@@ -1,0 +1,70 @@
+---
+title: Start
+description: Copies Revision folders/files, and configures some initial settings
+privilege: TrustedInstaller
+actions:
+    # Prevent annoying notifications during deployment
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance'
+    value: 'Enabled'
+    type: REG_DWORD
+    data: '0'
+
+  - !cmd:
+    exeDir: true
+    command: 'robocopy "Web" "%windir%\Web" /E /PURGE /IM /IT /NP'
+    weight: 10
+  - !cmd:
+    exeDir: true
+    command: 'robocopy "Licenses" "%SystemDrive%\Licenses" /E /PURGE /IM /IT /NP'
+    weight: 10
+  - !cmd:
+    exeDir: true
+    command: 'copy /y "hosts" "%WINDIR%\System32\drivers\etc\hosts"'
+    weight: 5
+
+  - !cmd:
+    exeDir: true
+    command: 'DISM /Online /Cleanup-Image /StartComponentCleanup'
+    # command: 'DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase'
+    weight: 250
+
+  - !service:
+    name: "wuauserv"
+    operation: stop
+
+  - !service:
+    name: "bits"
+    operation: stop
+  - !service:
+    name: "appidsvc"
+    operation: stop
+  - !service:
+    name: "cryptsvc"
+    operation: stop
+  - !file:
+    path: "%windir%\\SoftwareDistribution"
+    weight: 20
+    
+  - !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart', weight: 30}
+  - !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"DirectPlay" /NoRestart', weight: 30}
+
+  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2Root" /NoRestart', weight: 30}
+  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2" /NoRestart', weight: 30}
+  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"WorkFolders-Client" /NoRestart', weight: 30}
+  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Printing-Foundation-Features" /NoRestart', weight: 30}
+  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Printing-Foundation-InternetPrinting-Client" /NoRestart', weight: 30}
+# - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Windows-Defender-Default-Definitions" /NoRestart', weight: 30}
+  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"SmbDirect" /NoRestart', weight: 30}
+  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MSRDC-Infrastructure" /NoRestart', weight: 30}
+
+  - !powerShell:
+    command: 'Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(''https://community.chocolatey.org/install.ps1''))'
+    weight: 30
+  - !cmd:
+    command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums dotnet3.5'
+    weight: 150
+
+  - !service:
+    name: "wuauserv"
+    operation: stop

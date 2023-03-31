@@ -1,0 +1,19 @@
+{
+  "brave": {
+    "default_browser_prompt_enabled": true,
+    "dont_ask_for_crash_reporting": true,
+    "brave_shields": {
+      "p3a_usage": 0
+    },
+    "p3a": {
+      "enabled": false
+    },
+    "stats": {
+      "reporting_enabled": false
+    }
+  },
+  "distribution": {
+    "import_bookmarks_from_file": "C:\\Program Files\\BraveSoftware\\bookmarks.html",
+    "import_bookmarks": true
+  }
+}

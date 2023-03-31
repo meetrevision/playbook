@@ -1,0 +1,9 @@
+---
+title: configure-kernel
+description: configure-kernel
+privilege: TrustedInstaller
+actions:
+
+    # === Enable TSX
+    # ------> It was disabled by default due to security reasons; Enabling it makes 4~5 times faster in database transaction and around 40% faster in specific workloads
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Kernel', value: 'DisableTsx', type: REG_DWORD, data: '0'}

@@ -1,0 +1,9 @@
+---
+title: old-rightclick-menu
+description: old-rightclick-menu
+privilege: TrustedInstaller
+actions:
+
+    # IsModernRCEnabled is only added for detection purposes TODO remove isModernRCEnabled
+  - !registryValue: {path: 'HKLM\Software\Classes\CLSID', value: 'IsModernRCEnabled', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '', type: REG_SZ, data: ''}

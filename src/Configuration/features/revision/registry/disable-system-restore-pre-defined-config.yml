@@ -1,0 +1,11 @@
+---
+title: disable-system-restore-pre-defined-config
+description: disable-system-restore-pre-defined-config
+privilege: TrustedInstaller
+actions:
+
+    # === Disable System Restore pre-defined Config.
+    # ------> This does not disable System Restore, it only removes the pre-defined configuration and leaves it up to the user to define it themselves.
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SPP\Clients'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore', value: 'RPSessionInterval', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore\cfg', value: 'DiskPercent', type: REG_DWORD, data: '0'}

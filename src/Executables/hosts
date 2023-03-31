@@ -1,0 +1,60 @@
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+0.0.0.0 browser.pipe.aria.microsoft.com
+0.0.0.0 dmd.metaservices.microsoft.com
+0.0.0.0 ris.api.iris.microsoft.com
+0.0.0.0 teams.events.data.microsoft.com
+0.0.0.0 telecommand.telemetry.microsoft.com
+0.0.0.0 telemetry.microsoft.com
+0.0.0.0 vortex-win.data.microsoft.com
+0.0.0.0 watson.telemetry.microsoft.com
+0.0.0.0 activity.windows.com
+
+# Brave
+0.0.0.0 p3a.brave.com
+0.0.0.0 p2a.brave.com
+0.0.0.0 p3a-json.brave.com
+0.0.0.0 p2a-json.brave.com
+0.0.0.0 laptop-updates.brave.com
+# 0.0.0.0 variations.brave.com
+0.0.0.0 cr.brave.com
+
+# Visual Studio
+0.0.0.0 vortex.data.microsoft.com
+0.0.0.0 dc.services.visualstudio.com
+0.0.0.0 visualstudio-devdiv-c2s.msedge.net
+0.0.0.0 az667904.vo.msecnd.net
+0.0.0.0 scus-breeziest-in.cloudapp.net
+0.0.0.0 nw-umwatson.events.data.microsoft.com
+
+# Others
+0.0.0.0 digitalfitsoft.com
+0.0.0.0 zunsoach.com
+0.0.0.0 t3stdr1ve.com
+0.0.0.0 xf1lenewma.com
+0.0.0.0 agencyorquidea.com
+0.0.0.0 xpectthatmy.shop
+0.0.0.0 atebilaterde.one
+0.0.0.0 naleapprength.xyz
+0.0.0.0 whizduly.com
+0.0.0.0 orquideassp.com
+0.0.0.0 themezon.net

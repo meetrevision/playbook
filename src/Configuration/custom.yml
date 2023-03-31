@@ -1,0 +1,13 @@
+---
+title: Custom
+description: Custom Revision configuration
+privilege: Admin
+actions: []
+features:
+- features\revision\start.yml
+- features\revision\services.yml
+- features\revision\appx.yml
+- features\revision\components.yml
+- features\revision\packages.yml
+- features\revision\registry.yml
+- features\revision\config.yml
