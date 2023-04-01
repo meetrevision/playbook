@@ -31,7 +31,7 @@ if not defined w11 (
 
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "& {$cpu = Get-CimInstance Win32_Processor; $cpuName = $cpu.Name; if ($cpu.Manufacturer -eq 'GenuineIntel') { if ($cpuName.Substring(0, 2) -eq 'In') { Write-Host 'Detected Intel CPU older than 10th generation.' } else { $cpuGen = [int]($cpuName.Substring(0, 2)); if ($cpuGen -gt 11) { Write-Host 'Optimizing Revision''s Ultra powerplan for 12th generation or later Intel CPUs'; powercfg -changename 3ff9831b-6f80-4830-8178-736cd4229e7b 'Ultra Performance' 'Windows''s Ultimate Performance with optimized settings for newer Intel CPUs.'; powercfg -s 3ff9831b-6f80-4830-8178-736cd4229e7b; powercfg -setacvalueindex scheme_current sub_processor HETEROPOLICY 0; powercfg -setacvalueindex scheme_current sub_processor SCHEDPOLICY 2; powercfg /setactive scheme_current }}};}"
 
-echo Configuring HDD...
+echo Configuring Superfetch for HDD...
 
 for /f %%i in ('PowerShell -NonInteractive -NoLogo -NoProfile -Command "get-physicaldisk | get-disk | get-partition | Where-Object DriveLetter -EQ C | Select-Object DriveLetter, @{n='MediaType';e={$(get-physicaldisk).MediaType}} | Select-Object MediaType -ExpandProperty MediaType"') do (
   set "hardDrive=%%i"

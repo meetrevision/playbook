@@ -3,6 +3,9 @@ title: Start
 description: Copies Revision folders/files, and configures some initial settings
 privilege: TrustedInstaller
 actions:
+  
+  - !writeStatus: {status: "Configuring wallpapers, licenses and hosts"}
+
     # Prevent annoying notifications during deployment
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance'
@@ -22,6 +25,8 @@ actions:
     exeDir: true
     command: 'copy /y "hosts" "%WINDIR%\System32\drivers\etc\hosts"'
     weight: 5
+
+  - !writeStatus: {status: "Cleaning up the WinSxS folder"}
 
   - !cmd:
     exeDir: true
@@ -45,6 +50,8 @@ actions:
   - !file:
     path: "%windir%\\SoftwareDistribution"
     weight: 20
+
+  - !writeStatus: {status: "Configuring DISM features"}
     
   - !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart', weight: 30}
   - !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"DirectPlay" /NoRestart', weight: 30}
@@ -57,6 +64,8 @@ actions:
 # - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Windows-Defender-Default-Definitions" /NoRestart', weight: 30}
   - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"SmbDirect" /NoRestart', weight: 30}
   - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MSRDC-Infrastructure" /NoRestart', weight: 30}
+
+  - !writeStatus: {status: "Installing .NET Framework 3.5"}
 
   - !powerShell:
     command: 'Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(''https://community.chocolatey.org/install.ps1''))'

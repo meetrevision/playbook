@@ -4,9 +4,9 @@ description: Applies some Revision configurations
 privilege: TrustedInstaller
 actions:
   - !taskKill: {name: "explorer"}
-
   - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod"', showOutput: false, showError: false}
 
+  - !writeStatus: {status: "Configuring power settings"}
   - !run: {exe: 'powercfg', args: '/hibernate off', showOutput: false, showError: false}
   - !run: {exe: 'powercfg', args: '-duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61', showOutput: false, showError: false}
   - !run: {exe: 'powercfg', args: '-duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 3ff9831b-6f80-4830-8178-736cd4229e7b', showOutput: false, showError: false}
@@ -25,13 +25,14 @@ actions:
   - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-Kernel-Processor-Power/Diagnostic /e:false', showOutput: false}
   - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-UserModePowerService/Diagnostic /e:false', showOutput: false}
 
+  - !writeStatus: {status: "Configuring boot settings"}
   - !run: {exe: 'bcdedit', args: '/deletevalue useplatformclock', showOutput: false, showError: false}
     # bcdedit /set useplatformtick yes
   - !run: {exe: 'bcdedit', args: '/set disabledynamictick yes', showOutput: false, showError: false}
   - !run: {exe: 'bcdedit', args: '/set bootmenupolicy Legacy', showOutput: false, showError: false}
   - !run: {exe: 'bcdedit', args: '/set lastknowngood yes', showOutput: false, showError: false}
 
-
+  - !writeStatus: {status: "Optimizing NTFS settings"}
   - !run: {exe: 'fsutil', args: 'behavior set disableLastAccess 1', showOutput: false}
   - !run: {exe: 'fsutil', args: 'behavior set disable8dot3 1', showOutput: false}
   - !run: {exe: 'net', args: 'accounts /maxpwage:unlimited', showOutput: false}
@@ -39,6 +40,7 @@ actions:
   - !run: {exe: 'netsh', args: 'interface Teredo set state servername=default', showOutput: false, showError: false}
   - !run: {exe: 'netsh', args: 'int tcp set supplemental internet congestionprovider=bbr2', showOutput: false, showError: false}
 
+  - !writeStatus: {status: "Configuring Windows settings"}
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0'}
     # reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /f >NUL 2>nul
     # reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "ctfmon" /t REG_SZ /d "C:\Windows\System32\ctfmon.exe" /f >NUL 2>nul

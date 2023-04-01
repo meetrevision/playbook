@@ -6,7 +6,8 @@ actions:
   - !service:
     name: "wuauserv"
     operation: stop
-
+  
+  - !writeStatus: {status: "Removing Appx Packages"}
   - !appx: {name: '*Disney*', type: family}
   - !appx: {name: '*microsoft.microsoftedge.stable*', type: family}
   - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family}

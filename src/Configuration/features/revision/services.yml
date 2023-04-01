@@ -3,6 +3,8 @@ title: Services
 description: Removal and configuration of services
 privilege: TrustedInstaller
 actions:
+  
+  - !writeStatus: {status: "Configuring services"}
     # === Beep - Disabled
   - !service: {name: 'Beep', operation: change, startup: 4}
     # === GraphicsPerfSvc - Disabled

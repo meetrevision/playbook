@@ -7,6 +7,8 @@ actions:
     name: "wuauserv"
     operation: stop
 
+  - !writeStatus: {status: "Removing system packages"}
+
 # ---- NOTES
 # wow64 (x86 emulation) and x86 packages only modify files in %ProgramFiles(x86)% %windir%\SysWOW64, and only modifies registry values/keys in (HKLM/HKCU)\SOFTWARE\Wow6432Node))
 # AppxMain, AppxSetup, and similar packages are primarily just stubs, that is, just stray manifests rather than actual files that need to be removed. The actual apps get removed beforehand in appx.yml
