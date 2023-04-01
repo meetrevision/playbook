@@ -18,7 +18,6 @@ features:
 - features\revision\registry\configure-logon.yml
 - features\revision\registry\configure-microsoft-store.yml
 - features\revision\registry\configure-multimedia.yml
-- features\revision\registry\configure-onedrive.yml
 - features\revision\registry\configure-oobe.yml
 - features\revision\registry\configure-power-control.yml
 - features\revision\registry\configure-privacy.yml
