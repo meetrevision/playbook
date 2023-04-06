@@ -29,6 +29,10 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\vgc.exe', value: 'MitigationOptions', type: REG_BINARY, data: '000000000001000000000000000000000000000000000000'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\vgc.exe', value: 'MitigationAuditOptions', type: REG_BINARY, data: '000000000000000000000000000000000000000000000000'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\vgc.exe', value: 'EAFModules', type: REG_SZ, data: ''}
+    # === Enable ASLR mitigation for osu!
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\osu!.exe', value: 'MitigationOptions', type: REG_BINARY, data: '000021000000000000000000000000000000000000000000'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\osu!.exe', value: 'MitigationAuditOptions', type: REG_BINARY, data: '000000000000000000000000000000000000000000000000'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\osu!.exe', value: 'EAFModules', type: REG_SZ, data: ''}  
     # === ctfmon is needed to type something in search bar or WiFi password section, Snip & Sketch, etc.
     # ------> ctfmon depends on TabletInputService
     # ------> https://answers.microsoft.com/en-us/windows/forum/all/ctfmonexe-or-ctf-loader-not-automaticly-starting/4b6b91b3-e363-43cb-9715-92a1976e270f
@@ -36,9 +40,10 @@ actions:
     # "ctfmon"="C:\Windows\System32\ctfmon.exe"
     # === Fix WU Taskbar
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'TrayIconVisibility', type: REG_DWORD, data: '0'}
-    # === Stop indexing Revision-Tool and Licenses folders
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*'}
+    # === Stop indexing src and Licenses folders
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Windows\src\*', type: REG_SZ, data: 'file:///C:\Windows\src\*'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Licenses\*', type: REG_SZ, data: 'file:///C:\Licenses\*'}
     # === Prevent MS Edge Chromium being installed after updates (Legacy Edge still gets installed)
     # === Fix for VS not being allowed to install WebView2

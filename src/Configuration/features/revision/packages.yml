@@ -767,8 +767,9 @@ actions:
   - !systemPackage: {name: 'Microsoft-Windows-UsbCeip', arch: wow64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-OOBE-FirstLogonAnimExe', arch: amd64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-OOBE-FirstLogonAnim', arch: amd64, language: 'neutral'}
-  - !systemPackage: {name: 'Microsoft-Windows-GameExplorer', arch: amd64, language: 'neutral'}
-  - !systemPackage: {name: 'Microsoft-Windows-GameExplorer', arch: wow64, language: 'neutral'}
+  #   Breaks compatibility with older games #3
+  # - !systemPackage: {name: 'Microsoft-Windows-GameExplorer', arch: amd64, language: 'neutral'}
+  # - !systemPackage: {name: 'Microsoft-Windows-GameExplorer', arch: wow64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-Indeo4-Codecs', arch: x86, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-Indeo5-Codecs', arch: x86, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-OneDrive-Setup-Deployment-LanguagePack', arch: amd64, language: 'en-US'}
@@ -795,6 +796,7 @@ actions:
   - !systemPackage: {name: 'Microsoft-Windows-scrnsave', arch: amd64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-scrnsave', arch: wow64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-ssText3d', arch: amd64, language: 'neutral'}
+  #   Stripping Security Center introduces compatibility issues with Defender, it is disabled instead
   # - !systemPackage: {name: 'Microsoft-Windows-Securitycenter-Adm', arch: amd64, language: 'neutral'}
   # - !systemPackage: {name: 'Microsoft-Windows-SecurityCenter-Broker', arch: amd64, language: 'neutral'}
   # - !systemPackage: {name: 'Microsoft-Windows-SecurityCenter-Broker', arch: wow64, language: 'neutral'}
@@ -839,7 +841,7 @@ actions:
   - !systemPackage: {name: 'Microsoft-Windows-UNP-Task', arch: amd64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-UNP', arch: amd64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-OneCoreUAP-Feedback-StringFeedbackEngine', arch: amd64, language: 'neutral'}
-  #    Caused automatic repair loop
+  #  Caused automatic repair loop
 #  - !systemPackage: {name: 'Microsoft-Windows-ErrorReporting-Adm-Deployment-LanguagePack', arch: amd64, language: 'en-US'}
 #  - !systemPackage: {name: 'Microsoft-Windows-ErrorReporting-Adm-Deployment', arch: amd64, language: 'neutral'}
 #  - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingCompatibility', arch: amd64, language: 'neutral'}
