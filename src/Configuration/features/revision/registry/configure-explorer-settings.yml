@@ -121,7 +121,7 @@ actions:
     # === Do not preserve zone information in file attachments - Enabled
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments', value: 'SaveZoneInformation', type: REG_DWORD, data: '1'}
     # === Inclusion list for low file types - Enabled (list found below)
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations', value: 'LowRiskFileTypes', type: REG_SZ, data: '.avi;.bat;.com;.cmd;.exe;.htm;.html;.lnk;.mpg;.mpeg;.mov;.mp3;.msi;.m3u;.rar;.reg;.txt;.vbs;.wav;.zip;'}
+  # - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations', value: 'LowRiskFileTypes', type: REG_SZ, data: '.avi;.bat;.com;.cmd;.exe;.htm;.html;.lnk;.mpg;.mpeg;.mov;.mp3;.msi;.m3u;.rar;.reg;.txt;.vbs;.wav;.zip;'}
     # === Inclusion list for moderate risk file types - Enabled (list found below)
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations', value: 'ModRiskFileTypes', type: REG_SZ, data: '.bat;.exe;.reg;.vbs;.chm;.msi;.js;.cmd'}
     # === Notify antivirus programs when opening attachments - Disabled
@@ -147,7 +147,3 @@ actions:
     # "Start_ShowRun"=dword:00000001
     # "Start_TrackDocs"=dword:00000000
     # "Start_JumpListItems"=dword:00000000
-    # === Undocumented, therefore discarded
-    # ------> https://gist.github.com/kedazo/d9afb28a7d6b6f3366c5ff419adaa54c
-    # [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\{E2F13B98-650F-47DB-845A-420A1ED34EC7}User\Software\Microsoft\Windows\CurrentVersion\Policies\Associations]
-    # "LowRiskFileTypes"=".exe;.bat;.cmd;.vbs;.reg"
