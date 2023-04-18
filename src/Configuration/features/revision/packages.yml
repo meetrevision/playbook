@@ -869,10 +869,11 @@ actions:
 # - !systemPackage: {name: 'Microsoft-Windows-Flighting-FeatureConfiguration', arch: wow64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-Flighting-Settings', arch: wow64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-SystemSettings-SettingsHandlers-Flights', arch: amd64, language: 'neutral'}
-  - !systemPackage: {name: 'Microsoft-Windows-Data-Pdf.Events', arch: amd64, language: 'neutral'}
-  - !systemPackage: {name: 'Microsoft-Windows-Data-Pdf.Events', arch: wow64, language: 'neutral'}
-  - !systemPackage: {name: 'Microsoft-Windows-Data-Pdf', arch: amd64, language: 'neutral'}
-  - !systemPackage: {name: 'Microsoft-Windows-Data-Pdf', arch: wow64, language: 'neutral'}
+  # Breaks benchmarking tools like Passmark
+  # - !systemPackage: {name: 'Microsoft-Windows-Data-Pdf.Events', arch: amd64, language: 'neutral'}
+  # - !systemPackage: {name: 'Microsoft-Windows-Data-Pdf.Events', arch: wow64, language: 'neutral'}
+  # - !systemPackage: {name: 'Microsoft-Windows-Data-Pdf', arch: amd64, language: 'neutral'}
+  # - !systemPackage: {name: 'Microsoft-Windows-Data-Pdf', arch: wow64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-PortableWorkspaces-SSO', arch: amd64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-PortableWorkspaces-SysPrep', arch: amd64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-PortableWorkspaces-SysPrep', arch: wow64, language: 'neutral'}
