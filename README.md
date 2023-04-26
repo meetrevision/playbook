@@ -40,4 +40,4 @@ See our documentation for more information:
 
 ## License
 
-ReviOS Playbook is licensed under [Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+The ReviOS Playbook is licensed under [Attribution-NonCommercial-NoDerivatives 4.0 International.](https://creativecommons.org/licenses/by-nc-nd/4.0/)
