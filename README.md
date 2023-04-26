@@ -8,7 +8,6 @@ ReviOS is a customized version of Windows, designed to be lightweight, stable, a
 
 ## Features
 
-- Automatically built by GitHub Actions for enhanced safety, as it eliminates human interference and ensures that the playbook's code is an exact match with the code from the repository
 - Easy to use, just drag and drop the playbook into [AME Wizard](https://ameliorated.io)
 - Removes bloatware and unnecessary system components
 - Optimizes your system for performance and improved privacy
@@ -20,7 +19,7 @@ ReviOS is a customized version of Windows, designed to be lightweight, stable, a
 - Windows 10 22H2 `19045`
 - Windows 11 22H2 `22621`
 
-Any other build **isn't** supported by Revision.
+Any other build **is not** supported by Revision.
 
 ## Getting Started
 
@@ -40,4 +39,4 @@ See our documentation for more information:
 
 ## License
 
-The ReviOS Playbook is licensed under [Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0).
+ReviOS Playbook is licensed under [Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0).
