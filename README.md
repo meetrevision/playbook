@@ -4,12 +4,12 @@
 <a href="https://www.buymeacoffee.com/meetrevision" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" height="20px"></a>
 <br>
 
-ReviOS is a customized version of Windows, designed to be lightweight, stable, and focused on improving performance, privacy and compatibility. It aspires to re-create what Windows as an operating system should have been - easy and simple. Now compatible with the [AME Wizard](https://ameliorated.io).
+ReviOS is a customized version of Windows, designed to be lightweight, stable, and focused on improving performance, privacy and compatibility. It aspires to re-create what Windows as an operating system should have been - easy and simple. Now compatible with [AME Wizard](https://ameliorated.io).
 
 ## Features
 
-- Automatically built by GitHub Actions for reduced release times and enhanced safety, as it eliminates human interference and ensures that the playbook's code is an exact match with the code from the repository
-- Easy to use, just drag and drop the playbook into the [AME Wizard](https://ameliorated.io)
+- Automatically built by GitHub Actions for enhanced safety, as it eliminates human interference and ensures that the playbook's code is an exact match with the code from the repository
+- Easy to use, just drag and drop the playbook into [AME Wizard](https://ameliorated.io)
 - Removes bloatware and unnecessary system components
 - Optimizes your system for performance and improved privacy
 - Integrates the [Revision Tool](https://github.com/meetrevision/revision-tool) to customize your system further
@@ -26,7 +26,7 @@ Any other build **isn't** supported by Revision.
 
 To use ReviOS Playbook on your computer, follow these steps:
 
-1. Download the [AME Wizard](https://ameliorated.io) and our playbook from [releases](https://github.com/meetrevision/playbook/releases)
+1. Download [AME Wizard](https://ameliorated.io) and our playbook from [releases](https://github.com/meetrevision/playbook/releases)
 2. Run the AME Wizard
 3. Drag and drop the downloaded playbook into the drag box
 4. Follow the on-screen instructions
