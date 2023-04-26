@@ -16,9 +16,9 @@ ReviOS is a customized version of Windows, designed to be lightweight, stable, a
 
 ## System Requirements
 
-- Windows 10 21H2 [`19044`](https://en.wikipedia.org/wiki/Windows_10_version_21H2) (LTSC)
-- Windows 10 22H2 [`19045`](https://en.wikipedia.org/wiki/Windows_10_version_22H2)
-- Windows 11 22H2 [`22621`](https://en.wikipedia.org/wiki/Windows_11_version_22H2)
+- Windows 10 21H2 `19044` (LTSC)
+- Windows 10 22H2 `19045`
+- Windows 11 22H2 `22621`
 
 Any other build **isn't** supported by Revision.
 
