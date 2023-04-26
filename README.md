@@ -8,7 +8,7 @@ ReviOS is a customized version of Windows, designed to be lightweight, stable, a
 
 ## Features
 
-- Automatically built by GitHub actions for reduced release times
+- Automatically built by GitHub Actions for reduced release times and enhanced safety, as it eliminates human interference and ensures that the playbook's code is an exact match with the code from the repository
 - Easy to use, just drag and drop the playbook into the [AME Wizard](https://ameliorated.io)
 - Removes bloatware and unnecessary system components
 - Optimizes your system for performance and improved privacy
