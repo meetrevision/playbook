@@ -43,8 +43,8 @@ actions:
     # === Stop indexing src and Licenses folders
   # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*'}
   # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Windows\src\*', type: REG_SZ, data: 'file:///C:\Windows\src\*'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Licenses\*', type: REG_SZ, data: 'file:///C:\Licenses\*'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Windows\src\*', type: REG_SZ, data: 'file:///C:\Windows\src\*'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Licenses\*', type: REG_SZ, data: 'file:///C:\Licenses\*'}
     # === Prevent MS Edge Chromium being installed after updates (Legacy Edge still gets installed)
     # === Fix for VS not being allowed to install WebView2
     # ------> Credits to https://github.com/AveYo
