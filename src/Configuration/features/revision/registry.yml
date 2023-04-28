@@ -27,7 +27,7 @@ features:
 - features\revision\registry\configure-win32priorityseparation.yml
 - features\revision\registry\configure-windows-settings.yml
 - features\revision\registry\configure-windows-update-and-install.yml
-- features\revision\registry\disabe-disk-defragmentation.yml
+# - features\revision\registry\disabe-disk-defragmentation.yml
 - features\revision\registry\disable-automatic-maintenance.yml
 - features\revision\registry\disable-disk-checking.yml
 - features\revision\registry\disable-ease-of-access-features.yml

@@ -41,7 +41,7 @@ actions:
     # [HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
     # "DisableNotificationCenter"=dword:00000001
     # --------> Detection reasons
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer', value: 'IsNotificationsEnabled', type: REG_DWORD, data: '1'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer', value: 'IsNotificationsEnabled', type: REG_DWORD, data: '1'}
     # === Remove the People Bar from the taskbar - Enabled
   - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\Explorer', value: 'HidePeopleBar', type: REG_DWORD, data: '1'}
     # === Remove the Security and Maintenance icon - Enabled
