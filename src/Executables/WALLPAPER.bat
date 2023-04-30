@@ -40,10 +40,11 @@ if exist "%~2\Microsoft\Windows\Themes\TranscodedWallpaper" (
 
 if not exist "!windir!\Web\Wallpaper\Windows\revision.jpg" exit /b 1
 
-reg add "HKEY_USERS\%~1\Control Panel\Desktop" /v "WallPaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
+reg add "HKEY_USERS\%~1\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
 
 del /q /f "%~2\Microsoft\Windows\Themes\TranscodedWallpaper"
 rmdir /q /s "%~2\Microsoft\Windows\Themes\CachedFiles"
+rundll32.exe user32.dll, UpdatePerUserSystemParameters
 
 if not "%~1"=="AME_UserHive_Default" (
 	reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Creative\%~1" /v "RotatingLockScreenEnabled" /t REG_DWORD /d "0" /f > nul
