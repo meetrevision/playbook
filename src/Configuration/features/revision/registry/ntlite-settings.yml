@@ -252,12 +252,12 @@ actions:
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity', value: 'Locked', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity', value: 'WasEnabledBy', operation: delete}
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Lsa', value: 'LsaCfgFlags', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'FilterAdministratorToken', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableInstallerDetection', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'PromptOnSecureDesktop', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ConsentPromptBehaviorAdmin', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableSecureUIAPaths', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableVirtualization', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'FilterAdministratorToken', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableInstallerDetection', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'PromptOnSecureDesktop', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ConsentPromptBehaviorAdmin', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableSecureUIAPaths', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableVirtualization', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows Security Health\State', value: 'AccountProtection_MicrosoftAccount_Disconnected', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKU\S-1-5-18\Software\Microsoft\Windows Security Health\State', value: 'AccountProtection_MicrosoftAccount_Disconnected', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications', value: 'DisableNotifications', type: REG_DWORD, data: '1'}

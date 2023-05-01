@@ -33,7 +33,7 @@ PowerShell -NonInteractive -NoLogo -NoP -C "& {$cpu = Get-CimInstance Win32_Proc
 
 echo Configuring Superfetch for HDD...
 
-for /f %%i in ('PowerShell -NonInteractive -NoLogo -NoP -C "Get-PhysicalDisk | ForEach-Object { $physicalDisk = $_ ; $physicalDisk | Get-Disk | Get-Partition | Where-Object { $_.DriveLetter -eq 'C'} | Select-Object @{n='MediaType';e={$physicalDisk.MediaType}}}"') do (
+for /f %%i in ('PowerShell -NonInteractive -NoLogo -NoP -C "(Get-PhysicalDisk -SerialNumber (Get-Disk -Number (Get-Partition -DriveLetter $env:SystemDrive.Substring(0, 1)).DiskNumber).SerialNumber.TrimStart()).MediaType"') do (
   set "hardDrive=%%i"
 )
 if "%hardDrive%"=="HDD" (
@@ -44,7 +44,6 @@ if "%hardDrive%"=="HDD" (
   reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d "3" /f >NUL 2>nul
   reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "GroupPolicyDisallowCaches" /f >NUL 2>nul
   reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "AllowNewCachesByDefault" /f >NUL 2>nul
-
 )
 
 echo Configuring memory...

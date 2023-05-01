@@ -41,6 +41,7 @@ if exist "%~2\Microsoft\Windows\Themes\TranscodedWallpaper" (
 if not exist "!windir!\Web\Wallpaper\Windows\revision.jpg" exit /b 1
 
 reg add "HKEY_USERS\%~1\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
+reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
 
 del /q /f "%~2\Microsoft\Windows\Themes\TranscodedWallpaper"
 rmdir /q /s "%~2\Microsoft\Windows\Themes\CachedFiles"
