@@ -8,6 +8,10 @@ for /f %%i in ('reg query "HKLM\SYSTEM\ControlSet001\Services" /s /k "webthreatd
   reg add "%%i" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
 )
 
+:: Turn off the "account protection notifications" in Windows Defender
+reg add "HKCU\Software\Microsoft\Windows Defender Security Center\Account protection" /v "DisableWindowsHelloNotifications" /t REG_SZ /d "1" /f >NUL 2>nul
+reg add "HKCU\Software\Microsoft\Windows Defender Security Center\Account protection" /v "DisableDynamiclockNotifications" /t REG_SZ /d "1" /f >NUL 2>nul
+
 if not defined w11 (
 	bcdedit /set description "ReviOS 10 %version%" >NUL 2>nul
   reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model"  /t REG_SZ /d "ReviOS 10 %version%" /f >NUL 2>nul
@@ -33,7 +37,7 @@ PowerShell -NonInteractive -NoLogo -NoP -C "& {$cpu = Get-CimInstance Win32_Proc
 
 echo Configuring Superfetch for HDD...
 
-for /f %%i in ('PowerShell -NonInteractive -NoLogo -NoP -C "Get-PhysicalDisk | ForEach-Object { $physicalDisk = $_ ; $physicalDisk | Get-Disk | Get-Partition | Where-Object { $_.DriveLetter -eq 'C'} | Select-Object @{n='MediaType';e={$physicalDisk.MediaType}}}"') do (
+for /f %%i in ('PowerShell -NonInteractive -NoLogo -NoP -C "Get-PhysicalDisk -SerialNumber (Get-Disk -Number (Get-Partition -DriveLetter $env:SystemDrive.Substring(0, 1)).DiskNumber).SerialNumber | Select-Object MediaType') do (
   set "hardDrive=%%i"
 )
 if "%hardDrive%"=="HDD" (

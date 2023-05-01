@@ -40,10 +40,14 @@ if exist "%~2\Microsoft\Windows\Themes\TranscodedWallpaper" (
 
 if not exist "!windir!\Web\Wallpaper\Windows\revision.jpg" exit /b 1
 
-reg add "HKEY_USERS\%~1\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
+reg add "HKEY_USERS\%~1\Control Panel\Desktop" /v "WallPaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
+
+:: Set the wallpaper for the current user and local machine
+reg add "HKCU\Control Panel\Desktop" /v "WallPaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
+reg add "HKLM\Control Panel\Desktop" /v "WallPaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
 
 del /q /f "%~2\Microsoft\Windows\Themes\TranscodedWallpaper"
-rmdir /q /s "%~2\Microsoft\Windows\Themes\CachedFiles"
+rd /q /s "%~2\Microsoft\Windows\Themes\CachedFiles"
 rundll32.exe user32.dll, UpdatePerUserSystemParameters
 
 if not "%~1"=="AME_UserHive_Default" (
