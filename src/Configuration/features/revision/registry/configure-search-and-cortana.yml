@@ -51,3 +51,9 @@ actions:
     # === Cortana on Lock Screen - Disabled
     # ------> https://winaero.com/blog/how-to-enable-cortana-on-lock-screen/
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences', value: 'VoiceActivationEnableAboveLockscreen', type: REG_DWORD, data: '0'}
+    # === Respect Power Settings when Indexing - Enabled
+    # ------> https://www.elevenforum.com/t/turn-on-or-off-respect-power-settings-when-indexing-in-windows-11.2960/
+  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows Search\Gather\Windows\SystemIndex', value: 'RespectPowerModes', type: REG_DWORD, data: '1'}
+    # === Prevent indexing when running on battery power to conserve energy - Enabled
+    # ------> https://winaero.com/disable-search-indexing-battery-windows-10/
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search', value: 'PreventIndexOnBattery', type: REG_DWORD, data: '1'}
