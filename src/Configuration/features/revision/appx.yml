@@ -53,7 +53,9 @@ actions:
   - !appx: {name: '*Microsoft.Office.Word*', type: family}
   - !appx: {name: '*Microsoft.Office.OneNote*', type: family}
   - !appx: {name: '*Microsoft.Microsoft3DViewer*', type: family}
-
+  - !appx: {name: 'Microsoft.Advertising*', type: family}
+  - !appx: {name: '*MixedReality.Portal*', type: family}
+  
     # Paint 3D
   - !appx: {name: '*Microsoft.MSPaint*', type: family}
 

@@ -29,7 +29,7 @@ actions:
     # =============
     # === Extra ===
     # =============
-    # === Inscreased context options time threshold
+    # === Increased context options time threshold
     # ------> If selecting and right clicking more than x amount of items, some context options disappear (i.e. Take ownership), this will increase the threshold.
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer', value: 'MultipleInvokePromptMinimum', type: REG_DWORD, data: '100'}
   - !registryValue: {path: 'HKCU\Software\Winaero.com\Winaero Tweaker\Changes', value: 'pageContextMenuSelectionLimit', type: REG_DWORD, data: '1'}
