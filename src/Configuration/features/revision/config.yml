@@ -35,12 +35,14 @@ actions:
   - !writeStatus: {status: "Optimizing NTFS settings"}
   - !run: {exe: 'fsutil', args: 'behavior set disableLastAccess 1', showOutput: false}
   - !run: {exe: 'fsutil', args: 'behavior set disable8dot3 1', showOutput: false}
-  - !run: {exe: 'net', args: 'accounts /maxpwage:unlimited', showOutput: false}
+
+  - !writeStatus: {status: "Configuring network settings"}
   - !run: {exe: 'netsh', args: 'interface Teredo set state type=default', showOutput: false, showError: false}
   - !run: {exe: 'netsh', args: 'interface Teredo set state servername=default', showOutput: false, showError: false}
   - !run: {exe: 'netsh', args: 'int tcp set supplemental internet congestionprovider=bbr2', showOutput: false, showError: false}
 
   - !writeStatus: {status: "Configuring Windows settings"}
+  - !run: {exe: 'net', args: 'accounts /maxpwage:unlimited', showOutput: false}
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0'}
     # reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /f >NUL 2>nul
     # reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "ctfmon" /t REG_SZ /d "C:\Windows\System32\ctfmon.exe" /f >NUL 2>nul
@@ -70,39 +72,10 @@ actions:
     # OneDrive workaround
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\OneDrive', value: 'DisableFileSyncNGSC', operation: delete}
 
+  - !run: {exeDir: true, exe: "APPLICATIONS.bat", wait: true, weight: 60}
+
     # Windows Defender
-  - !service: {name: 'MsSecFlt', operation: change, startup: 4}
-  - !service: {name: 'SecurityHealthService', operation: change, startup: 4}
-  - !service: {name: 'Sense', operation: change, startup: 4}
-  - !service: {name: 'WdBoot', operation: change, startup: 4}
-  - !service: {name: 'WdFilter', operation: change, startup: 4}
-  - !service: {name: 'WdNisDrv', operation: change, startup: 4}
-  - !service: {name: 'WdNisSvc', operation: change, startup: 4}
-  - !service: {name: 'WinzDefend', operation: change, startup: 4}
-    # WindowsSystemTray
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run', value: 'SecurityHealth', operation: delete}
-    # System Guard
-  - !service: {name: 'SgrmAgent', operation: change, startup: 4}
-  - !service: {name: 'SgrmBroker', operation: change, startup: 4}
-    # WebThreatDefSvc
-  - !service: {name: 'webthreatdefsvc', operation: change, startup: 4}
-  - !service: {name: 'webthreatdefusersvc', operation: change, startup: 4}
-
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe', value: 'Debugger', type: REG_SZ, data: '%%windir%%\System32\taskkill.exe'}
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations', value: 'DefaultFileTypeRisk', type: REG_DWORD, data: '6152'}
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments', value: 'SaveZoneInformation', type: REG_DWORD, data: '1'}
-  # - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations', value: 'LowRiskFileTypes', type: REG_SZ, data: '.avi;.bat;.com;.cmd;.exe;.htm;.html;.lnk;.mpg;.mpeg;.mov;.mp3;.msi;.m3u;.rar;.reg;.txt;.vbs;.wav;.zip;'}
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations', value: 'ModRiskFileTypes', type: REG_SZ, data: '.bat;.exe;.reg;.vbs;.chm;.msi;.js;.cmd'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'SmartScreenEnabled', type: REG_SZ, data: 'Off'}
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen', value: 'ConfigureAppInstallControlEnabled', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen', value: 'ConfigureAppInstallControl', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen', value: 'EnableSmartScreen', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter', value: 'EnabledV9', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter', value: 'EnabledV9', type: REG_DWORD, data: '0'}
-
-
-
-  - !run: {exeDir: true, exe: "APPLICATIONS.bat", weight: 60}
+  - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.bat", wait: true}
 
   - !run: {exeDir: true, exe: "FINALIZE.bat", weight: 25}
 
