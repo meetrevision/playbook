@@ -5,9 +5,8 @@ privilege: TrustedInstaller
 actions:
 
     # === Hide stripped components from Settings - Windows Updates
-    # ------> IsWUHidden doesn't exist in Windows, but it is added for detection purposes TODO deprecate IsWUHidden
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'SettingsPageVisibility', type: REG_SZ, data: 'hide:cortana;privacy-automaticfiledownloads;privacy-feedback;windowsinsider;windowsupdate'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'IsWUHidden', type: REG_DWORD, data: '1'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'IsWUHidden', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'TrayIconVisibility', type: REG_DWORD, data: '0'}
     # ==============
     # === System ===
