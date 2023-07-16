@@ -79,6 +79,7 @@ actions:
 
     # Windows Defender
   - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.bat", wait: true}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender', value: 'InstallLocation', operation: delete}
 
   - !run: {exeDir: true, exe: "FINALIZE.bat", weight: 25}
 
