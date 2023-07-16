@@ -39,7 +39,7 @@ actions:
     # [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
     # "ctfmon"="C:\Windows\System32\ctfmon.exe"
     # === Fix WU Taskbar
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'TrayIconVisibility', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'TrayIconVisibility', type: REG_DWORD, data: '0'}
     # === Stop indexing src and Licenses folders
   # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*'}
   # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*'}

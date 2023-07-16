@@ -10,4 +10,5 @@ features:
 - features\revision\components.yml
 - features\revision\packages.yml
 - features\revision\registry.yml
+- features\revision\revert.yml
 - features\revision\config.yml

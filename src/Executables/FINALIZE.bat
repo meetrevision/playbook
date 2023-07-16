@@ -1,5 +1,5 @@
 @echo off
-set version=23.06
+set version=23.07
 for /f "tokens=2 delims==" %%i in ('wmic os get BuildNumber /value ^| find "="') do set "build=%%i"
 if %build% gtr 19045 ( set "w11=true" )
 
@@ -16,18 +16,7 @@ if not defined w11 (
 	bcdedit /set description "ReviOS 11 %version%" >NUL 2>nul
   reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model"  /t REG_SZ /d "ReviOS 11 %version%" /f >NUL 2>nul
   reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganisation" /t REG_SZ /d "ReviOS 11 %version%" /f >NUL 2>nul
-	::FileExplorerTabs
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\1931258509" /v "EnabledState" /t REG_DWORD /d "2" /f >NUL
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\1931258509" /v "EnabledStateOptions" /t REG_DWORD /d "0" /f >NUL
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\1931258509" /v "Variant" /t REG_DWORD /d "0" /f >NUL
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\1931258509" /v "VariantPayload" /t REG_DWORD /d "0" /f >NUL
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\1931258509" /v "VariantPayloadKind" /t REG_DWORD /d "0" /f >NUL
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\2733408908" /v "EnabledState" /t REG_DWORD /d "2" /f >NUL
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\2733408908" /v "EnabledStateOptions" /t REG_DWORD /d "0" /f >NUL
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\2733408908" /v "Variant" /t REG_DWORD /d "0" /f >NUL
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\2733408908" /v "VariantPayload" /t REG_DWORD /d "0" /f >NUL
-	@REM reg add "HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\2733408908" /v "VariantPayloadKind" /t REG_DWORD /d "0" /f >NUL
-)
+	)
 
 PowerShell -NonInteractive -NoLogo -NoP -C "& {$cpu = Get-CimInstance Win32_Processor; $cpuName = $cpu.Name; if ($cpu.Manufacturer -eq 'GenuineIntel') { if ($cpuName.Substring(0, 2) -eq 'In') { Write-Host 'Detected Intel CPU older than 10th generation.' } else { $cpuGen = [int]($cpuName.Substring(0, 2)); if ($cpuGen -gt 11) { Write-Host 'Optimizing Revision''s Ultra powerplan for 12th generation or later Intel CPUs'; powercfg -changename 3ff9831b-6f80-4830-8178-736cd4229e7b 'Ultra Performance' 'Windows''s Ultimate Performance with optimized settings for newer Intel CPUs.'; powercfg -s 3ff9831b-6f80-4830-8178-736cd4229e7b; powercfg -setacvalueindex scheme_current sub_processor HETEROPOLICY 0; powercfg -setacvalueindex scheme_current sub_processor SCHEDPOLICY 2; powercfg /setactive scheme_current }}};}"
 
@@ -62,6 +51,10 @@ for /f "usebackq tokens=2 delims=\" %%a in (`reg query "HKEY_USERS" ^| findstr /
       )
     )
   )
+
+:: https://github.com/meetrevision/playbook/issues/15
+:: Updates root certificates
+PowerShell -NonInteractive -NoLogo -NoP -C "& {$tmp = (New-TemporaryFile).FullName; CertUtil -generateSSTFromWU -f $tmp; if ( (Get-Item $tmp | Measure-Object -Property Length -Sum).sum -gt 0 ) { $SST_File = Get-ChildItem -Path $tmp; $SST_File | Import-Certificate -CertStoreLocation "Cert:\LocalMachine\Root"; $SST_File | Import-Certificate -CertStoreLocation "Cert:\LocalMachine\AuthRoot" } Remove-Item -Path $tmp}" >NUL 2>nul
 
 
 @REM echo Configuring UAC...

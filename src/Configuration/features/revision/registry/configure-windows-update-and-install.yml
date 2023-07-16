@@ -7,37 +7,24 @@ actions:
     # ======================
     # === Windows Update ===
     # ======================
-    # === Allow Automatic Updates immediate installation - Disabled
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AUOptions', type: REG_DWORD, data: '2'}
-    # === Allow Automatic Updates immediate installation - Disabled
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AutoInstallMinorUpdates', type: REG_DWORD, data: '0'}
-    # === Allow updates to be downloaded automatically over metered connections - Disabled
-    # [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate]
-    # "AllowAutoWindowsUpdateDownloadOverMeteredNetwork"=dword:00000001
+
     # === Configure Automatic Updates - Disabled
-    # === Breaks Xbox Sign-in
-    # [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU]
-    # "NoAutoUpdate"=dword:00000001
-    # === Do not adjust default option to 'Install Updates and Shut Down' in Shut Down Windows dialog box - Enabled
-  - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', type: REG_DWORD, data: '1'}
+    # === Used to break Xbox Sign-in
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', type: REG_DWORD, data: '1'}
+
     # === Do not allow update deferral policies to cause scans against Windows Update - Enabled
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'DisableDualScan', type: REG_DWORD, data: '1'}
-    # === Do not display 'Install Updates and Shut Down' option in Shut Down Windows dialog box - Enabled
-  - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUShutdownOption', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUShutdownOption', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'DisableDualScan', type: REG_DWORD, data: '1'}  
+  
     # === Do not include drivers with Windows Updates - Enabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'ExcludeWUDriversInQualityUpdate', type: REG_DWORD, data: '1'}
     # === Enabling Windows Update Power Management to automatically wake up the system to install scheduled updates - Disabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'AUPowerManagement', type: REG_DWORD, data: '0'}
-    # === No auto-restart with logged on users for scheduled automatic updates installations - Enabled
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoRebootWithLoggedOnUsers', type: REG_DWORD, data: '1'}
+
     # === Turn off auto-restart notifications for update installations - Enabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'SetAutoRestartNotificationDisable', type: REG_DWORD, data: '1'}
     # === Turn on recommended updates via Automatic Updates - Disabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'IncludeRecommendedUpdates', type: REG_DWORD, data: '0'}
-    # === Turn on Software Notifications - Disabled
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'EnableFeaturedSoftware', type: REG_DWORD, data: '0'}
+
     # === Windows Update Notifications - Disabled
     # ------> https://www.askvg.com/fix-how-to-stop-automatic-forced-upgrade-to-feature-updates-in-windows-10/
   - !registryValue: {path: 'HKLM\SYSTEM\Setup\UpgradeNotification', value: 'UpgradeAvailable', type: REG_DWORD, data: '0'}
@@ -111,6 +98,8 @@ actions:
     # ------> Media Player Updates auto update disabled.
     # ------> https://admx.help/?Category=Windows_8.1_2012R2&Policy=Microsoft.Policies.MediaPlayer::DisableAutoUpdate
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\WindowsMediaPlayer', value: 'DisableAutoUpdate', type: REG_DWORD, data: '0'}
+  
+  
     # ========================
     # === Discarded Tweaks ===
     # ========================
@@ -134,3 +123,18 @@ actions:
     # "value"=dword:00000001
     # [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings]
     # "ExcludeWUDriversInQualityUpdate"=dword:00000001
+
+   # === Allow Automatic Updates immediate installation - Disabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AUOptions', type: REG_DWORD, data: '2'}
+    # === Allow Automatic Updates immediate installation - Disabled (Not supported anymore)
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AutoInstallMinorUpdates', type: REG_DWORD, data: '0'}
+     # === Do not adjust default option to 'Install Updates and Shut Down' in Shut Down Windows dialog box - Enabled (Not supported anymore)
+  # - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', type: REG_DWORD, data: '1'}
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', type: REG_DWORD, data: '1'}
+  # === Do not display 'Install Updates and Shut Down' option in Shut Down Windows dialog box - Enabled (Not supported anymore)
+  # - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUShutdownOption', type: REG_DWORD, data: '1'}
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUShutdownOption', type: REG_DWORD, data: '1'}
+  # === No auto-restart with logged on users for scheduled automatic updates installations - Enabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoRebootWithLoggedOnUsers', type: REG_DWORD, data: '1'}
+  # === Turn on Software Notifications - Disabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'EnableFeaturedSoftware', type: REG_DWORD, data: '0'}

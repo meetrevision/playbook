@@ -6,7 +6,8 @@
       "p3a_usage": 0
     },
     "p3a": {
-      "enabled": false
+      "enabled": false,
+      "notice_acknowledged": true
     },
     "stats": {
       "reporting_enabled": false
@@ -15,5 +16,8 @@
   "distribution": {
     "import_bookmarks_from_file": "C:\\Program Files\\BraveSoftware\\bookmarks.html",
     "import_bookmarks": true
+  },
+  "user_experience_metrics": {
+    "reporting_enabled": false
   }
 }
