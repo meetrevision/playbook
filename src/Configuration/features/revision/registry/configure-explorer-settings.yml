@@ -49,6 +49,11 @@ actions:
     # === AutoPlay - Disabled
     # ------> Auto play is the notification that pops up when you insert an external storage device, like a USB.
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers', value: 'DisableAutoplay', type: REG_DWORD, data: '1'}
+    # === AutoRun - Disabled
+    # ------> Disable autorun will limit the functionality of autorun.inf on all disks.
+    # ------> https://learn.microsoft.com/en-us/windows/win32/shell/autoplay-reg
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'NoDriveTypeAutoRun', type: REG_DWORD, data: '255'}
+  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'NoDriveTypeAutoRun', type: REG_DWORD, data: '255'}
     # === Show Task View button in taskbar - Enabled
     # ------> Defaulted due to removal of subjective changes.
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowTaskViewButton', type: REG_DWORD, data: '1'}
