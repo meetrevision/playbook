@@ -6,9 +6,10 @@ actions: []
 features:
 - features\revision\start.yml
 - features\revision\services.yml
-- features\revision\appx.yml
 - features\revision\components.yml
+- features\revision\appx.yml
 - features\revision\packages.yml
 - features\revision\registry.yml
 - features\revision\revert.yml
+- features\revision\software.yml
 - features\revision\config.yml

@@ -4,7 +4,7 @@ description: Applies some Revision configurations
 privilege: TrustedInstaller
 actions:
   - !taskKill: {name: "explorer"}
-  - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod"', showOutput: false, showError: false}
+  - !run: {exe: 'PowerShell', args: 'Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod', showOutput: false, showError: false}
 
   - !writeStatus: {status: "Configuring power settings"}
   - !run: {exe: 'powercfg', args: '/hibernate off', showOutput: false, showError: false}
@@ -75,25 +75,25 @@ actions:
     # OneDrive workaround
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\OneDrive', value: 'DisableFileSyncNGSC', operation: delete}
 
-  - !run: {exeDir: true, exe: "APPLICATIONS.bat", wait: true, weight: 60}
+  - !run: {exeDir: true, exe: "APPLICATIONS.cmd", wait: true, weight: 60}
 
     # Windows Defender
-  - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.bat", wait: true}
+  - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.cmd", wait: true}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender', value: 'InstallLocation', operation: delete}
 
-  - !run: {exeDir: true, exe: "FINALIZE.bat", weight: 25}
+  - !run: {exeDir: true, exe: "FINALIZE.cmd", weight: 25}
 
   - !run:
     exeDir: true
-    exe: "STARTMENU.bat"
+    exe: "STARTMENU.cmd"
     weight: 20
   - !run:
     exeDir: true
-    exe: "FILEASSOC.bat"
+    exe: "FILEASSOC.cmd"
     weight: 90
   - !run:
     exeDir: true
-    exe: "WALLPAPER.bat"
+    exe: "WALLPAPER.cmd"
     weight: 20
 
     # Start as user process to prevent weird look due to running as TrustedInstaller
