@@ -56,13 +56,6 @@ actions:
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKCU\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1'}
 
-    # Add Task Manager to taskbar right click
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\4\1887869580', value: 'EnabledState', type: REG_DWORD, data: '2'}
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\4\1887869580', value: 'EnabledStateOptions', type: REG_DWORD, data: '0'}
-
-    # Remove Widget button, only useful for the final explorer restart, since it will still show otherwise until the system is restarted.
-  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarDa', type: REG_DWORD, data: '0'}
-
   - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Rename-Computer -NewName $env:computername"', showOutput: false, showError: false}
   - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc"', showOutput: false, showError: false}
   - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"', showOutput: false, showError: false}
@@ -75,10 +68,8 @@ actions:
     # OneDrive workaround
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\OneDrive', value: 'DisableFileSyncNGSC', operation: delete}
 
-  - !run: {exeDir: true, exe: "APPLICATIONS.cmd", wait: true, weight: 60}
-
     # Windows Defender
-  - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.cmd", wait: true}
+  - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.bat", wait: true}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender', value: 'InstallLocation', operation: delete}
 
   - !run: {exeDir: true, exe: "FINALIZE.cmd", weight: 25}
