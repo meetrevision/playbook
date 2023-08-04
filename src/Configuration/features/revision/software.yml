@@ -7,7 +7,17 @@ actions:
   - !writeStatus: {status: 'Installing Revision Tool'}
   !powershell: {command: '& {Invoke-WebRequest ((Invoke-RestMethod -Uri "https://api.github.com/repos/meetrevision/revision-tool/releases/latest" -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq "RevisionTool-Setup.exe" }).browser_download_url -OutFile "$env:TEMP\RevisionTool-Setup.exe"}' }
   !cmd: {command: 'call "%temp%\RevisionTool-Setup.exe" /VERYSILENT /TASKS="desktopicon" & del "%temp%\RevisionTool-Setup.exe"' weight: 100}
-  
+
+  - !powerShell:
+    command: 'Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(''https://community.chocolatey.org/install.ps1''))'
+    weight: 30
+
+  - !writeStatus: {status: "Installing .NET Framework 3.5", option: "dotnet35"}
+  - !cmd:
+    command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums dotnet3.5'
+    weight: 150
+    option: "dotnet35"
+
   - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
   - !cmd:
     command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums brave'
@@ -38,6 +48,7 @@ actions:
   - !registryValue {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\10', value: 'Favicon', type: REG_SZ, data: 'https://revi.cc/img/favicon.png', option: "browser-firefox"}
   - !registryValue {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\10', value: 'Placement', type: REG_SZ, data: 'toolbar', option: "browser-firefox"}
   - !registryValue {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\10', value: 'Folder', type: REG_SZ, data: '', option: "browser-firefox"} 
+  - !cmd: {command: '%ProgramFiles(x86)%\Mozilla Maintenance Service\uninstall.exe /uninstall', option: "browser-firefox"}
 
   - !writeStatus: {status: 'Installing Ungoogled Chromium', option: "browser-ugc"}
   - !cmd:
