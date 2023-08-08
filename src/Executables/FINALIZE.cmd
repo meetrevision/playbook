@@ -21,7 +21,7 @@ if not defined w11 (
   set "cbs=%systemroot%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy"
   set "manifest=%cbs%\appxmanifest.xml"
   takeown /F "%manifest%" /A & icacls "%manifest%" /grant Administrators:F
-  if not exist "%cbs%\appxmanifest.xml.og" do xcopy "%manifest%" "%cbs%\appxmanifest.xml.og" /o & del "%manifest%"
+  if not exist "%cbs%\appxmanifest.xml.og" xcopy "%manifest%" "%cbs%\appxmanifest.xml.og" /o & del "%manifest%"
   PowerShell -NonInteractive -NoLogo -NoP -C "& { [xml]$xml = Get-Content -Path '%cbs%\appxmanifest.xml.og' -Raw; $applicationNode = $xml.Package.Applications.Application | Where-Object { $_.Id -eq 'WebExperienceHost' }; if ($applicationNode -ne $null) { $xml.Package.Applications.RemoveChild($applicationNode) } $xml.Save('%manifest%') }" >NUL 2>nul
 )
 
@@ -45,6 +45,8 @@ echo Configuring memory...
 
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f >NUL
 reg add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "0" /f >NUL
+
+for /f "tokens=2 delims==" %%a in ('wmic os get TotalVisibleMemorySize /format:value') do set "mem=%%a"
 
 for /f "usebackq tokens=2 delims=\" %%a in (`reg query "HKEY_USERS" ^| findstr /r /x /c:"HKEY_USERS\\S-.*" /c:"HKEY_USERS\\AME_UserHive_[^_]*"`) do (
   REM If the "Volatile Environment" key exists, that means it is a proper user. Built in accounts/SIDs do not have this key.
