@@ -21,7 +21,7 @@ if not defined w11 (
   set "cbs=%systemroot%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy"
   set "manifest=%cbs%\appxmanifest.xml"
   takeown /F "%manifest%" /A & icacls "%manifest%" /grant Administrators:F
-  if not exist "%cbs%\appxmanifest.xml.og" xcopy "%manifest%" "%cbs%\appxmanifest.xml.og" /o & del "%manifest%"
+  if not exist "%cbs%\appxmanifest.xml.revi" copy "%manifest%" "%cbs%\appxmanifest.xml.revi" /v & del "%manifest%"
   PowerShell -NonInteractive -NoLogo -NoP -C "& { [xml]$xml = Get-Content -Path '%cbs%\appxmanifest.xml.og' -Raw; $applicationNode = $xml.Package.Applications.Application | Where-Object { $_.Id -eq 'WebExperienceHost' }; if ($applicationNode -ne $null) { $xml.Package.Applications.RemoveChild($applicationNode) } $xml.Save('%manifest%') }" >NUL 2>nul
 )
 
