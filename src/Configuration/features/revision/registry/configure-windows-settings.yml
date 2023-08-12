@@ -24,7 +24,7 @@ actions:
     # ======> Storage
     # === Allow Storage Sense - Disabled
     # ------> Storage Sense is turned off the machine. Users cannot enable Storage Sense
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\StorageSense', value: 'AllowStorageSenseGlobal', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\StorageSense', value: 'AllowStorageSenseGlobal', type: REG_DWORD, data: '0'}
     # ======> Tablet mode
     # === Adjust Tablet mode to always desktop mode.
     # ------> When I sign in - Use desktop mode.
