@@ -60,8 +60,8 @@ actions:
   - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc"', showOutput: false, showError: false}
   - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"', showOutput: false, showError: false}
   - !run: {exe: 'powershell', args: '-NonInteractive -NoLogo -NoProfile Set-ProcessMitigation -Name vgc.exe -Enable CFG', showOutput: false}
-  - !cmd: {exeDir: true, command: '@echo Disable-MMAgent -MC; ForEach($v in (Get-Command -Name "Set-ProcessMitigation").Parameters["Disable"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString().Replace(" ", "").Replace("`n", "")}; rm $PSCommandPath> MC_PM.ps1'}
-  - !run: {exeDir: true, exe: 'powershell', args: '-windowstyle hidden -ExecutionPolicy Bypass -C "& ''./MC_PM.ps1''"'}
+  # - !cmd: {exeDir: true, command: '@echo Disable-MMAgent -MC; ForEach($v in (Get-Command -Name "Set-ProcessMitigation").Parameters["Disable"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString().Replace(" ", "").Replace("`n", "")}; rm $PSCommandPath> MC_PM.ps1'}
+  # - !run: {exeDir: true, exe: 'powershell', args: '-windowstyle hidden -ExecutionPolicy Bypass -C "& ''./MC_PM.ps1''"'}
   - !run: {exe: 'setx', args: 'DOTNET_CLI_TELEMETRY_OPTOUT 1'}
   - !run: {exe: 'setx', args: 'POWERSHELL_TELEMETRY_OPTOUT 1'}
 
