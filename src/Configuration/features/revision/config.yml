@@ -82,6 +82,7 @@ actions:
     exeDir: true
     exe: "FILEASSOC.cmd"
     weight: 90
+    
   - !run:
     exeDir: true
     exe: "WALLPAPER.cmd"

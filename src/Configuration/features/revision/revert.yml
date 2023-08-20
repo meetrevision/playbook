@@ -4,12 +4,21 @@ description: Revert configurations that were from previous versions
 privilege: TrustedInstaller
 actions:
 
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AUOptions', operation: delete}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AutoInstallMinorUpdates', operation: delete}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', operation: delete}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUShutdownOption', operation: delete}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoRebootWithLoggedOnUsers', operation: delete}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'IncludeRecommendedUpdates', operation: delete}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'EnableFeaturedSoftware', operation: delete}
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager', value: 'HeapDeCommitFreeBlockThreshold', type: REG_DWORD, data: '0'}
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', type: REG_DWORD, data: '1' }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AUOptions', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AutoInstallMinorUpdates', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUShutdownOption', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoRebootWithLoggedOnUsers', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'IncludeRecommendedUpdates', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'EnableFeaturedSoftware', operation: delete }
+  - !registryValue: { path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager', value: 'HeapDeCommitFreeBlockThreshold', type: REG_DWORD, data: '0' }
+
+  - !registryValue: { path: 'HKCU\SOFTWARE\Policies\Microsoft\Internet Explorer\Security', value: 'DisableSecuritySettingsCheck', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Security', value: 'DisableSecuritySettingsCheck', operation: delete }
+  - !registryValue: { path: 'HKCU\SOFTWARE\Policies\Microsoft\Internet Explorer\Security', value: 'DisableFixSecuritySettings', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Security', value: 'DisableFixSecuritySettings', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Download', value: 'CheckExeSignatures', operation: delete }
+  - !registryValue: { path: 'HKCU\SOFTWARE\Policies\Microsoft\Internet Explorer\Privacy', value: 'ClearBrowsingHistoryOnExit', operation: delete }
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Privacy', value: 'ClearBrowsingHistoryOnExit', operation: delete }
+  

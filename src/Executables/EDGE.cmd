@@ -14,3 +14,10 @@ for /D %%I in ("%ProgramFiles(x86)%\Microsoft\Edge\Application\*") do (
 )
 
 msiexec /X{2BFF39DC-EFF0-355C-80CD-41D847013784} /qn /norestart
+
+set "value=MicrosoftEdgeAutoLaunch_.*"
+set "path=HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
+
+for /f "tokens=1,*" %%A in ('reg query "%path%" /f "Microsoft" ^| findstr /R "%value%"') do (
+    reg delete "%path%" /v "%%A" /f
+)

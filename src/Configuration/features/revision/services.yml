@@ -47,31 +47,31 @@ actions:
     # === Security Services ===
     # =========================
     # === Sense
-  - !service: {name: 'Sense', operation: change, startup: 4}
-    # === SecurityHealthService
-  - !service: {name: 'SecurityHealthService', operation: change, startup: 4}
-    # === WinDefend
-  - !service: {name: 'WinDefend', operation: change, startup: 4}
-    # === WdNisSvc
-  - !service: {name: 'WdNisSvc', operation: change, startup: 4}
-    # === WdNisDrv
-  - !service: {name: 'WdNisDrv', operation: change, startup: 4}
-    # === WdBoot
-  - !service: {name: 'WdBoot', operation: change, startup: 4}
-    # === WdFilter
-  - !service: {name: 'WdFilter', operation: change, startup: 4}
-    # === MsSecFlt
-  - !service: {name: 'MsSecFlt', operation: change, startup: 4}
-    # === webthreatdefsvc - default 3
-  - !service: {name: 'webthreatdefsvc', operation: change, startup: 4}
-    # === webthreatdefusersvc - default 2
-  - !service: {name: 'webthreatdefusersvc', operation: change, startup: 4}
-    # === Security Center - default 2
-  - !service: {name: 'wscsvc', operation: change, startup: 4}
-    # === System Guard
-    # ------> SgrmAgent,SgrmBroker
-  - !service: {name: 'SgrmAgent', operation: change, startup: 4}
-  - !service: {name: 'SgrmBroker', operation: change, startup: 4}
+  # - !service: {name: 'Sense', operation: change, startup: 4}
+  #   # === SecurityHealthService
+  # - !service: {name: 'SecurityHealthService', operation: change, startup: 4}
+  #   # === WinDefend
+  # - !service: {name: 'WinDefend', operation: change, startup: 4}
+  #   # === WdNisSvc
+  # - !service: {name: 'WdNisSvc', operation: change, startup: 4}
+  #   # === WdNisDrv
+  # - !service: {name: 'WdNisDrv', operation: change, startup: 4}
+  #   # === WdBoot
+  # - !service: {name: 'WdBoot', operation: change, startup: 4}
+  #   # === WdFilter
+  # - !service: {name: 'WdFilter', operation: change, startup: 4}
+  #   # === MsSecFlt
+  # - !service: {name: 'MsSecFlt', operation: change, startup: 4}
+  #   # === webthreatdefsvc - default 3
+  # - !service: {name: 'webthreatdefsvc', operation: change, startup: 4}
+  #   # === webthreatdefusersvc - default 2
+  # - !service: {name: 'webthreatdefusersvc', operation: change, startup: 4}
+  #   # === Security Center - default 2
+  # - !service: {name: 'wscsvc', operation: change, startup: 4}
+  #   # === System Guard
+  #   # ------> SgrmAgent,SgrmBroker
+  # - !service: {name: 'SgrmAgent', operation: change, startup: 4}
+  # - !service: {name: 'SgrmBroker', operation: change, startup: 4}
     # ===================================
     # == Tcpipreg (experimental)
   - !service: {name: 'tcpipreg', operation: change, startup: 4}

@@ -10,7 +10,8 @@
         "!taskKill: mapping",
         "!systemPackage: mapping",
         "!cmd: mapping",
-        "!powershell: mapping",
+        "!powerShell: mapping",
         "!writeStatus: mapping"
     ],
+    "redhat.telemetry.enabled": false
 }
