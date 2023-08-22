@@ -12,7 +12,7 @@ actions:
   - !appx: {name: '*microsoft.microsoftedge.stable*', type: family}
   - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family}
   - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', type: family}
-  - !appx: {name: '*OneDrive*', type: family}
+  - !appx: {name: '*OneDrive*', type: family, option: "remove-onedrive"}
   - !appx: {name: '*Spotify*', type: family}
   - !appx: {name: '*SecureAssessmentBrowser*', type: family}
   - !appx: {name: '*PeopleExperienceHost*', type: family}

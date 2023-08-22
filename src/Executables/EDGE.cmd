@@ -21,3 +21,5 @@ set "path=HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
 for /f "tokens=1,*" %%A in ('reg query "%path%" /f "Microsoft" ^| findstr /R "%value%"') do (
     reg delete "%path%" /v "%%A" /f
 )
+
+del /q /f "%userprofile%\Desktop\Microsoft Edge.lnk" >NUL 2>nul

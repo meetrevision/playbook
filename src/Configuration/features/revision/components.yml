@@ -9,38 +9,40 @@ actions:
 
   - !taskKill: {name: "explorer"}
 
-  - !writeStatus: {status: "Removing Windows components"}
+  - !writeStatus: {status: "Removing components"}
 
     # Microsoft Edge
+  - !writeStatus: {status: "Removing Microsoft Edge"}
   - !taskKill: {name: "MicrosoftEdgeUpdate"}
   - !taskKill: {name: "msedge"}
   - !taskKill: {name: "MicrosoftEdge*"}
   - !taskKill: {name: "setup", pathContains: "\\Edge"}
   - !taskKill: {name: "msedgewebview2"}
+  - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", weight: 10}
   # - !service: {name: "edgeupdate", operation: delete}
   # - !service: {name: "edgeupdatem", operation: delete}
   # - !service: {name: "MicrosoftEdgeElevationService", operation: delete}
   - !run: {exeDir: true, exe: "EDGE.cmd", weight: 20}  
-
-  - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", weight: 10}
+  
   # - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\EdgeUpdate", weight: 10}
   # - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\EdgeCore", weight: 10}
 
     # OneDrive
-  - !taskKill: {name: "OneDriveStandaloneUpdater"}
-  - !taskKill: {name: "OneDriveSetup"}
-  - !taskKill: {name: "OneDrive*"}
+  - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
+  - !taskKill: {name: "OneDriveStandaloneUpdater", option: "remove-onedrive"}
+  - !taskKill: {name: "OneDriveSetup", option: "remove-onedrive"}
+  - !taskKill: {name: "OneDrive*", option: "remove-onedrive"}
 
-  - !cmd: {command: '%windir%\System32\OneDriveSetup.exe /uninstall'}
-  - !cmd: {command: '%windir%\SysWOW64\OneDriveSetup.exe /uninstall'}
+  - !cmd: {command: '%windir%\System32\OneDriveSetup.exe /uninstall', option: "remove-onedrive"}
+  - !cmd: {command: '%windir%\SysWOW64\OneDriveSetup.exe /uninstall', option: "remove-onedrive"}
 
-  - !file: {path: "%windir%\\System32\\OneDriveSetup.exe"}
-  - !file: {path: "%windir%\\SysWOW64\\OneDriveSetup.exe"}
-  - !file: {path: "%windir%\\SysWOW64\\OneDriveSettingSyncProvider.dll"}
-  - !file: {path: "%SystemDrive%\\OneDriveTemp"}
-  - !file: {path: "%ProgramData%\\Microsoft OneDrive"}
+  - !file: {path: "%windir%\\System32\\OneDriveSetup.exe", option: "remove-onedrive"}
+  - !file: {path: "%windir%\\SysWOW64\\OneDriveSetup.exe", option: "remove-onedrive"}
+  - !file: {path: "%windir%\\SysWOW64\\OneDriveSettingSyncProvider.dll", option: "remove-onedrive"}
+  - !file: {path: "%SystemDrive%\\OneDriveTemp", option: "remove-onedrive"}
+  - !file: {path: "%ProgramData%\\Microsoft OneDrive", option: "remove-onedrive"}
 
-  - !run: {exeDir: true, exe: "ONED.cmd", weight: 20}
+  - !run: {exeDir: true, exe: "ONED.cmd", option: "remove-onedrive", weight: 20}
   
     # Update Health Tools
   - !cmd: {command: 'msiexec /X{43D501A5-E5E3-46EC-8F33-9E15D2A2CBD5} /qn /norestart'}

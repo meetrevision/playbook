@@ -772,11 +772,11 @@ actions:
   # - !systemPackage: {name: 'Microsoft-Windows-GameExplorer', arch: wow64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-Indeo4-Codecs', arch: x86, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-Indeo5-Codecs', arch: x86, language: 'neutral'}
-  - !systemPackage: {name: 'Microsoft-Windows-OneDrive-Setup-Deployment-LanguagePack', arch: amd64, language: 'en-US'}
-  - !systemPackage: {name: 'Microsoft-Windows-OneDrive-Setup-Deployment', arch: amd64, language: 'neutral'}
-  - !systemPackage: {name: 'Microsoft-Windows-OneDrive-Setup-WOW64-Deployment-LanguagePack', arch: amd64, language: 'en-US'}
-  - !systemPackage: {name: 'Microsoft-Windows-OneDrive-Setup-WOW64-Deployment', arch: amd64, language: 'neutral'}
-  - !systemPackage: {name: 'Microsoft-Windows-SystemSettings-SettingsHandlers-OneDriveBackup', arch: amd64, language: 'neutral'}
+  - !systemPackage: {name: 'Microsoft-Windows-OneDrive-Setup-Deployment-LanguagePack', arch: amd64, language: 'en-US', option: "remove-onedrive"}
+  - !systemPackage: {name: 'Microsoft-Windows-OneDrive-Setup-Deployment', arch: amd64, language: 'neutral', option: "remove-onedrive"}
+  - !systemPackage: {name: 'Microsoft-Windows-OneDrive-Setup-WOW64-Deployment-LanguagePack', arch: amd64, language: 'en-US', option: "remove-onedrive"}
+  - !systemPackage: {name: 'Microsoft-Windows-OneDrive-Setup-WOW64-Deployment', arch: amd64, language: 'neutral', option: "remove-onedrive"}
+  - !systemPackage: {name: 'Microsoft-Windows-SystemSettings-SettingsHandlers-OneDriveBackup', arch: amd64, language: 'neutral', option: "remove-onedrive"}
   - !systemPackage: {name: 'Microsoft-Windows-PhotoBasic-Feature-WOW64-Deployment-LanguagePack', arch: amd64, language: 'en-US'}
   - !systemPackage: {name: 'Microsoft-Windows-PhotoBasic-Feature-WOW64-Deployment', arch: amd64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-PhotoBasic-PictureTools-WOW64-Deployment-LanguagePack', arch: amd64, language: 'en-US'}
