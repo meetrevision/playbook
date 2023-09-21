@@ -72,6 +72,12 @@ actions:
   - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.bat", wait: true}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender', value: 'InstallLocation', operation: delete}
 
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File ngen.ps1'
+    weight: 20
+
   - !run: {exeDir: true, exe: "FINALIZE.cmd", weight: 25}
 
   - !run:
@@ -89,4 +95,4 @@ actions:
     weight: 20
 
     # Start as user process to prevent weird look due to running as TrustedInstaller
-  - !run: {baseDir: true, exe: "NSudoLC.exe", args: '-U:C -UseCurrentConsole explorer.exe'}
+  # - !run: {baseDir: true, exe: "NSudoLC.exe", args: '-U:C -UseCurrentConsole explorer.exe'}

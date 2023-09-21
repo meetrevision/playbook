@@ -59,4 +59,4 @@ actions:
     #  Windows Installation Assistant
   - !cmd: {command: '"%ProgramFiles(x86)%\WindowsInstallationAssistant\Windows10UpgraderApp.exe" /SunValley /ForceUninstall', weight: 10}
 
-  - !run: {exe: "explorer.exe", wait: false}
+  # - !run: {exe: "explorer.exe", wait: false}
