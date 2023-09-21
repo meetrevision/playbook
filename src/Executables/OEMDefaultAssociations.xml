@@ -11,10 +11,4 @@
   <Association Identifier=".tif" ProgId="PhotoViewer.FileAssoc.Tiff" ApplicationName="Windows Photo Viewer" />
   <Association Identifier=".tiff" ProgId="PhotoViewer.FileAssoc.Tiff" ApplicationName="Windows Photo Viewer" />
   <Association Identifier=".wdp" ProgId="PhotoViewer.FileAssoc.Wdp" ApplicationName="Windows Photo Viewer" />
-  <Association Identifier=".htm" ProgId="BraveHTML" ApplicationName="Brave Browser" />
-  <Association Identifier=".html" ProgId="BraveHTML" ApplicationName="Brave Browser" />
-  <Association Identifier=".pdf" ProgId="BraveHTML" ApplicationName="Brave Browser" />
-  <Association Identifier=".shtml" ProgId="BraveHTML" ApplicationName="Brave Browser" />
-  <Association Identifier="http" ProgId="BraveHTML" ApplicationName="Brave Browser" />
-  <Association Identifier="https" ProgId="BraveHTML" ApplicationName="Brave Browser" />
 </DefaultAssociations>
