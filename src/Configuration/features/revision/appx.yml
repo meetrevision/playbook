@@ -9,9 +9,9 @@ actions:
   
   - !writeStatus: {status: "Removing Appx Packages"}
   - !appx: {name: '*Disney*', type: family}
-  - !appx: {name: '*microsoft.microsoftedge.stable*', type: family}
-  - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family}
-  - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', type: family}
+  - !appx: {name: '*microsoft.microsoftedge.stable*', type: family, option: "remove-edge"}
+  - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family, option: "remove-edge"}
+  - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', type: family, option: "remove-edge"}
   - !appx: {name: '*OneDrive*', type: family, option: "remove-onedrive"}
   - !appx: {name: '*Spotify*', type: family}
   - !appx: {name: '*SecureAssessmentBrowser*', type: family}
