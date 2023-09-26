@@ -18,11 +18,11 @@ actions:
   - !taskKill: {name: "MicrosoftEdge*", option: "remove-edge"}
   - !taskKill: {name: "setup", pathContains: "\\Edge", option: "remove-edge"}
   - !taskKill: {name: "msedgewebview2", option: "remove-edge"}
+  - !run: {exeDir: true, exe: "EDGE.cmd", option: "remove-edge", weight: 20}
   - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 10}
   # - !service: {name: "edgeupdate", operation: delete}
   # - !service: {name: "edgeupdatem", operation: delete}
   # - !service: {name: "MicrosoftEdgeElevationService", operation: delete}
-  - !run: {exeDir: true, exe: "EDGE.cmd", option: "remove-edge", weight: 20}  
   
   # - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\EdgeUpdate", weight: 10}
   # - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\EdgeCore", weight: 10}
