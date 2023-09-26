@@ -42,7 +42,9 @@ actions:
   - !writeStatus: {status: "Configuring network settings"}
   - !run: {exe: 'netsh', args: 'interface Teredo set state type=default', showOutput: false, showError: false}
   - !run: {exe: 'netsh', args: 'interface Teredo set state servername=default', showOutput: false, showError: false}
-  - !run: {exe: 'netsh', args: 'int tcp set supplemental internet congestionprovider=bbr2', showOutput: false, showError: false}
+  
+  # https://github.com/meetrevision/playbook/issues/27
+  # - !run: {exe: 'netsh', args: 'int tcp set supplemental internet congestionprovider=bbr2', showOutput: false, showError: false}
 
   - !writeStatus: {status: "Configuring Windows settings"}
   - !run: {exe: 'net', args: 'accounts /maxpwage:unlimited', showOutput: false}
