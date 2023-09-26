@@ -1,8 +1,23 @@
 @echo off
 SETLOCAL ENABLEDELAYEDEXPANSION
 
+taskkill /f /im "OneDrive.exe"
+taskkill /f /im "OneDriveStandaloneUpdater.exe"
+taskkill /f /im "OneDriveSetup.exe"
+
+!systemroot!\System32\OneDriveSetup.exe /uninstall
+!systemroot!\SysWOW64\OneDriveSetup.exe /uninstall
+del /F /Q "!systemroot!\System32\OneDriveSetup.exe"
+del /F /Q "!systemroot!\SysWOW64\OneDriveSetup.exe"
+del /F /Q "!systemroot!\SysWOW64\OneDriveSettingSyncProvider.dll"
+del /F /Q "!SystemDrive!\OneDriveTemp"
+del /F /Q "!ProgramData!\Microsoft OneDrive"
 
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f
+
+REM remove OneDrive from explorer navigation pane
+reg delete "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
+reg delete "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
 
 for /f "usebackq tokens=2 delims=\" %%e in (`reg query "HKEY_USERS" ^| findstr /r /x /c:"HKEY_USERS\\S-.*" /c:"HKEY_USERS\\AME_UserHive_[^_]*"`) do (
 	REM If the "Volatile Environment" key exists, that means it is a proper user. Built in accounts/SIDs do not have this key.
@@ -12,7 +27,7 @@ for /f "usebackq tokens=2 delims=\" %%e in (`reg query "HKEY_USERS" ^| findstr /
 	)
 )
 
-taskkill /f /im "OneDrive.exe"
+
 
 for /f "usebackq delims=" %%a in (`dir /b /a:d "!SystemDrive!\Users"`) do (
 	echo rmdir /q /s "!SystemDrive!\Users\%%a\AppData\Local\Microsoft\OneDrive"
