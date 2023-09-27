@@ -5,8 +5,17 @@ taskkill /f /im "OneDrive.exe"
 taskkill /f /im "OneDriveStandaloneUpdater.exe"
 taskkill /f /im "OneDriveSetup.exe"
 
-!systemroot!\System32\OneDriveSetup.exe /uninstall
-!systemroot!\SysWOW64\OneDriveSetup.exe /uninstall
+"!systemroot!\System32\OneDriveSetup.exe" /uninstall
+"!systemroot!\SysWOW64\OneDriveSetup.exe" /uninstall
+
+for /f "tokens=2*" %%A in ('reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe" /v "UninstallString"') do (
+    set "uninstallString=%%B"
+)
+
+if defined uninstallString (
+    call !uninstallString!
+)
+
 del /F /Q "!systemroot!\System32\OneDriveSetup.exe"
 del /F /Q "!systemroot!\SysWOW64\OneDriveSetup.exe"
 del /F /Q "!systemroot!\SysWOW64\OneDriveSettingSyncProvider.dll"
@@ -14,6 +23,8 @@ del /F /Q "!SystemDrive!\OneDriveTemp"
 del /F /Q "!ProgramData!\Microsoft OneDrive"
 
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f
+
+reg delete "HKCU\Software\Microsoft\OneDrive" /f
 
 REM remove OneDrive from explorer navigation pane
 reg delete "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
@@ -26,8 +37,6 @@ for /f "usebackq tokens=2 delims=\" %%e in (`reg query "HKEY_USERS" ^| findstr /
 		call :USERREG "%%e"
 	)
 )
-
-
 
 for /f "usebackq delims=" %%a in (`dir /b /a:d "!SystemDrive!\Users"`) do (
 	echo rmdir /q /s "!SystemDrive!\Users\%%a\AppData\Local\Microsoft\OneDrive"
