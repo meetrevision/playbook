@@ -63,6 +63,9 @@ actions:
   - !appx: {name: '*WebExperienceHost*', type: app}
 
   - !appx: {name: '*MicrosoftTeams*', type: family}
+
+    # A new Outlook app; Added in 23H2
+  - !appx: {name: 'Microsoft.OutlookForWindows*', type: family}
   
     # Necessary to refresh start menu entries etc.
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
