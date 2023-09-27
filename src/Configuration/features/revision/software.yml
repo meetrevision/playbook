@@ -31,24 +31,7 @@ actions:
     weight: 150
     option: "browser-firefox"
   - !writeStatus: {status: 'Tweaking Firefox settings', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox', value: 'DisableTelemetry', type: REG_DWORD, data: '1', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox', value: 'DisablePocket', type: REG_DWORD, data: '1', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox', value: 'CaptivePortal', type: REG_DWORD, data: '0', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox', value: 'DisableFirefoxStudies', type: REG_DWORD, data: '1', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox', value: 'ExtensionSettings', type: REG_MULTI_SZ, data: '{\\0   "uBlock0@raymondhill.net": {\\0    "installation_mode": "force_installed",\\0    "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"\\0  }\\0}', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox', value: 'DisableDefaultBrowserAgent', type: REG_DWORD, data: '1', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox', value: 'Preferences', type: REG_MULTI_SZ, data: '{"network.cookie.sameSite.laxByDefault":{"Value":true,"Status":"user"},"network.cookie.sameSite.noneRequiresSecure":{"Value":true,"Status":"user"},"network.cookie.sameSite.schemeful":{"Value":true,"Status":"user"},"browser.contentblocking.category":{"Value":"strict","Status":"user"},"browser.newtabpage.activity-stream.showSponsored":{"Value":false,"Status":"user"},"browser.newtabpage.activity-stream.showSponsoredTopSites":{"Value":false,"Status":"user"}}', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\1', value: 'Title', type: REG_SZ, data: 'Revision', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\1', value: 'URL', type: REG_SZ, data: 'https://revi.cc/', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\1', value: 'Favicon', type: REG_SZ, data: 'https://revi.cc/img/favicon.png', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\1', value: 'Placement', type: REG_SZ, data: 'toolbar', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\1', value: 'Folder', type: REG_SZ, data: '', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\10', value: 'Title', type: REG_SZ, data: 'FAQ', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\10', value: 'URL', type: REG_SZ, data: 'https://revi.cc/docs/faq/', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\10', value: 'Favicon', type: REG_SZ, data: 'https://revi.cc/img/favicon.png', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\10', value: 'Placement', type: REG_SZ, data: 'toolbar', option: "browser-firefox"}
-  - !registryValue: {path: 'HKCU\Software\Policies\Mozilla\Firefox\Bookmarks\10', value: 'Folder', type: REG_SZ, data: '', option: "browser-firefox"} 
-  - !cmd: {command: '%ProgramFiles(x86)%\Mozilla Maintenance Service\uninstall.exe /uninstall', option: "browser-firefox"}
+  - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
 
   - !writeStatus: {status: 'Installing Ungoogled Chromium', option: "browser-ugc"}
   - !cmd:
