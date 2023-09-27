@@ -8,3 +8,6 @@ $env:PATH = [Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()
         ngen.exe install $path /nologo
     }
 }
+
+
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\.NET Framework\" | Start-ScheduledTask
