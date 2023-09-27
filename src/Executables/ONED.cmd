@@ -4,15 +4,6 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 "!systemroot!\System32\OneDriveSetup.exe" /uninstall
 "!systemroot!\SysWOW64\OneDriveSetup.exe" /uninstall
 
-
-REM User installed variant
-for /f "tokens=2*" %%A in ('reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe" /v "UninstallString"') do (
-    set "uninstallString=%%B"
-)
-if defined uninstallString (
-    call !uninstallString!
-)
-
 for /f "usebackq tokens=2 delims=\" %%e in (`reg query "HKEY_USERS" ^| findstr /r /x /c:"HKEY_USERS\\S-.*" /c:"HKEY_USERS\\AME_UserHive_[^_]*"`) do (
 	REM If the "Volatile Environment" key exists, that means it is a proper user. Built in accounts/SIDs do not have this key.
 	reg query "HKU\%%e" | findstr /c:"Volatile Environment" /c:"AME_UserHive_" > nul 2>&1
@@ -57,4 +48,12 @@ for /f "usebackq delims=" %%e in (`reg query "HKU\%~1\SOFTWARE\Microsoft\Windows
 for /f "usebackq delims=" %%e in (`reg query "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" ^| findstr /i /c:"OneDrive"`) do (
 	echo reg delete "%%e" /f
 	reg delete "%%e" /f
+)
+
+REM User installed variant
+for /f "tokens=2*" %%A in ('reg query "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe" /v "UninstallString"') do (
+    set "uninstallString=%%B"
+)
+if defined uninstallString (
+    call !uninstallString!
 )
