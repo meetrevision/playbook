@@ -13,9 +13,7 @@ for /D %%I in ("%ProgramFiles(x86)%\Microsoft\Edge\Application\*") do (
     )
 )
 
-
 msiexec /X{2BFF39DC-EFF0-355C-80CD-41D847013784} /qn /norestart
-
 
 ::leftovers
 
@@ -28,12 +26,6 @@ for /f "usebackq tokens=2 delims=\" %%a in (`reg query "HKEY_USERS" ^| findstr /
 			echo del "%%c\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\Microsoft Edge.lnk" /q /f
 			del "%%c\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\Microsoft Edge.lnk" /q /f
 		)
-	)
-)
-
-for /f "usebackq tokens=2 delims=\" %%a in (`reg query "HKEY_USERS" ^| findstr /r /x /c:"HKEY_USERS\\S-.*" /c:"HKEY_USERS\\AME_UserHive_[^_]*"`) do (
-	reg query "HKU\%%a" | findstr /c:"Volatile Environment" /c:"AME_UserHive_" > nul 2>&1
-	if not errorlevel 1 (
 		CALL :USERREG "%%a"
 	)
 )
@@ -67,5 +59,3 @@ for /f "usebackq tokens=1 delims= " %%e in (`reg query "HKU\%~1\SOFTWARE\Microso
 	echo reg delete "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "%%e" /f
 	reg delete "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "%%e" /f
 )
-
-
