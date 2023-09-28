@@ -60,7 +60,7 @@ actions:
   - !appx: {name: '*Microsoft.MSPaint*', type: family, weight: 10}
 
     # Get Started app
-  - !appx: {name: '*WebExperienceHost*', type: family, weight: 10}
+  - !appx: {name: '*WebExperienceHost*', type: app, weight: 10}
 
   - !appx: {name: '*MicrosoftTeams*', type: family, weight: 10}
 
