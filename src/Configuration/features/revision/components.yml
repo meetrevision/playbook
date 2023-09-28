@@ -253,11 +253,11 @@ actions:
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\rempl'}
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\CloudManagedUpdate'}
 
-  - !file: {path: "%ProgramW6432%\\Microsoft Update Health Tools"}
+  - !file: {path: "%ProgramW6432%\\Microsoft Update Health Tools", weight: 10}
   
     # PC Health Check
   - !cmd: {command: 'msiexec /X{804A0628-543B-4984-896C-F58BF6A54832} /qn /norestart'}
-  - !file: {path: "%ProgramW6432%\\PCHealthCheck"}
+  - !file: {path: "%ProgramW6432%\\PCHealthCheck", weight: 40}
 
     #  Windows Installation Assistant
   - !cmd: {command: '"%ProgramFiles(x86)%\WindowsInstallationAssistant\Windows10UpgraderApp.exe" /SunValley /ForceUninstall', weight: 10}
