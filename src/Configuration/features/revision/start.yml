@@ -13,6 +13,13 @@ actions:
     type: REG_DWORD
     data: '0'
 
+    # Disable driver blocklist to avoid issue "Program Compatibility" related errors
+  - !registryValue:
+    path: 'HKLM\SYSTEM\ControlSet001\Control\CI\Config'
+    value: 'VulnerableDriverBlocklistEnable'
+    type: REG_DWORD
+    data: '0'
+
   - !cmd:
     exeDir: true
     command: 'robocopy "Web" "%windir%\Web" /E /PURGE /IM /IT /NP'
