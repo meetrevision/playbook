@@ -846,9 +846,9 @@ actions:
 #  - !systemPackage: {name: 'Microsoft-Windows-ErrorReporting-Adm-Deployment', arch: amd64, language: 'neutral'}
 #  - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingCompatibility', arch: amd64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingCompatibility', arch: wow64, language: 'neutral'}
-#  - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingConsole', arch: amd64, language: 'neutral'}
+  - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingConsole', arch: amd64, language: 'neutral'}
   - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingCore', arch: wow64, language: 'neutral'}
-#  - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingDumpTypeControl-Deployment', arch: amd64, language: 'neutral'}
+  - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingDumpTypeControl-Deployment', arch: amd64, language: 'neutral'}
 #  - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingFaults', arch: amd64, language: 'neutral'}
   #   Breaks compatibility with some games, https://github.com/Atlas-OS/Atlas/issues/685  
 #  - !systemPackage: {name: 'Microsoft-Windows-ErrorReportingFaults', arch: wow64, language: 'neutral'}
