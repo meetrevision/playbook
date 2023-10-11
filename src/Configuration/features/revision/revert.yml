@@ -22,6 +22,8 @@ actions:
   - !registryValue: { path: 'HKCU\SOFTWARE\Policies\Microsoft\Internet Explorer\Privacy', value: 'ClearBrowsingHistoryOnExit', operation: delete }
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Privacy', value: 'ClearBrowsingHistoryOnExit', operation: delete }
   
-
   # https://github.com/meetrevision/playbook/issues/27
   - !run: {exe: 'netsh', args: 'int tcp set supplemental internet congestionprovider=default', showOutput: false, showError: false}
+
+  # https://github.com/meetrevision/playbook/pull/31
+  - !registryValue: { path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion', value: 'RegisteredOrganisation', operation: delete }
