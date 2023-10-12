@@ -24,9 +24,9 @@ actions:
   - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable', showOutput: false}
   - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\Application Experience\AitAgent" /disable', showOutput: false}
   - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable', showOutput: false}
-  - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-SleepStudy/Diagnostic /e:false', showOutput: false}
-  - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-Kernel-Processor-Power/Diagnostic /e:false', showOutput: false}
-  - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-UserModePowerService/Diagnostic /e:false', showOutput: false, weight: 10}
+  - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-SleepStudy/Diagnostic /q:false', showOutput: false}
+  - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-Kernel-Processor-Power/Diagnostic /q:false', showOutput: false}
+  - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-UserModePowerService/Diagnostic /q:false', showOutput: false, weight: 10}
 
   - !writeStatus: {status: "Configuring boot settings"}
   - !run: {exe: 'bcdedit', args: '/deletevalue useplatformclock', showOutput: false, showError: false}

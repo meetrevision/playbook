@@ -54,9 +54,6 @@ actions:
   - !service:
     name: "cryptsvc"
     operation: stop
-  - !file:
-    path: "%windir%\\SoftwareDistribution"
-    weight: 20
 
   - !writeStatus: {status: "Configuring DISM features"}
   - !run:
