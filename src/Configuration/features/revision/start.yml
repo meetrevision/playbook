@@ -59,18 +59,11 @@ actions:
     weight: 20
 
   - !writeStatus: {status: "Configuring DISM features"}
-    
-  - !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"DirectPlay" /NoRestart', weight: 30}
-
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2Root" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"WorkFolders-Client" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Printing-Foundation-Features" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Printing-Foundation-InternetPrinting-Client" /NoRestart', weight: 30}
-# - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Windows-Defender-Default-Definitions" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"SmbDirect" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MSRDC-Infrastructure" /NoRestart', weight: 30}
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File DISM-FEATURES.ps1'
+    weight: 270
 
   - !service:
     name: "wuauserv"
