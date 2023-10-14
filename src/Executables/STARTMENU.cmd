@@ -57,6 +57,9 @@ for /f "usebackq tokens=2 delims=\" %%a in (`reg query "HKEY_USERS" ^| findstr /
 			echo reg delete "%%c" /f
 			reg delete "%%c" /f
 		)
+
+		@REM Needed for 23H2, removing StartMenu AppX cache is also required
+		reg delete "HKU\%%a\Software\Microsoft\Windows\CurrentVersion\Start" /v "Config" /f
 	)
 )
 
