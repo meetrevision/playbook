@@ -99,5 +99,16 @@ actions:
     exe: "WALLPAPER.cmd"
     weight: 20
 
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File CLEANER.ps1'
+    weight: 100
+
+  # Necessary to refresh start menu entries etc.
+  - !appx: {operation: clearCache, name: '*Client.CBS*'}
+  - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*'}
+  - !appx: {operation: clearCache, name: '*Windows.Search*'}
+
     # Start as user process to prevent weird look due to running as TrustedInstaller
   # - !run: {baseDir: true, exe: "NSudoLC.exe", args: '-U:C -UseCurrentConsole explorer.exe'}

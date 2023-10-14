@@ -66,9 +66,3 @@ actions:
 
     # A new Outlook app; Added in 23H2
   - !appx: {name: 'Microsoft.OutlookForWindows*', type: family, weight: 10}
-
-  
-    # Necessary to refresh start menu entries etc.
-  - !appx: {operation: clearCache, name: '*Client.CBS*'}
-  - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*'}
-  - !appx: {operation: clearCache, name: '*Windows.Search*'}
