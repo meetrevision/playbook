@@ -4,7 +4,9 @@ description: Copies Revision folders/files, and configures some initial settings
 privilege: TrustedInstaller
 actions:
   
-  - !writeStatus: {status: "Configuring wallpapers, licenses and hosts"}
+  - !taskKill: {name: "explorer"}
+  
+  - !writeStatus: {status: "Initializing"}
 
     # Prevent annoying notifications during deployment
   - !registryValue:
@@ -13,7 +15,7 @@ actions:
     type: REG_DWORD
     data: '0'
 
-    # Disable driver blocklist to avoid issue "Program Compatibility" related errors
+    # Disable driver blocklist to avoid "Program Compatibility" related errors 
   - !registryValue:
     path: 'HKLM\SYSTEM\ControlSet001\Control\CI\Config'
     value: 'VulnerableDriverBlocklistEnable'
@@ -22,38 +24,13 @@ actions:
 
   - !cmd:
     exeDir: true
-    command: 'robocopy "Web" "%windir%\Web" /E /PURGE /IM /IT /NP'
-    weight: 10
-  - !cmd:
-    exeDir: true
     command: 'robocopy "Licenses" "%SystemDrive%\Licenses" /E /PURGE /IM /IT /NP'
-    weight: 10
+    weight: 30
+    
   - !cmd:
     exeDir: true
     command: 'copy /y "hosts" "%WINDIR%\System32\drivers\etc\hosts"'
-    weight: 5
-
-  - !writeStatus: {status: "Cleaning up the WinSxS folder"}
-
-  - !cmd:
-    exeDir: true
-    command: 'DISM /Online /Cleanup-Image /StartComponentCleanup'
-    # command: 'DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase'
-    weight: 250
-
-  - !service:
-    name: "wuauserv"
-    operation: stop
-
-  - !service:
-    name: "bits"
-    operation: stop
-  - !service:
-    name: "appidsvc"
-    operation: stop
-  - !service:
-    name: "cryptsvc"
-    operation: stop
+    weight: 20
 
   - !writeStatus: {status: "Configuring DISM features"}
   - !run:
@@ -61,7 +38,3 @@ actions:
     exe: "PowerShell"
     args: '-NoP -ExecutionPolicy Bypass -File DISM-FEATURES.ps1'
     weight: 270
-
-  - !service:
-    name: "wuauserv"
-    operation: stop

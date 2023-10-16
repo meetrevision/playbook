@@ -3,11 +3,6 @@ title: Components
 description: Remove certain windows components
 privilege: TrustedInstaller
 actions:
-  - !service:
-    name: "wuauserv"
-    operation: stop
-
-  - !taskKill: {name: "explorer"}
 
   - !writeStatus: {status: "Removing components"}
 

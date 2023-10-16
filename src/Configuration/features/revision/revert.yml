@@ -27,3 +27,6 @@ actions:
 
   # https://github.com/meetrevision/playbook/pull/31
   - !registryValue: { path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion', value: 'RegisteredOrganisation', operation: delete }
+
+  # Previously used as detection purpose 
+  - !registryValue: { path: 'HKLM\Software\Classes\CLSID', value: 'IsModernRCEnabled', type: REG_DWORD, operation: delete }

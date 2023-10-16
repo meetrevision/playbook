@@ -3,9 +3,6 @@ title: Packages
 description: Removes system packages
 privilege: TrustedInstaller
 actions:
-  - !service:
-    name: "wuauserv"
-    operation: stop
 
   - !writeStatus: {status: "Removing system packages"}
 

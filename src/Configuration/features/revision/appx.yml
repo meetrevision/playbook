@@ -3,9 +3,6 @@ title: APPX
 description: Removal of APPX packages
 privilege: TrustedInstaller
 actions:
-  - !service:
-    name: "wuauserv"
-    operation: stop
   
   - !writeStatus: {status: "Removing Appx Packages"}
   - !appx: {name: '*Disney*', type: family, weight: 10}
