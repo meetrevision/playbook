@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set file name
         run: echo "FILENAME=Revi-PB-${{ github.ref_name }}.apbx" >> $GITHUB_ENV
@@ -26,7 +26,8 @@ jobs:
       
       - name: DevUploads
         run: |
-          echo "DEVUPLOADS=$(bash <(curl -s https://devuploads.com/upload.sh) -f ${{ env.FILENAME }} -k ${{ secrets.DEVUPLOADS_API_KEY }} | grep -o 'https://devuploads.com[^"]*')" >> $GITHUB_ENV
+          url=$(bash <(curl -s https://devuploads.com/upload.sh) -f "${{ env.FILENAME }}" -k "${{ secrets.DEVUPLOADS_API_KEY }}" | grep -o 'https://devuploads.com[^"]*')
+          echo "DEVUPLOADS=$url" >> $GITHUB_ENV
 
       - name: Release
         uses: svenstaro/upload-release-action@v2
