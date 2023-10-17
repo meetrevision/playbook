@@ -26,7 +26,7 @@ jobs:
       
       - name: DevUploads
         run: |
-          echo "DEVUPLOADS=$(bash <(curl -s https://devuploads.com/upload.sh) -f ${{ env.FILENAME }} -k ${{ secrets.DEVUPLOADS_API_KEY }} | grep -o 'https://devuploads.com[^"]*'" >> $GITHUB_ENV
+          echo "DEVUPLOADS=$(bash <(curl -s https://devuploads.com/upload.sh) -f ${{ env.FILENAME }} -k ${{ secrets.DEVUPLOADS_API_KEY }} | grep -o 'https://devuploads.com[^"]*')" >> $GITHUB_ENV
 
       - name: Release
         uses: svenstaro/upload-release-action@v2
