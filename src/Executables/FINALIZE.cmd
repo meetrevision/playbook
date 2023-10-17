@@ -81,20 +81,13 @@ netsh interface Teredo set state servername=default >NUL 2>nul
 echo Configuring Windows settings
 net accounts /maxpwage:unlimited
   
-
-
-  # - !run: {exe: 'PowerShell -NonInteractive -NoLogo -NoProfile -Command "Rename-Computer -NewName $env:computername"', showOutput: false, showError: false}
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc"', showOutput: false, showError: false}
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"', showOutput: false, showError: false}
 powershell -NonInteractive -NoLogo -NoProfile Set-ProcessMitigation -Name vgc.exe -Enable CFG
-  # - !cmd: {exeDir: true, command: '@echo Disable-MMAgent -MC; ForEach($v in (Get-Command -Name "Set-ProcessMitigation").Parameters["Disable"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString().Replace(" ", "").Replace("`n", "")}; rm $PSCommandPath> MC_PM.ps1'}
-  # - !run: {exeDir: true, exe: 'powershell -windowstyle hidden -ExecutionPolicy Bypass -C "& ''./MC_PM.ps1''"'}
-setx DOTNET_CLI_TELEMETRY_OPTOUT 1'}
-setx POWERSHELL_TELEMETRY_OPTOUT 1', weight: 10}
-
-    # OneDrive workaround
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\OneDrive', value: 'DisableFileSyncNGSC', operation: delete}
-
+:: - !cmd: {exeDir: true, command: '@echo Disable-MMAgent -MC; ForEach($v in (Get-Command -Name "Set-ProcessMitigation").Parameters["Disable"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString().Replace(" ", "").Replace("`n", "")}; rm $PSCommandPath> MC_PM.ps1'}
+:: - !run: {exeDir: true, exe: 'powershell -windowstyle hidden -ExecutionPolicy Bypass -C "& ''./MC_PM.ps1''"'}
+setx DOTNET_CLI_TELEMETRY_OPTOUT 1
+setx POWERSHELL_TELEMETRY_OPTOUT 1'
 
 echo Disabling Superfetch for SSD...
 

@@ -6,11 +6,14 @@ actions:
 
   - !writeStatus: {status: "Configuring general settings"}
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0', weight: 50}
-  - !registryValue: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '', type: REG_SZ, data: '', weight: 60}
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '0', weight: 70}
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '0', weight: 50}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', type: REG_DWORD, data: '1', weight: 60}
   - !registryValue: {path: 'HKCU\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1', weight: 50}
+
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '0', option: configure-darkmode, weight: 70}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '0', option: configure-darkmode, weight: 50}
+
+   # OneDrive workaround
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\OneDrive', value: 'DisableFileSyncNGSC', operation: delete}
 
   - !writeStatus: {status: "Optimizing PowerShell performance"}
   - !run:
@@ -31,16 +34,11 @@ actions:
     exeDir: true
     exe: "FILEASSOC.cmd"
     weight: 90
-  
-  - !cmd:
-    exeDir: true
-    command: 'robocopy "Web" "%windir%\Web" /E /PURGE /IM /IT /NP'
-    ignoreErrors: true
-    weight: 30
 
   - !run:
     exeDir: true
     exe: "WALLPAPER.cmd"
+    option: "configure-wallpaper"
     weight: 20
 
   - !writeStatus: {status: "Removing temporary files"}

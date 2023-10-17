@@ -8,8 +8,8 @@ actions:
 
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\CrashControl', value: 'AutoReboot', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\CrashControl', value: 'CrashDumpEnabled', type: REG_DWORD, data: '3'}
-  - !registryValue: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '', type: REG_SZ, data: ''}
-  - !registryValue: {path: 'HKU\S-1-5-18\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '', type: REG_SZ, data: ''}
+  # - !registryValue: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '', type: REG_SZ, data: ''}
+  # - !registryValue: {path: 'HKU\S-1-5-18\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '', type: REG_SZ, data: ''}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKU\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '0'}

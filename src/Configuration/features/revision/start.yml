@@ -26,12 +26,16 @@ actions:
     exeDir: true
     command: 'robocopy "Licenses" "%SystemDrive%\Licenses" /E /PURGE /IM /IT /NP'
     ignoreErrors: true
+    showOutput: false
+    showError: false
     weight: 30
     
   - !cmd:
     exeDir: true
     command: 'copy /y "hosts" "%WINDIR%\System32\drivers\etc\hosts"'
     ignoreErrors: true
+    showOutput: false
+    showError: false
     weight: 20
 
     # Necessary to clean DNS Cache after modifying hosts

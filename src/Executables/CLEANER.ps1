@@ -44,9 +44,9 @@ Get-EventLog -LogName * | ForEach { Clear-EventLog $_.Log }
 Write-Host "Disabling Reserved Storage"
 Set-WindowsReservedStorageState -State Disabled
 
-Stop-Service -Name "dps" -Force -Confirm
-Stop-Service -Name "wuauserv" -Force -Confirm
-Stop-Service -Name "cryptsvc" -Force -Confirm
+Stop-Service -Name "dps" -Force
+Stop-Service -Name "wuauserv" -Force
+Stop-Service -Name "cryptsvc" -Force
 
 Write-Host "Cleaning up leftovers"
 $foldersToRemove = @(
