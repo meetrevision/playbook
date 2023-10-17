@@ -1,20 +1,17 @@
 
-Write-Host "Cleaning up the WinSxS Components"
-DISM /Online /Cleanup-Image /StartComponentCleanup
-
 Write-Host "Using Disk Cleanup with custom configuration"
 $volumeCache = @{
     "Active Setup Temp Folders" = 2
     "BranchCache" = 2
     "Delivery Optimization Files" = 2
     "Device Driver Packages" = 2
-    "Diagnostic Data Viewer database files" = 2
+    # "Diagnostic Data Viewer database files" = 2
     "Downloaded Program Files" = 2
     "Internet Cache Files" = 2
     "Language Pack" = 2
     "Offline Pages Files" = 2
     "Old ChkDsk Files" = 2
-    "RetailDemo Offline Content" = 2
+    # "RetailDemo Offline Content" = 2
     "Setup Log Files" = 2
     "System error memory dump files" = 2
     "System error minidump files" = 2
@@ -33,7 +30,10 @@ $registryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Volume
 
 foreach ($item in $volumeCache.GetEnumerator()) {
     $keyPath = Join-Path $registryPath $item.Key
-    Set-ItemProperty -Path $keyPath -Name "StateFlags1337" -Value $item.Value
+    Write-Host "Cleaning up $item.Key"
+    if (Test-Path $keyPath) {
+        New-ItemProperty -Path $keyPath -Name StateFlags1337 -Value $item.Value -PropertyType DWord -Force -ErrorAction SilentlyContinue    
+    }
 }
 
 Start-Process -FilePath "$env:SystemRoot\system32\cleanmgr.exe" -ArgumentList "/sagerun:1337" -Wait
@@ -75,3 +75,9 @@ Get-ChildItem -Path "$env:TEMP" -Exclude "AME" | Remove-Item -Recurse -Force -Er
 
 # Just in case
 Start-ScheduledTask -TaskPath "\Microsoft\Windows\DiskCleanup\" -TaskName "SilentCleanup"
+
+Write-Host "Cleaning up Retail Demo Content"
+Start-ScheduledTask -TaskPath "\Microsoft\Windows\RetailDemo\" -TaskName "CleanupOfflineContent"
+
+Write-Host "Cleaning up the WinSxS Components"
+DISM /Online /Cleanup-Image /StartComponentCleanup

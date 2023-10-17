@@ -17,19 +17,20 @@ actions:
   - !run: {exe: 'powercfg', args: '-setacvalueindex scheme_current sub_processor PERFINCTHRESHOLD 10', showOutput: false, showError: false}
   - !run: {exe: 'powercfg', args: '-setacvalueindex scheme_current sub_processor PERFDECTHRESHOLD 8', showOutput: false, showError: false}
   - !run: {exe: 'powercfg', args: '/setactive scheme_current', showOutput: false, showError: false}
-  - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable', showOutput: false}
-  - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents" /disable', showOutput: false}
-  - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" /disable', showOutput: false}
-  - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\WindowsUpdate\Scheduled Start" /disable', showOutput: false}
-  - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable', showOutput: false}
-  - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\Application Experience\AitAgent" /disable', showOutput: false}
-  - !run: {exe: 'schtasks', args: '/change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable', showOutput: false}
+  
+  - !scheduledTask: {path: '\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem', operation: disable}
+  - !scheduledTask: {path: '\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents', operation: disable}
+  - !scheduledTask: {path: '\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic', operation: disable}
+  - !scheduledTask: {path: '\Microsoft\Windows\WindowsUpdate\Scheduled Start', operation: disable}
+  - !scheduledTask: {path: '\Microsoft\Windows\Windows Error Reporting\QueueReporting', operation: disable}
+  - !scheduledTask: {path: '\Microsoft\Windows\Application Experience\AitAgent', operation: disable}
+  - !scheduledTask: {path: '\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector', operation: disable}
   - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-SleepStudy/Diagnostic /q:false', showOutput: false}
   - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-Kernel-Processor-Power/Diagnostic /q:false', showOutput: false}
   - !run: {exe: 'wevtutil', args: 'sl Microsoft-Windows-UserModePowerService/Diagnostic /q:false', showOutput: false, weight: 10}
 
   - !writeStatus: {status: "Configuring boot settings"}
-  - !run: {exe: 'bcdedit', args: '/deletevalue useplatformclock', showOutput: false, showError: false}
+  - !run: {exe: 'bcdedit', args: '/deletevalue useplatformclock', showOutput: false, showError: false, ignoreErrors: true}
     # bcdedit /set useplatformtick yes
   - !run: {exe: 'bcdedit', args: '/set disabledynamictick yes', showOutput: false, showError: false}
   - !run: {exe: 'bcdedit', args: '/set bootmenupolicy Legacy', showOutput: false, showError: false}
@@ -58,7 +59,7 @@ actions:
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKCU\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1', weight: 20}
 
-  - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Rename-Computer -NewName $env:computername"', showOutput: false, showError: false}
+  # - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Rename-Computer -NewName $env:computername"', showOutput: false, showError: false}
   - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc"', showOutput: false, showError: false}
   - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"', showOutput: false, showError: false}
   - !run: {exe: 'powershell', args: '-NonInteractive -NoLogo -NoProfile Set-ProcessMitigation -Name vgc.exe -Enable CFG', showOutput: false}
@@ -93,6 +94,7 @@ actions:
   - !cmd:
     exeDir: true
     command: 'robocopy "Web" "%windir%\Web" /E /PURGE /IM /IT /NP'
+    ignoreErrors: true
     weight: 30
 
   - !run:
@@ -106,7 +108,13 @@ actions:
     args: '-NoP -ExecutionPolicy Bypass -File CLEANER.ps1'
     weight: 100
 
-  # Necessary to refresh start menu entries etc.
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File DISM-FEATURES.ps1'
+    weight: 270
+
+    # Necessary to refresh start menu entries etc.
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
   - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*'}
   - !appx: {operation: clearCache, name: '*Windows.Search*'}

@@ -12,7 +12,6 @@ actions:
   - !taskKill: {name: "msedge", option: "remove-edge"}
   - !taskKill: {name: "MicrosoftEdge*", option: "remove-edge"}
   - !taskKill: {name: "setup", pathContains: "\\Edge", option: "remove-edge"}
-  - !taskKill: {name: "msedgewebview2", option: "remove-edge"}
   - !run: {exeDir: true, exe: "EDGE.cmd", option: "remove-edge", weight: 40}
   - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
   # - !service: {name: "edgeupdate", operation: delete}
@@ -243,18 +242,18 @@ actions:
   - !file: {path: "%ProgramData%\\Microsoft OneDrive", option: "remove-onedrive"}
   
     # Update Health Tools
-  - !cmd: {command: 'msiexec /X{43D501A5-E5E3-46EC-8F33-9E15D2A2CBD5} /qn /norestart'}
+  - !cmd: {command: 'msiexec /X{43D501A5-E5E3-46EC-8F33-9E15D2A2CBD5} /qn /norestart', ignoreErrors: true}
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\UpdateHealthTools'}
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\rempl'}
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\CloudManagedUpdate'}
 
-  - !file: {path: "%ProgramW6432%\\Microsoft Update Health Tools", weight: 10}
+  - !file: {path: "%ProgramW6432%\\Microsoft Update Health Tools", ignoreErrors: true, weight: 10}
   
     # PC Health Check
-  - !cmd: {command: 'msiexec /X{804A0628-543B-4984-896C-F58BF6A54832} /qn /norestart'}
-  - !file: {path: "%ProgramW6432%\\PCHealthCheck", weight: 40}
+  - !cmd: {command: 'msiexec /X{804A0628-543B-4984-896C-F58BF6A54832} /qn /norestart', ignoreErrors: true}
+  - !file: {path: "%ProgramW6432%\\PCHealthCheck", ignoreErrors: true, weight: 40}
 
     #  Windows Installation Assistant
-  - !cmd: {command: '"%ProgramFiles(x86)%\WindowsInstallationAssistant\Windows10UpgraderApp.exe" /SunValley /ForceUninstall', weight: 10}
+  - !cmd: {command: '"%ProgramFiles(x86)%\WindowsInstallationAssistant\Windows10UpgraderApp.exe" /SunValley /ForceUninstall', ignoreErrors: true, weight: 10}
 
   # - !run: {exe: "explorer.exe", wait: false}

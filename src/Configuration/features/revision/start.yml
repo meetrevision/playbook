@@ -25,16 +25,15 @@ actions:
   - !cmd:
     exeDir: true
     command: 'robocopy "Licenses" "%SystemDrive%\Licenses" /E /PURGE /IM /IT /NP'
+    ignoreErrors: true
     weight: 30
     
   - !cmd:
     exeDir: true
     command: 'copy /y "hosts" "%WINDIR%\System32\drivers\etc\hosts"'
+    ignoreErrors: true
     weight: 20
 
-  - !writeStatus: {status: "Configuring DISM features"}
-  - !run:
-    exeDir: true
-    exe: "PowerShell"
-    args: '-NoP -ExecutionPolicy Bypass -File DISM-FEATURES.ps1'
-    weight: 270
+    # Necessary to clean DNS Cache after modifying hosts
+  - !cmd:
+    command: 'ipconfig /flushdns'
