@@ -20,6 +20,7 @@ For more detailed information, see our documentation [here](https://www.revi.cc/
 - Windows 10 21H2 `19044` (LTSC)
 - Windows 10 22H2 `19045`
 - Windows 11 22H2 `22621`
+- Windows 11 23H2 `22631`
 
 Any other build **is not** supported by Revision.
 
@@ -36,9 +37,10 @@ To use ReviOS Playbook on your computer, follow these steps:
 
 See our documentation for more information:
 
-- [Playbook](https://www.revi.cc/docs/playbook)
+- [Playbook](https://www.revi.cc/docs/playbook/general)
+- [Installing Windows](https://www.revi.cc/docs/playbook/installstock)
+- [Installing & Updating ReviOS](https://www.revi.cc/docs/playbook/installrevi)
 - [Frequently Asked Questions](https://www.revi.cc/docs/faq)
-- [Features](https://www.revi.cc/docs/faq/before/features)
 
 ## License
 
