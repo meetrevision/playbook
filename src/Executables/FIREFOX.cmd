@@ -29,4 +29,4 @@ reg add "HKU\%~1\Software\Policies\Mozilla\Firefox\Bookmarks\10" /v "Favicon" /t
 reg add "HKU\%~1\Software\Policies\Mozilla\Firefox\Bookmarks\10" /v "Placement" /t REG_SZ /d "toolbar" /f
 reg add "HKU\%~1\Software\Policies\Mozilla\Firefox\Bookmarks\10" /v "Folder" /t REG_SZ /d "" /f
 
-"%ProgramFiles(x86)%\Mozilla Maintenance Service\uninstall.exe" /S
+"%ProgramFiles(x86)%\Mozilla Maintenance Service\uninstall.exe" /S >NUL 2>nul

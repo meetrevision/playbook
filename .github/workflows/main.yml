@@ -19,7 +19,15 @@ jobs:
       - name: Archive content
         run: |
           7z a -p${{ secrets.PASSWORD }} -mhe=on "${{ env.FILENAME }}" ./src/*
+
+      - name: Hash 256
+        run: |
+          echo "HASH=$(sha256sum ${{ env.FILENAME }} | cut -d ' ' -f 1)" >> $GITHUB_ENV
       
+      - name: DevUploads
+        run: |
+          echo "DEVUPLOADS=$(bash <(curl -s https://devuploads.com/upload.sh) -f ${{ env.FILENAME }} -k ${{ secrets.DEVUPLOADS_API_KEY }} | grep -o 'https://devuploads.com[^"]*'" >> $GITHUB_ENV
+
       - name: Release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -28,3 +36,12 @@ jobs:
           asset_name: ${{ env.FILENAME }}
           tag: ${{ github.ref }}
           overwrite: true
+          body: |
+            # Download Link ✨
+
+            If you would like to support Revision, kindly download the Playbook from the provided link below.
+
+            📌Link: ${{ env.DEVUPLOADS }}
+            
+            SHA256: ${{ env.HASH }}
+            

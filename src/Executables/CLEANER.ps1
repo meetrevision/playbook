@@ -76,8 +76,8 @@ Get-ChildItem -Path "$env:TEMP" -Exclude "AME" | Remove-Item -Recurse -Force -Er
 # Just in case
 Start-ScheduledTask -TaskPath "\Microsoft\Windows\DiskCleanup\" -TaskName "SilentCleanup"
 
-Write-Host "Cleaning up Retail Demo Content"
-Start-ScheduledTask -TaskPath "\Microsoft\Windows\RetailDemo\" -TaskName "CleanupOfflineContent"
+# Write-Host "Cleaning up Retail Demo Content"
+# Start-ScheduledTask -TaskPath "\Microsoft\Windows\RetailDemo\" -TaskName "CleanupOfflineContent"
 
 Write-Host "Cleaning up the WinSxS Components"
 DISM /Online /Cleanup-Image /StartComponentCleanup
