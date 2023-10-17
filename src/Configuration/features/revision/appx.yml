@@ -63,9 +63,9 @@ actions:
   - !appx: {name: '*MicrosoftTeams*', type: family, weight: 10}
 
     # MicrosoftWindows.Client.Core_cw5n1h2txyewy!
-  - !appx: {name: '*Global.ValueBanner*', type: app}
+  - !appx: {name: '*Global.ValueBanner*', type: app, weight: 50}
     # MicrosoftWindows.Client.Core_cw5n1h2txyewy
-  - !appx: {name: '*Global.BackupBanner*', type: app}
+  - !appx: {name: '*Global.BackupBanner*', type: app, weight: 50}
    
     # 23H2
     # A new Outlook app; Added in 23H2

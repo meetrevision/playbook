@@ -5,7 +5,7 @@ privilege: TrustedInstaller
 actions:
 
   - !writeStatus: {status: "Configuring general settings"}
-  - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0', weight: 50}
+  - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0', weight: 70}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', type: REG_DWORD, data: '1', weight: 60}
   - !registryValue: {path: 'HKCU\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1', weight: 50}
 
@@ -15,7 +15,7 @@ actions:
    # OneDrive workaround
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\OneDrive', value: 'DisableFileSyncNGSC', operation: delete}
 
-  - !writeStatus: {status: "Optimizing PowerShell performance"}
+  - !writeStatus: {status: "Optimizing PowerShell"}
   - !run:
     exeDir: true
     exe: "PowerShell"
@@ -28,18 +28,18 @@ actions:
   - !run:
     exeDir: true
     exe: "STARTMENU.cmd"
-    weight: 50
+    weight: 100
 
   - !run:
     exeDir: true
     exe: "FILEASSOC.cmd"
-    weight: 90
+    weight: 150
 
   - !run:
     exeDir: true
     exe: "WALLPAPER.cmd"
     option: "configure-wallpaper"
-    weight: 20
+    weight: 90
 
   - !writeStatus: {status: "Removing temporary files"}
   - !run:
