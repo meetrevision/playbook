@@ -24,10 +24,10 @@ jobs:
         run: |
           echo "HASH=$(sha256sum ${{ env.FILENAME }} | cut -d ' ' -f 1)" >> $GITHUB_ENV
       
-      - name: DevUploads
-        run: |
-          url=$(bash <(curl -s https://devuploads.com/upload.sh) -f "${{ env.FILENAME }}" -k "${{ secrets.DEVUPLOADS_API_KEY }}" | grep -o 'https://devuploads.com[^"]*')
-          echo "DEVUPLOADS=$url" >> $GITHUB_ENV
+      # - name: DevUploads
+      #   run: |
+      #     url=$(bash <(curl -s https://devuploads.com/upload.sh) -f "${{ env.FILENAME }}" -k "${{ secrets.DEVUPLOADS_API_KEY }}" | grep -o 'https://devuploads.com[^"]*')
+      #     echo "DEVUPLOADS=$url" >> $GITHUB_ENV
 
       - name: Release
         uses: svenstaro/upload-release-action@v2
@@ -42,7 +42,7 @@ jobs:
 
             If you would like to support Revision, kindly download the Playbook from the provided link below.
 
-            📌Link: ${{ env.DEVUPLOADS }}
+            📌Link: 
             
-            SHA256: ${{ env.HASH }}
+            SHA256: `${{ env.HASH }}`
             
