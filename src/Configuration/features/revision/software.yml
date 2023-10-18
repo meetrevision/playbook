@@ -37,11 +37,11 @@ actions:
   - !writeStatus: {status: 'Tweaking Firefox settings', option: "browser-firefox"}
   - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
 
-  # - !writeStatus: {status: 'Installing Ungoogled Chromium', option: "browser-ugc"}
-  # - !cmd:
-  #   command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums ungoogled-chromium'
-  #   weight: 150
-  #   option: "browser-ugc"
+  - !writeStatus: {status: 'Installing Ungoogled Chromium', option: "browser-ugc"}
+  - !cmd:
+    command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums ungoogled-chromium'
+    weight: 150
+    option: "browser-ugc"
 
   # - !writeStatus: {status: 'Installing LibreWolf', option: "browser-librewolf"}
   # - !cmd:
