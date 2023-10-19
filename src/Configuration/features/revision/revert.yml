@@ -29,4 +29,7 @@ actions:
   - !registryValue: { path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion', value: 'RegisteredOrganisation', operation: delete }
 
   # Previously used as detection purpose 
-  - !registryValue: { path: 'HKLM\Software\Classes\CLSID', value: 'IsModernRCEnabled', type: REG_DWORD, operation: delete }
+  - !registryValue: { path: 'HKLM\Software\Classes\CLSID', value: 'IsModernRCEnabled', operation: delete }
+
+  # Breaks XboxGipSvc - https://github.com/meetrevision/playbook/issues/34
+  - !registryValue: { path: 'HKLM\SYSTEM\ControlSet001\Control', value: 'SvcHostSplitThresholdInKB', type: REG_DWORD, data: '380000' }

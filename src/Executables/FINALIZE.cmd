@@ -87,7 +87,7 @@ powershell -NonInteractive -NoLogo -NoProfile Set-ProcessMitigation -Name vgc.ex
 :: - !cmd: {exeDir: true, command: '@echo Disable-MMAgent -MC; ForEach($v in (Get-Command -Name "Set-ProcessMitigation").Parameters["Disable"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString().Replace(" ", "").Replace("`n", "")}; rm $PSCommandPath> MC_PM.ps1'}
 :: - !run: {exeDir: true, exe: 'powershell -windowstyle hidden -ExecutionPolicy Bypass -C "& ''./MC_PM.ps1''"'}
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1
-setx POWERSHELL_TELEMETRY_OPTOUT 1'
+setx POWERSHELL_TELEMETRY_OPTOUT 1
 
 echo Disabling Superfetch for SSD...
 
@@ -97,10 +97,10 @@ if "%hardDrive%"=="SSD" (
   @start /b "" "%programfiles(x86)%\Revision Tool\data\flutter_assets\additionals\MinSudo.exe" --NoLogo --TrustedInstaller "%programfiles(x86)%\Revision Tool\data\flutter_assets\additionals\DisableSF.bat"
 )
 
-echo Configuring memory...
+echo Configuring animations
 
-reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f >NUL
-reg add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "0" /f >NUL
+:: Breaks XboxGipSvc
+::reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f >NUL
 
 for /f "tokens=2 delims==" %%a in ('wmic os get TotalVisibleMemorySize /format:value') do set "mem=%%a"
 
@@ -117,6 +117,8 @@ for /f "usebackq tokens=2 delims=\" %%a in (`reg query "HKEY_USERS" ^| findstr /
 
 :: https://github.com/meetrevision/playbook/issues/15
 :: Updates root certificates
+
+echo Updating root certificates
 
 PowerShell -NonInteractive -NoLogo -NoP -C "& {$tmp = (New-TemporaryFile).FullName; CertUtil -generateSSTFromWU -f $tmp; if ( (Get-Item $tmp | Measure-Object -Property Length -Sum).sum -gt 0 ) { $SST_File = Get-ChildItem -Path $tmp; $SST_File | Import-Certificate -CertStoreLocation "Cert:\LocalMachine\Root"; $SST_File | Import-Certificate -CertStoreLocation "Cert:\LocalMachine\AuthRoot" } Remove-Item -Path $tmp}" >NUL 2>nul
 
