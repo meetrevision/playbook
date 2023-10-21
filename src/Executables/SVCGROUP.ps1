@@ -28,6 +28,7 @@ $services = @(
     "Themes",
     "TokenBroker",
     "UserManager",
+    "ProfSvc",
     "UsoSvc",
     "Winmgmt",
     "WpnService",
@@ -57,9 +58,21 @@ $services = @(
 	
     "CoreMessagingRegistrar",
     "DPS",
+    "NcdAutoSetup",
 	
 	"AppXSvc",
-	"ClipSVC"
+	"ClipSVC",
+
+    "camsvc",
+    "StateRepository",
+
+    "FDResPub",
+    "SSDPSRV",
+
+    "CryptSvc",
+    "Dnscache",
+    "NlaSvc",
+    "LanmanWorkstation"
 )
 
 foreach ($service in $services) {
