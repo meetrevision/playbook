@@ -44,6 +44,7 @@ $services = @(
 
     "FontCache",
     "nsi",
+    "netprofm",
 	"SstpSvc",
     "DispBrokerDesktopSvc",
     "CDPSvc",
@@ -72,7 +73,11 @@ $services = @(
     "CryptSvc",
     "Dnscache",
     "NlaSvc",
-    "LanmanWorkstation"
+    "LanmanWorkstation",
+
+    "KeyIso",
+    "VaultSvc",
+    "SamSs"
 )
 
 foreach ($service in $services) {
