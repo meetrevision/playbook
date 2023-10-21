@@ -11,6 +11,12 @@ actions:
    # OneDrive workaround
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\OneDrive', value: 'DisableFileSyncNGSC', operation: delete}
 
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File SVCGROUP.ps1'
+    weight: 50
+
   - !writeStatus: {status: "Optimizing PowerShell"}
   - !run:
     exeDir: true
