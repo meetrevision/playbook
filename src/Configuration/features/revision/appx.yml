@@ -68,6 +68,7 @@ actions:
   - !appx: {name: '*Global.BackupBanner*', type: app, weight: 50}
    
     # 23H2
-    # A new Outlook app; Added in 23H2
   - !appx: {name: 'Microsoft.OutlookForWindows*', type: family, weight: 10}
+  - !appx: {name: '*DevHome*', type: family, option: "remove-uwp-devhome", weight: 10}
+  
   - !appx: {name: '*WindowsBackup*', type: app, option: "remove-uwp-wbackup", weight: 10}
