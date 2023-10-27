@@ -23,13 +23,17 @@ actions:
     option: "dotnet35"
 
   - !writeStatus: {status: 'Downloading Brave', option: "browser-brave"}
-  - !powerShell: {command: '& { Invoke-WebRequest ((Invoke-RestMethod -Uri "https://api.github.com/repos/brave/brave-browser/releases/latest" -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq "BraveBrowserStandaloneSetup.exe" }).browser_download_url -OutFile "$env:TEMP\BraveBrowserStandaloneSetup.exe" }', weight: 150, option: "browser-brave"}
-  
+  - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/brave/brave-browser/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'BraveBrowserStandaloneSetup.exe' }).browser_download_url -OutFile \"$env:TEMP\\BraveBrowserStandaloneSetup.exe\" }" , weight: 150, option: "browser-brave"}
+
   - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
-  - !cmd: {command: 'call "%temp%\BraveBrowserStandaloneSetup.exe" /silent /install"', runas: currentUserElevated, weight: 50}
+  - !cmd: {command: 'call "%temp%\BraveBrowserStandaloneSetup.exe" /silent /install', runas: currentUserElevated, weight: 50}
 
   - !writeStatus: {status: 'Configuring Brave', option: "browser-brave"}
-  - !cmd: {command: 'copy /y "BraveSoftware\Brave-Browser\Application\initial_preferences" "%ProgramFiles%\BraveSoftware\Brave-Browser\Application"', weight: 30, option: "browser-brave"}
+  - !cmd:
+    exeDir: true
+    command: 'robocopy "BraveSoftware" "%ProgramFiles%\BraveSoftware" /E /IM /IT /NP'
+    weight: 20
+    option: "browser-brave"
 
   # Firefox
   - !writeStatus: {status: 'Installing Firefox', option: "browser-firefox"}
