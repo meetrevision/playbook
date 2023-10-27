@@ -33,7 +33,7 @@ actions:
     # === Program Compatibility Assistant Service - Disabled
   - !service: {name: 'PcaSvc', operation: change, startup: 4}
     # === Diagnostic Policy Service - Disabled
-    # ------> Needed for troubleshooting, but the Troubleshooter automatically activates this service itself when needed
+    # ------> Needed for Data usage and troubleshooting, but the Troubleshooter automatically activates the service itself when needed
   - !service: {name: 'DPS', operation: change, startup: 4}
     # === Diagnostic Service Host - Disabled
   - !service: {name: 'WdiServiceHost', operation: change, startup: 4}
@@ -44,3 +44,6 @@ actions:
   - !service: {name: 'tcpipreg', operation: change, startup: 4}
     # == EdgeUpdate - Manual (Disabled breaks WebView installation via Visual Studio)
   - !service: {name: 'edgeupdate', operation: change, startup: 3}
+
+  # == Windows Event Collector - Disabled
+  - !service: {name: 'Wecsvc', operation: change, startup: 4} 
