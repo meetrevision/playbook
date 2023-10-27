@@ -60,6 +60,15 @@ actions:
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
   - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*'}
   - !appx: {operation: clearCache, name: '*Windows.Search*'}
+  - !appx: {operation: clearCache, name: '*TCUI*'}
+    # Workaround for KGL versions to match
+  - !appx: {operation: clearCache, name: '*XboxGameCallableUI*'}
+  - !appx: {operation: clearCache, name: '*XboxGameOverlay*'}
+  - !appx: {operation: clearCache, name: '*XboxGamingOverlay*'}
+  - !appx: {operation: clearCache, name: '*XboxIdentityProvider*'}
+  - !appx: {operation: clearCache, name: '*XboxSpeechToTextOverlay*'}
+
+  
 
     # Start as user process to prevent weird look due to running as TrustedInstaller
   # - !run: {baseDir: true, exe: "NSudoLC.exe", args: '-U:C -UseCurrentConsole explorer.exe'}
