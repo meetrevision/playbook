@@ -1,3 +1,5 @@
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\.NET Framework\" | Start-ScheduledTask
+
 # Credits to https://stackoverflow.com/users/9898643/theo
 $env:PATH = [Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()
 [AppDomain]::CurrentDomain.GetAssemblies() | ForEach-Object {
@@ -8,6 +10,3 @@ $env:PATH = [Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()
         ngen.exe install $path /nologo
     }
 }
-
-
-Get-ScheduledTask -TaskPath "\Microsoft\Windows\.NET Framework\" | Start-ScheduledTask
