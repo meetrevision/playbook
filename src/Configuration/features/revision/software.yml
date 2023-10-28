@@ -26,7 +26,7 @@ actions:
   - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/brave/brave-browser/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'BraveBrowserStandaloneSetup.exe' }).browser_download_url -OutFile \"$env:TEMP\\BraveBrowserStandaloneSetup.exe\" }" , weight: 150, option: "browser-brave"}
 
   - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
-  - !cmd: {command: 'call "%temp%\BraveBrowserStandaloneSetup.exe" /silent /install', runas: currentUserElevated, weight: 50}
+  - !cmd: {command: 'call "%temp%\BraveBrowserStandaloneSetup.exe" /silent /install', runas: currentUserElevated, weight: 50, option: "browser-brave"}
 
   - !writeStatus: {status: 'Configuring Brave', option: "browser-brave"}
   - !cmd:
