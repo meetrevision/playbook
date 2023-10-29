@@ -16,11 +16,11 @@ actions:
     command: 'Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(''https://community.chocolatey.org/install.ps1''))'
     weight: 50
 
-  - !writeStatus: {status: "Installing .NET Framework 3.5", option: "dotnet35"}
-  - !cmd:
-    command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums dotnet3.5'
-    weight: 150
-    option: "dotnet35"
+  # - !writeStatus: {status: "Installing .NET Framework 3.5", option: "dotnet35"}
+  # - !cmd:
+  #   command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums dotnet3.5'
+  #   weight: 150
+  #   option: "dotnet35"
 
   - !writeStatus: {status: 'Downloading Brave', option: "browser-brave"}
   - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/brave/brave-browser/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'BraveBrowserStandaloneSetup.exe' }).browser_download_url -OutFile \"$env:TEMP\\BraveBrowserStandaloneSetup.exe\" }" , weight: 150, option: "browser-brave"}
