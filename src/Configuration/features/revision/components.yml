@@ -28,7 +28,7 @@ actions:
   - !taskKill: {name: "OneDrive*", option: "remove-onedrive"}
 
   - !run: {exeDir: true, exe: "ONED.cmd", option: "remove-onedrive", weight: 40}
-  - !service: {name: "OneSyncSvc*", option: "remove-onedrive", operation: delete}
+  # - !service: {name: "OneSyncSvc*", option: "remove-onedrive", operation: delete}
   - !registryKey: {path: 'HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}', option: "remove-onedrive"}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run', value: 'OneDrive', option: "remove-onedrive", operation: delete}
   - !registryKey: {path: 'HKCU\SOFTWARE\Microsoft\OneDrive', option: "remove-onedrive"}
