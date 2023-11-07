@@ -7,16 +7,18 @@ function Toggle-Feature {
     $regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures"
     $regKey = Get-ItemProperty -Path "$regPath\$featureName" -ErrorAction SilentlyContinue
 	
-	$dismCmd = if ($bool) { "Enable-Feature" } else { "Disable-Feature" }
-	
+	$dismCmd = if ($bool) { "Enable" } else { "Disable" }
 	
     if ($regKey -eq $null) {
         Write-Host "$dismCmd $featureName"
-        DISM /Online /$dismCmd /FeatureName:"$featureName" /NoRestart
     } else {
 		if (($regKey.Selection -eq 0 -and $bool) -or ($regKey.Selection -eq 1 -and !$bool)) {
             Write-Host "$dismCmd $featureName"
-			DISM /Online /$dismCmd /FeatureName:"$featureName" /NoRestart
+			if ($bool) {
+				Enable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart
+			} else {
+				Disable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart
+			}
 		}
     }
 }
