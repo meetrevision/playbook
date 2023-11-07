@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and Discussions
+    url: https://github.com/meetrevision/playbook/discussions
+    about: For general questions or technical support, please use the Discussions page
+  - name: Discord
+    url: https://discord.gg/962y4pU
+    about: Join our Discord server to chat with the community and get technical support
