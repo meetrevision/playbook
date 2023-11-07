@@ -35,6 +35,7 @@ actions:
   - !run:
     exeDir: true
     exe: "FILEASSOC.cmd"
+    option: "configure-lpv"
     weight: 150
 
   - !run:
