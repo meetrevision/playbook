@@ -16,7 +16,7 @@ taskkill /f /im "OneDrive.exe"
 
 for /f "usebackq delims=" %%a in (`dir /b /a:d "%SystemDrive%\Users"`) do (
 	rmdir /q /s "%SystemDrive%\Users\%%a\AppData\Local\Microsoft\OneDrive" >NUL 2>nul
-	rmdir /q /s "%SystemDrive%\Users\%%a\OneDrive" >NUL 2>nul
+	@REM rmdir /q /s "%SystemDrive%\Users\%%a\OneDrive" >NUL 2>nul
 	del /q /f "%SystemDrive%\Users\%%a\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk" >NUL 2>nul
 )
 
