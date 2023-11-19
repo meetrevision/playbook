@@ -21,6 +21,12 @@ actions:
   # - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\EdgeUpdate", weight: 10}
   # - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\EdgeCore", weight: 10}
 
+  # Allow uninstall of Edge, EdgeUpdate and WebView
+  - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge', value: 'NoRemove', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update', value: 'NoRemove', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView', value: 'NoRemove', type: REG_DWORD, data: '0'}
+
+
     # OneDrive
   - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
   - !taskKill: {name: "OneDriveStandaloneUpdater", option: "remove-onedrive"}
