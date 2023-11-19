@@ -10,6 +10,7 @@ actions:
   - !taskKill: {name: "RuntimeBroker"}
   - !taskKill: {name: "TextInputHost"}
   - !taskKill: {name: "ShellExperienceHost"}
+  - !taskKill: {name: "backgroundTaskHost"}
   
   - !writeStatus: {status: "Initializing"}
 
