@@ -56,7 +56,7 @@ $foldersToRemove = @(
     "System32\LogFiles",
     "System32\sru"
     "Temp",
-    "WinSxS\Backup"
+    # "WinSxS\Backup"
     # "Panther",
     # "Prefetch"
 )
@@ -81,5 +81,5 @@ Start-ScheduledTask -TaskPath "\Microsoft\Windows\DiskCleanup\" -TaskName "Silen
 # Write-Host "Cleaning up Retail Demo Content"
 # Start-ScheduledTask -TaskPath "\Microsoft\Windows\RetailDemo\" -TaskName "CleanupOfflineContent"
 
-Write-Host "Cleaning up the WinSxS Components"
-DISM /Online /Cleanup-Image /StartComponentCleanup
+# Write-Host "Cleaning up the WinSxS Components"
+# DISM /Online /Cleanup-Image /StartComponentCleanup
