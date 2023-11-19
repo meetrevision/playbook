@@ -5,6 +5,11 @@ privilege: TrustedInstaller
 actions:
   
   - !taskKill: {name: "explorer"}
+  - !taskKill: {name: "SearchApp"}
+  - !taskKill: {name: "SearchHost"}
+  - !taskKill: {name: "RuntimeBroker"}
+  - !taskKill: {name: "TextInputHost"}
+  - !taskKill: {name: "ShellExperienceHost"}
   
   - !writeStatus: {status: "Initializing"}
 
