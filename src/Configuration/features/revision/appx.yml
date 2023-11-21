@@ -65,8 +65,10 @@ actions:
   - !taskKill: {name: "*teams*", ignoreErrors: true}
   - !appx: {name: '*MicrosoftTeams*', type: family, weight: 10}
 
-    # MicrosoftWindows.Client.Core_cw5n1h2txyewy!
+    # MicrosoftWindows.Client.CBS_cw5n1h2txyewy
   - !appx: {name: '*Global.ValueBanner*', type: app, weight: 50}
+  - !appx: {name: '*Global.WsxPackManager*', type: app, weight: 50}
+
     # MicrosoftWindows.Client.Core_cw5n1h2txyewy
   - !appx: {name: '*Global.BackupBanner*', type: app, weight: 50}
    
