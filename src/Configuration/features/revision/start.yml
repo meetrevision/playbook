@@ -4,14 +4,14 @@ description: Copies Revision folders/files, and configures some initial settings
 privilege: TrustedInstaller
 actions:
   
-  - !taskKill: {name: "explorer"}
-  - !taskKill: {name: "SearchApp"}
-  - !taskKill: {name: "SearchHost"}
-  - !taskKill: {name: "RuntimeBroker"}
-  - !taskKill: {name: "TextInputHost"}
-  - !taskKill: {name: "ShellExperienceHost"}
-  - !taskKill: {name: "backgroundTaskHost"}
-  - !taskKill: {name: "Widgets"}
+  - !taskKill: {name: "explorer", ignoreErrors: true}
+  - !taskKill: {name: "SearchApp", ignoreErrors: true}
+  - !taskKill: {name: "SearchHost", ignoreErrors: true}
+  - !taskKill: {name: "RuntimeBroker", ignoreErrors: true}
+  - !taskKill: {name: "TextInputHost", ignoreErrors: true}
+  - !taskKill: {name: "ShellExperienceHost", ignoreErrors: true}
+  - !taskKill: {name: "backgroundTaskHost", ignoreErrors: true}
+  - !taskKill: {name: "Widgets", ignoreErrors: true}
   
   - !writeStatus: {status: "Initializing"}
 
