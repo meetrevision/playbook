@@ -11,6 +11,7 @@ actions:
   - !taskKill: {name: "TextInputHost"}
   - !taskKill: {name: "ShellExperienceHost"}
   - !taskKill: {name: "backgroundTaskHost"}
+  - !taskKill: {name: "Widgets"}
   
   - !writeStatus: {status: "Initializing"}
 
