@@ -26,7 +26,6 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update', value: 'NoRemove', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView', value: 'NoRemove', type: REG_DWORD, data: '0'}
 
-
     # OneDrive
   - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
   - !taskKill: {name: "OneDriveStandaloneUpdater", option: "remove-onedrive"}
