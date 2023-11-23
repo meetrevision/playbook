@@ -7,71 +7,138 @@ actions:
   - !writeStatus: {status: "Removing Appx Packages"}
   - !appx: {name: '*Disney*', type: family, weight: 10}
 
-  - !appx: {name: '*microsoft.microsoftedge.stable*', type: family, weight: 10, option: "remove-edge"}
-  - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family, weight: 10, option: "remove-edge"}
-  - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', type: family, weight: 10, option: "remove-edge"}
-  - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", option: "remove-edge"}
+  - !appx: {name: '*microsoft.microsoftedge.stable*', type: family, ignoreErrors: true, weight: 10, option: "remove-edge"}
+  - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family, ignoreErrors: true, weight: 10, option: "remove-edge"}
+  - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', ignoreErrors: true, type: family, weight: 10, option: "remove-edge"}
+  - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", ignoreErrors: true, option: "remove-edge"}
 
-  - !appx: {name: '*OneDrive*', type: family, weight: 10, option: "remove-onedrive"}
+  - !writeStatus: {status: "Removing OneDrive"}
+  - !appx: {name: '*OneDrive*', type: family, ignoreErrors: true, weight: 10, option: "remove-onedrive"}
+
+  - !writeStatus: {status: "Removing Spotify"}
   - !appx: {name: '*Spotify*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing SecureAssessmentBrowser"}
   - !appx: {name: '*SecureAssessmentBrowser*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing PeopleExperienceHost"}
   - !appx: {name: '*PeopleExperienceHost*', type: family, weight: 10}
 
+  - !writeStatus: {status: "Removing Photos"}
   - !appx: {name: '*Microsoft.Windows.Photos*', type: family, weight: 10}
+  - !writeStatus: {status: "Removing Camera"}
   - !appx: {name: '*Microsoft.WindowsCamera*', type: family, weight: 10}
-  - !appx: {name: '*MicrosoftWindows.Client.WebExperience*', type: family, weight: 10}
+  
+  - !writeStatus: {status: "Removing WebExperience"}
+  - !appx: {name: '*MicrosoftWindows.Client.WebExperience*', ignoreErrors: true, type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing Alarms"}
   - !appx: {name: '*Microsoft.WindowsAlarms*', type: family, weight: 10}
+ 
+  - !writeStatus: {status: "Removing WindowsMaps"}
   - !appx: {name: '*Microsoft.WindowsMaps*', type: family, weight: 10}
+  
+  - !writeStatus: {status: "Removing StickyNotes"}
   - !appx: {name: '*Microsoft.MicrosoftStickyNotes*', type: family, weight: 10}
+  
+  - !writeStatus: {status: "Removing Mail"}
   - !appx: {name: '*microsoft.windowscommunicationsapps*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing People"}
   - !appx: {name: '*Microsoft.People*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing BingNews"}
   - !appx: {name: '*Microsoft.BingNews*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing BingWeather"}
   - !appx: {name: '*Microsoft.BingWeather*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing Solitaire"}
   - !appx: {name: '*Microsoft.MicrosoftSolitaireCollection*', type: family, weight: 10}
-  - !appx: {name: '*Microsoft.MicrosoftOfficeHub*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing Feedback"}
   - !appx: {name: '*Microsoft.WindowsFeedbackHub*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing GetHelp"}
   - !appx: {name: '*Microsoft.GetHelp*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing GetStarted"}
   - !appx: {name: '*Microsoft.Getstarted*', type: family, weight: 10}
+    # Get Started placeholder
+  - !appx: {name: '*WebExperienceHost*', type: app, weight: 10}
+
+  - !writeStatus: {status: "Removing Todos"}
   - !appx: {name: '*Microsoft.Todos*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing PowerAutomate"}
   - !appx: {name: '*Microsoft.PowerAutomateDesktop*', type: family, weight: 10}
     # Cortana
+  - !writeStatus: {status: "Removing Cortana"}
   - !appx: {name: '*Microsoft.549981C3F5F10*', type: family, weight: 10}
+  
+  - !writeStatus: {status: "Removing QuickAssist"}
   - !appx: {name: '*MicrosoftCorporationII.QuickAssist*', type: family, weight: 10}
+  - !writeStatus: {status: "Removing MS Family"}
   - !appx: {name: '*MicrosoftCorporationII.MicrosoftFamily*', type: family, weight: 10}
+  
+  - !writeStatus: {status: "Removing ZuneMusic"}
   - !appx: {name: '*Microsoft.ZuneMusic*', type: family, weight: 10}
+  - !writeStatus: {status: "Removing ZuneVideo"}
   - !appx: {name: '*Microsoft.ZuneVideo*', type: family, weight: 10}
+  - !writeStatus: {status: "Removing SoundRecorder"}
   - !appx: {name: '*Microsoft.WindowsSoundRecorder*', type: family, weight: 10}
+  - !writeStatus: {status: "Removing Clipchamp"}
   - !appx: {name: '*Clipchamp.Clipchamp*', type: family, weight: 10}
+  - !writeStatus: {status: "Removing Whiteboard"}
   - !appx: {name: '*Microsoft.Whiteboard*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing skydrive"}
   - !appx: {name: '*microsoft.microsoftskydrive*', type: family, weight: 10}
+  
+  - !writeStatus: {status: "Removing TeamsforSurfaceHub"}
   - !appx: {name: '*Microsoft.MicrosoftTeamsforSurfaceHub*', type: family, weight: 10}
+  - !writeStatus: {status: "Removing MailforSurfaceHub"}
   - !appx: {name: '*MicrosoftCorporationII.MailforSurfaceHub*', type: family, weight: 10}
+  - !writeStatus: {status: "Removing PowerBI"}
   - !appx: {name: '*Microsoft.MicrosoftPowerBIForWindows*', type: family, weight: 10}
+  - !writeStatus: {status: "Removing Skype"}
   - !appx: {name: '*Microsoft.SkypeApp*', type: family, weight: 10}
+ 
+  - !writeStatus: {status: "Removing UWP Office"}
+  - !appx: {name: '*Microsoft.MicrosoftOfficeHub*', type: family, weight: 10}
   - !appx: {name: '*Microsoft.Office.Excel*', type: family, weight: 10}
   - !appx: {name: '*Microsoft.Office.PowerPoint*', type: family, weight: 10}
   - !appx: {name: '*Microsoft.Office.Word*', type: family, weight: 10}
   - !appx: {name: '*Microsoft.Office.OneNote*', type: family, weight: 10}
+    # 23H2
+  - !appx: {name: 'Microsoft.OutlookForWindows*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing 3DViewer"}
   - !appx: {name: '*Microsoft.Microsoft3DViewer*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing Advertising"}
   - !appx: {name: 'Microsoft.Advertising*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing MixedRealityPortal"}
   - !appx: {name: '*MixedReality.Portal*', type: family, weight: 10}
   
     # Paint 3D
+  - !writeStatus: {status: "Removing Paint"}
   - !appx: {name: '*Microsoft.MSPaint*', type: family, weight: 10}
 
-    # Get Started app
-  - !appx: {name: '*WebExperienceHost*', type: app, weight: 10}
-
+  - !writeStatus: {status: "Removing Teams"}
   - !taskKill: {name: "*teams*", ignoreErrors: true}
   - !appx: {name: '*MicrosoftTeams*', type: family, weight: 10}
 
-    # MicrosoftWindows.Client.Core_cw5n1h2txyewy!
+  - !writeStatus: {status: "Removing Banners"}
+    # MicrosoftWindows.Client.CBS_cw5n1h2txyewy!
   - !appx: {name: '*Global.ValueBanner*', type: app, weight: 50}
+  - !appx: {name: '*Global.WsxPackManager*', type: app, weight: 50}
     # MicrosoftWindows.Client.Core_cw5n1h2txyewy
   - !appx: {name: '*Global.BackupBanner*', type: app, weight: 50}
-   
-    # 23H2
-  - !appx: {name: 'Microsoft.OutlookForWindows*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing DevHome"}
   - !appx: {name: '*DevHome*', type: family, option: "remove-uwp-devhome", weight: 10}
   
+  - !writeStatus: {status: "Removing Windows Backup"}
   - !appx: {name: '*WindowsBackup*', type: app, option: "remove-uwp-wbackup", weight: 10}

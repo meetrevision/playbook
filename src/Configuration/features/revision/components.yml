@@ -8,10 +8,10 @@ actions:
 
     # Microsoft Edge
   - !writeStatus: {status: "Removing Microsoft Edge", option: "remove-edge"}
-  - !taskKill: {name: "MicrosoftEdgeUpdate", option: "remove-edge"}
-  - !taskKill: {name: "msedge", option: "remove-edge"}
-  - !taskKill: {name: "MicrosoftEdge*", option: "remove-edge"}
-  - !taskKill: {name: "setup", pathContains: "\\Edge", option: "remove-edge"}
+  - !taskKill: {name: "MicrosoftEdgeUpdate", ignoreErrors: true, option: "remove-edge"}
+  - !taskKill: {name: "msedge", ignoreErrors: true, option: "remove-edge"}
+  - !taskKill: {name: "MicrosoftEdge*", ignoreErrors: true, option: "remove-edge"}
+  - !taskKill: {name: "setup", ignoreErrors: true, pathContains: "\\Edge", option: "remove-edge"}
   - !run: {exeDir: true, exe: "EDGE.cmd", option: "remove-edge", weight: 40}
   - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
   # - !service: {name: "edgeupdate", operation: delete}
@@ -26,12 +26,11 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update', value: 'NoRemove', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView', value: 'NoRemove', type: REG_DWORD, data: '0'}
 
-
     # OneDrive
   - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
-  - !taskKill: {name: "OneDriveStandaloneUpdater", option: "remove-onedrive"}
-  - !taskKill: {name: "OneDriveSetup", option: "remove-onedrive"}
-  - !taskKill: {name: "OneDrive*", option: "remove-onedrive"}
+  - !taskKill: {name: "OneDriveStandaloneUpdater", ignoreErrors: true, option: "remove-onedrive"}
+  - !taskKill: {name: "OneDriveSetup", ignoreErrors: true, option: "remove-onedrive"}
+  - !taskKill: {name: "OneDrive*", ignoreErrors: true, option: "remove-onedrive"}
 
   - !run: {exeDir: true, exe: "ONED.cmd", option: "remove-onedrive", weight: 40}
   # - !service: {name: "OneSyncSvc*", option: "remove-onedrive", operation: delete}

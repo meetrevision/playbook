@@ -1,5 +1,5 @@
 @echo off
-set version=23.10
+set version=23.11
 for /f "tokens=2 delims==" %%i in ('wmic os get BuildNumber /value ^| find "="') do set "build=%%i"
 if %build% gtr 19045 ( set "w11=true" )
 
@@ -27,9 +27,6 @@ if not defined w11 (
 	bcdedit /set description "ReviOS 11 %version%" >NUL 2>nul
   reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model"  /t REG_SZ /d "ReviOS 11 %version%" /f >NUL 2>nul
   reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganization" /t REG_SZ /d "ReviOS 11 %version%" /f >NUL 2>nul
-
-  :: Credits to Garlin for the idea
-  PowerShell -NonInteractive -NoLogo -NoP -C "& { $Cbs = \"$env:SystemRoot\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\"; $Manifest = Join-Path $Cbs 'appxmanifest.xml'; takeown /a /f $Manifest; icacls $Manifest /grant Administrators:F; $ReviManifest = Join-Path $Cbs \"appxmanifest.xml.revi\"; if (!(Test-Path $ReviManifest)) { Copy-Item -Path $Manifest -Destination $ReviManifest -Force; Remove-Item $Manifest -Force }; [xml]$xml = Get-Content -Path \"$Cbs\\appxmanifest.xml.revi\" -Raw; $applicationNode = $xml.Package.Applications.Application | Where-Object { $_.Id -eq 'WebExperienceHost' }; if ($applicationNode -ne $null) { $xml.Package.Applications.RemoveChild($applicationNode) } $xml.Save($Manifest) }"
 )
 
 PowerShell -NonInteractive -NoLogo -NoP -C "Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod" >NUL 2>nul

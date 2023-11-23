@@ -12,7 +12,7 @@ for /f "usebackq tokens=2 delims=\" %%e in (`reg query "HKEY_USERS" ^| findstr /
 	)
 )
 
-taskkill /f /im "OneDrive.exe"
+taskkill /f /im "OneDrive.exe" >NUL 2>nul
 
 for /f "usebackq delims=" %%a in (`dir /b /a:d "%SystemDrive%\Users"`) do (
 	rmdir /q /s "%SystemDrive%\Users\%%a\AppData\Local\Microsoft\OneDrive" >NUL 2>nul
