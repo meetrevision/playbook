@@ -31,7 +31,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit 1 }
           .\build.bat
           .\clean.bat
-          Copy-Item -Path *.cab -Destination ".\src\Executables\CAB" -Force | Out-Null
+          Copy-Item -Path *.cab -Destination "..\src\Executables\CAB" -Force | Out-Null
         working-directory: sxsc-src
         #
       
