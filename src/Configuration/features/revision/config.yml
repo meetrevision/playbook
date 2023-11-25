@@ -61,16 +61,5 @@ actions:
   - !appx: {operation: clearCache, name: '*XboxIdentityProvider*'}
   - !appx: {operation: clearCache, name: '*XboxSpeechToTextOverlay*'}
 
-  - !run:
-    exe: "explorer.exe"
-    runas: currentUser
-
-  - !taskKill: {name: "explorer", ignoreErrors: true}
-
-  - !cmd:
-    exeDir: true
-    command: 'copy /y %WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\appxmanifest.xml.og %WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\appxmanifest.xml'
-    weight: 10  
-
     # Start as user process to prevent weird look due to running as TrustedInstaller
   # - !run: {baseDir: true, exe: "NSudoLC.exe", args: '-U:C -UseCurrentConsole explorer.exe'}

@@ -2,7 +2,8 @@
 title: Registry
 description: Revision registry configuration
 privilege: TrustedInstaller
-actions: []
+actions: 
+  - !writeStatus: {status: "Tweaking registry"}
 features:
   - features\revision\registry\ntlite-settings.yml
   - features\revision\registry\aaa-edit-ISO-version-and-edition.yml
