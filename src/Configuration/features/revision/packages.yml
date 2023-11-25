@@ -6,7 +6,7 @@ actions:
 
   - !writeStatus: {status: "Removing system packages"}
   - !run: 
-    exeDir: true,
+    exeDir: true
     exe: 'CAB\cab-installer.cmd'
 
 
