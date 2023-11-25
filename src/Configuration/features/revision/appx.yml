@@ -25,7 +25,7 @@ actions:
   - !appx: {name: '*PeopleExperienceHost*', type: family, weight: 10}
 
   - !writeStatus: {status: "Removing Photos"}
-  - !appx: {name: '*Microsoft.Windows.Photos*', type: family, weight: 10}
+  - !appx: {name: '*Microsoft.Windows.Photos*', type: family, option: "remove-appx-photos", weight: 10}
   - !writeStatus: {status: "Removing Camera"}
   - !appx: {name: '*Microsoft.WindowsCamera*', type: family, weight: 10}
   
@@ -138,7 +138,7 @@ actions:
   - !appx: {name: '*Global.BackupBanner*', type: app, unregister: true, weight: 50}
 
   - !writeStatus: {status: "Removing DevHome"}
-  - !appx: {name: '*DevHome*', type: family, option: "remove-uwp-devhome", weight: 10}
+  - !appx: {name: '*DevHome*', type: family, option: "remove-appx-devhome", weight: 10}
   
   - !writeStatus: {status: "Removing Windows Backup"}
-  - !appx: {name: '*WindowsBackup*', type: app, unregister: true, option: "remove-uwp-wbackup", weight: 10}
+  - !appx: {name: '*WindowsBackup*', type: app, unregister: true, option: "remove-appx-wbackup", weight: 10}

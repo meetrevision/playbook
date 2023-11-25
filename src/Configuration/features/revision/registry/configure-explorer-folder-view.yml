@@ -2,6 +2,7 @@
 title: configure-explorer-folder-view
 description: configure-explorer-folder-view
 privilege: TrustedInstaller
+option: configure-explorer-folder-view
 actions:
 
     # === Customized folder view, only relevant information ( Name / Size / Date modified / Date created )
