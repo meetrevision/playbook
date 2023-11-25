@@ -42,3 +42,16 @@ actions:
     # Necessary to clean DNS Cache after modifying hosts
   - !cmd:
     command: 'ipconfig /flushdns'
+
+  # Backup appxmanifest.xml
+  - !cmd:
+    exeDir: true
+    command: 'copy /y %WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\appxmanifest.xml %WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\appxmanifest.xml.og'
+    weight: 10
+
+  - !writeStatus: {status: "Optimizing PowerShell"}
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File ngen.ps1'
+    weight: 100

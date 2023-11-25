@@ -5,24 +5,44 @@ on:
     tags:
       - '*'
 
+env:
+    SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
+    FILENAME: 'Revi-PB-${{ github.ref_name }}.apbx'
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set file name
-        run: echo "FILENAME=Revi-PB-${{ github.ref_name }}.apbx" >> $GITHUB_ENV
+        # Credits to echnobas, Atlas and all the contributors.
+      - name: Git clone sxsc
+        run: |
+          git clone --depth=1 ${{ env.SXSC_REPO }} sxsc-src
+
+      - name: Build cab
+        run: |
+          pip install -r requirements.txt | Out-Null
+          $systemPackages = "..\src\Executables\CAB\systemPackages.yaml" 
+          Copy-Item -Path $systemPackages -Destination "cfg.yaml" -Force | Out-Null
+          python sxsc.py
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          .\build.bat
+          .\clean.bat
+          Copy-Item -Path *.cab -Destination ".\src\Executables\CAB" -Force | Out-Null
+        working-directory: sxsc-src
+        #
       
       - name: Archive content
         run: |
-          7z a -p${{ secrets.PASSWORD }} -mhe=on "${{ env.FILENAME }}" ./src/*
+          7z a -pmalte -mhe=on ${{ env.FILENAME }} ./src/*
 
-      - name: Hash 256
+      - name: Generate SHA256
         run: |
-          echo "HASH=$(sha256sum ${{ env.FILENAME }} | cut -d ' ' -f 1)" >> $GITHUB_ENV
+          $hash = (Get-FileHash -Algorithm SHA256 -Path ${{ env.FILENAME }}).Hash
+          echo ("HASH=" + $hash) >> $env:GITHUB_ENV
       
       # - name: DevUploads
       #   run: |

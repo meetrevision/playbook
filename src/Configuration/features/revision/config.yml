@@ -4,7 +4,7 @@ description: Applies some Revision configurations
 privilege: TrustedInstaller
 actions:
 
-  - !writeStatus: {status: "Configuring general settings"}
+  - !writeStatus: {status: "Finalizing process"}
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0', weight: 70}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', type: REG_DWORD, data: '1', weight: 60}
 
@@ -17,14 +17,6 @@ actions:
     args: '-NoP -ExecutionPolicy Bypass -File SVCGROUP.ps1'
     weight: 50
 
-  - !writeStatus: {status: "Optimizing PowerShell"}
-  - !run:
-    exeDir: true
-    exe: "PowerShell"
-    args: '-NoP -ExecutionPolicy Bypass -File ngen.ps1'
-    weight: 100
-
-  - !writeStatus: {status: "Finalizing process"}
   - !run: {exeDir: true, exe: "FINALIZE.cmd", weight: 200}
 
   - !run:
@@ -44,7 +36,7 @@ actions:
     option: "configure-wallpaper"
     weight: 90
 
-  - !writeStatus: {status: "Removing temporary files"}
+  - !writeStatus: {status: "Removing logs"}
   - !run:
     exeDir: true
     exe: "PowerShell"
@@ -69,7 +61,16 @@ actions:
   - !appx: {operation: clearCache, name: '*XboxIdentityProvider*'}
   - !appx: {operation: clearCache, name: '*XboxSpeechToTextOverlay*'}
 
-  
+  - !run:
+    exe: "explorer.exe"
+    runas: currentUser
+
+  - !taskKill: {name: "explorer", ignoreErrors: true}
+
+  - !cmd:
+    exeDir: true
+    command: 'copy /y %WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\appxmanifest.xml.og %WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\appxmanifest.xml'
+    weight: 10  
 
     # Start as user process to prevent weird look due to running as TrustedInstaller
   # - !run: {baseDir: true, exe: "NSudoLC.exe", args: '-U:C -UseCurrentConsole explorer.exe'}
