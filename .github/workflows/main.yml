@@ -30,8 +30,8 @@ jobs:
           python sxsc.py
           if ($LASTEXITCODE -ne 0) { exit 1 }
           .\build.bat
-          .\clean.bat
           Copy-Item -Path *.cab -Destination "..\src\Executables\CAB" -Force | Out-Null
+          .\clean.bat
         working-directory: sxsc-src
         #
       
