@@ -65,7 +65,7 @@ actions:
   - !writeStatus: {status: "Removing GetStarted"}
   - !appx: {name: '*Microsoft.Getstarted*', type: family, weight: 10}
     # Get Started placeholder
-  - !appx: {name: '*WebExperienceHost*', type: app, unregister: true, weight: 10}
+  # - !appx: {name: '*WebExperienceHost*', type: app, unregister: true, weight: 10}
 
   - !writeStatus: {status: "Removing Todos"}
   - !appx: {name: '*Microsoft.Todos*', type: family, weight: 10}
@@ -132,13 +132,13 @@ actions:
 
   - !writeStatus: {status: "Removing Banners"}
     # MicrosoftWindows.Client.CBS_cw5n1h2txyewy!
-  - !appx: {name: '*Global.ValueBanner*', type: app, unregister: true, weight: 50}
-  - !appx: {name: '*Global.WsxPackManager*', type: app, unregister: true, weight: 50}
-    # MicrosoftWindows.Client.Core_cw5n1h2txyewy
-  - !appx: {name: '*Global.BackupBanner*', type: app, unregister: true, weight: 50}
+  # - !appx: {name: '*Global.ValueBanner*', type: app, unregister: true, weight: 50}
+  # - !appx: {name: '*Global.WsxPackManager*', type: app, unregister: true, weight: 50}
+  #   # MicrosoftWindows.Client.Core_cw5n1h2txyewy
+  # - !appx: {name: '*Global.BackupBanner*', type: app, unregister: true, weight: 50}
 
   - !writeStatus: {status: "Removing DevHome"}
   - !appx: {name: '*DevHome*', type: family, option: "remove-appx-devhome", weight: 10}
   
-  - !writeStatus: {status: "Removing Windows Backup"}
-  - !appx: {name: '*WindowsBackup*', type: app, unregister: true, option: "remove-appx-wbackup", weight: 10}
+  # - !writeStatus: {status: "Removing Windows Backup"}
+  # - !appx: {name: '*WindowsBackup*', type: app, unregister: true, option: "remove-appx-wbackup", weight: 10}
