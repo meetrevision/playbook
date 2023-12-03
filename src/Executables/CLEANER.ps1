@@ -55,7 +55,7 @@ $foldersToRemove = @(
     "SoftwareDistribution",
     "System32\LogFiles",
     "System32\sru"
-    "Temp",
+    "Temp"
     # "WinSxS\Backup"
     # "Panther",
     # "Prefetch"
