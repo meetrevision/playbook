@@ -12,7 +12,7 @@ function Toggle-Feature {
     if ($regKey -eq $null -or ($regKey.Selection -eq 0 -and $bool) -or ($regKey.Selection -eq 1 -and !$bool)) {
         Write-Host "$dismCmd $featureName"
         if ($bool) {
-            Enable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart
+            Enable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart -All
         } else {
             Disable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart
         }
@@ -28,8 +28,8 @@ $featuresToToggle = @(
     @{ Name = "MSRDC-Infrastructure"; Bool = $false },
     @{ Name = "Printing-Foundation-Features"; Bool = $false },
     @{ Name = "Printing-Foundation-InternetPrinting-Client"; Bool = $false },
-    @{ Name = "WorkFolders-Client"; Bool = $false },
-	@{ Name = "SmbDirect"; Bool = $false }
+    @{ Name = "WorkFolders-Client"; Bool = $false }
+	# @{ Name = "SmbDirect"; Bool = $false }
 )
 foreach ($feature in $featuresToToggle) {
     Toggle-Feature -featureName $feature.Name -bool $feature.Bool
