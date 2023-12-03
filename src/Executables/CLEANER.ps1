@@ -68,7 +68,7 @@ foreach ($folderName in $foldersToRemove) {
     }
 }
 
-Remove-Item -Path "C:\Program Files\WindowsApps\MicrosoftWindows.Client.WebExperience*" -Recurse -Force
+# Remove-Item -Path "C:\Program Files\WindowsApps\MicrosoftWindows.Client.WebExperience*" -Recurse -Force
 
 Get-ChildItem -Path "$env:SystemRoot" -Filter *.log -File -Recurse -Force | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
 

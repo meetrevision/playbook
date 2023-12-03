@@ -29,16 +29,19 @@ actions:
   - !writeStatus: {status: "Removing Camera"}
   - !appx: {name: '*Microsoft.WindowsCamera*', type: family, weight: 10}
   
-  - !writeStatus: {status: "Removing WebExperience"}
+  - !writeStatus: {status: "Removing Widgets"}
+  - !powerShell:
+    command: 'Get-AppxPackage MicrosoftWindows.Client.WebExperience | Remove-AppxPackage'
+    runas: currentUserElevated
   - !appx: {name: '*MicrosoftWindows.Client.WebExperience*', ignoreErrors: true, type: family, weight: 10}
 
   - !writeStatus: {status: "Removing Alarms"}
   - !appx: {name: '*Microsoft.WindowsAlarms*', type: family, weight: 10}
  
-  - !writeStatus: {status: "Removing WindowsMaps"}
+  - !writeStatus: {status: "Removing Maps"}
   - !appx: {name: '*Microsoft.WindowsMaps*', type: family, weight: 10}
   
-  - !writeStatus: {status: "Removing StickyNotes"}
+  - !writeStatus: {status: "Removing Sticky Notes"}
   - !appx: {name: '*Microsoft.MicrosoftStickyNotes*', type: family, weight: 10}
   
   - !writeStatus: {status: "Removing Mail"}
@@ -123,7 +126,7 @@ actions:
   - !appx: {name: '*MixedReality.Portal*', type: family, weight: 10}
   
     # Paint 3D
-  - !writeStatus: {status: "Removing Paint"}
+  - !writeStatus: {status: "Removing Paint 3D"}
   - !appx: {name: '*Microsoft.MSPaint*', type: family, weight: 10}
 
   - !writeStatus: {status: "Removing Teams"}
@@ -137,7 +140,7 @@ actions:
   #   # MicrosoftWindows.Client.Core_cw5n1h2txyewy
   # - !appx: {name: '*Global.BackupBanner*', type: app, unregister: true, weight: 50}
 
-  - !writeStatus: {status: "Removing DevHome"}
+  - !writeStatus: {status: "Removing Dev Home"}
   - !appx: {name: '*DevHome*', type: family, option: "remove-appx-devhome", weight: 10}
   
   # - !writeStatus: {status: "Removing Windows Backup"}
