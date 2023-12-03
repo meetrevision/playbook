@@ -66,3 +66,16 @@ for /f "usebackq tokens=2 delims=\" %%a in (`reg query "HKEY_USERS" ^| findstr /
 ::PowerShell -NoP -C "Import-StartLayout -LayoutPath '!SystemDrive!\Windows\StartMenuLayout.xml' -MountPath $env:SystemDrive\\"
 ::reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /f
 ::reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "StartLayoutFile" /t REG_SZ /d "!SystemDrive!\Windows\StartMenuLayout.xml" /f
+
+for %%i in (
+	"WebExperienceHostApp.exe"
+	"WebExperienceHost.dll"
+	"SystemSettingsExtensions.dll"
+	"WsxPackManager.dll"
+) do (
+	if exist "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i.bak" del /q /f "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i.bak"
+
+	if exist "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i" (
+		ren "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i" "%%i.bak"
+	)
+)
