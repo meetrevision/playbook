@@ -30,13 +30,13 @@ $registryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Volume
 
 foreach ($item in $volumeCache.GetEnumerator()) {
     $keyPath = Join-Path $registryPath $item.Key
-    Write-Host "Cleaning up $item.Key"
     if (Test-Path $keyPath) {
-        New-ItemProperty -Path $keyPath -Name StateFlags1337 -Value $item.Value -PropertyType DWord -Force -ErrorAction SilentlyContinue    
+        Write-Host "Cleaning up $item.Key"
+        New-ItemProperty -Path $keyPath -Name StateFlags1337 -Value $item.Value -PropertyType DWord | Out-Null
     }
 }
 
-Start-Process -FilePath "$env:SystemRoot\system32\cleanmgr.exe" -ArgumentList "/sagerun:1337" -Wait
+Start-Process -FilePath "$env:SystemRoot\system32\cleanmgr.exe" -ArgumentList "/sagerun:1337"
 
 Write-Host "Cleaning up Event Logs"
 Get-EventLog -LogName * | ForEach { Clear-EventLog $_.Log }
@@ -44,15 +44,17 @@ Get-EventLog -LogName * | ForEach { Clear-EventLog $_.Log }
 Write-Host "Disabling Reserved Storage"
 Set-WindowsReservedStorageState -State Disabled
 
-Stop-Service -Name "dps" -Force
-Stop-Service -Name "wuauserv" -Force
-Stop-Service -Name "cryptsvc" -Force
+Stop-Service -Name "bits" -Force | Out-Null
+Stop-Service -Name "appidsvc" -Force | Out-Null
+Stop-Service -Name "dps" -Force | Out-Null
+Stop-Service -Name "wuauserv" -Force | Out-Null
+Stop-Service -Name "cryptsvc" -Force | Out-Null
 
 Write-Host "Cleaning up leftovers"
 $foldersToRemove = @(
     "CbsTemp",
     "Logs",
-    "SoftwareDistribution",
+    "SoftwareDistribution"
     "System32\LogFiles",
     "System32\sru"
     "Temp"
@@ -64,13 +66,13 @@ $foldersToRemove = @(
 foreach ($folderName in $foldersToRemove) {
     $folderPath = Join-Path $env:SystemRoot $folderName
     if (Test-Path $folderPath) {
-        Remove-Item -Path "$folderPath\*" -Force -Recurse -Verbose
+        Remove-Item -Path "$folderPath\*" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null
     }
 }
 
 # Remove-Item -Path "C:\Program Files\WindowsApps\MicrosoftWindows.Client.WebExperience*" -Recurse -Force
 
-Get-ChildItem -Path "$env:SystemRoot" -Filter *.log -File -Recurse -Force | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+Get-ChildItem -Path "$env:SystemRoot" -Filter *.log -File -Recurse -Force | Remove-Item -Recurse -Force | Out-Null
 
 Write-Host "Cleaning up %TEMP%"
 Get-ChildItem -Path "$env:TEMP" -Exclude "AME" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue

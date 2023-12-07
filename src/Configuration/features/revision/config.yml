@@ -43,6 +43,7 @@ actions:
     args: '-NoP -ExecutionPolicy Bypass -File CLEANER.ps1'
     weight: 150
 
+  - !writeStatus: {status: "Configuring features"}
   - !run:
     exeDir: true
     exe: "PowerShell"
