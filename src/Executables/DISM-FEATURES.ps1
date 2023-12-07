@@ -1,4 +1,4 @@
-function Toggle-Feature {
+function Update-Feature {
     param(
         [string]$featureName,
         [bool]$bool
@@ -9,7 +9,7 @@ function Toggle-Feature {
 	
 	$dismCmd = if ($bool) { "Enable" } else { "Disable" }
 	
-    if ($regKey -eq $null -or ($regKey.Selection -eq 0 -and $bool) -or ($regKey.Selection -eq 1 -and !$bool)) {
+    if ($null -eq $regKey -or ($regKey.Selection -eq 0 -and $bool) -or ($regKey.Selection -eq 1 -and !$bool)) {
         Write-Host "$dismCmd $featureName"
         if ($bool) {
             Enable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart -All
@@ -20,7 +20,7 @@ function Toggle-Feature {
 }
 
 
-$featuresToToggle = @(
+$features = @(
     @{ Name = "DirectPlay"; Bool = $true },
     @{ Name = "LegacyComponents"; Bool = $true },
     @{ Name = "MicrosoftWindowsPowerShellV2"; Bool = $false },
@@ -31,6 +31,6 @@ $featuresToToggle = @(
     @{ Name = "WorkFolders-Client"; Bool = $false }
 	# @{ Name = "SmbDirect"; Bool = $false }
 )
-foreach ($feature in $featuresToToggle) {
-    Toggle-Feature -featureName $feature.Name -bool $feature.Bool
+foreach ($feature in $features) {
+    Update-Feature -featureName $feature.Name -bool $feature.Bool
 }
