@@ -100,7 +100,11 @@ actions:
     # ------> https://www.sevenforums.com/tutorials/717-shut-down-speed-up.html
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control', value: 'WaitToKillServiceTimeout', type: REG_SZ, data: '1500'}
     # === Disable Taskbar Animations. (prevents the pop up windows in the taskbar from getting stuck too)
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', type: REG_DWORD, data: '0', option: 'configure-explorer-taskbar-animations'}
+  
+  - !registryValue: { path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', operation: delete, option: '!configure-explorer-taskbar-animations' }
+
+
     # === Turn off display of recent search entries in the File Explorer search box - Enabled
     # ------> Additionally this also disables Bing in the Start Menu in Windows 10's May 2020 update (20H1).
     # ------> https://www.howtogeek.com/224159/how-to-disable-bing-in-the-windows-10-start-menu/
