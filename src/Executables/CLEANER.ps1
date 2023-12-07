@@ -36,7 +36,7 @@ foreach ($item in $volumeCache.GetEnumerator()) {
     }
 }
 
-Start-Process -FilePath "$env:SystemRoot\system32\cleanmgr.exe" -ArgumentList "/sagerun:1337"
+Start-Process -FilePath "$env:SystemRoot\system32\cleanmgr.exe" -ArgumentList "/sagerun:1337" -Wait:$false
 
 Write-Host "Cleaning up Event Logs"
 Get-EventLog -LogName * | ForEach { Clear-EventLog $_.Log }

@@ -4,7 +4,6 @@ description: configure-internet-explorer
 privilege: TrustedInstaller
 actions:
 
-    # ;; Disable Enhanced Security Configuration on Internet Explorer -> https://support.microsoft.com/en-sg/help/4551931/faq-about-internet-explorer-enhanced-security-configuration
     # ===============
     # === Updates ===
     # ===============

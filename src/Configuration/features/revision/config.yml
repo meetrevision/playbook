@@ -4,6 +4,13 @@ description: Applies some Revision configurations
 privilege: TrustedInstaller
 actions:
 
+  - !writeStatus: {status: "Removing logs"}
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File CLEANER.ps1'
+    weight: 150
+
   - !writeStatus: {status: "Finalizing process"}
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0', weight: 70}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', type: REG_DWORD, data: '1', weight: 60}
@@ -35,13 +42,6 @@ actions:
     exe: "WALLPAPER.cmd"
     option: "configure-wallpaper"
     weight: 90
-
-  - !writeStatus: {status: "Removing logs"}
-  - !run:
-    exeDir: true
-    exe: "PowerShell"
-    args: '-NoP -ExecutionPolicy Bypass -File CLEANER.ps1'
-    weight: 150
 
   - !writeStatus: {status: "Configuring features"}
   - !run:
