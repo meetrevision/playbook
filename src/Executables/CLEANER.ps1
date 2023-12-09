@@ -1,3 +1,4 @@
+$ErrorActionPreference = 'SilentlyContinue'
 
 Write-Host "Using Disk Cleanup with custom configuration"
 $volumeCache = @{
@@ -31,7 +32,7 @@ $registryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Volume
 foreach ($item in $volumeCache.GetEnumerator()) {
     $keyPath = Join-Path $registryPath $item.Key
     if (Test-Path $keyPath) {
-        Write-Host "Cleaning up $item.Key"
+        
         New-ItemProperty -Path $keyPath -Name StateFlags1337 -Value $item.Value -PropertyType DWord | Out-Null
     }
 }
@@ -39,7 +40,7 @@ foreach ($item in $volumeCache.GetEnumerator()) {
 Start-Process -FilePath "$env:SystemRoot\system32\cleanmgr.exe" -ArgumentList "/sagerun:1337" -Wait:$false
 
 Write-Host "Cleaning up Event Logs"
-Get-EventLog -LogName * | ForEach { Clear-EventLog $_.Log }
+Get-EventLog -LogName * | ForEach-Object { Clear-EventLog $_.Log }
 
 Write-Host "Disabling Reserved Storage"
 Set-WindowsReservedStorageState -State Disabled
@@ -66,7 +67,7 @@ $foldersToRemove = @(
 foreach ($folderName in $foldersToRemove) {
     $folderPath = Join-Path $env:SystemRoot $folderName
     if (Test-Path $folderPath) {
-        Remove-Item -Path "$folderPath\*" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null
+        Remove-Item -Path "$folderPath\*" -Force -Recurse | Out-Null
     }
 }
 
@@ -75,7 +76,7 @@ foreach ($folderName in $foldersToRemove) {
 Get-ChildItem -Path "$env:SystemRoot" -Filter *.log -File -Recurse -Force | Remove-Item -Recurse -Force | Out-Null
 
 Write-Host "Cleaning up %TEMP%"
-Get-ChildItem -Path "$env:TEMP" -Exclude "AME" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+Get-ChildItem -Path "$env:TEMP" -Exclude "AME" | Remove-Item -Recurse -Force
 
 # Just in case
 Start-ScheduledTask -TaskPath "\Microsoft\Windows\DiskCleanup\" -TaskName "SilentCleanup"
