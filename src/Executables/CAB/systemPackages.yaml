@@ -201,6 +201,7 @@ updates:
 
   - target_component: Microsoft-Windows-PhotoScreensaver.Resources
     target_arch: x86
+    version: 38655.38527.65535.65535
 
   - target_component: Microsoft-Windows-Ribbons
     target_arch: amd64
