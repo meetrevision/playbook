@@ -12,6 +12,7 @@ actions:
   - !writeStatus: {status: 'Disabling Windows Defender'}
   - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.bat", wait: true, weight: 100}
 
+  - !writeStatus: {status: 'Installing Chocolatey'}
   - !powerShell:
     command: 'Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(''https://community.chocolatey.org/install.ps1''))'
     weight: 50
