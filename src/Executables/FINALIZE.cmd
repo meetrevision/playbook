@@ -91,7 +91,7 @@ echo Disabling Superfetch for SSD...
 for /f %%i in ('PowerShell -NonInteractive -NoLogo -NoP -C "(Get-PhysicalDisk -SerialNumber (Get-Disk -Number (Get-Partition -DriveLetter $env:SystemDrive.Substring(0, 1)).DiskNumber).SerialNumber.TrimStart()).MediaType"') do set "hardDrive=%%i"
 
 if "%hardDrive%"=="SSD" (
-  @start /b "" "%programfiles(x86)%\Revision Tool\data\flutter_assets\additionals\MinSudo.exe" --NoLogo --TrustedInstaller "%programfiles(x86)%\Revision Tool\data\flutter_assets\additionals\DisableSF.bat"
+  @start /b "" "%programfiles(x86)%\Revision Tool\data\flutter_assets\additionals\DisableSF.bat"
 )
 
 echo Configuring animations
