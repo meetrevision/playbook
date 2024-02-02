@@ -71,11 +71,17 @@ for %%i in (
 	"WebExperienceHostApp.exe"
 	"WebExperienceHost.dll"
 	"SystemSettingsExtensions.dll"
-	"WsxPackManager.dll"
 ) do (
 	if exist "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i.bak" del /q /f "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i.bak"
 
 	if exist "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i" (
 		ren "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i" "%%i.bak"
 	)
+)
+
+@REM revert #61
+for %%i in (
+	"!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\WsxPackManager.dll"
+) do (
+	if not exist "%%i" if exist "%%i.bak" ren "%%i.bak" "WsxPackManager.dll"
 )
