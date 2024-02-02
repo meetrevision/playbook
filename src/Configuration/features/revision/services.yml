@@ -12,7 +12,7 @@ actions:
     # === Desktop Activity Moderator Driver - Disabled
   - !service: {name: 'dam', operation: change, startup: 4}
     # === Background Activity Moderator Driver - Disabled
-  - !service: {name: 'bam', operation: change, startup: 4}
+  # - !service: {name: 'bam', operation: change, startup: 4}
     # === GPU Energy Driver - Disabled
   - !service: {name: 'GpuEnergyDrv', operation: change, startup: 4}
     # === NetBT - Disabled

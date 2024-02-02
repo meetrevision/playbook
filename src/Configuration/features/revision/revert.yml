@@ -33,3 +33,6 @@ actions:
 
   # Breaks XboxGipSvc - https://github.com/meetrevision/playbook/issues/34
   - !registryValue: { path: 'HKLM\SYSTEM\ControlSet001\Control', value: 'SvcHostSplitThresholdInKB', type: REG_DWORD, data: '3670016' }
+
+  # Breaks Efficiency Mode in Task Manager
+  - !service: {name: 'bam', operation: change, startup: 1}
