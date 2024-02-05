@@ -60,6 +60,7 @@ wevtutil sl Microsoft-Windows-UserModePowerService/Diagnostic /q:false >NUL 2>nu
 echo Configuring boot settings
 bcdedit /deletevalue useplatformclock >NUL 2>nul
 ::bcdedit /set useplatformtick yes >NUL 2>nul
+bcdedit /set integrityservices no >NUL 2>nul
 bcdedit /set disabledynamictick yes >NUL 2>nul
 bcdedit /set bootmenupolicy Legacy >NUL 2>nul
 bcdedit /set lastknowngood yes >NUL 2>nul
