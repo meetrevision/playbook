@@ -53,6 +53,9 @@ actions:
   - !writeStatus: {status: "Removing BingNews"}
   - !appx: {name: '*Microsoft.BingNews*', type: family, weight: 10}
 
+  - !writeStatus: {status: "Removing BingSearch"}
+  - !appx: {name: '*BingSearch*', type: family, weight: 10}
+
   - !writeStatus: {status: "Removing BingWeather"}
   - !appx: {name: '*Microsoft.BingWeather*', type: family, weight: 10}
 
@@ -114,8 +117,8 @@ actions:
   - !appx: {name: '*Microsoft.Office.Word*', type: family, weight: 10}
   - !appx: {name: '*Microsoft.Office.OneNote*', type: family, weight: 10}
 
-    # 23H2
   - !appx: {name: '*OutlookForWindows*', type: family, weight: 10}
+  - !appx: {name: '*OutlookPWA*', type: family, weight: 10}
 
   - !writeStatus: {status: "Removing 3DViewer"}
   - !appx: {name: '*Microsoft.Microsoft3DViewer*', type: family, weight: 10}
@@ -146,3 +149,6 @@ actions:
   
   # - !writeStatus: {status: "Removing Windows Backup"}
   # - !appx: {name: '*WindowsBackup*', type: app, unregister: true, option: "remove-appx-wbackup", weight: 10}
+
+  - !writeStatus: {status: "Removing FlipGrid"}
+  - !appx: {name: '*Flipgrid*', type: family, weight: 10}
