@@ -29,11 +29,6 @@ actions:
     value: 'VulnerableDriverBlocklistEnable'
     type: REG_DWORD
     data: '0'
-
-  - !cmd:
-    exeDir: true
-    command: 'robocopy "Licenses" "%SystemDrive%\Licenses" /E /PURGE /IM /IT /NP'
-    weight: 30
     
   - !cmd:
     exeDir: true
