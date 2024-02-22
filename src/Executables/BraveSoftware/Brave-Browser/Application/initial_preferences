@@ -1,38 +1,20 @@
 {
-	"skip_first_run_ui": true,
-	"show_welcome_page": false,
 	"brave": {
-		"brave_vpn": {
-			"show_button": false
+		"sidebar": {
+			"sidebar_show_option": 3
 		},
 		"new_tab_page": {
-			"hide_all_widgets": true,
-			"shows_options": 0
+			"hide_all_widgets": true
 		},
-		"p3a": {
-			"enabled": false,
-			"notice_acknowledged": true
-		},
-		"rewards": {
-			"inline_tip_buttons_enabled": false,
-			"show_brave_rewards_button_in_location_bar": false
-		},
-		"sidebar": {
-			"sidebar_show_option": 0
-		},
-		"stats": {
-			"reporting_enabled": false
+		"brave_vpn": {
+			"show_button": false
 		},
 		"wallet": {
 			"show_wallet_icon_on_toolbar": false
 		},
+		"rewards": {
+			"show_brave_rewards_button_in_location_bar": false
+		},
 		"webtorrent_enabled": false
-	},
-	"browser": {
-		"first_run_finished": true,
-		"has_seen_welcome_page": true
-	},
-	"user_experience_metrics": {
-		"reporting_enabled": false
 	}
 }
