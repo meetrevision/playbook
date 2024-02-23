@@ -1,7 +1,7 @@
 @echo off
-set version=23.12
-for /f "tokens=2 delims==" %%i in ('wmic os get BuildNumber /value ^| find "="') do set "build=%%i"
-if %build% gtr 19045 ( set "w11=true" )
+@REM set version=23.12
+@REM for /f "tokens=2 delims==" %%i in ('wmic os get BuildNumber /value ^| find "="') do set "build=%%i"
+@REM if %build% gtr 19045 ( set "w11=true" )
 
 
 :: Update Health Tools
@@ -19,15 +19,15 @@ rmdir /s /q "%ProgramW6432%\\PCHealthCheck" >NUL 2>nul
 "%ProgramFiles(x86)%\WindowsInstallationAssistant\Windows10UpgraderApp.exe" /SunValley /ForceUninstall >NUL 2>nul
 rmdir /s /q "%ProgramFiles(x86)%\WindowsInstallationAssistant" >NUL 2>nul
 
-if not defined w11 (
-	bcdedit /set description "ReviOS 10 %version%" >NUL 2>nul
-  reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model"  /t REG_SZ /d "ReviOS 10 %version%" /f >NUL 2>nul
-  reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganization" /t REG_SZ /d "ReviOS 10 %version%" /f >NUL 2>nul
-) else (
-	bcdedit /set description "ReviOS 11 %version%" >NUL 2>nul
-  reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model"  /t REG_SZ /d "ReviOS 11 %version%" /f >NUL 2>nul
-  reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganization" /t REG_SZ /d "ReviOS 11 %version%" /f >NUL 2>nul
-)
+@REM if not defined w11 (
+@REM 	bcdedit /set description "ReviOS 10 %version%" >NUL 2>nul
+@REM   reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model"  /t REG_SZ /d "ReviOS 10 %version%" /f >NUL 2>nul
+@REM   reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganization" /t REG_SZ /d "ReviOS 10 %version%" /f >NUL 2>nul
+@REM ) else (
+@REM 	bcdedit /set description "ReviOS 11 %version%" >NUL 2>nul
+@REM   reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model"  /t REG_SZ /d "ReviOS 11 %version%" /f >NUL 2>nul
+@REM   reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganization" /t REG_SZ /d "ReviOS 11 %version%" /f >NUL 2>nul
+@REM )
 
 @REM PowerShell -NonInteractive -NoLogo -NoP -C "Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod" >NUL 2>nul
 

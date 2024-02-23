@@ -37,12 +37,6 @@ actions:
     option: "configure-lpv"
     weight: 150
 
-  - !run:
-    exeDir: true
-    exe: "WALLPAPER.cmd"
-    option: "configure-wallpaper"
-    weight: 90
-
   - !writeStatus: {status: "Configuring features"}
   - !run:
     exeDir: true

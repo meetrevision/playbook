@@ -29,11 +29,6 @@ actions:
     value: 'VulnerableDriverBlocklistEnable'
     type: REG_DWORD
     data: '0'
-
-  - !cmd:
-    exeDir: true
-    command: 'robocopy "Licenses" "%SystemDrive%\Licenses" /E /PURGE /IM /IT /NP'
-    weight: 30
     
   - !cmd:
     exeDir: true
@@ -48,5 +43,5 @@ actions:
   - !run:
     exeDir: true
     exe: "PowerShell"
-    args: '-NoP -ExecutionPolicy Bypass -File ngen.ps1'
+    args: '-NoP -ExecutionPolicy Bypass -File NGEN.ps1'
     weight: 100
