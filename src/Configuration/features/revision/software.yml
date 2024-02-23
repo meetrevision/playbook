@@ -12,10 +12,18 @@ actions:
   - !writeStatus: {status: 'Disabling Windows Defender'}
   - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.bat", wait: true, weight: 100}
 
-  - !writeStatus: {status: 'Installing Chocolatey'}
+    # https://github.com/meetrevision/playbook/issues/81
+  - !writeStatus: {status: 'Updating Store & Winget'}
   - !powerShell:
-    command: 'Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(''https://community.chocolatey.org/install.ps1''))'
     weight: 50
+    runas: currentUserElevated
+    command: |
+      $path = ${env:ProgramFiles(x86)} + '\Revision Tool'
+      if (Test-Path $path) {
+        $file = $path + '\revitool.exe'
+        Start-Process -FilePath $file -ArgumentList 'msstore-apps --id 9WZDNCRFJBMP --id 9NBLGGH4NNS1 --ring RP' -Wait -WindowStyle Hidden
+        Add-AppPackage 'https://cdn.winget.microsoft.com/cache/source.msix' -ForceApplicationShutdown
+      }
 
   # - !writeStatus: {status: "Installing .NET Framework 3.5", option: "dotnet35"}
   # - !cmd:
@@ -39,8 +47,9 @@ actions:
   # Firefox
   - !writeStatus: {status: 'Installing Firefox', option: "browser-firefox"}
   - !cmd:
-    command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums firefox'
+    command: 'winget install Mozilla.Firefox --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
+    runas: currentUserElevated
     option: "browser-firefox"
   - !writeStatus: {status: 'Configuring Firefox', option: "browser-firefox"}
   - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
