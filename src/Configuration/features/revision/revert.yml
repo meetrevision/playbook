@@ -1,6 +1,6 @@
 ---
 title: Revert configurations
-description: Revert configurations that were from previous versions
+description: For those who are coming from previous versions
 privilege: TrustedInstaller
 actions:
 
@@ -36,3 +36,6 @@ actions:
 
   # Breaks Efficiency Mode in Task Manager
   - !service: {name: 'bam', operation: change, startup: 1}
+
+  #  The Start Recording button on GameBar is gray outed - #74
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', operation: delete}
