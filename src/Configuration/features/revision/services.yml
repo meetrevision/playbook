@@ -6,9 +6,9 @@ actions:
   
   - !writeStatus: {status: "Configuring services"}
     # === Beep - Disabled
-  - !service: {name: 'Beep', operation: change, startup: 4}
+  # - !service: {name: 'Beep', operation: change, startup: 4}
     # === GraphicsPerfSvc - Disabled
-  - !service: {name: 'GraphicsPerfSvc', operation: change, startup: 4}
+  # - !service: {name: 'GraphicsPerfSvc', operation: change, startup: 4}
     # === Desktop Activity Moderator Driver - Disabled
   - !service: {name: 'dam', operation: change, startup: 4}
     # === Background Activity Moderator Driver - Disabled
@@ -21,7 +21,7 @@ actions:
   - !service: {name: 'Telemetry', operation: change, startup: 4}
 
     # === Windows Network Data Usage Monitoring Driver - Disabled
-  - !service: {name: 'Ndu', operation: change, startup: 4}
+  # - !service: {name: 'Ndu', operation: change, startup: 4}
     # === Microsoft (R) Diagnostics Hub Standard Collector Service - Disabled
   - !service: {name: 'diagnosticshub.standardcollector.service', operation: change, startup: 4}
     # === Windows Error Reporting Service - Disabled

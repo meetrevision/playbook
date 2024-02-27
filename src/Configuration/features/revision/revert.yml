@@ -40,3 +40,9 @@ actions:
 
   #  The Start Recording button on GameBar is gray outed - #74
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', operation: delete}
+
+
+  # Revert services
+  - !service: {name: 'Beep', operation: change, startup: 1} 
+  - !service: {name: 'GraphicsPerfSvc', operation: change, startup: 3}
+  - !service: {name: 'Ndu', operation: change, startup: 2}
