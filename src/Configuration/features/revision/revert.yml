@@ -1,7 +1,8 @@
 ---
-title: Revert configurations
-description: For those who are coming from previous versions
+title: Rollback Tweaks
+description: Rollback tweaks for those who are applying from previous versions of the playbook
 privilege: TrustedInstaller
+option: apply-revert
 actions:
 
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', type: REG_DWORD, data: '1' }
