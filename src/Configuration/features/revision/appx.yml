@@ -152,3 +152,10 @@ actions:
 
   - !writeStatus: {status: "Removing FlipGrid"}
   - !appx: {name: '*Flipgrid*', type: family, weight: 10}
+
+  - !writeStatus: {status: "Removing Xbox Apps", option: "remove-appx-xbox"}
+  - !appx: {name: '*Microsoft.Xbox*', type: family, weight: 10, option: "remove-appx-xbox"}
+  - !appx: {name: '*Microsoft.GamingApp*', type: family, option: "remove-appx-xbox"}
+  
+  - !writeStatus: {status: "Removing Your Phone", option: "remove-appx-yourphone"}
+  - !appx: {name: '*Microsoft.YourPhone*', type: family, weight: 10, option: "remove-appx-yourphone"}

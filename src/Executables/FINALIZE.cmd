@@ -1,5 +1,5 @@
 @echo off
-set version=23.12
+set version=1.0
 for /f "tokens=2 delims==" %%i in ('wmic os get BuildNumber /value ^| find "="') do set "build=%%i"
 if %build% gtr 19045 ( set "w11=true" )
 
