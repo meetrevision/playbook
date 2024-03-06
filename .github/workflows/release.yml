@@ -51,6 +51,23 @@ jobs:
           $hash = (Get-FileHash -Algorithm SHA256 -Path ${{ env.FILENAME }}).Hash
           echo ("HASH=" + $hash) >> $env:GITHUB_ENV
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+  
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+  
+      - name: Run script and set outputs
+        run: |
+          python get_versions.py
+          echo "CANARY=$(python get_versions.py | awk 'NR==1{print $1}')" >> $GITHUB_ENV
+          echo "DEV=$(python get_versions.py | awk 'NR==2{print $1}')" >> $GITHUB_ENV
+          echo "BETA=$(python get_versions.py | awk 'NR==3{print $1}')" >> $GITHUB_ENV
+
       - name: Release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -60,9 +77,18 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           body: |
+            # ReviOS nightly build with insider support
+
+            ## Supported versions:
+
+            - Canary: ${{ env.CANARY }}
+            - Dev: ${{ env.DEV }}
+            - Beta: ${{ env.BETA }}
+
+            ## Note:
             Again, this is even more unsupported than the official ReviOS releases.
 
-            Use at your own risk and enjoy!
+            Use at your own risk and enjoy👍
             
             SHA256: `${{ env.HASH }}`
             
