@@ -1,13 +1,18 @@
 # ReviOS Playbook (insider build support edition)
-[![Releases](https://img.shields.io/github/v/release/meetrevision/playbook.svg)](https://github.com/meetrevision/playbook/releases)
+
+[![Releases](https://img.shields.io/github/v/release/Pyenb/Revision_playbook_insider_buildsk.svg)](https://github.com/Pyenb/Revision_playbook_insider_builds/releases)
 [![License](https://img.shields.io/static/v1?label=LICENSE&message=CC%20BY-NC-SA&logo=creativecommons)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-<a href="https://www.buymeacoffee.com/meetrevision" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" height="20px"></a>
-<br>
 
 This is a fork of the original [ReviOS Playbook](https://github.com/meetrevision/playbook), with support for the latest Windows Insider builds.
 
+###### Why? I tried to install ReviOS on a Windows 11 Insider build, and it didn't work. So I made this fork to add support for the latest Insider builds
+
 > [!CAUTION]
 > ReviOS does not officially support Windows Insider builds. **Use at your own risk.**
+
+## Where to get the forked version
+
+Just head over to the [Releases](github.com/Pyenb/Revision_playbook_insider_builds/releases/latest) page, download the playbook and follow the original instructions.
 
 ## (New) System Requirements
 
@@ -23,12 +28,12 @@ This is a fork of the original [ReviOS Playbook](https://github.com/meetrevision
 
 ## Documentation
 
-See our documentation for more information:
+See the documentation for more information:
 
 - [Playbook](https://www.revi.cc/docs/playbook/general)
 - [Installing Windows](https://www.revi.cc/docs/playbook/installstock)
 - [Installing & Updating ReviOS](https://www.revi.cc/docs/playbook/install)
-- [Frequently Asked Questions](https://www.revi.cc/docs/faq)
+- [FAQ](https://www.revi.cc/docs/faq)
 
 ## License
 
