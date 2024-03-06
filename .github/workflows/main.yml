@@ -1,9 +1,7 @@
 name: Archive and Release
 
 on:
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:
 
 env:
     SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
