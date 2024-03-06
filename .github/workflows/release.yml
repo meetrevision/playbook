@@ -22,7 +22,7 @@ jobs:
 
       - name: Update version
         run: |
-          $version = "nightly"
+          $version = "${{ github.ref_name }}"
           $playbookConfPath = "src\playbook.conf"
           $finalizeCMDPath = "src\Executables\FINALIZE.cmd"
 
