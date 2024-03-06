@@ -5,7 +5,7 @@ on:
 
 env:
     SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
-    FILENAME: 'Revi-PB-ReviOS_Nightly.apbx'
+    FILENAME: 'Revi-PB-${{ github.ref }}.apbx'
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
 
       - name: Update version
         run: |
-          $version = "ReviOS_Nightly"
+          $version = "${{ github.ref }}"
           $playbookConfPath = "src\playbook.conf"
           $finalizeCMDPath = "src\Executables\FINALIZE.cmd"
 
@@ -97,9 +97,9 @@ jobs:
 
             ## Supported versions:
 
-            - Canary: ${{ env.CANARY }}
-            - Dev: ${{ env.DEV }}
-            - Beta: ${{ env.BETA }}
+            - Canary: `${{ env.CANARY }}`
+            - Dev: `${{ env.DEV }}`
+            - Beta: `${{ env.BETA }}`
 
             ## Note:
               
