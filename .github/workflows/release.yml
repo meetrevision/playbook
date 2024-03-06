@@ -41,7 +41,15 @@ jobs:
           Copy-Item -Path *.cab -Destination "..\src\Executables\CAB" -Force | Out-Null
           .\clean.bat
         working-directory: sxsc-src
-      
+
+  archive:
+    needs: build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Archive content
         run: |
           7z a -pmalte -mhe=on ${{ env.FILENAME }} ./src/*
@@ -51,10 +59,18 @@ jobs:
           $hash = (Get-FileHash -Algorithm SHA256 -Path ${{ env.FILENAME }}).Hash
           echo ("HASH=" + $hash) >> $env:GITHUB_ENV
 
+  release:
+    needs: archive
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.8
+          python-version: 3.10
   
       - name: Install dependencies
         run: |
@@ -74,16 +90,16 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.FILENAME }}
           asset_name: ${{ env.FILENAME }}
-          tag: ${{ github.ref }}
+          tag: ${{ github.sha }}
           overwrite: true
           body: |
             # ReviOS nightly build with insider support
 
             ## Supported versions:
 
-            - Canary: ${{ env.CANARY }}
-            - Dev: ${{ env.DEV }}
-            - Beta: ${{ env.BETA }}
+            - Canary: $CANARY
+            - Dev: $DEV
+            - Beta: $BETA
 
             ## Note:
               
@@ -92,4 +108,3 @@ jobs:
             Use at your own risk and enjoy👍
             
             SHA256: `${{ env.HASH }}`
-            
