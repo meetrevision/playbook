@@ -15,7 +15,7 @@ This is a fork of the original [ReviOS Playbook](https://github.com/meetrevision
 
 ## Where to get the forked version
 
-Just head over to the [Releases](github.com/Pyenb/ReviOS_playbook_nightly_insider/releases/latest) page, download the playbook and follow the original instructions.
+Just head over to the [Releases](https://github.com/Pyenb/ReviOS_playbook_nightly_insider/releases/latest) page, download the playbook and follow the original instructions.
 
 ## (New) System Requirements
 
