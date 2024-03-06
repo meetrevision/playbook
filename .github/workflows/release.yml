@@ -5,7 +5,7 @@ on:
 
 env:
     SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
-    FILENAME: 'Revi-PB-${{ github.ref }}.apbx'
+    FILENAME: 'Revi-PB-${{ github.ref_name }}.apbx'
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
 
       - name: Update version
         run: |
-          $version = "${{ github.ref }}"
+          $version = "${{ github.ref_name }}"
           $playbookConfPath = "src\playbook.conf"
           $finalizeCMDPath = "src\Executables\FINALIZE.cmd"
 
