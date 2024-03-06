@@ -2,6 +2,11 @@ name: Archive and release
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'
 
 env:
   SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
