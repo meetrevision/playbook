@@ -1,4 +1,4 @@
-name: Archive and Release
+name: Archive and release
 
 on:
   workflow_dispatch:
@@ -63,17 +63,18 @@ jobs:
   
       - name: Run script and set outputs
         run: |
-          python get_versions.py
-          echo "CANARY=$(python get_versions.py | awk 'NR==1{print $1}')" >> $env:GITHUB_ENV
-          echo "DEV=$(python get_versions.py | awk 'NR==2{print $1}')" >> $env:GITHUB_ENV
-          echo "BETA=$(python get_versions.py | awk 'NR==3{print $1}')" >> $env:GITHUB_ENV
-
-      - name: Output pwd and files
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Files in current directory:"
-          ls
+          $ErrorActionPreference = "Stop"
+          try {
+            python get_versions.py
+            echo "CANARY=$(python get_versions.py | awk 'NR==1{print $1}')" >> $env:GITHUB_ENV
+            echo "DEV=$(python get_versions.py | awk 'NR==2{print $1}')" >> $env:GITHUB_ENV
+            echo "BETA=$(python get_versions.py | awk 'NR==3{print $1}')" >> $env:GITHUB_ENV
+          } catch {
+            echo "Script execution failed, setting defaults"
+            echo "CANARY=26063" >> $env:GITHUB_ENV
+            echo "DEV=26058" >> $env:GITHUB_ENV
+            echo "BETA=22635" >> $env:GITHUB_ENV
+          }
 
       - name: Release
         uses: svenstaro/upload-release-action@v2
@@ -82,9 +83,12 @@ jobs:
           file: ${{ env.FILENAME }}
           asset_name: ${{ env.FILENAME }}
           tag: ${{ github.ref }}
+          release_name: Nightly build
           overwrite: true
           body: |
             # ReviOS nightly build with insider support
+
+            This is an auto generated nightly build of ReviOS with support for the newest windows 11 insider builds.
 
             ## Supported versions:
 
