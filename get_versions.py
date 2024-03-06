@@ -7,4 +7,5 @@ def get_versions():
     beta = requests.get("https://aka.ms/BetaLatest", headers=headers).url.split("preview-build-")[1].split("-")[0]
     return canary, dev, beta
 
-print(get_versions())
+for version in get_versions():
+    print(version)

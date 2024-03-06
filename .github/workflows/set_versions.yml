@@ -24,9 +24,9 @@ jobs:
     - name: Run script and set outputs
       run: |
         python get_versions.py
-        echo "CANARY=$(python get_versions.py | awk '{print $1}')" >> $GITHUB_ENV
-        echo "DEV=$(python get_versions.py | awk '{print $2}')" >> $GITHUB_ENV
-        echo "BETA=$(python get_versions.py | awk '{print $3}')" >> $GITHUB_ENV
+        echo "CANARY=$(python get_versions.py | awk 'NR==1{print $1}')" >> $GITHUB_ENV
+        echo "DEV=$(python get_versions.py | awk 'NR==2{print $1}')" >> $GITHUB_ENV
+        echo "BETA=$(python get_versions.py | awk 'NR==3{print $1}')" >> $GITHUB_ENV
 
     - name: Use versions
       run: |
