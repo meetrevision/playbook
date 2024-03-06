@@ -1,4 +1,4 @@
-# ReviOS Playbook (insider build support edition)
+# ReviOS Playbook (Nightly Windows insider builds edition)
 
 ![Workflow](https://github.com/Pyenb/ReviOS_playbook_nightly_insider/actions/workflows/release.yml/badge.svg)
 ![Downloads](https://img.shields.io/github/downloads/Pyenb/ReviOS_playbook_nightly_insider/total.svg)
