@@ -81,6 +81,19 @@ jobs:
             echo "BETA=22635" >> $env:GITHUB_ENV
           }
 
+      - name: Update README Badges
+        run: |
+          sed -i "s|Canary%20Channel-[0-9]*-blue|Canary%20Channel-${{ env.CANARY }}-blue|g" README.md
+          sed -i "s|Dev%20Channel-[0-9]*-green|Dev%20Channel-${{ env.DEV }}-green|g" README.md
+          sed -i "s|Beta%20Channel-[0-9]*-orange|Beta%20Channel-${{ env.BETA }}-orange|g" README.md
+      
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update README badges"
+          git push
+        shell: bash
+
       - name: Release
         uses: svenstaro/upload-release-action@v2
         with:
