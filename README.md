@@ -21,9 +21,9 @@ Just head over to the [Releases](github.com/Pyenb/ReviOS_playbook_nightly_inside
 
 These are all Windows 11, 23H2.
 
-![CANARY](https://img.shields.io/badge/Canary%20Channel-26163-blue)
-![DEV](https://img.shields.io/badge/Dev%20Channel-26158-green)
-![BETA](https://img.shields.io/badge/Beta%20Channel-22135-orange)
+![CANARY](https://img.shields.io/badge/Canary%20Channel-26063-blue)
+![DEV](https://img.shields.io/badge/Dev%20Channel-26058-green)
+![BETA](https://img.shields.io/badge/Beta%20Channel-22635-orange)
 
 ## Latest Windows Insider Builds
 
