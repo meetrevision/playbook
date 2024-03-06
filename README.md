@@ -1,18 +1,21 @@
 # ReviOS Playbook (insider build support edition)
 
-[![Releases](https://img.shields.io/github/v/release/Pyenb/Revision_playbook_insider_buildsk.svg)](https://github.com/Pyenb/Revision_playbook_insider_builds/releases)
+[![Releases](https://img.shields.io/github/v/release/Pyenb/ReviOS_playbook_nightly_insider.svg)](https://github.com/Pyenb/ReviOS_playbook_nightly_insider/releases)
 [![License](https://img.shields.io/static/v1?label=LICENSE&message=CC%20BY-NC-SA&logo=creativecommons)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-This is a fork of the original [ReviOS Playbook](https://github.com/meetrevision/playbook), with support for the latest Windows Insider builds.
+This is a fork of the original [ReviOS Playbook](https://github.com/meetrevision/playbook), with support for the latest Windows Insider builds and nightly builds.
 
 ###### Why? I tried to install ReviOS on a Windows 11 Insider build, and it didn't work. So I made this fork to add support for the latest Insider builds
 
 > [!CAUTION]
+> The nightly builds are not tested and may not work. **Use at your own risk.**
+
+> [!WARNING]
 > ReviOS does not officially support Windows Insider builds. **Use at your own risk.**
 
 ## Where to get the forked version
 
-Just head over to the [Releases](github.com/Pyenb/Revision_playbook_insider_builds/releases/latest) page, download the playbook and follow the original instructions.
+Just head over to the [Releases](github.com/Pyenb/ReviOS_playbook_nightly_insider/releases/latest) page, download the playbook and follow the original instructions.
 
 ## (New) System Requirements
 
