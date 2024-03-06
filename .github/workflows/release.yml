@@ -27,13 +27,11 @@ jobs:
           $finalizeCMDPath = "src\Executables\FINALIZE.cmd"
 
           (Get-Content -Path $playbookConfPath) -replace '<Version>.*</Version>', "<Version>$version</Version>" | Set-Content -Path $playbookConfPath
-
           (Get-Content -Path $finalizeCMDPath) -replace 'set version=.+', "set version=$version" | Set-Content -Path $finalizeCMDPath
         shell: pwsh
 
       - name: Git clone sxsc
-        run: |
-          git clone --depth=1 ${{ env.SXSC_REPO }} sxsc-src
+        run: git clone --depth=1 ${{ env.SXSC_REPO }} sxsc-src
 
       - name: Build cab
         run: |
@@ -48,8 +46,7 @@ jobs:
         working-directory: sxsc-src
 
       - name: Archive content
-        run: |
-          7z a -pmalte -mhe=on ${{ env.FILENAME }} ./src/*
+        run: 7z a -pmalte -mhe=on ${{ env.FILENAME }} ./src/*
 
       - name: Generate SHA256
         run: |
@@ -81,19 +78,27 @@ jobs:
             echo "BETA=22635" >> $env:GITHUB_ENV
           }
 
-      - name: Update README Badges
+      - name: Replace string in README
+        if: success()
         run: |
           sed -i "s|Canary%20Channel-[0-9]*-blue|Canary%20Channel-${{ env.CANARY }}-blue|g" README.md
           sed -i "s|Dev%20Channel-[0-9]*-green|Dev%20Channel-${{ env.DEV }}-green|g" README.md
           sed -i "s|Beta%20Channel-[0-9]*-orange|Beta%20Channel-${{ env.BETA }}-orange|g" README.md
-          
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+
+      - name: Commit changes
+        if: success()
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add README.md
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update README badges" && git push)
-        shell: bash
+          git commit -am "Update README badges"
+
+      - name: Push changes
+        if: success()
+        run: git push
 
       - name: Release
+        if: success()
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
