@@ -42,11 +42,7 @@ jobs:
           .\clean.bat
         working-directory: sxsc-src
 
-  archive:
-    needs: build
-    runs-on: windows-latest
 
-    steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -58,13 +54,7 @@ jobs:
         run: |
           $hash = (Get-FileHash -Algorithm SHA256 -Path ${{ env.FILENAME }}).Hash
           echo ("HASH=" + $hash) >> $env:GITHUB_ENV
-          echo ${{ env.HASH }}
 
-  release:
-    needs: archive
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
