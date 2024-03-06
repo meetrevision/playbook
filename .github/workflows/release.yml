@@ -58,6 +58,7 @@ jobs:
         run: |
           $hash = (Get-FileHash -Algorithm SHA256 -Path ${{ env.FILENAME }}).Hash
           echo ("HASH=" + $hash) >> $env:GITHUB_ENV
+          echo ${{ env.HASH }}
 
   release:
     needs: archive
