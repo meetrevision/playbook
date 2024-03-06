@@ -10,7 +10,7 @@ on:
 
 env:
   SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
-  FILENAME: 'Revi-PB-${{ github.ref_name }}.apbx'
+  FILENAME: 'Revi-PB-nightly.apbx'
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
 
       - name: Update version
         run: |
-          $version = "${{ github.ref_name }}"
+          $version = "nightly"
           $playbookConfPath = "src\playbook.conf"
           $finalizeCMDPath = "src\Executables\FINALIZE.cmd"
 
@@ -86,12 +86,11 @@ jobs:
           sed -i "s|Canary%20Channel-[0-9]*-blue|Canary%20Channel-${{ env.CANARY }}-blue|g" README.md
           sed -i "s|Dev%20Channel-[0-9]*-green|Dev%20Channel-${{ env.DEV }}-green|g" README.md
           sed -i "s|Beta%20Channel-[0-9]*-orange|Beta%20Channel-${{ env.BETA }}-orange|g" README.md
-      
+          
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add README.md
-          git commit -m "Update README badges"
-          git push
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update README badges" && git push)
         shell: bash
 
       - name: Release
