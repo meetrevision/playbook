@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 env:
-    SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
-    FILENAME: 'Revi-PB-${{ github.ref_name }}.apbx'
+  SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
+  FILENAME: 'Revi-PB-${{ github.ref_name }}.apbx'
 
 jobs:
   build:
@@ -42,10 +42,6 @@ jobs:
           .\clean.bat
         working-directory: sxsc-src
 
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Archive content
         run: |
           7z a -pmalte -mhe=on ${{ env.FILENAME }} ./src/*
@@ -54,9 +50,6 @@ jobs:
         run: |
           $hash = (Get-FileHash -Algorithm SHA256 -Path ${{ env.FILENAME }}).Hash
           echo ("HASH=" + $hash) >> $env:GITHUB_ENV
-
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -74,6 +67,13 @@ jobs:
           echo "CANARY=$(python get_versions.py | awk 'NR==1{print $1}')" >> $env:GITHUB_ENV
           echo "DEV=$(python get_versions.py | awk 'NR==2{print $1}')" >> $env:GITHUB_ENV
           echo "BETA=$(python get_versions.py | awk 'NR==3{print $1}')" >> $env:GITHUB_ENV
+
+      - name: Output pwd and files
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Files in current directory:"
+          ls
 
       - name: Release
         uses: svenstaro/upload-release-action@v2
