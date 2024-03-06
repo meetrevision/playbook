@@ -28,7 +28,6 @@ jobs:
           (Get-Content -Path $finalizeCMDPath) -replace 'set version=.+', "set version=$version" | Set-Content -Path $finalizeCMDPath
         shell: pwsh
 
-        # Credits to echnobas, Atlas and all the contributors.
       - name: Git clone sxsc
         run: |
           git clone --depth=1 ${{ env.SXSC_REPO }} sxsc-src
@@ -44,7 +43,6 @@ jobs:
           Copy-Item -Path *.cab -Destination "..\src\Executables\CAB" -Force | Out-Null
           .\clean.bat
         working-directory: sxsc-src
-        #
       
       - name: Archive content
         run: |
@@ -54,11 +52,6 @@ jobs:
         run: |
           $hash = (Get-FileHash -Algorithm SHA256 -Path ${{ env.FILENAME }}).Hash
           echo ("HASH=" + $hash) >> $env:GITHUB_ENV
-      
-      # - name: DevUploads
-      #   run: |
-      #     url=$(bash <(curl -s https://devuploads.com/upload.sh) -f "${{ env.FILENAME }}" -k "${{ secrets.DEVUPLOADS_API_KEY }}" | grep -o 'https://devuploads.com[^"]*')
-      #     echo "DEVUPLOADS=$url" >> $GITHUB_ENV
 
       - name: Release
         uses: svenstaro/upload-release-action@v2
@@ -69,11 +62,9 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           body: |
-            # Download Link ✨
+            Again, this is even more unsupported than the official ReviOS releases.
 
-            If you would like to support Revision, kindly download the Playbook from the provided link below.
-
-            📌Link: 
+            Use at your own risk and enjoy!
             
             SHA256: `${{ env.HASH }}`
             
