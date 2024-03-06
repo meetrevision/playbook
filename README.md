@@ -1,7 +1,7 @@
 # ReviOS Playbook (insider build support edition)
 
-[![Releases](https://img.shields.io/github/v/release/Pyenb/ReviOS_playbook_nightly_insider.svg)](https://github.com/Pyenb/ReviOS_playbook_nightly_insider/releases)
-[![License](https://img.shields.io/static/v1?label=LICENSE&message=CC%20BY-NC-SA&logo=creativecommons)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+![Workflow](https://github.com/Pyenb/ReviOS_playbook_nightly_insider/actions/workflows/release.yml/badge.svg)
+![Downloads](https://img.shields.io/github/downloads/Pyenb/ReviOS_playbook_nightly_insider/total.svg)
 
 This is a fork of the original [ReviOS Playbook](https://github.com/meetrevision/playbook), with support for the latest Windows Insider builds and nightly builds.
 
@@ -19,9 +19,11 @@ Just head over to the [Releases](github.com/Pyenb/ReviOS_playbook_nightly_inside
 
 ## (New) System Requirements
 
-- Canary Channel: W11 23H2 `26063`
-- Dev Channel: W11 23H2 `26058`
-- Beta Channel: W11 23H2 `22635`
+These are all Windows 11, 23H2.
+
+![CANARY](https://img.shields.io/badge/Canary%20Channel-26163-blue)
+![DEV](https://img.shields.io/badge/Dev%20Channel-26158-green)
+![BETA](https://img.shields.io/badge/Beta%20Channel-22135-orange)
 
 ## Latest Windows Insider Builds
 
@@ -39,5 +41,7 @@ See the documentation for more information:
 - [FAQ](https://www.revi.cc/docs/faq)
 
 ## License
+
+[![License](https://img.shields.io/static/v1?label=LICENSE&message=CC%20BY-NC-SA&logo=creativecommons)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ReviOS Playbook is licensed under [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).
