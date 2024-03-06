@@ -95,7 +95,7 @@ jobs:
 
       - name: Push changes
         if: success()
-        run: git push
+        run: git push -f
 
       - name: Release
         if: success()
