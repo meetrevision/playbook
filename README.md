@@ -5,8 +5,6 @@
 
 This is a fork of the original [ReviOS Playbook](https://github.com/meetrevision/playbook), with support for the latest Windows Insider builds and nightly builds.
 
-###### Why? I tried to install ReviOS on a Windows 11 Insider build, and it didn't work. So I made this fork to add support for the latest Insider builds
-
 > [!CAUTION]
 > The nightly builds are not tested and may not work. **Use at your own risk.**
 
@@ -39,6 +37,32 @@ See the documentation for more information:
 - [Installing Windows](https://www.revi.cc/docs/playbook/installstock)
 - [Installing & Updating ReviOS](https://www.revi.cc/docs/playbook/install)
 - [FAQ](https://www.revi.cc/docs/faq)
+
+## FAQ
+
+<details><summary>Why does this fork exist?</summary>
+
+I tried to use the original ReviOS Playbook with the latest Windows Insider builds, but it didn't work. So I decided to fork the original playbook and add support for the latest Windows Insider builds and nightly builds, because, why not?
+
+</details>
+
+<details><summary>What is Windows Insider?</summary>
+
+Windows Insider is an open software testing program by Microsoft that allows users globally to test pre-release versions of the Windows operating system. It is a way to get early access to new features and improvements, but it may also contain bugs and other issues.
+
+</details>
+
+<details><summary>What does nightly build mean?</summary>
+
+Nightly builds are bleeding-edge versions of the playbook. That means that **everything** that is commited to the main repository will be included in the nightly build. This includes untested and potentially broken features!
+
+</details>
+
+<details><summary>What is the difference between the original ReviOS Playbook and this fork?</summary>
+
+This fork is based on the original ReviOS Playbook, but with support for the latest Windows Insider builds and nightly builds.
+
+</details>
 
 ## License
 
