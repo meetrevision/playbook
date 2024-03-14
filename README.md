@@ -64,6 +64,12 @@ This fork is based on the original ReviOS Playbook, but with support for the lat
 
 </details>
 
+<details><summary>Are the older (non insider) versions still supported?</summary>
+
+Yes.
+
+</details>
+
 ## License
 
 [![License](https://img.shields.io/static/v1?label=LICENSE&message=CC%20BY-NC-SA&logo=creativecommons)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
