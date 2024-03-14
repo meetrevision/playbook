@@ -117,13 +117,13 @@ jobs:
 
             This is an auto generated nightly build of ReviOS with support for the newest windows 11 insider builds.
 
-            ## Supported versions:
+            ## Supported (insider) versions:
 
             - Canary: `${{ env.CANARY }}`
             - Dev: `${{ env.DEV }}`
             - Beta: `${{ env.BETA }}`
 
-            ### Older (not insider, but supported) versions:
+            ### Older (non insider) versions:
             
             - `19044`
             - `19045`
