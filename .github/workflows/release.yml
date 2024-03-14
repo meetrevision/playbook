@@ -78,6 +78,11 @@ jobs:
             echo "BETA=22635" >> $env:GITHUB_ENV
           }
 
+      - name: Replace versions in playbook.conf
+        if: success()
+        run: |
+          python set_plbk_version.py
+
       - name: Replace string in README
         if: success()
         run: |
@@ -91,7 +96,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git commit -am "Update README badges"
+          git commit -am "Update playbook, versions, readme"
 
       - name: Push changes
         if: success()
@@ -118,6 +123,13 @@ jobs:
             - Dev: `${{ env.DEV }}`
             - Beta: `${{ env.BETA }}`
 
+            ### Older (not insider, but supported) versions:
+            
+            - `19044`
+            - `19045`
+            - `22621`
+            - `22631`
+            
             ## Note:
               
             Again, this is even more unsupported than the official ReviOS releases.
