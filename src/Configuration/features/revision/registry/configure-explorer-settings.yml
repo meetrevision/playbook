@@ -146,6 +146,8 @@ actions:
   # === Force explorer to use high performance GPU
   - !registryValue: { path: 'HKCU\Software\Microsoft\DirectX\UserGpuPreferences', value: 'C:\Windows\explorer.exe', type: REG_SZ, data: 'GpuPreference=2;' }
 
+  # === Disable  "Include account-based insights, recent, favorite and recommended" for OneDrive in File Explorer
+  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer', value: 'DisableGraphRecentItems', type: REG_DWORD, data: '1' }
 
     # ========================
     # === Discarded Tweaks ===
