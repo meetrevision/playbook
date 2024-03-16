@@ -578,3 +578,51 @@ updates:
   - target_component: Microsoft-Windows-PortableWorkspaces-SysPrep
     target_arch: wow64
     version: 38655.38527.65535.65535
+
+
+  # Edge
+  - target_component: MicrosoftEdge-Autologger
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Edge-WebView
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-Angle
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-EdgeContent
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-EdgeManager
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeBCHost
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeCP
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeDevTools
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeEnlightenment
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeEnlightenment
+    target_arch: wow64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeSH
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeBrowser
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeDevToolsClient.AppxMain
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeDevToolsClient.AppxMain.Resources
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeDevToolsClient.AppxSetup
+    target_arch: amd64
+    version: 38655.38527.65535.65535
