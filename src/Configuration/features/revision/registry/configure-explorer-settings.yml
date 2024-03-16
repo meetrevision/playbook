@@ -136,6 +136,14 @@ actions:
     # === Notify antivirus programs when opening attachments - Disabled
     # ------> Default is 3
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments', value: 'ScanWithAntiVirus', type: REG_DWORD, data: '1'}
+
+
+  # === Disables Automatic Folder Type Discovery
+  # ------> Disabling it fixes the 'folder always loading' issue when a folder contains a lot of media files.  
+  # ------> https://www.windowslatest.com/2024/03/04/windows-11-can-open-big-folders-in-file-explorer-faster-if-you-turn-off-folder-discovery/
+  - !registryValue: {path: 'HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell', value: 'FolderType', type: REG_SZ, data: 'NotSpecified'} 
+
+
     # ========================
     # === Discarded Tweaks ===
     # ========================
