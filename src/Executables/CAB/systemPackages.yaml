@@ -421,7 +421,7 @@ updates:
     version: 38655.38527.65535.65535
   - target_component: Windows-System-Diagnostics-TraceReporting-PlatformDiagnosticActions
     target_arch: wow64
-
+    version: 38655.38527.65535.65535
 
   - target_component: Microsoft-Windows-UNP-Task
     target_arch: amd64
