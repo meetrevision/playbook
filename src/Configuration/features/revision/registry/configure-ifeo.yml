@@ -7,12 +7,21 @@ actions:
     # === CEIP
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CompatTelRunner.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\AggregatorHost.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
+
     # === Webcam Telemetry
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
+
     # === Microsoft PC Manager spread
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FeatureLoader.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
+
+  # === Bing pop-up ads
+  # -----> https://www.windowslatest.com/2024/03/15/microsoft-confirms-bing-pop-up-ads-in-chrome-on-windows-11-windows-10/
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BingChatInstaller.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BGAUpsell.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BCILauncher.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
+
+
     # === Change CPU priority to Below Normal
-    # ------> if no issues will be reported, then also change IO priority
     #  1 Idle
     #  2 Normal
     #  3 High
