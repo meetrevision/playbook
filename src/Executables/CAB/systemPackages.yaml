@@ -344,6 +344,9 @@ updates:
     target_arch: amd64
     version: 38655.38527.65535.65535
 
+  - target_component: Microsoft-Windows-DeviceCensus
+    target_arch: amd64
+    version: 38655.38527.65535.65535
   - target_component: Microsoft-Windows-DeviceCensus-Schedule-ClientServer
     target_arch: amd64
     version: 38655.38527.65535.65535
@@ -409,8 +412,14 @@ updates:
   - target_component: Windows-System-Diagnostics-Telemetry-PlatformTelemetryClient
     target_arch: amd64
     version: 38655.38527.65535.65535
-
   - target_component: Windows-System-Diagnostics-Telemetry-PlatformTelemetryClient
+    target_arch: wow64
+    version: 38655.38527.65535.65535
+    
+  - target_component: Windows-System-Diagnostics-TraceReporting-PlatformDiagnosticActions
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Windows-System-Diagnostics-TraceReporting-PlatformDiagnosticActions
     target_arch: wow64
     version: 38655.38527.65535.65535
 
@@ -577,4 +586,110 @@ updates:
 
   - target_component: Microsoft-Windows-PortableWorkspaces-SysPrep
     target_arch: wow64
+    version: 38655.38527.65535.65535
+
+
+  # Edge
+  - target_component: MicrosoftEdge-Autologger
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Edge-WebView
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-Angle
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-EdgeContent
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-EdgeManager
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeBCHost
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeCP
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeDevTools
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeEnlightenment
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeEnlightenment
+    target_arch: wow64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeSH
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeBrowser
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeDevToolsClient.AppxMain
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeDevToolsClient.AppxMain.Resources
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeDevToolsClient.AppxSetup
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-FlipGridPWA
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-FlipGridPWA-Deployment
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-FlipGridPWA-Deployment-LanguagePack
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-BingSearch
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-OutlookPWA
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OutlookPWA-Deployment
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OutlookPWA-Deployment-LanguagePack
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+
+  # this component is removed via appx removal, but gets reinstalled after a cumulative update
+  - target_component: Microsoft-Windows-PeopleExperienceHost.AppxMain
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PeopleExperienceHost.AppxMain.Resources
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PeopleExperienceHost.AppxSetup
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+
+  # OneDrive
+  - target_component: Microsoft-Windows-OneDrive-Setup
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-Setup-Deployment
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-Setup-Deployment-LanguagePack
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-SetupRegistry
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-SetupRegistry
+    target_arch: wow64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-Setup-WOW64-Deployment
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-Setup-WOW64-Deployment-LanguagePack
+    target_arch: amd64
     version: 38655.38527.65535.65535
