@@ -311,6 +311,9 @@ updates:
   - target_component: Microsoft-Windows-DataCollection-Adm
     target_arch: amd64
     version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-DataCollection-Adm.Resources
+    target_arch: amd64
+    version: 38655.38527.65535.65535
 
   - target_component: Microsoft-Windows-DeviceCensus
     target_arch: amd64
@@ -322,16 +325,22 @@ updates:
   - target_component: Microsoft-Windows-KeyboardDiagnostic
     target_arch: amd64
     version: 38655.38527.65535.65535
-
-  - target_component: Microsoft-Windows-Power-EnergyEstimationEngine-Client-Overrides
+  - target_component: Microsoft-Windows-KeyboardDiagnostic.Resources
     target_arch: amd64
     version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-Power-EnergyEstimationEngine-Client-Overrides
+  #   target_arch: amd64
+  #   version: 38655.38527.65535.65535
 
   - target_component: Microsoft-Windows-SetupPlatform-Telemetry-AutoLogger
     target_arch: amd64
     version: 38655.38527.65535.65535
 
   - target_component: Microsoft-Windows-SystemSettings-SettingsHandlers-SIUF
+    target_arch: amd64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-SystemSettings-SettingsHandlers-SIUF.Resources
     target_arch: amd64
     version: 38655.38527.65535.65535
 

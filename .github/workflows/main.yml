@@ -36,13 +36,17 @@ jobs:
       - name: Build cab
         run: |
           pip install -r requirements.txt | Out-Null
-          $systemPackages = "..\src\Executables\CAB\systemPackages.yaml" 
-          Copy-Item -Path $systemPackages -Destination "cfg.yaml" -Force | Out-Null
-          python sxsc.py
-          if ($LASTEXITCODE -ne 0) { exit 1 }
-          .\build.bat
-          Copy-Item -Path *.cab -Destination "..\src\Executables\CAB" -Force | Out-Null
-          .\clean.bat
+          $systemPackages = "..\src\Executables\CAB\" 
+
+          foreach ($file in Get-ChildItem -Path $systemPackages -Recurse -File -Filter "*.yaml") {
+            Remove-Item -Path $file.FullName -Force
+            Copy-Item -Path $file.FullName -Destination "cfg.yaml" -Force | Out-Null
+            python sxsc.py
+            if ($LASTEXITCODE -ne 0) { exit 1 }
+            .\build.bat
+            Move-Item -Path *.cab -Destination "..\src\Executables\CAB" -Force | Out-Null
+            .\clean.bat
+          }
         working-directory: sxsc-src
         #
       
