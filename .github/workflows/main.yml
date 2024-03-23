@@ -39,7 +39,6 @@ jobs:
           $systemPackages = "..\src\Executables\CAB\" 
 
           foreach ($file in Get-ChildItem -Path $systemPackages -Recurse -File -Filter "*.yaml") {
-            Remove-Item -Path $file.FullName -Force
             Copy-Item -Path $file.FullName -Destination "cfg.yaml" -Force | Out-Null
             python sxsc.py
             if ($LASTEXITCODE -ne 0) { exit 1 }
