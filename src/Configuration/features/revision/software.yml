@@ -36,23 +36,28 @@ actions:
   #   weight: 150
   #   option: "dotnet35"
 
-  - !writeStatus: {status: 'Downloading Brave', option: "browser-brave"}
-  - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/brave/brave-browser/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'BraveBrowserStandaloneSetup.exe' }).browser_download_url -OutFile \"$env:TEMP\\BraveBrowserStandaloneSetup.exe\" }" , weight: 150, option: "browser-brave"}
-
   - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
-  - !cmd: {command: 'call "%temp%\BraveBrowserStandaloneSetup.exe" /silent /install', runas: currentUserElevated, weight: 50, option: "browser-brave"}
+  - !cmd:
+    command: 'winget install Brave.Brave --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    option: "browser-brave"
+
+  # - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/brave/brave-browser/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'BraveBrowserStandaloneSetup.exe' }).browser_download_url -OutFile \"$env:TEMP\\BraveBrowserStandaloneSetup.exe\" }" , weight: 150, option: "browser-brave"}
+  # - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
+  # - !cmd: {command: 'call "%temp%\BraveBrowserStandaloneSetup.exe" /silent /install', runas: currentUserElevated, weight: 50, option: "browser-brave"}
 
   - !writeStatus: {status: 'Configuring Brave', option: "browser-brave"}
   - !cmd:
     exeDir: true
-    command: 'robocopy "BraveSoftware" "%ProgramFiles%\BraveSoftware" /E /IM /IT /NP'
+    command: 'robocopy "BraveSoftware" "%ProgramFiles%\BraveSoftware" /E /IM /IT /NP & robocopy "BraveSoftware" "%localappdata%\BraveSoftware" /E /IM /IT /NP'
     weight: 20
     option: "browser-brave"
 
   # Firefox
   - !writeStatus: {status: 'Installing Firefox', option: "browser-firefox"}
   - !cmd:
-    command: 'winget install Mozilla.Firefox --silent --accept-source-agreements --accept-package-agreements'
+    command: 'winget install Mozilla.Firefox --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
     option: "browser-firefox"
