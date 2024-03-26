@@ -40,9 +40,8 @@ for /d %%x in ("!ProgramData!\Microsoft\Windows\SystemData\*") do (
 
 @REM if not exist "!windir!\Web\Wallpaper\Windows\revision.jpg" exit /b 1
 
-@REM reg add "HKEY_USERS\%~1\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
-@REM reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\revision.jpg" /f
-
+:: Some OEM systems, the wallpaper is set to a different path
+reg add "HKEY_USERS\%~1\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "!windir!\Web\Wallpaper\Windows\img0.jpg" /f
 rmdir /q /s "!appdata!\Microsoft\Windows\Themes"
 rundll32.exe user32.dll, UpdatePerUserSystemParameters
 
