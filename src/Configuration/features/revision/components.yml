@@ -12,7 +12,7 @@ actions:
   - !taskKill: {name: "msedge", ignoreErrors: true, option: "remove-edge"}
   - !taskKill: {name: "MicrosoftEdge*", ignoreErrors: true, option: "remove-edge"}
   - !taskKill: {name: "setup", ignoreErrors: true, pathContains: "\\Edge", option: "remove-edge"}
-  - !run: {exeDir: true, exe: "EDGE.cmd", option: "remove-edge", weight: 40}
+  - !run: {exeDir: true, exe: "EDGE.cmd", runas: currentUserElevated, option: "remove-edge", weight: 40}
   - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
   # - !service: {name: "edgeupdate", operation: delete}
   # - !service: {name: "edgeupdatem", operation: delete}

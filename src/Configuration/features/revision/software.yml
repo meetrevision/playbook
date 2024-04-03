@@ -28,7 +28,6 @@ actions:
         Start-Process -FilePath $file -ArgumentList $args -Wait -WindowStyle Hidden
         }
         Add-AppPackage 'https://cdn.winget.microsoft.com/cache/source.msix' -ForceApplicationShutdown
-      }
 
   # - !writeStatus: {status: "Installing .NET Framework 3.5", option: "dotnet35"}
   # - !cmd:
