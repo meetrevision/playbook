@@ -34,7 +34,7 @@ features:
   - features\revision\registry\disable-ease-of-access-features.yml
   - features\revision\registry\disable-installing-teams.yml
   - features\revision\registry\disable-logging.yml
-  - features\revision\registry\disable-prefetcher-superfetch-and-readyboost.yml
+  # - features\revision\registry\disable-prefetcher-superfetch-and-readyboost.yml
   - features\revision\registry\disable-system-restore-pre-defined-config.yml
   # - features\revision\registry\disable-user-account-control-uac.yml
   - features\revision\registry\enable-audio-communications-do-nothing.yml
