@@ -5,7 +5,7 @@ privilege: TrustedInstaller
 option: apply-revert
 actions:
 
-  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', type: REG_DWORD, data: '1' }
+
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AUOptions', operation: delete }
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AutoInstallMinorUpdates', operation: delete }
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', operation: delete }
@@ -41,8 +41,14 @@ actions:
   #  The Start Recording button on GameBar is gray outed - #74
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', operation: delete}
 
-
   # Revert services
   - !service: {name: 'Beep', operation: change, startup: 1} 
   - !service: {name: 'GraphicsPerfSvc', operation: change, startup: 3}
   - !service: {name: 'Ndu', operation: change, startup: 2}
+
+  # Setting it to 0 breaks THE FINALS
+  - !registryValue:
+    path: 'HKLM\SYSTEM\ControlSet001\Control\CI\Config'
+    value: 'VulnerableDriverBlocklistEnable'
+    type: REG_DWORD
+    data: '1'

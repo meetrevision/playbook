@@ -23,16 +23,10 @@ actions:
     type: REG_DWORD
     data: '0'
 
-    # Disable driver blocklist to avoid "Program Compatibility" related errors 
-  - !registryValue:
-    path: 'HKLM\SYSTEM\ControlSet001\Control\CI\Config'
-    value: 'VulnerableDriverBlocklistEnable'
-    type: REG_DWORD
-    data: '0'
-
   - !cmd:
     exeDir: true
     command: 'robocopy "Licenses" "%SystemDrive%\Licenses" /E /PURGE /IM /IT /NP'
+    ignoreErrors: true
     weight: 30
     
   - !cmd:
