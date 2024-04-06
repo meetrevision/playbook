@@ -18,7 +18,7 @@ actions:
     weight: 50
     runas: currentUserElevated
     command: |
-      $productName = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ProductName
+      $productName = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion' -Name ProductName
       $path = Join-Path ${env:ProgramFiles(x86)} 'Revision Tool'
 
       if (Test-Path $path) {
@@ -50,6 +50,7 @@ actions:
   - !cmd:
     exeDir: true
     command: 'robocopy "BraveSoftware" "%ProgramFiles%\BraveSoftware" /E /IM /IT /NP & robocopy "BraveSoftware" "%localappdata%\BraveSoftware" /E /IM /IT /NP'
+    ignoreErrors: true
     weight: 20
     option: "browser-brave"
 
