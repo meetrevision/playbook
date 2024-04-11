@@ -24,7 +24,6 @@ ReviOS is a customized version of Windows, designed to be lightweight, stable, a
 - ⚡ Optimizes your system for performance and improved privacy
 - 🔧 Integrates the [Revision Tool](https://github.com/meetrevision/revision-tool) to customize your system further
 
-
 For more detailed information, see our documentation [here](https://www.revi.cc/docs/faq/before/features).
 
 ## 💻 System Requirements
