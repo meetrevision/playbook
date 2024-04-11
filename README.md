@@ -2,7 +2,7 @@
 
 <h1 align="center">
 
-<img src="images/gh.png" alt="image" width="800">
+<img src="images/gh.png" alt="image" width="700">
 
 </h1>
 
