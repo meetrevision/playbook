@@ -1,6 +1,8 @@
-# ReviOS Playbook
-
 <h1 align="center">
+
+ReviOS Playbook📜
+
+---
 
 <img src="images/gh.png" alt="image" width="700">
 
