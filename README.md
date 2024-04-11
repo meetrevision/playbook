@@ -4,7 +4,7 @@ ReviOS Playbook📜
 
 ---
 
-<img src="images/gh.png" alt="image" width="500">
+<img src="images/github-banner.png" alt="image" width="900">
 
 </h1>
 
