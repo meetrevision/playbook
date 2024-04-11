@@ -4,7 +4,7 @@ ReviOS Playbook📜
 
 ---
 
-<img src="images/gh.png" alt="image" width="700">
+<img src="images/gh.png" alt="image" width="500">
 
 </h1>
 
@@ -21,7 +21,7 @@ ReviOS is a customized version of Windows, designed to be lightweight, stable, a
 
 ## ✨ Key Features
 
-- 🌟 Easy to use, just drag and drop the playbook into [AME Wizard](https://ameliorated.io)
+- 🎯 Easy to use, just drag and drop the playbook into [AME Wizard](https://ameliorated.io)
 - 🗑 Removes bloatware and unnecessary system components
 - ⚡ Optimizes your system for performance and improved privacy
 - 🔧 Integrates the [Revision Tool](https://github.com/meetrevision/revision-tool) to customize your system further
@@ -66,5 +66,8 @@ ReviOS Playbook is licensed under [Attribution-NonCommercial-ShareAlike 4.0 Inte
 ## 🤝 Support
 
 If you need any assistance or have any questions, feel free to reach out to our team. We are here to help!
+
+> [!NOTE]
+> Revision itself (and its Discord server) is not tech support in any shape or form. Before joining, please read our [guidelines](https://www.revi.cc/guidelines).
 
 The best way to contact us is through our [Discord server](https://discord.gg/962y4pU).
