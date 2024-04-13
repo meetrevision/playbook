@@ -33,7 +33,7 @@ if not defined w11 (
 
 echo Configuring power settings
 powercfg /hibernate off
-@REM powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+powercfg -restoredefaultschemes
 powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 3ff9831b-6f80-4830-8178-736cd4229e7b
 powercfg -changename 3ff9831b-6f80-4830-8178-736cd4229e7b "Revision - Ultra Performance" "Windows's Ultimate Performance with additional changes."
 powercfg -s 3ff9831b-6f80-4830-8178-736cd4229e7b
