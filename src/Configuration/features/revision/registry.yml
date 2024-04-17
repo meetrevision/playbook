@@ -6,7 +6,7 @@ actions:
   - !writeStatus: {status: "Tweaking registry"}
 features:
   - features\revision\registry\ntlite-settings.yml
-  - features\revision\registry\aaa-edit-ISO-version-and-edition.yml
+  # - features\revision\registry\aaa-edit-ISO-version-and-edition.yml
   - features\revision\registry\add-take-ownership-in-context-menu.yml
   - features\revision\registry\bypass-requirements.yml
   - features\revision\registry\configure-crash-control.yml
