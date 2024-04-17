@@ -18,6 +18,7 @@ actions:
     command: '.\UNPIN.ps1 -List "Microsoft Edge" -Mode "taskbar"'
     exeDir: true
     runas: currentUserElevated
+    option: "remove-edge"
   # - !service: {name: "edgeupdate", operation: delete}
   # - !service: {name: "edgeupdatem", operation: delete}
   # - !service: {name: "MicrosoftEdgeElevationService", operation: delete}
