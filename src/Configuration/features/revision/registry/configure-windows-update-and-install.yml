@@ -109,6 +109,12 @@ actions:
     # ------> Media Player Updates auto update disabled.
     # ------> https://admx.help/?Category=Windows_8.1_2012R2&Policy=Microsoft.Policies.MediaPlayer::DisableAutoUpdate
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\WindowsMediaPlayer', value: 'DisableAutoUpdate', type: REG_DWORD, data: '0'}
+
+    # --- Prevent Windows Update Orchestrator automatically instaling unwanted updates: 
+    # ------> DevHome, Outlook
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate', operation: 'delete'}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate', operation: 'delete'}
+
   
   
     # ========================

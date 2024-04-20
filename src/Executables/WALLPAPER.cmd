@@ -1,7 +1,7 @@
 @echo off
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-robocopy "Web" "%windir%\Web" /E /IM /IT /NP
+robocopy "Web" "%windir%\Web" /E /IM /IT /NP > nul
 
 @REM :: Set wallpaper path for new users, as well as dark/light theme
 @REM type "!windir!\Resources\Themes\aero.theme" | findstr /c:"AppMode=" > nul

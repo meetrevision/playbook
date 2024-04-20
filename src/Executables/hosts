@@ -29,6 +29,7 @@
 0.0.0.0 watson.events.data.microsoft.com
 0.0.0.0 activity.windows.com
 0.0.0.0 browser.events.data.microsoft.com
+0.0.0.0 outlookads.live.com
 
 # Windows Error Reporting
 # https://learn.microsoft.com/en-us/troubleshoot/windows-client/system-management-components/windows-error-reporting-diagnostics-enablement-guidance#configure-network-endpoints-to-be-allowed
