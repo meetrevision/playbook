@@ -18,13 +18,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-- name: Update version
-  run: |
-    $version = "1.0"  # Establece la versión que deseas utilizar
-    $playbookConfPath = "src\playbook.conf"
+      - name: Update version
+        run: |
+          $version = "1.0"  # Establece la versión que deseas utilizar
+          $playbookConfPath = "src\playbook.conf"
 
-    (Get-Content -Path $playbookConfPath) -replace '<Version>.*</Version>', "<Version>$version</Version>" | Set-Content -Path $playbookConfPath
-  shell: pwsh
+          (Get-Content -Path $playbookConfPath) -replace '<Version>.*</Version>', "<Version>$version</Version>" | Set-Content -Path $playbookConfPath
+        shell: pwsh
 
         # Credits to echnobas, Atlas and all the contributors.
       - name: Git clone sxsc
