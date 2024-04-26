@@ -47,3 +47,7 @@ actions:
 
   # == Windows Event Collector - Disabled
   - !service: {name: 'Wecsvc', operation: change, startup: 4} 
+
+  # == UCPD velocity - Disabled
+  - !service: {name: 'UCPD', operation: change, startup: 4}
+  - !powerShell: {command: "Disable-ScheduledTask -TaskPath '\\Microsoft\\Windows\\AppxDeploymentClient' -TaskName 'UCPD velocity'"}
