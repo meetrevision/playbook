@@ -12,7 +12,14 @@ actions:
   - !taskKill: {name: "msedge", ignoreErrors: true, option: "remove-edge"}
   - !taskKill: {name: "MicrosoftEdge*", ignoreErrors: true, option: "remove-edge"}
   - !taskKill: {name: "setup", ignoreErrors: true, pathContains: "\\Edge", option: "remove-edge"}
-  - !run: {exeDir: true, exe: "EDGE.cmd", runas: currentUserElevated, option: "remove-edge", weight: 40}
+  
+  - !powerShell:
+    command: '.\EDGE.ps1 -Mode 'EdgeBrowser'
+    exeDir: true
+    runas: currentUserElevated
+    option: "remove-edge"
+    weight: 40
+
   - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
   - !powerShell:
     command: '.\UNPIN.ps1 -List ""Microsoft Edge"" -Mode ""taskbar""'
