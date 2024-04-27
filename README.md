@@ -30,10 +30,13 @@ For more detailed information, see our documentation [here](https://www.revi.cc/
 
 ## 💻 System Requirements
 
+ReviOS Playbook currently supports ARM64 and AMD64 builds of the following Windows versions:
+
 - Windows 10 21H2 `19044` (LTSC)
 - Windows 10 22H2 `19045`
 - Windows 11 22H2 `22621`
 - Windows 11 23H2 `22631`
+- Windows 11 24H2 `26100`
 
 Any other build **is not** supported by Revision.
 
