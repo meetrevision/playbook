@@ -52,3 +52,15 @@ actions:
     value: 'VulnerableDriverBlocklistEnable'
     type: REG_DWORD
     data: '1'
+
+  # Revert mitigation tweaks
+  - !registryKey: 
+    path: 'HKCU\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions'
+    operation: delete
+  - !registryKey: 
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions'
+    operation: delete
+    
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management', value: 'FeatureSettings', operation: delete}
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverride', operation: delete}
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverrideMask', operation: delete}
