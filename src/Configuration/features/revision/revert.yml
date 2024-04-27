@@ -39,7 +39,8 @@ actions:
   - !service: {name: 'bam', operation: change, startup: 1}
 
   #  The Start Recording button on GameBar is gray outed - #74
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', operation: delete}
+  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', operation: delete}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', operation: delete, option: '!remove-appx-xbox'}
 
   # Revert services
   - !service: {name: 'Beep', operation: change, startup: 1} 
