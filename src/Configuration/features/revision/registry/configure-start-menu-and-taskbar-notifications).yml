@@ -104,3 +104,9 @@ actions:
     # ------> https://www.tenforums.com/tutorials/6004-enable-disable-action-center-windows-10-a-post321932.html#post321932
     # [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings]
     # "NOC_GLOBAL_SETTING_TOASTS_ENABLED"=dword:00000000
+  
+  # === 'Show recommendations for tips, shortcuts, new apps, and more' - Disabled
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_IrisRecommendations', type: REG_DWORD, data: '0'}
+
+  # === 'Show account related notifications occasionally in Start' - Disabled
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_AccountNotifications', type: REG_DWORD, data: '0'}
