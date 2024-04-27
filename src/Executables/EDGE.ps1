@@ -9,6 +9,11 @@ function Uninstall-Process {
         [Parameter(Mandatory = $true)]
         [string]$Key
     )
+
+    $originalNation = [microsoft.win32.registry]::GetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', [Microsoft.Win32.RegistryValueKind]::String)
+
+    # Set Nation to 84 (France) temporarily
+    [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', 84, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
     
     # credits to he3als for the Acl commands
     $fileName = "IntegratedServicesRegionPolicySet.json"
@@ -33,7 +38,7 @@ function Uninstall-Process {
     }
     
     $baseKey = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate'
-    $registryPath = $baseKey + '\ClientState' + $Key
+    $registryPath = $baseKey + '\ClientState\' + $Key
 
     if (!(Test-Path -Path $registryPath)) {
         Write-Host "[$Mode] Registry key not found: $registryPath"
@@ -65,15 +70,18 @@ function Uninstall-Process {
         Set-Acl -Path $pathISRPS -AclObject $aclISRPSBackup
     }
 
+    # Restore Nation
+    [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', $originalNation, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
+
     if ((Get-ItemProperty -Path $baseKey).IsEdgeStableUninstalled -eq 1) {
         Write-Host "[$Mode] Edge Stable has been successfully uninstalled"
-    }
+    } 
 }
 
 function Uninstall-Edge {
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge" -Name "NoRemove" -ErrorAction SilentlyContinue | Out-Null
    
-    # [microsoft.win32.registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev", "AllowUninstall", 1, [Microsoft.Win32.RegistryValueKind]::DWord) | Out-Null
+    [microsoft.win32.registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev", "AllowUninstall", 1, [Microsoft.Win32.RegistryValueKind]::DWord) | Out-Null
 
     Uninstall-Process -Key '{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}'
 
