@@ -86,3 +86,8 @@ Start-ScheduledTask -TaskPath "\Microsoft\Windows\DiskCleanup\" -TaskName "Silen
 
 # Write-Host "Cleaning up the WinSxS Components"
 # DISM /Online /Cleanup-Image /StartComponentCleanup
+
+$edgeUpdatePath = ${env:ProgramFiles(x86)} + "\Microsoft\EdgeUpdate\Download"
+if (Test-Path -Path $edgeUpdatePath) {
+    Remove-Item -Path $edgeUpdatePath -Force -Recurse | Out-Null
+}
