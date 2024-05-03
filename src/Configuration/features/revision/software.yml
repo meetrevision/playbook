@@ -2,8 +2,6 @@
 title: Software
 description: Installs preferred softwares 
 privilege: TrustedInstaller
-features:
-  - features\revision\registry\aaa-edit-ISO-version-and-edition.yml
 actions:
   - !writeStatus: {status: 'Installing Revision Tool'}
   - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/meetrevision/revision-tool/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'RevisionTool-Setup.exe' }).browser_download_url -OutFile \"$env:TEMP\\RevisionTool-Setup.exe\" }" }
@@ -19,17 +17,12 @@ actions:
     weight: 50
     runas: currentUserElevated
     wait: true
+    exeDir: true
     command: '.\UPDATE-APPX.ps1'
-      
-  # - !writeStatus: {status: "Installing .NET Framework 3.5", option: "dotnet35"}
-  # - !cmd:
-  #   command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums dotnet3.5'
-  #   weight: 150
-  #   option: "dotnet35"
 
   - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
   - !cmd:
-    command: 'winget install Brave.Brave --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    command: 'winget install Brave.Brave --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     wait: true
     runas: currentUserElevated
@@ -50,22 +43,10 @@ actions:
   # Firefox
   - !writeStatus: {status: 'Installing Firefox', option: "browser-firefox"}
   - !cmd:
-    command: 'winget install Mozilla.Firefox --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    command: 'winget install Mozilla.Firefox --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
     wait: true
     option: "browser-firefox"
   - !writeStatus: {status: 'Configuring Firefox', option: "browser-firefox"}
   - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
-
-  # - !writeStatus: {status: 'Installing Ungoogled Chromium', option: "browser-ugc"}
-  # - !cmd:
-  #   command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums ungoogled-chromium'
-  #   weight: 150
-  #   option: "browser-ugc"
-
-  # - !writeStatus: {status: 'Installing LibreWolf', option: "browser-librewolf"}
-  # - !cmd:
-  #   command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums librewolf'
-  #   weight: 150
-  #   option: "browser-librewolf"
