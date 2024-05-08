@@ -67,21 +67,14 @@ for /f "usebackq tokens=2 delims=\" %%a in (`reg query "HKEY_USERS" ^| findstr /
 ::reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /f
 ::reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "StartLayoutFile" /t REG_SZ /d "!SystemDrive!\Windows\StartMenuLayout.xml" /f
 
+
+@REM revert #61 WsxPackManager.dll
+@REM Replaced with a more reliable method
 for %%i in (
+	"WsxPackManager.dll"
 	"WebExperienceHostApp.exe"
 	"WebExperienceHost.dll"
 	"SystemSettingsExtensions.dll"
 ) do (
-	if exist "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i.bak" del /q /f "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i.bak"
-
-	if exist "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i" (
-		ren "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i" "%%i.bak"
-	)
-)
-
-@REM revert #61
-for %%i in (
-	"!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\WsxPackManager.dll"
-) do (
-	if not exist "%%i" if exist "%%i.bak" ren "%%i.bak" "WsxPackManager.dll"
+	if not exist "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i" if exist "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i.bak" ren "!SystemDrive!\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\%%i.bak" "%%i"
 )

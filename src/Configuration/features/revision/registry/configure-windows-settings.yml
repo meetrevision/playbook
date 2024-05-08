@@ -317,6 +317,11 @@ actions:
     # === Disable Wi-Fi Sense telemetry
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting', value: 'value', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots', value: 'value', type: REG_DWORD, data: '0'}
+   
+   # === Disable ValueBanners in Windows 11 Settings (Requires TrustedInstaller permissions)
+   # ------> Credits to @he3als for finding more reliable method.
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\ValueBanner.IdealStateFeatureControlProvider', value: 'ActivationType', type: REG_DWORD, data: '0'}
+   
     # ========================
     # === Discarded Tweaks ===
     # ========================
