@@ -2,6 +2,7 @@
 title: disable-automatic-maintenance
 description: disable-automatic-maintenance
 privilege: TrustedInstaller
+option: disable-automatic-maintenance
 actions:
 
     # === Automatic Maintenance - Disabled
