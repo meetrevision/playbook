@@ -8,7 +8,7 @@
 : #>
 
 $certRegPath = "HKLM:\Software\Microsoft\SystemCertificates\ROOT\Certificates"
-$cabPaths = If ($env:PROCESSOR_ARCHITECTURE -ieq 'ARM64') { ".\$(Get-ChildItem  -File -Filter '*arm64*.cab' -Recurse)" } Else { ".\$(Get-ChildItem  -File -Filter '*amd64*.cab' -Recurse)"}
+$cabPaths = If ($env:PROCESSOR_ARCHITECTURE -ieq 'ARM64') { Get-ChildItem -File -Filter '*arm64*.cab' -Recurse } Else { Get-ChildItem -File -Filter '*amd64*.cab' -Recurse }
 
 if ($cabPaths.Count -eq 0) {
     Write-Host "No CAB files found in the current directory"
