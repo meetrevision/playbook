@@ -188,6 +188,11 @@ actions:
     # ------> Let Windows track app launches to improve Start and search results - Disabled
     # [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
     # "Start_TrackProgs"=dword:00000000
+
+    # === Show me notifications in the Settings app - Off
+    # ------> Found in 22631.3527
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\SystemSettings\AccountNotifications', value: 'EnableAccountNotifications', type: REG_DWORD, data: '1', weight: 50}
+  
     # ======> Speech
     # === Online speech recognition - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy', value: 'HasAccepted', type: REG_DWORD, data: '0'}
