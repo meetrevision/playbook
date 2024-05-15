@@ -70,7 +70,7 @@ actions:
     option: "install-teamspeak"
 
   - !powerShell: 
-    command: '$env:TEMP\teamspeak-client.msi /quiet'
+    command: 'Start-Process -FilePath "$env:TEMP\teamspeak-client.msi" -ArgumentList "/quiet" -Wait'
     weight: 150
     runas: currentUserElevated
     wait: true
