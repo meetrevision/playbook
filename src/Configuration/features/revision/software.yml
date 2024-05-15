@@ -50,3 +50,111 @@ actions:
     option: "browser-firefox"
   - !writeStatus: {status: 'Configuring Firefox', option: "browser-firefox"}
   - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
+
+  # Chrome
+  - !writeStatus: {status: 'Installing Chrome', option: "browser-chrome"}
+  - !cmd:
+    command: 'winget install Google.Chrome.EXE --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "browser-chrome"
+
+  # Teamspeak
+  - !writeStatus: {status: 'Downloading TeamSpeak', option: "install-teamspeak"}
+  - !powerShell:
+    command: 'Invoke-WebRequest -Uri "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi" -OutFile \"$env:TEMP\\teamspeak-client.msi\"'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-teamspeak"
+
+  - !cmd
+    command: 'call %temp%\teamspeak-client.msi /quiet'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-teamspeak"
+  
+  # Discord
+  - !writeStatus: {status: 'Installing Discord', option: "install-discord"}
+  - !cmd:
+    command: 'winget install Discord.Discord --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-discord"
+  
+  # Office
+  - !writeStatus: {status: 'Installing MS Office', option: "install-office"}
+  - !cmd:
+    command: 'winget install Microsoft.Office --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-office"
+  
+  # Steam
+  - !writeStatus: {status: 'Installing Steam', option: "install-steam"}
+  - !cmd:
+    command: 'winget install Valve.Steam --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-steam"
+  
+  # VS Code
+  - !writeStatus: {status: 'Installing VS-Code', option: "install-vscode"}
+  - !cmd:
+    command: 'winget install Microsoft.VisualStudioCode --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-vscode"
+ 
+  # Github Desktop
+  - !writeStatus: {status: 'Installing Github Desktop', option: "install-github"}
+  - !cmd:
+    command: 'winget install GitHub.GitHubDesktop --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-github"
+  
+  # Dropbox
+  - !writeStatus: {status: 'Installing Dropbox', option: "install-dropbox"}
+  - !cmd:
+    command: 'winget install Dropbox.Dropbox --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-dropbox"
+
+  # Google Drive
+  - !writeStatus: {status: 'Installing Google Drive', option: "install-gdrive"}
+  - !cmd:
+    command: 'winget install Google.GoogleDrive --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-gdrive"
+  
+  # DisplayCAL
+  - !writeStatus: {status: 'Installing DisplayCAL', option: "install-displaycal"}
+  - !cmd:
+    command: 'winget install FlorianHoech.DisplayCAL --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-displaycal"
+  
+  # WinRAR
+  - !writeStatus: {status: 'Installing Winrar', option: "install-winrar"}
+  - !cmd:
+    command: 'winget install RARLab.WinRAR --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-winrar"
+  
+  
