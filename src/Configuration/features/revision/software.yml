@@ -63,14 +63,14 @@ actions:
   # Teamspeak
   - !writeStatus: {status: 'Downloading TeamSpeak', option: "install-teamspeak"}
   - !powerShell:
-    command: 'Invoke-WebRequest -Uri "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi" -OutFile \"$env:TEMP\\teamspeak-client.msi\"'
+    command: 'Invoke-WebRequest -Uri "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi" -OutFile "$env:TEMP\teamspeak-client.msi"'
     weight: 150
     runas: currentUserElevated
     wait: true
     option: "install-teamspeak"
 
-  - !cmd
-    command: 'call %temp%\teamspeak-client.msi /quiet'
+  - !powerShell: 
+    command: '$env:TEMP\teamspeak-client.msi /quiet'
     weight: 150
     runas: currentUserElevated
     wait: true
