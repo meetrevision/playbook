@@ -94,6 +94,15 @@ actions:
     wait: true
     option: "install-office"
   
+  # Office Deploy
+  - !writeStatus: {status: 'Installing MS Office', option: "install-office-deploy"}
+  - !powerShell:
+    command: 'Invoke-WebRequest -Uri "https://download.microsoft.com/download/2/7/A/27AF1BE6-DD20-4CB4-B154-EBAB8A7D4A7E/officedeploymenttool_17531-20046.exe" -OutFile "$env:TEMP\officedeploymenttool.exe" ; Start-Process -FilePath "$env:TEMP\officedeploymenttool.exe" -ArgumentList "/quiet" -Wait'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-office-deploy"
+  
   # Steam
   - !writeStatus: {status: 'Installing Steam', option: "install-steam"}
   - !cmd:
