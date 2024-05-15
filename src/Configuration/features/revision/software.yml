@@ -95,13 +95,31 @@ actions:
     option: "install-office"
   
   # Office Deploy
-  - !writeStatus: {status: 'Installing MS Office', option: "install-office-deploy"}
+  - !writeStatus: {status: 'Installing MS Office Deployment', option: "install-office-deploy"}
   - !powerShell:
     command: 'Invoke-WebRequest -Uri "https://download.microsoft.com/download/2/7/A/27AF1BE6-DD20-4CB4-B154-EBAB8A7D4A7E/officedeploymenttool_17531-20046.exe" -OutFile "$env:TEMP\officedeploymenttool.exe" ; Start-Process -FilePath "$env:TEMP\officedeploymenttool.exe" -ArgumentList "/quiet" -Wait'
     weight: 150
     runas: currentUserElevated
     wait: true
     option: "install-office-deploy"
+  
+  # Thunderbird
+  - !writeStatus: {status: 'Installing Thunderbird', option: "install-thunderbird"}
+  - !powerShell:
+    command: 'winget install Mozilla.Thunderbird --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-thunderbird"
+  
+  # MS Teams
+  - !writeStatus: {status: 'Installing MS Teams', option: "install-teams"}
+  - !powerShell:
+    command: 'winget install Microsoft.Teams --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-teams"
   
   # Steam
   - !writeStatus: {status: 'Installing Steam', option: "install-steam"}
@@ -156,6 +174,15 @@ actions:
     runas: currentUserElevated
     wait: true
     option: "install-displaycal"
+  
+  # NVCleanstall
+  - !writeStatus: {status: 'Installing NVCleanstall', option: "install-nvclean"}
+  - !cmd:
+    command: 'winget install TechPowerUp.NVCleanstall --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    runas: currentUserElevated
+    wait: true
+    option: "install-nvclean"
   
   # WinRAR
   - !writeStatus: {status: 'Installing Winrar', option: "install-winrar"}
