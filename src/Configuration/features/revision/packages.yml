@@ -5,9 +5,22 @@ privilege: TrustedInstaller
 actions:
 
   - !writeStatus: {status: "Removing system packages"}
-  - !run: 
-    exeDir: true
-    exe: 'CAB\cab-installer.cmd'
+  - !run:
+    path: "%ProgramFiles(x86)%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "winpackage --install system-components-removal"
+    wait: true
+    runas: currentUserElevated
+    weight: 100
+   
+  - !writeStatus: {status: 'Disabling Windows Defender'}
+  - !run:
+    path: "%ProgramFiles(x86)%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "defender disable"
+    wait: true
+    runas: currentUserElevated
+    weight: 100
 
 
 # NOTE: This method of removing system packages is now deprecated and not recommended by Revision, as it is one of the main cause of #49

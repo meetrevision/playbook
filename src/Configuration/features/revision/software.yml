@@ -7,10 +7,6 @@ actions:
   - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/meetrevision/revision-tool/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'RevisionTool-Setup.exe' }).browser_download_url -OutFile \"$env:TEMP\\RevisionTool-Setup.exe\" }" }
   - !cmd: {command: 'call "%temp%\RevisionTool-Setup.exe" /VERYSILENT /TASKS="desktopicon"', wait: true, weight: 150}
 
-    # Not an ideal place to put this - Disable Defender
-  - !writeStatus: {status: 'Disabling Windows Defender'}
-  - !run: {path: "%ProgramFiles(x86)%\\Revision Tool\\data\\flutter_assets\\additionals", exe: "DisableWD.bat", wait: true, weight: 100}
-
     # https://github.com/meetrevision/playbook/issues/81
   - !writeStatus: {status: 'Updating Winget'}
   - !powerShell:
