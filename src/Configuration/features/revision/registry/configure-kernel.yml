@@ -6,4 +6,9 @@ actions:
 
     # === Enable TSX
     # ------> It was disabled by default due to security reasons; Enabling it makes 4~5 times faster in database transaction and around 40% faster in specific workloads
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Kernel', value: 'DisableTsx', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Kernel', value: 'DisableTsx', type: REG_DWORD, data: '0'}
+  - !powerShell: 
+    command: |
+      if ((Get-WmiObject Win32_Processor).Name -like '*Intel*') {
+        [microsoft.win32.registry]::SetValue("HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Kernel", "DisableTsx", 0, [Microsoft.Win32.RegistryValueKind]::DWord)
+      }
