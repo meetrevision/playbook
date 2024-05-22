@@ -26,12 +26,12 @@ for /f "usebackq tokens=2 delims=\" %%a in (`reg query "HKEY_USERS" ^| findstr /
 			copy /y "DefaultLayouts.xml" "%%c\Microsoft\Windows\Shell\DefaultLayouts.xml"
 
 			@REM Clear start menu pinned items
-			for /f "usebackq delims=" %%d in (`dir /b "%%c\Packages" /a:d ^| findstr /c:"Microsoft.Windows.StartMenuExperienceHost"`) do (
-				for /f "usebackq delims=" %%e in (`dir /b "%%c\Packages\%%d\LocalState" /a:-d ^| findstr /R /c:"start.\.bin" /c:"start\.bin"`) do (
-					echo del /q /f "%%c\Packages\%%d\LocalState\%%e"
-					del /q /f "%%c\Packages\%%d\LocalState\%%e"
-				)
-			)
+			@REM for /f "usebackq delims=" %%d in (`dir /b "%%c\Packages" /a:d ^| findstr /c:"Microsoft.Windows.StartMenuExperienceHost"`) do (
+			@REM 	for /f "usebackq delims=" %%e in (`dir /b "%%c\Packages\%%d\LocalState" /a:-d ^| findstr /R /c:"start.\.bin" /c:"start\.bin"`) do (
+			@REM 		echo del /q /f "%%c\Packages\%%d\LocalState\%%e"
+			@REM 		del /q /f "%%c\Packages\%%d\LocalState\%%e"
+			@REM 	)
+			@REM )
 
 
 

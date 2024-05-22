@@ -54,7 +54,7 @@ actions:
 
     # Necessary to refresh start menu entries etc.
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
-  - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*'}
+  - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*', option: "remove-pinned-items-startmenu"}
   - !appx: {operation: clearCache, name: '*Windows.Search*'}
   - !appx: {operation: clearCache, name: '*TCUI*'}
     # Workaround for KGL versions to match
