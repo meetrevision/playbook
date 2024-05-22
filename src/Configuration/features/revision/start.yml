@@ -38,6 +38,21 @@ actions:
   - !cmd:
     command: 'ipconfig /flushdns'
 
+  # Wakelock modification isn't available in AME Wizard, therefore activating a custom high performance powerplan before we proceed to prevent sleep 
+  - !writeStatus: {status: "Configuring a power plan"}
+  - !run: {exe: "powercfg", args: "/hibernate off"}
+  - !run: {exe: "powercfg", args: "-restoredefaultschemes"}
+  - !run: {exe: "powercfg", args: "-duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 3ff9831b-6f80-4830-8178-736cd4229e7b"}
+  - !run: {exe: "powercfg", args: "-changename 3ff9831b-6f80-4830-8178-736cd4229e7b \"Revision - Ultra Performance\" \"Windows's Ultimate Performance with additional changes.\""}
+  - !run: {exe: "powercfg", args: "-s 3ff9831b-6f80-4830-8178-736cd4229e7b"}
+  - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor PERFINCPOL 2"}
+  - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor PERFDECPOL 1"}
+  - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor PERFINCTHRESHOLD 10"}
+  - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor PERFDECTHRESHOLD 8"}
+  - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor CPMINCORES 100"}
+  - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor CPMINCORES1 100"} # on hybrid CPUs, '1' at the end of the setting name is for P-cores
+  - !run: {exe: "powercfg", args: "/setactive scheme_current"}
+
   - !writeStatus: {status: "Optimizing PowerShell"}
   - !run:
     exeDir: true
