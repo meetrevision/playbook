@@ -136,6 +136,8 @@ actions:
   - !writeStatus: {status: "Removing Teams"}
   - !taskKill: {name: "*teams*", ignoreErrors: true}
   - !appx: {name: '*MicrosoftTeams*', type: family, weight: 10}
+    # new Teams
+  - !appx: {name: '*MSTeams*', type: family, weight: 10}
 
   - !writeStatus: {status: "Removing Banners"}
     # MicrosoftWindows.Client.CBS_cw5n1h2txyewy!
