@@ -31,6 +31,7 @@ actions:
   - !run:
     exeDir: true
     exe: "STARTMENU.cmd"
+    option: "remove-pinned-items-startmenu"
     weight: 100
 
   - !run:
