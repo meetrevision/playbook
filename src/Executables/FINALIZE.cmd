@@ -98,7 +98,7 @@ setx DOTNET_CLI_TELEMETRY_OPTOUT 1
 setx POWERSHELL_TELEMETRY_OPTOUT 1
 
 echo Disabling Superfetch for SSD...
-
+:: Might not work on VMs
 for /f %%i in ('PowerShell -NonInteractive -NoLogo -NoP -C "(Get-PhysicalDisk -SerialNumber (Get-Disk -Number (Get-Partition -DriveLetter $env:SystemDrive.Substring(0, 1)).DiskNumber).SerialNumber.TrimStart()).MediaType"') do set "hardDrive=%%i"
 
 if "%hardDrive%"=="SSD" (
