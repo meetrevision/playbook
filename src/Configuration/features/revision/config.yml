@@ -40,11 +40,19 @@ actions:
     option: "configure-lpv"
     weight: 150
 
-  - !run:
+  - !powerShell:
+    command: '.\WALLPAPER.ps1 -Mode Desktop -ImagePath .\Wallpapers\desktop.jpg'
     exeDir: true
-    exe: "WALLPAPER.cmd"
+    runas: currentUserElevated
     option: "configure-wallpaper"
-    weight: 90
+    weight: 45
+
+  - !powerShell: 
+    command: '.\WALLPAPER.ps1 -Mode LockScreen -ImagePath .\Wallpapers\lockscreen.jpg'
+    exeDir: true
+    runas: currentUserElevated
+    option: "configure-wallpaper"
+    weight: 45 
 
   - !writeStatus: {status: "Configuring features"}
   - !run:
