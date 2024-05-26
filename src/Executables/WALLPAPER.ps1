@@ -16,7 +16,12 @@ function Set-DesktopWallpaper {
         Write-Error "Image path does not exist: $imagePath"
         return
     }
-   
+
+    Get-ChildItem -Path "Registry::HKU" | ForEach-Object {
+        $userKey = $_.Name
+        [microsoft.win32.registry]::SetValue("$userKey\Control Panel\Desktop", "WallPaper", $imagePath, [Microsoft.Win32.RegistryValueKind]::String)
+    }
+    
     # https://gist.github.com/s7ephen/714023?permalink_comment_id=3611772#gistcomment-3611772
     $setwallpapersrc = @"
     using System.Runtime.InteropServices;
