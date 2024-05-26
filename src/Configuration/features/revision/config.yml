@@ -47,6 +47,7 @@ actions:
 
   - !powerShell:
     command: '.\WALLPAPER.ps1 -Mode Desktop -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\desktop.jpg'
+    exeDir: true
     runas: currentUserElevated
     option: "configure-wallpaper"
     weight: 45
