@@ -11,10 +11,9 @@ actions:
   - !powerShell: 
     command: |
       $manufacturer = (Get-WmiObject Win32_Processor).Manufacturer
-      $registryPath = 'HKLM:\SYSTEM\ControlSet001\Control\Session Manager\Kernel'
+      $registryPath = 'HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Kernel'
       if ($manufacturer -eq 'GenuineIntel') {
         [microsoft.win32.registry]::SetValue($registryPath, 'DisableTsx', 0, [Microsoft.Win32.RegistryValueKind]::DWord)
       } else {
         Remove-ItemProperty -Path $registryPath -Name 'DisableTsx' -ErrorAction SilentlyContinue | Out-Null
       }
-      exit 0
