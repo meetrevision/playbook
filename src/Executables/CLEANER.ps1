@@ -60,7 +60,7 @@ $foldersToRemove = @(
     "System32\LogFiles\WMI,"
     "System32\SleepStudy",
     "System32\sru",
-    "System32\WDI\LogFiles,"
+    "System32\WDI\LogFiles",
     "System32\winevt\Logs",
     "SystemTemp",
     "Temp"
