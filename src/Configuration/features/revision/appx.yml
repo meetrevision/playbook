@@ -45,10 +45,7 @@ actions:
   - !appx: {name: '*Microsoft.MicrosoftStickyNotes*', type: family, weight: 10}
   
   - !writeStatus: {status: "Removing Mail"}
-  - !powerShell:
-    command: 'Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage'
-    runas: currentUserElevated
-  - !appx: {name: '*microsoft.windowscommunicationsapps*', type: family, weight: 10} # Seems to leave leftovers on the taskbar
+  - !appx: {name: '*microsoft.windowscommunicationsapps*', type: family, weight: 10}
 
   - !writeStatus: {status: "Removing People"}
   - !appx: {name: '*Microsoft.People*', type: family, weight: 10}
@@ -139,9 +136,6 @@ actions:
   - !writeStatus: {status: "Removing Teams"}
   - !taskKill: {name: "*teams*", ignoreErrors: true}
   - !appx: {name: '*MicrosoftTeams*', type: family, weight: 10}
-    # new Teams
-  - !powerShell: {command: 'Get-AppxPackage *MSTeams* | Remove-AppxPackage', runas: currentUserElevated}
-  - !appx: {name: '*MSTeams*', type: family, weight: 10}
 
   - !writeStatus: {status: "Removing Banners"}
     # MicrosoftWindows.Client.CBS_cw5n1h2txyewy!

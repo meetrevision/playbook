@@ -1,0 +1,702 @@
+copyright: MeetRevision
+package: Revision-ReviOS-SystemPackages-Removal
+target_arch: arm64
+version: 2.0.0.0
+updates:
+  - target_component: Microsoft-Windows-AcProxy
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-AcProxy.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-CEIPEnable-Adm
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-CEIPEnable-Adm.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Client-SQM-Consolidator
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-SQM-Consolidator-Base
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-SQM-Consolidator-Base.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  # sqmapi dll is present in Revision, which this would remove
+  # - target_component: Microsoft-Windows-SQMApi
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-SQMApi
+  #   target_arch: wow64
+  #   version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-UsbCeip
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-UsbCeip
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-UsbCeip
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-UsbCeip.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-OOBE-FirstLogonAnim
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OOBE-FirstLogonAnim.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OOBE-FirstLogonAnimExe
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  #   Breaks compatibility with older games #3
+  # - target_component: Microsoft-Windows-GameExplorer
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-GameExplorer
+  #   target_arch: arm64.arm
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-GameExplorer
+  #   target_arch: arm64.x86
+  #   version: 38655.38527.65535.65535
+  
+  - target_component: Microsoft-Windows-Indeo4-Codecs
+    target_arch: x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Indeo4-Codecs.Resources
+    target_arch: x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Indeo5-Codecs
+    target_arch: x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Indeo5-Codecs.Resources
+    target_arch: x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-PhotoBasic-Feature-WOW64-Deployment-LanguagePack
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-PhotoBasic-Feature-WOW64-Deployment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-PhotoBasic-PictureTools-WOW64-Deployment-LanguagePack
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-PhotoBasic-PictureTools-WOW64-Deployment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-PhotoBasic-WOW64-merged-Deployment-LanguagePack
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-PhotoBasic-WOW64-merged-Deployment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-shimgvw
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-RetailDemo-RetailInfo
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-RetailDemo-Service.Deployment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-RetailDemo-Service.Instrumentation
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-RetailDemo-Service
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  
+  - target_component: Microsoft-Windows-RetailDemo-Service.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Shell-RetailDemo-DesktopTaskFactory
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Bubbles
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Bubbles.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Mystify
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Mystify
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Mystify.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Mystify.Resources
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-PhotoScreensaver
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PhotoScreensaver
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PhotoScreensaver
+    target_arch: x86
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PhotoScreensaver.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PhotoScreensaver.Resources
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PhotoScreensaver.Resources
+    target_arch: x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Ribbons
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Ribbons
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Ribbons.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Ribbons.Resources
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-scrnsave
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-scrnsave
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-scrnsave
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-scrnsave.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-scrnsave.Resources
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-scrnsave.Resources
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  # Stripping Security Center introduces compatibility issues with Defender, it is disabled instead
+  # - target_component: Microsoft-Windows-Securitycenter-Adm
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-SecurityCenter-Broker
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-SecurityCenter-Broker
+  #   target_arch: wow64
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-SecurityCenter-ControlPanel
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-SecurityCenter-ControlPanel
+  #   target_arch: wow64
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-SecurityCenter-Core
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-SecurityCenter-Core
+  #   target_arch: wow64
+  #   version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Skype-ORTC
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Skype-ORTC
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Skype-ORTC
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Shell-SoundThemes
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Services-TargetedContent
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-OneCore-SystemSettings-InputCloudStore
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Application-Experience-AIT-Static
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Application-Experience-AppInv
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Application-Experience-Core-Inventory-Service
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Application-Experience-Inventory-Data-Sources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Application-Experience-Mitigations-C8
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Application-Experience-Program-Data
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Application-Experience-Program-Data.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Compat-Appraiser-InboxDataFiles
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Compat-Appraiser-Logger
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Compat-Appraiser
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Compat-CompatTelRunner
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  
+  - target_component: Microsoft-Windows-Compat-CompatTelRunner.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Compat-GeneralTel
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  #  regex: BthTelemetry.dll
+  # - target_component: Microsoft-Windows-CoreSystem-Bluetooth-Telemetry
+  # target_arch: arm64
+  # version: 38655.38527.65535.65535
+
+  # regex: BthTelemetry.dll
+  # - target_component: Microsoft-Windows-CoreSystem-Bluetooth-Telemetry
+  # target_arch: wow64
+  # version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-DataCollection-Adm
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-DataCollection-Adm.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-DeviceCensus
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-DeviceCensus-Schedule-ClientServer
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-KeyboardDiagnostic
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-KeyboardDiagnostic.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-Power-EnergyEstimationEngine-Client-Overrides
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-SetupPlatform-Telemetry-AutoLogger
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-SystemSettings-SettingsHandlers-SIUF
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-SystemSettings-SettingsHandlers-SIUF.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-TelemetryClient
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-TelemetryClient
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-TelemetryClient
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Unified-Telemetry-Client-Aggregators
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Unified-Telemetry-Client-AutoLogger-Default
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Unified-Telemetry-Client-Decoder-Host
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Unified-Telemetry-Client-Settings-WindowsClient
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  # utcapi.dll utcutil.dll
+  # - target_component: Microsoft-Windows-Unified-Telemetry-Client-WoWOnly
+  #   target_arch: arm64.arm
+  #   version: 38655.38527.65535.65535
+  # - target_component: Microsoft-Windows-Unified-Telemetry-Client-WoWOnly
+  #   target_arch: arm64.x86
+
+  - target_component: Microsoft-Windows-Unified-Telemetry-Client.resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Update-Aggregators
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+    
+  - target_component: Windows-System-Diagnostics-Telemetry-PlatformTelemetryClient
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Windows-System-Diagnostics-Telemetry-PlatformTelemetryClient
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Windows-System-Diagnostics-Telemetry-PlatformTelemetryClient
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+  
+  - target_component: Windows-System-Diagnostics-TraceReporting-PlatformDiagnosticActions
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Windows-System-Diagnostics-TraceReporting-PlatformDiagnosticActions
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Windows-System-Diagnostics-TraceReporting-PlatformDiagnosticActions
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-UNP-Task
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-UNP
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+    
+  - target_component: Microsoft-OneCoreUAP-Feedback-StringFeedbackEngine
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-ErrorReporting-Adm-Deployment-LanguagePack
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-ErrorReporting-Adm-Deployment
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-ErrorReportingCompatibility
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-ErrorReportingCompatibility
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-ErrorReportingConsole
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-ErrorReportingCore
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-ErrorReportingDumpTypeControl-Deployment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  #   Breaks compatibility with some games, https://github.com/Atlas-OS/Atlas/issues/685
+
+  # - target_component: Microsoft-Windows-ErrorReportingFaults
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-ErrorReportingFaults
+  #   target_arch: arm64.x86
+  #   version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-ErrorReportingKernel
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-ErrorReportingPowershell
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-ErrorReportingPowershell
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-ErrorReportingUI
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-ErrorReportingUI
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Feedback-CourtesyEngine
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Feedback-DeploymentMgrClient
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Feedback-DeploymentMgrClient-Desktop-TaskSch
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Feedback-Service
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  
+  - target_component: Microsoft-Windows-Feedback-Service.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-FeedbackNotifications-Adm
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-FeedbackNotifications-Adm.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-BuildFlighting
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Flighting-FeatureConfiguration-Tasks
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  #   Causes winver to show 2009, and makes start menu use the old block icon type
+
+  # - target_component: Microsoft-Windows-Flighting-FeatureConfiguration
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-Flighting-FeatureConfiguration
+  #   target_arch: wow64
+  #   version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-Flighting-Settings
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+  
+  - target_component: Microsoft-Windows-Flighting-Settings.Resources
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-SystemSettings-SettingsHandlers-Flights
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-SystemSettings-SettingsHandlers-Flights.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  # Breaks benchmarking tools like Passmark 
+  # - target_component: Microsoft-Windows-Data-Pdf.Events
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-Data-Pdf.Events
+  #   target_arch: wow64
+  #   version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-Data-Pdf
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  # - target_component: Microsoft-Windows-Data-Pdf
+  #   target_arch: wow64
+  #   version: 38655.38527.65535.65535
+
+
+
+  # - target_component: Microsoft-Windows-PortableWorkspaces-SSO
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+  
+  # - target_component: Microsoft-Windows-PortableWorkspaces-SSO.Resources
+  #   target_arch: arm64
+  #   version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-PortableWorkspaces-SysPrep
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PortableWorkspaces-SysPrep
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PortableWorkspaces-SysPrep
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+
+
+  # Edge
+  - target_component: MicrosoftEdge-Autologger
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Edge-WebView
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-Angle
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-EdgeContent
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-EdgeManager
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeBCHost
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeCP
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeDevTools
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeEnlightenment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeEnlightenment
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeEnlightenment
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-Edge-MicrosoftEdgeSH
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeBrowser
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeDevToolsClient.AppxMain
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeDevToolsClient.AppxMain.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-MicrosoftEdgeDevToolsClient.AppxSetup
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-FlipGridPWA
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-FlipGridPWA-Deployment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-FlipGridPWA-Deployment-LanguagePack
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-BingSearch
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  - target_component: Microsoft-Windows-OutlookPWA
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OutlookPWA-Deployment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OutlookPWA-Deployment-LanguagePack
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  # this component is removed via appx removal, but gets reinstalled after a cumulative update
+  - target_component: Microsoft-Windows-PeopleExperienceHost.AppxMain
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PeopleExperienceHost.AppxMain.Resources
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-PeopleExperienceHost.AppxSetup
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+
+  # OneDrive
+  - target_component: Microsoft-Windows-OneDrive-Setup
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-Setup-Deployment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-Setup-Deployment-LanguagePack
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-SetupRegistry
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-SetupRegistry
+    target_arch: arm64.arm
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-SetupRegistry
+    target_arch: arm64.x86
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-Setup-WOW64-Deployment
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-OneDrive-Setup-WOW64-Deployment-LanguagePack
+    target_arch: arm64
+    version: 38655.38527.65535.65535
+  - target_component: Microsoft-Windows-SystemSettings-SettingsHandlers-OneDriveBackup
+    target_arch: arm64
+    version: 38655.38527.65535.65535
