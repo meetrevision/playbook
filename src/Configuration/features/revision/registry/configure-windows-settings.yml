@@ -4,8 +4,8 @@ description: configure-windows-settings
 privilege: TrustedInstaller
 actions:
 
-    # === Hide stripped components from Settings - Windows Updates
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'SettingsPageVisibility', type: REG_SZ, data: 'hide:cortana;privacy-automaticfiledownloads;privacy-feedback;windowsinsider;windowsupdate'}
+    # === Hide stripped components from Settings
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'SettingsPageVisibility', type: REG_SZ, data: 'hide:cortana;privacy-automaticfiledownloads;privacy-feedback;windowsinsider;home'}
 
   # === Hide Insider page from Settings --> Windows Updates
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility', value: 'HideInsiderPage', type: REG_DWORD, data: '1'}
