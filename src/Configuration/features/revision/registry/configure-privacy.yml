@@ -47,6 +47,8 @@ actions:
   - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\CloudContent', value: 'DisableWindowsSpotlightOnActionCenter', type: REG_DWORD, data: '1'}
     # === Turn off Windows Spotlight on Settings - Enabled
   - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\CloudContent', value: 'DisableWindowsSpotlightOnSettings', type: REG_DWORD, data: '1'}
+    # === Turn off cloud optimized content - Enabled
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent', value: 'DisableCloudOptimizedContent', type: REG_DWORD, data: '1'}    
     # =================
     # === Messaging ===
     # =================

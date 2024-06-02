@@ -84,6 +84,15 @@ function Uninstall-Edge {
     [microsoft.win32.registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev", "AllowUninstall", 1, [Microsoft.Win32.RegistryValueKind]::DWord) | Out-Null
 
     Uninstall-Process -Key '{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}'
+    
+    @( "$env:ProgramData\Microsoft\Windows\Start Menu\Programs",
+       "$env:PUBLIC\Desktop",
+       "$env:USERPROFILE\Desktop" ) | ForEach-Object {
+        $shortcutPath = Join-Path -Path $_ -ChildPath "Microsoft Edge.lnk"
+        if (Test-Path -Path $shortcutPath) {
+            Remove-Item -Path $shortcutPath -Force
+        }
+    }
 
 }
 

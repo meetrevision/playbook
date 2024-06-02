@@ -27,28 +27,7 @@ jobs:
 
           (Get-Content -Path $finalizeCMDPath) -replace 'set version=.+', "set version=$version" | Set-Content -Path $finalizeCMDPath
         shell: pwsh
-
-        # Credits to echnobas, Atlas and all the contributors.
-      - name: Git clone sxsc
-        run: |
-          git clone --depth=1 ${{ env.SXSC_REPO }} sxsc-src
-
-      - name: Build cab
-        run: |
-          pip install -r requirements.txt | Out-Null
-          $systemPackages = "..\src\Executables\CAB\" 
-
-          foreach ($file in Get-ChildItem -Path $systemPackages -Recurse -File -Filter "*.yaml") {
-            Copy-Item -Path $file.FullName -Destination "cfg.yaml" -Force | Out-Null
-            python sxsc.py
-            if ($LASTEXITCODE -ne 0) { exit 1 }
-            .\build.bat
-            Move-Item -Path *.cab -Destination "..\src\Executables\CAB" -Force | Out-Null
-            .\clean.bat
-          }
-        working-directory: sxsc-src
-        #
-      
+        
       - name: Archive content
         run: |
           7z a -pmalte -mhe=on ${{ env.FILENAME }} ./src/*

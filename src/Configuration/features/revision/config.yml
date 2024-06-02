@@ -31,6 +31,7 @@ actions:
   - !run:
     exeDir: true
     exe: "STARTMENU.cmd"
+    option: "remove-pinned-items-startmenu"
     weight: 100
 
   - !run:
@@ -39,11 +40,24 @@ actions:
     option: "configure-lpv"
     weight: 150
 
-  - !run:
+  - !cmd:
     exeDir: true
-    exe: "WALLPAPER.cmd"
+    command: 'robocopy "Wallpapers" "%systemroot%\Web\Wallpaper\MeetRevision\v2" /E /PURGE /IM /IT /NP'
+    ignoreErrors: true
+
+  - !powerShell:
+    command: '.\WALLPAPER.ps1 -Mode Desktop -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\desktop.jpg'
+    exeDir: true
+    runas: currentUserElevated
     option: "configure-wallpaper"
-    weight: 90
+    weight: 45
+
+  - !powerShell: 
+    command: '.\WALLPAPER.ps1 -Mode LockScreen -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\lockscreen.jpg'
+    exeDir: true
+    runas: currentUserElevated
+    option: "configure-wallpaper"
+    weight: 45 
 
   - !writeStatus: {status: "Configuring features"}
   - !run:
@@ -54,7 +68,7 @@ actions:
 
     # Necessary to refresh start menu entries etc.
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
-  - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*'}
+  - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*', option: "remove-pinned-items-startmenu"}
   - !appx: {operation: clearCache, name: '*Windows.Search*'}
   - !appx: {operation: clearCache, name: '*TCUI*'}
     # Workaround for KGL versions to match
