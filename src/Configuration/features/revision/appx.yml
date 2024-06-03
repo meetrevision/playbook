@@ -169,3 +169,6 @@ actions:
   - !writeStatus: {status: "Removing Your Phone", option: "remove-appx-yourphone"}
   - !appx: {name: '*Microsoft.YourPhone*', type: family, weight: 10, option: "remove-appx-yourphone"}
   - !appx: {name: '*MicrosoftWindows.CrossDevice*', type: family, weight: 10, option: "remove-appx-yourphone"}
+
+  - !writeStatus: {status: "Removing Recall", option: "remove-appx-recall"}
+  - !appx: {name: '*MicrosoftWindows.Client.AIX*', type: family, weight: 10, option: "remove-appx-recall"}
