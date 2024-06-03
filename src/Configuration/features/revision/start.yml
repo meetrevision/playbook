@@ -57,6 +57,10 @@ actions:
   - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor CPMINCORES1 100"} # on hybrid CPUs, '1' at the end of the setting name is for P-cores
   - !run: {exe: "powercfg", args: "/setactive scheme_current"}
 
+  - !writeStatus: {status: 'Installing Revision Tool'}
+  - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/meetrevision/revision-tool/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'RevisionTool-Setup.exe' }).browser_download_url -OutFile \"$env:TEMP\\RevisionTool-Setup.exe\" }" }
+  - !cmd: {command: 'call "%temp%\RevisionTool-Setup.exe" /VERYSILENT /TASKS="desktopicon"', wait: true, weight: 150}
+
   - !writeStatus: {status: "Optimizing PowerShell"}
   - !run:
     exeDir: true

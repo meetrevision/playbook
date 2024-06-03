@@ -4,10 +4,10 @@ description: Custom Revision configuration
 privilege: Admin
 actions: []
 features:
-- features\revision\start.yml
 - features\revision\registry\aaa-edit-ISO-version-and-edition.yml
-- features\revision\software.yml
+- features\revision\start.yml
 - features\revision\packages.yml
+- features\revision\software.yml
 - features\revision\services.yml
 - features\revision\components.yml
 - features\revision\appx.yml
