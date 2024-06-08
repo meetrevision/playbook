@@ -41,5 +41,5 @@ actions:
     runas: currentUserElevated
     wait: true
     option: "browser-firefox"
-  - !writeStatus: {status: 'Configuring Firefox', option: "browser-firefox"}
-  - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
+  # - !writeStatus: {status: 'Configuring Firefox', option: "browser-firefox"}
+  # - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
