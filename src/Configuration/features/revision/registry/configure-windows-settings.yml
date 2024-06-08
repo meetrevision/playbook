@@ -327,6 +327,9 @@ actions:
    # ------> Credits to @he3als for finding more reliable method.
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\ValueBanner.IdealStateFeatureControlProvider', value: 'ActivationType', type: REG_DWORD, data: '0'}
    
+  # === Disable Recall snapshots (24H2)
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI', value: 'DisableAIDataAnalysis', type: REG_DWORD, data: '1'}
+
     # ========================
     # === Discarded Tweaks ===
     # ========================
