@@ -69,3 +69,6 @@ actions:
   # Automatic Maintenance
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance', value: 'MaintenanceDisabled', operation: delete, option: '!disable-automatic-maintenance'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\ScheduledDiagnostics', value: 'EnabledExecution', operation: delete, option: '!disable-automatic-maintenance'}
+
+  # Breaks 'Your Phone'
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent', value: 'DisableWindowsConsumerFeatures', operation: delete}
