@@ -3,6 +3,15 @@ title: Packages
 description: Removes system packages
 privilege: TrustedInstaller
 actions:
+  - !writeStatus: {status: "Removing system packages"}
+  - !run:
+    path: "%ProgramFiles(x86)%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "winpackage --install system-components-removal"
+    wait: true
+    runas: currentUserElevated
+    weight: 100
+
   - !writeStatus: {status: 'Disabling Windows Defender', option: 'disable-defender'}
   - !run:
     path: "%ProgramFiles(x86)%\\Revision Tool"
@@ -22,15 +31,6 @@ actions:
     runas: currentUserElevated
     weight: 100
     option: 'enable-defender'
-
-  - !writeStatus: {status: "Removing system packages"}
-  - !run:
-    path: "%ProgramFiles(x86)%\\Revision Tool"
-    exe: "revitool.exe"
-    args: "winpackage --install system-components-removal"
-    wait: true
-    runas: currentUserElevated
-    weight: 100
 
   - !taskKill: {name: "explorer", ignoreErrors: true}
   - !taskKill: {name: "SearchApp", ignoreErrors: true}
