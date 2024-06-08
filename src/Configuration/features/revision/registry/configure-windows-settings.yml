@@ -330,6 +330,9 @@ actions:
   # === Disable Recall snapshots (24H2)
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI', value: 'DisableAIDataAnalysis', type: REG_DWORD, data: '1'}
 
+  # === Enable Sudo - On (Inline)
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Sudo', value: 'Enabled', type: REG_DWORD, data: '3'}
+
     # ========================
     # === Discarded Tweaks ===
     # ========================
