@@ -1,46 +1,54 @@
-@echo off
-SETLOCAL ENABLEDELAYEDEXPANSION
+<# :
+@echo off &pushd "%~dp0"
+@set batch_args=%*
+@powershell "iex (cat -Raw '%~f0')"
+@exit /b %ERRORLEVEL%
+: #>
 
-"!systemroot!\System32\OneDriveSetup.exe" /uninstall >NUL 2>nul
-"!systemroot!\SysWOW64\OneDriveSetup.exe" /uninstall >NUL 2>nul
-
-for /f "usebackq tokens=2 delims=\" %%e in (`reg query "HKEY_USERS" ^| findstr /r /x /c:"HKEY_USERS\\S-.*" /c:"HKEY_USERS\\AME_UserHive_[^_]*"`) do (
-	REM If the "Volatile Environment" key exists, that means it is a proper user. Built in accounts/SIDs do not have this key.
-	reg query "HKU\%%e" | findstr /c:"Volatile Environment" /c:"AME_UserHive_" > nul 2>&1
-	if not errorlevel 1 (
-		call :USERREG "%%e"
-	)
+$setupPaths = @(
+    "$env:systemroot\System32\OneDriveSetup.exe",
+    "$env:systemroot\SysWOW64\OneDriveSetup.exe"
 )
+$uninstallArguments = "/uninstall"
 
-taskkill /f /im "OneDrive.exe" >NUL 2>nul
+# $sid = (([System.Security.Principal.WindowsIdentity]::GetCurrent()).User).Value
 
-for /f "usebackq delims=" %%a in (`dir /b /a:d "%SystemDrive%\Users"`) do (
-	rmdir /q /s "%SystemDrive%\Users\%%a\AppData\Local\Microsoft\OneDrive" >NUL 2>nul
-	@REM rmdir /q /s "%SystemDrive%\Users\%%a\OneDrive" >NUL 2>nul
-	del /q /f "%SystemDrive%\Users\%%a\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk" >NUL 2>nul
-)
+$uninstallRegPaths = New-Object System.Collections.ArrayList
+New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS | Out-Null
+$users = Get-ChildItem 'HKU:\'
+foreach ($user in $users) {
+    if (Test-Path "HKU:\$($user.PSChildName)\Volatile Environment") {
+        $regPath = "HKU:\$($user.PSChildName)\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe"
+        $uninstallString = (Get-ItemProperty -Path $regPath).UninstallString
 
-for /f "usebackq delims=" %%e in (`reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SyncRootManager" ^| findstr /i /c:"OneDrive"`) do reg delete "%%e" /f >NUL 2>nul
+        if (!([string]::IsNullOrEmpty($uninstallString))) {
+            $uninstallFilePath = [System.IO.Path]::GetDirectoryName($uninstallString)
+            $uninstallRegPaths.Add($uninstallFilePath)
+        }
+        
+        Remove-ItemProperty -Path "HKU:\$($user.PSChildName)\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "OneDrive" -ErrorAction SilentlyContinue
+    }
+}
 
-for /f "usebackq tokens=1* delims=\" %%A in (`schtasks /query /fo list ^| findstr /c:"\OneDrive Reporting Task" /c:"\OneDrive Standalone Update Task"`) do (
-	schtasks /delete /tn "%%B" /f >NUL 2>nul
-)
+if ($uninstallRegPaths.Count -ne 0) {
+    $setupPaths = @($uninstallRegPaths) + $setupPaths
+}
 
-exit /b 0
+$setupPaths | ForEach-Object {
+    if (Test-Path $_) {
+        Write-Host "Uninstalling OneDrive from $_"
+        Start-Process -FilePath $_ -ArgumentList $uninstallArguments -Verbose -Wait -NoNewWindow -PassThru
+    }
+}
 
-:USERREG
-for /f "usebackq delims=" %%e in (`reg query "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\BannerStore" ^| findstr /i /c:"OneDrive"`) do reg delete "%%e" /f >NUL 2>nul
+Get-ChildItem -Path "$env:SystemDrive\Users" -Directory | ForEach-Object {
+    $oneDrivePath = Join-Path $_.FullName "AppData\Local\Microsoft\OneDrive"
+    if (Test-Path $oneDrivePath) {
+        Remove-Item -Path $oneDrivePath -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+    }
 
-for /f "usebackq delims=" %%e in (`reg query "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers" ^| findstr /i /c:"OneDrive"`) do reg delete "%%e" /f >NUL 2>nul
-
-for /f "usebackq delims=" %%e in (`reg query "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths" ^| findstr /i /c:"OneDrive"`) do reg delete "%%e" /f >NUL 2>nul
-
-for /f "usebackq delims=" %%e in (`reg query "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" ^| findstr /i /c:"OneDrive"`) do reg delete "%%e" /f >NUL 2>nul
-
-REM User installed variant
-for /f "tokens=2*" %%A in ('reg query "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe" /v "UninstallString"') do (
-    set "uninstallString=%%B"
-)
-if defined uninstallString (
-    call !uninstallString! >NUL 2>nul
-)
+    $oneDriveLinkPath = Join-Path $_.FullName "AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
+    if (Test-Path $oneDriveLinkPath) {
+        Remove-Item -Path $oneDriveLinkPath -Force -ErrorAction SilentlyContinue | Out-Null
+    }
+}

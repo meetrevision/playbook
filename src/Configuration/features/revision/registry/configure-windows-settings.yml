@@ -4,8 +4,8 @@ description: configure-windows-settings
 privilege: TrustedInstaller
 actions:
 
-    # === Hide stripped components from Settings - Windows Updates
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'SettingsPageVisibility', type: REG_SZ, data: 'hide:cortana;privacy-automaticfiledownloads;privacy-feedback;windowsinsider;windowsupdate'}
+    # === Hide stripped components from Settings
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'SettingsPageVisibility', type: REG_SZ, data: 'hide:cortana;privacy-automaticfiledownloads;privacy-feedback;windowsinsider;home'}
 
   # === Hide Insider page from Settings --> Windows Updates
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility', value: 'HideInsiderPage', type: REG_DWORD, data: '1'}
@@ -327,6 +327,12 @@ actions:
    # ------> Credits to @he3als for finding more reliable method.
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\ValueBanner.IdealStateFeatureControlProvider', value: 'ActivationType', type: REG_DWORD, data: '0'}
    
+  # === Disable Recall snapshots (24H2)
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI', value: 'DisableAIDataAnalysis', type: REG_DWORD, data: '1'}
+
+  # === Enable Sudo - On (Inline)
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Sudo', value: 'Enabled', type: REG_DWORD, data: '3'}
+
     # ========================
     # === Discarded Tweaks ===
     # ========================
