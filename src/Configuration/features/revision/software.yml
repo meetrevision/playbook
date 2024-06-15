@@ -13,9 +13,17 @@ actions:
     exeDir: true
     command: '.\UPDATE-APPX.ps1'
 
+  - !writeStatus: {status: 'Installing Arc (Win10)', option: "browser-arc10"}
+  - !powerShell:
+    weight: 50
+    runas: currentUserElevated
+    wait: true
+    exeDir: true
+    command: '.\arcwin10.ps1'
+
   - !writeStatus: {status: 'Installing Arc', option: "browser-arc"}
   - !cmd:
-    command: 'winget install TheBrowserCompany.Arc --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    command: 'winget install TheBrowserCompany.Arc --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     wait: true
     runas: currentUserElevated
@@ -23,7 +31,7 @@ actions:
 
   - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
   - !cmd:
-    command: 'winget install Brave.Brave --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    command: 'winget install Brave.Brave --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     wait: true
     runas: currentUserElevated
@@ -33,7 +41,7 @@ actions:
   # - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
   # - !cmd: {command: 'call "%temp%\BraveBrowserStandaloneSetup.exe" /silent /install', runas: currentUserElevated, weight: 50, option: "browser-brave"}
 
-  - !writeStatus: {status: 'Configuring Brave', option: "browser-brave"}
+  - !writeStatus: {status: 'Configuring Brave', }
   - !cmd:
     exeDir: true
     command: 'robocopy "BraveSoftware" "%ProgramFiles%\BraveSoftware" /E /IM /IT /NP & robocopy "BraveSoftware" "%localappdata%\BraveSoftware" /E /IM /IT /NP'
@@ -42,12 +50,12 @@ actions:
     option: "browser-brave"
 
   # Firefox
-  - !writeStatus: {status: 'Installing Firefox', option: "browser-firefox"}
-  - !cmd:
-    command: 'winget install Mozilla.Firefox --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
-    weight: 150
-    runas: currentUserElevated
-    wait: true
-    option: "browser-firefox"
+  #- !writeStatus: {status: 'Installing Firefox', option: "browser-firefox"}
+  #- !cmd:
+  #  command: 'winget install Mozilla.Firefox --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+  #  weight: 150
+  #  runas: currentUserElevated
+  #  wait: true
+  #  option: "browser-firefox"
   # - !writeStatus: {status: 'Configuring Firefox', option: "browser-firefox"}
   # - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
