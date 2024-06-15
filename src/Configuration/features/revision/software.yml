@@ -13,6 +13,14 @@ actions:
     exeDir: true
     command: '.\UPDATE-APPX.ps1'
 
+  - !writeStatus: {status: 'Installing Arc', option: "browser-arc"}
+  - !cmd:
+    command: 'winget install TheBrowserCompany.Arc --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    weight: 150
+    wait: true
+    runas: currentUserElevated
+    option: "browser-arc"
+
   - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
   - !cmd:
     command: 'winget install Brave.Brave --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
