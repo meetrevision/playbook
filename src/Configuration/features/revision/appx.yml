@@ -5,7 +5,7 @@ privilege: TrustedInstaller
 actions:
   
   - !writeStatus: {status: "Removing Appx Packages"}
-  - !appx: {name: '*Disney*', type: family, weight: 10}
+  # - !appx: {name: '*Disney*', type: family, weight: 10}
 
   - !appx: {name: '*microsoft.microsoftedge.stable*', type: family, ignoreErrors: true, weight: 10, option: "remove-edge"}
   - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family, ignoreErrors: true, weight: 10, option: "remove-edge"}
@@ -163,3 +163,6 @@ actions:
   - !writeStatus: {status: "Removing Your Phone", option: "remove-appx-yourphone"}
   - !appx: {name: '*Microsoft.YourPhone*', type: family, weight: 10, option: "remove-appx-yourphone"}
   - !appx: {name: '*MicrosoftWindows.CrossDevice*', type: family, weight: 10, option: "remove-appx-yourphone"}
+
+  - !writeStatus: {status: "Removing Recall", option: "remove-appx-recall"}
+  - !appx: {name: '*MicrosoftWindows.Client.AIX*', type: family, weight: 10, option: "remove-appx-recall"}

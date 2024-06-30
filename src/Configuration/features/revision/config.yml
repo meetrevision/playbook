@@ -4,6 +4,28 @@ description: Applies some Revision configurations
 privilege: TrustedInstaller
 actions:
 
+  # Disable Memory Compression
+  - !powerShell: 
+    command: 'Disable-MMAgent -mc'
+
+  # Disable Superfetch for SSDs
+  # Might not work on VMs
+  - !powerShell:
+    command: |
+      $mediaType = (Get-PhysicalDisk -SerialNumber (Get-Disk -Number (Get-Partition -DriveLetter $env:SystemDrive.Substring(0, 1)).DiskNumber).SerialNumber.TrimStart()).MediaType
+      if ($mediaType -eq 'SSD') {
+        $path = ${env:ProgramFiles(x86)} + '\Revision Tool\data\flutter_assets\additionals\DisableSF.bat'
+        Start-Process -FilePath $path -Wait -NoNewWindow
+      }
+  
+  - !cmd:
+    command: 'setx DOTNET_CLI_TELEMETRY_OPTOUT 1'
+    runas: currentUserElevated
+    
+  - !cmd:
+    command: 'setx POWERSHELL_TELEMETRY_OPTOUT 1'
+    runas: currentUserElevated
+
   - !writeStatus: {status: "Removing logs"}
   - !run:
     exeDir: true
