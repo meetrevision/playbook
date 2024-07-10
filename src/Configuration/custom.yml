@@ -2,15 +2,14 @@
 title: Custom
 description: Custom Revision configuration
 privilege: Admin
-actions: []
-features:
-- features\revision\registry\aaa-edit-ISO-version-and-edition.yml
-- features\revision\start.yml
-- features\revision\packages.yml
-- features\revision\software.yml
-- features\revision\services.yml
-- features\revision\components.yml
-- features\revision\appx.yml
-- features\revision\registry.yml
-- features\revision\revert.yml
-- features\revision\config.yml
+actions: 
+  - !task: {path: 'features\revision\registry\aaa-edit-ISO-version-and-edition.yml'}
+  - !task: {path: 'features\revision\start.yml'}
+  - !task: {path: 'features\revision\packages.yml'}
+  - !task: {path: 'features\revision\software.yml'}
+  - !task: {path: 'features\revision\services.yml'}
+  - !task: {path: 'features\revision\components.yml'}
+  - !task: {path: 'features\revision\appx.yml'}
+  - !task: {path: 'features\revision\registry.yml'}
+  - !task: {path: 'features\revision\revert.yml'}
+  - !task: {path: 'features\revision\config.yml'}

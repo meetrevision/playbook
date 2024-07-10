@@ -11,7 +11,8 @@
         "!systemPackage: mapping",
         "!cmd: mapping",
         "!powerShell: mapping",
-        "!writeStatus: mapping"
+        "!writeStatus: mapping",
+        "!task: mapping",
     ],
     "redhat.telemetry.enabled": false,
     "yaml.schemas": {
