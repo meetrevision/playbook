@@ -72,3 +72,9 @@ actions:
 
   # Breaks 'Your Phone'
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent', value: 'DisableWindowsConsumerFeatures', operation: delete}
+
+  # Revert Windows Updates policies
+  - !registryKey: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', operation: delete}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Servicing', value: 'RepairContentServerSource', operation: delete}
+  
+
