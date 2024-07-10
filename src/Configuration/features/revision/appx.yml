@@ -7,13 +7,13 @@ actions:
   - !writeStatus: {status: "Removing Appx Packages"}
   # - !appx: {name: '*Disney*', type: family, weight: 10}
 
-  - !appx: {name: '*microsoft.microsoftedge.stable*', type: family, ignoreErrors: true, weight: 10, option: "remove-edge"}
-  - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family, ignoreErrors: true, weight: 10, option: "remove-edge"}
-  - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', ignoreErrors: true, type: family, weight: 10, option: "remove-edge"}
-  - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", ignoreErrors: true, option: "remove-edge"}
+  - !appx: {name: '*microsoft.microsoftedge.stable*', type: family, errorAction: Ignore, weight: 10, option: "remove-edge"}
+  - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family, errorAction: Ignore, weight: 10, option: "remove-edge"}
+  - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', errorAction: Ignore, type: family, weight: 10, option: "remove-edge"}
+  - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", errorAction: Ignore, option: "remove-edge"}
 
   - !writeStatus: {status: "Removing OneDrive"}
-  - !appx: {name: '*OneDrive*', type: family, ignoreErrors: true, weight: 10, option: "remove-onedrive"}
+  - !appx: {name: '*OneDrive*', type: family, errorAction: Ignore, weight: 10, option: "remove-onedrive"}
 
   - !writeStatus: {status: "Removing Spotify"}
   - !appx: {name: '*Spotify*', type: family, weight: 10}
@@ -33,7 +33,7 @@ actions:
   - !powerShell:
     command: 'Get-AppxPackage MicrosoftWindows.Client.WebExperience | Remove-AppxPackage'
     runas: currentUserElevated
-  - !appx: {name: '*MicrosoftWindows.Client.WebExperience*', ignoreErrors: true, type: family, weight: 10}
+  - !appx: {name: '*MicrosoftWindows.Client.WebExperience*', errorAction: Ignore, type: family, weight: 10}
 
   - !writeStatus: {status: "Removing Alarms"}
   - !appx: {name: '*Microsoft.WindowsAlarms*', type: family, weight: 10}
@@ -137,7 +137,7 @@ actions:
   - !appx: {name: '*Microsoft.MSPaint*', type: family, weight: 10}
 
   - !writeStatus: {status: "Removing Teams"}
-  - !taskKill: {name: "*teams*", ignoreErrors: true}
+  - !taskKill: {name: "*teams*", errorAction: Ignore}
   - !appx: {name: '*MicrosoftTeams*', type: family, weight: 10}
     # new Teams
   - !powerShell: {command: 'Get-AppxPackage *MSTeams* | Remove-AppxPackage', runas: currentUserElevated}
