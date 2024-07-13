@@ -19,14 +19,16 @@ $users = Get-ChildItem 'HKU:\'
 foreach ($user in $users) {
     if (Test-Path "HKU:\$($user.PSChildName)\Volatile Environment") {
         $regPath = "HKU:\$($user.PSChildName)\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe"
-        $uninstallString = (Get-ItemProperty -Path $regPath).UninstallString
+        $uninstallString = (Get-ItemProperty -Path $regPath -EA SilentlyContinue).UninstallString
 
         if (!([string]::IsNullOrEmpty($uninstallString))) {
             $uninstallFilePath = [System.IO.Path]::GetDirectoryName($uninstallString)
             $uninstallRegPaths.Add($uninstallFilePath)
         }
         
-        Remove-ItemProperty -Path "HKU:\$($user.PSChildName)\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "OneDrive" -ErrorAction SilentlyContinue
+        Remove-ItemProperty -Path "HKU:\$($user.PSChildName)\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "OneDrive" -EA SilentlyContinue
+
+        Remove-Item -Path "HKU:\$($user.PSChildName)\Software\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe" -Force -EA SilentlyContinue
     }
 }
 
@@ -52,3 +54,6 @@ Get-ChildItem -Path "$env:SystemDrive\Users" -Directory | ForEach-Object {
         Remove-Item -Path $oneDriveLinkPath -Force -ErrorAction SilentlyContinue | Out-Null
     }
 }
+
+# Remove OneDrive from the Explorer sidebar
+[microsoft.win32.registry]::SetValue("HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", 0, [Microsoft.Win32.RegistryValueKind]::DWord)
