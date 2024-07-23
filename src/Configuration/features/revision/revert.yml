@@ -2,17 +2,9 @@
 title: Rollback Tweaks
 description: Rollback tweaks for those who are applying from previous versions of the playbook
 privilege: TrustedInstaller
-option: apply-revert
+onUpgrade: true
 actions:
 
-
-  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AUOptions', operation: delete }
-  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AutoInstallMinorUpdates', operation: delete }
-  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', operation: delete }
-  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUShutdownOption', operation: delete }
-  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoRebootWithLoggedOnUsers', operation: delete }
-  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'IncludeRecommendedUpdates', operation: delete }
-  - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'EnableFeaturedSoftware', operation: delete }
   - !registryValue: { path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager', value: 'HeapDeCommitFreeBlockThreshold', type: REG_DWORD, data: '0' }
 
   - !registryValue: { path: 'HKCU\SOFTWARE\Policies\Microsoft\Internet Explorer\Security', value: 'DisableSecuritySettingsCheck', operation: delete }
