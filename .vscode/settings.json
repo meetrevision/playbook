@@ -14,7 +14,6 @@
         "!writeStatus: mapping",
         "!task: mapping",
     ],
-    "redhat.telemetry.enabled": false,
     "yaml.schemas": {
         "https://json.schemastore.org/github-issue-config.json": "file:///workspaces/playbook/.github/ISSUE_TEMPLATE/config.yml"
     }

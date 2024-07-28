@@ -10,7 +10,7 @@ actions:
 
     # === Configure Automatic Updates - Disabled
     # ------> NOTE: Used to break Xbox Sign-in
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', type: REG_DWORD, data: '1'}
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', type: REG_DWORD, data: '1'}
 
    # === Pause Windows Updates to 2038 January 19
    # === FlightSettingsMaxPauseDays is responsible for the rest regs to work
