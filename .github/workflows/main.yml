@@ -8,9 +8,9 @@ on:
 
 env:
     SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
-    VERSIONLONG: '15.06.2024'
-    VERSIONGSHORT: '24.06'
-    FILENAME: Revi-BETA-15.06.2024.apbx
+    VERSIONLONG: '28.07.2024'
+    VERSIONGSHORT: '24.07'
+    FILENAME: Revi-BETA-28.07.2024.apbx
 
 jobs:
   build:
