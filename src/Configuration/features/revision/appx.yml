@@ -11,6 +11,7 @@ actions:
   - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family, errorAction: Ignore, weight: 10, option: "remove-edge"}
   - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', errorAction: Ignore, type: family, weight: 10, option: "remove-edge"}
   - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", errorAction: Ignore, option: "remove-edge"}
+  - !appx: {name: 'Microsoft.Copilot*', type: family, errorAction: Ignore, weight: 10, option: "remove-edge"}
 
   - !writeStatus: {status: "Removing OneDrive"}
   - !appx: {name: '*OneDrive*', type: family, errorAction: Ignore, weight: 10, option: "remove-onedrive"}
