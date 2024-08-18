@@ -69,4 +69,8 @@ actions:
   - !registryKey: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', operation: delete}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Servicing', value: 'RepairContentServerSource', operation: delete}
   
-
+  # Breaks 'defrag c: -b' and cores parking on some AMD CPUs
+  - !powerShell:
+    command: |
+      $path = ${env:ProgramFiles(x86)} + '\Revision Tool\data\flutter_assets\additionals\EnableSF.bat'
+      Start-Process -FilePath $path -Wait -NoNewWindow
