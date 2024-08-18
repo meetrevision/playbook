@@ -15,7 +15,8 @@ actions:
 
   - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
   - !cmd:
-    command: 'winget install Brave.Brave --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    # command: 'winget install Brave.Brave --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    command: 'winget install Brave.Brave --source winget --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     wait: true
     runas: currentUserElevated
