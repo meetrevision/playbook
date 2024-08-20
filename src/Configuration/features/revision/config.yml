@@ -102,5 +102,8 @@ actions:
   - !appx: {operation: clearCache, name: '*XboxIdentityProvider*'}
   - !appx: {operation: clearCache, name: '*XboxSpeechToTextOverlay*'}
 
+  # Force update group policy
+  - !run: 
+    exe: "gpupdate.exe"
     # Start as user process to prevent weird look due to running as TrustedInstaller
   # - !run: {baseDir: true, exe: "NSudoLC.exe", args: '-U:C -UseCurrentConsole explorer.exe'}
