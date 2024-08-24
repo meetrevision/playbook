@@ -1,6 +1,12 @@
 Write-Host 'Updating Microsoft Store apps...'
 Write-Host 'Installing Winget Source'
-Add-AppPackage 'https://cdn.winget.microsoft.com/cache/source.msix' -ForceApplicationShutdown -Verbose
+
+if (-Not (Test-Path -Path 'C:\winget.msix')) {
+    Add-AppPackage 'https://cdn.winget.microsoft.com/cache/source.msix' -ForceApplicationShutdown -Verbose
+} else {
+    Add-AppPackage 'C:\winget.msix' -ForceApplicationShutdown -Verbose
+}
+
 $productName = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').ProductName
 Write-Host "Product Name: $productName"
 $path = Join-Path ${env:ProgramFiles(x86)} 'Revision Tool'
