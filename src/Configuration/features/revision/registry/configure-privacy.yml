@@ -143,8 +143,6 @@ actions:
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'PreInstalledAppsEverEnabled', type: REG_DWORD, data: '0'}
     # === Pre-installed vendor apps - Off
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'OemPreInstalledAppsEnabled', type: REG_DWORD, data: '0'}
-    # === Pre-installed vendor apps - Off
-  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'OemPreInstalledAppsEnabled', type: REG_DWORD, data: '0'}
     # === Prevent Content Delivery Manager from reverting feature configuration
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'FeatureManagementEnabled', type: REG_DWORD, data: '0'}
     # === Remove Content Delivery Subcsriptions
