@@ -51,6 +51,7 @@
 # 0.0.0.0 laptop-updates.brave.com
 # 0.0.0.0 variations.brave.com
 0.0.0.0 cr.brave.com
+0.0.0.0 star-randsrv.bsg.brave.com
 
 # Visual Studio / VSCode
 0.0.0.0 vortex.data.microsoft.com
