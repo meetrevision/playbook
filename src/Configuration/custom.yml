@@ -2,13 +2,23 @@
 title: Custom
 description: Custom Revision configuration
 privilege: Admin
-actions: 
+actions:
   - !task: {path: 'features\revision\registry\aaa-edit-ISO-version-and-edition.yml'}
   - !task: {path: 'features\revision\start.yml'}
+  - !task: {path: 'features\revision\components.yml'}
+
   - !task: {path: 'features\revision\packages.yml'}
+  - !taskKill: {name: "explorer", errorAction: Ignore}
+  - !taskKill: {name: "SearchApp", errorAction: Ignore}
+  - !taskKill: {name: "SearchHost", errorAction: Ignore}
+  - !taskKill: {name: "RuntimeBroker", errorAction: Ignore}
+  - !taskKill: {name: "TextInputHost", errorAction: Ignore}
+  - !taskKill: {name: "ShellExperienceHost", errorAction: Ignore}
+  - !taskKill: {name: "backgroundTaskHost", errorAction: Ignore}
+  - !taskKill: {name: "Widgets", errorAction: Ignore}
+
   - !task: {path: 'features\revision\software.yml'}
   - !task: {path: 'features\revision\services.yml'}
-  - !task: {path: 'features\revision\components.yml'}
   - !task: {path: 'features\revision\appx.yml'}
   - !task: {path: 'features\revision\registry.yml'}
   - !task: {path: 'features\revision\revert.yml'}
