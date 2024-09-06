@@ -131,7 +131,7 @@ actions:
   - !registryValue: {path: 'HKU\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SystemPaneSuggestionsEnabled', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SubscribedContent-338388Enabled', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKU\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SubscribedContent-338388Enabled', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization', value: 'AllowInputPersonalization', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization', value: 'AllowInputPersonalization', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Personalization\Settings', value: 'AcceptedPrivacyPolicy', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKU\S-1-5-18\Software\Microsoft\Personalization\Settings', value: 'AcceptedPrivacyPolicy', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\TextInput', value: 'AllowLinguisticDataCollection', type: REG_DWORD, data: '0'}
@@ -267,7 +267,7 @@ actions:
   # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching', value: 'SearchOrderConfig', operation: delete}
   # - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching'}
 
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences', value: 'ModelDownloadAllowed', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences', value: 'ModelDownloadAllowed', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata', value: 'PreventDeviceMetadataFromNetwork', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching', value: 'DontSearchWindowsUpdate', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching', value: 'DriverUpdateWizardWuSearchEnabled', type: REG_DWORD, data: '0'}

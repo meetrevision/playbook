@@ -47,7 +47,7 @@ actions:
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Search', value: 'BingSearchEnabled', type: REG_DWORD, data: '0'}
     # === Automatic Update of Speech Data - Off
     # ------> https://www.howto-connect.com/enable-disable-automatic-update-speech-data-windows-10/
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences', value: 'ModelDownloadAllowed', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences', value: 'ModelDownloadAllowed', type: REG_DWORD, data: '0'}
     # === Cortana on Lock Screen - Disabled
     # ------> https://winaero.com/blog/how-to-enable-cortana-on-lock-screen/
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences', value: 'VoiceActivationEnableAboveLockscreen', type: REG_DWORD, data: '0'}

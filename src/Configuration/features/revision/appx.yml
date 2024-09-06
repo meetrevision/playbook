@@ -60,7 +60,6 @@ actions:
         'Microsoft.MSPaint', # Paint 3D
         'MicrosoftTeams',
         'MSTeams', # New Teams
-        'Microsoft.WindowsCalculator',
         'Microsoft.StartExperiencesApp'
       )
 
