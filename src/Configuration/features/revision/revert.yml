@@ -74,3 +74,7 @@ actions:
     command: |
       $path = ${env:ProgramFiles(x86)} + '\Revision Tool\data\flutter_assets\additionals\EnableSF.bat'
       Start-Process -FilePath $path -Wait -NoNewWindow
+
+  # Speech Recognition
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization', value: 'AllowInputPersonalization', operation: delete}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences', value: 'ModelDownloadAllowed', operation: delete}
