@@ -17,7 +17,7 @@ actions:
   - !cmd:
     command: 'winget install Brave.Brave --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
-    wait: false
+    wait: true
     runas: currentUserElevated
     option: "browser-brave"
 
@@ -39,7 +39,7 @@ actions:
     command: 'winget install Mozilla.Firefox --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "browser-firefox"
   # - !writeStatus: {status: 'Configuring Firefox', option: "browser-firefox"}
   # - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
@@ -50,7 +50,7 @@ actions:
     command: 'winget install Google.Chrome.EXE --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "browser-chrome"
 
   # Teamspeak
@@ -59,14 +59,14 @@ actions:
     command: 'Invoke-WebRequest -Uri "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi" -OutFile "$env:TEMP\teamspeak-client.msi"'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-teamspeak"
 
   - !powerShell: 
     command: 'Start-Process -FilePath "$env:TEMP\teamspeak-client.msi" -ArgumentList "/quiet" -Wait'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-teamspeak"
   
   # Discord
@@ -75,7 +75,7 @@ actions:
     command: 'winget install Discord.Discord --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-discord"
   
   # Office
@@ -84,7 +84,7 @@ actions:
     command: 'winget install Microsoft.Office --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-office"
   
   # Office Deploy
@@ -93,7 +93,7 @@ actions:
     command: 'Invoke-WebRequest -Uri "https://download.microsoft.com/download/2/7/A/27AF1BE6-DD20-4CB4-B154-EBAB8A7D4A7E/officedeploymenttool_17531-20046.exe" -OutFile "$env:TEMP\officedeploymenttool.exe" ; Start-Process -FilePath "$env:TEMP\officedeploymenttool.exe" -ArgumentList "/quiet" -Wait'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-office-deploy"
   
   # Thunderbird
@@ -102,7 +102,7 @@ actions:
     command: 'winget install Mozilla.Thunderbird --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-thunderbird"
   
   # MS Teams
@@ -111,7 +111,7 @@ actions:
     command: 'winget install Microsoft.Teams --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-teams"
   
   # Steam
@@ -120,7 +120,7 @@ actions:
     command: 'winget install Valve.Steam --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-steam"
   
   # VS Code
@@ -129,7 +129,7 @@ actions:
     command: 'winget install Microsoft.VisualStudioCode --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-vscode"
  
   # Github Desktop
@@ -138,7 +138,7 @@ actions:
     command: 'winget install GitHub.GitHubDesktop --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-github"
   
   # Dropbox
@@ -147,7 +147,7 @@ actions:
     command: 'winget install Dropbox.Dropbox --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-dropbox"
 
   # Google Drive
@@ -156,7 +156,7 @@ actions:
     command: 'winget install Google.GoogleDrive --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-gdrive"
   
   # DisplayCAL
@@ -165,7 +165,7 @@ actions:
     command: 'winget install displaycal --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-displaycal"
   
   # NVCleanstall
@@ -174,7 +174,7 @@ actions:
     command: 'winget install TechPowerUp.NVCleanstall --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-nvclean"
   
   # WinRAR
@@ -183,5 +183,5 @@ actions:
     command: 'winget install RARLab.WinRAR --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
-    wait: false
+    wait: true
     option: "install-winrar"
