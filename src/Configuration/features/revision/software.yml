@@ -16,7 +16,7 @@ actions:
   - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
   - !cmd:
     # command: 'winget install Brave.Brave --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
-    command: 'winget install Brave.Brave --source winget --silent --accept-source-agreements --accept-package-agreements'
+    command: 'winget install XP8C9QZMS2PC1T --source msstore --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     wait: true
     runas: currentUserElevated
@@ -37,7 +37,7 @@ actions:
   # Firefox
   - !writeStatus: {status: 'Installing Firefox', option: "browser-firefox"}
   - !cmd:
-    command: 'winget install Mozilla.Firefox --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
+    command: 'winget install Mozilla.Firefox --source winget --silent --accept-source-agreements --accept-package-agreements'
     weight: 150
     runas: currentUserElevated
     wait: true
