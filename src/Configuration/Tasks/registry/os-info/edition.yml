@@ -1,0 +1,14 @@
+---
+title: revision-static-edition
+description: revision-static-edition
+privilege: TrustedInstaller
+actions:
+
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion', value: 'EditionSubManufacturer', type: REG_SZ, data: 'MeetRevision'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion', value: 'EditionSubstring', type: REG_SZ, data: 'Revision'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion', value: 'EditionSubVersion', type: REG_SZ, data: 'ReviOS'}
+
+
+  # === Causes Network Sharing/Computer Name issues
+  # - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\ComputerName\ComputerName', value: 'ComputerName', type: REG_SZ, data: 'Revision-PC'}
+  # - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\ComputerName\ActiveComputerName', value: 'ComputerName', type: REG_SZ, data: 'Revision-PC'}

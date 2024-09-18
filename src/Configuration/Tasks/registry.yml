@@ -1,0 +1,70 @@
+---
+title: Registry
+description: Revision registry configuration
+privilege: TrustedInstaller
+actions: 
+  - !writeStatus: {status: "Tweaking registry"}
+
+  # OS Info
+  - !writeStatus: {status: "Configuring OS Info"}
+  - !task: {path: 'Tasks\registry\os-info\edition.yml'}
+  - !task: {path: 'Tasks\registry\os-info\oem-info.yml'}
+
+  # Explorer
+  - !writeStatus: {status: "Configuring Explorer"}
+  - !task: {path: 'Tasks\registry\explorer\explorer.yml'}
+  - !task: {path: 'Tasks\registry\explorer\context-menu.yml'}
+  - !task: {path: 'Tasks\registry\explorer\control-panel.yml'}
+  - !task: {path: 'Tasks\registry\explorer\notifications.yml'}
+  - !task: {path: 'Tasks\registry\explorer\search.yml'}
+  - !task: {path: 'Tasks\registry\explorer\start-menu.yml'}
+  - !task: {path: 'Tasks\registry\explorer\taskbar.yml'}
+  - !task: {path: 'Tasks\registry\explorer\view.yml'}
+  - !task: {path: 'Tasks\registry\explorer\win-settings.yml'}
+
+  # Privacy
+  - !writeStatus: {status: "Configuring Privacy"}
+  - !task: {path: 'Tasks\registry\privacy\privacy.yml'}
+  - !task: {path: 'Tasks\registry\privacy\app-compat.yml'}
+  - !task: {path: 'Tasks\registry\privacy\cdm.yml'}
+  - !task: {path: 'Tasks\registry\privacy\ceip.yml'}
+  - !task: {path: 'Tasks\registry\privacy\cloud-content.yml'}
+  - !task: {path: 'Tasks\registry\privacy\telemetry.yml'}
+  - !task: {path: 'Tasks\registry\privacy\wer.yml'}
+
+  # Security
+  - !writeStatus: {status: "Configuring Security"}
+  - !task: {path: 'Tasks\registry\security\security.yml'}
+  - !task: {path: 'Tasks\registry\security\vbs.yml'}
+
+  # System
+  - !writeStatus: {status: "Configuring System"}
+  - !task: {path: 'Tasks\registry\system\boot.yml'}
+  - !task: {path: 'Tasks\registry\system\bypass-requirements.yml'}
+  - !task: {path: 'Tasks\registry\system\crash-control.yml'}
+  - !task: {path: 'Tasks\registry\system\disable-automatic-maintenance.yml'}
+  - !task: {path: 'Tasks\registry\system\ifeo.yml'}
+  - !task: {path: 'Tasks\registry\system\kernel.yml'}
+  - !task: {path: 'Tasks\registry\system\logon.yml'}
+  - !task: {path: 'Tasks\registry\system\multimedia.yml'}
+  - !task: {path: 'Tasks\registry\system\oobe.yml'}
+  - !task: {path: 'Tasks\registry\system\power.yml'}
+  - !task: {path: 'Tasks\registry\system\win32ps.yml'}
+
+  # Updates
+  - !writeStatus: {status: "Configuring Updates"}
+  - !task: {path: 'Tasks\registry\updates\updates.yml'}
+  - !task: {path: 'Tasks\registry\updates\drivers.yml'}
+  - !task: {path: 'Tasks\registry\updates\internet-explorer.yml'}
+  - !task: {path: 'Tasks\registry\updates\ms-store.yml'}
+
+  # Miscellaneous
+  - !task: {path: 'Tasks\registry\misc\classic-photo-viewer.yml'}
+  - !task: {path: 'Tasks\registry\misc\deprovisioned-apps.yml'}
+  - !task: {path: 'Tasks\registry\misc\disable-installing-teams.yml'}
+  - !task: {path: 'Tasks\registry\misc\disable-logging.yml'}
+  - !task: {path: 'Tasks\registry\misc\disable-system-restore-pre-defined-config.yml'}
+  - !task: {path: 'Tasks\registry\misc\enable-audio-communications-do-nothing.yml'}
+  - !task: {path: 'Tasks\registry\misc\fixes.yml'}
+  - !task: {path: 'Tasks\registry\misc\msi-installer-in-safe-mode.yml'}
+

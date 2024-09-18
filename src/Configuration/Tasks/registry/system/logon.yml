@@ -1,0 +1,35 @@
+---
+title: Configure System -> Logon
+description: Configure logon settings
+privilege: TrustedInstaller
+actions:
+
+  # =============
+  # === Logon ===
+  # =============
+  # === Always use classic logon - Disabled
+  # ------> Outdated tweak
+  # [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System]
+  # "LogonType"=dword:00000001
+  
+  # === Show first sign-in animation - Disabled
+  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableFirstLogonAnimation', type: REG_DWORD, data: '0'}
+    
+  # === Turn off Windows Startup sound - Enabled
+  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System', value: 'DisableStartupSound', type: REG_DWORD, data: '1'}
+  
+  # ========================================
+  # === Control Panel -> Personalization ===
+  # ========================================
+  # === Do not display the lock screen - Enabled
+  # ------> This won't skip the password/pin screen.
+  # [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Personalizaion]
+  # "NoLockScreen"=dword:00000001
+  
+  # =============================
+  # === Windows Logon Options ===
+  # =============================
+  
+  # === Sign-in and lock last interactive user automatically after a restart - Disabled
+  # ------> Prevents apps from automatically reopening after a restart or an update.
+  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System', value: 'DisableAutomaticRestartSignOn', type: REG_DWORD, data: '1'}

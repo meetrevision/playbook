@@ -1,7 +1,0 @@
----
-title: configure-multimedia
-description: configure-multimedia
-privilege: TrustedInstaller
-actions:
-
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile', value: 'NetworkThrottlingIndex', type: REG_DWORD, data: '10'}

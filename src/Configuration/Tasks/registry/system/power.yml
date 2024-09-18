@@ -1,0 +1,32 @@
+---
+title: configure-power-control
+description: configure-power-control
+privilege: TrustedInstaller
+actions:
+
+  # === Require use of fast startup - Disabled
+  # ------> Enhances compatibility with Linux dual boot.
+  # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.WindowsInitialization::Hiberboot
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\System', value: 'HiberbootEnabled', type: REG_DWORD, data: '0'}
+
+  # === Disable Fast startup.
+  # ------> Enhances compatibility with Linux dual boot.
+  # ------> https://support.bromium.com/s/article/Disabling-Windows-10-Fast-Startup?language=en_US
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Power', value: 'HiberbootEnabled', type: REG_DWORD, data: '0'}
+
+  # === Shutdown Menu - Hibernate - Disabled
+  # ------> https://www.tenforums.com/tutorials/7445-add-remove-hibernate-power-menu-windows-10-a.html
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings', value: 'ShowHibernateOption', type: REG_DWORD, data: '0'}
+
+  # === Shutdown Menu - Sleep - Enabled
+  # ------> https://www.tenforums.com/tutorials/7445-add-remove-hibernate-power-menu-windows-10-a.html
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings', value: 'ShowSleepOption', type: REG_DWORD, data: '1'}
+
+  # === Allow system to be shut down without having to log on - Enabled
+  # ------> https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/shutdown-allow-system-to-be-shut-down-without-having-to-log-on
+  # ------> https://www.stigviewer.com/stig/windows_server_2012_member_server/2014-01-07/finding/V-1075
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ShutdownWithoutLogon', type: REG_DWORD, data: '1'}
+
+  # === Hibernation - Disabled
+  # ------> https://www.tenforums.com/tutorials/2859-enable-disable-hibernate-windows-10-a.html
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Power', value: 'HibernateEnabled', type: REG_DWORD, data: '0'}

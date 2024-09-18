@@ -1,0 +1,11 @@
+---
+title: Optional Features
+description: Configures Windows optional features
+privilege: TrustedInstaller
+actions:
+  - !writeStatus: {status: "Configuring features"}
+  - !powerShell:
+    exeDir: true
+    errorAction: Ignore
+    weight: 100
+    command: 'DISM-FEATURES.ps1'

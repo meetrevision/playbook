@@ -1,0 +1,34 @@
+---
+title: Custom
+description: Custom Revision configuration
+privilege: Admin
+actions:
+  
+  # OS Info
+  - !task: {path: 'Tasks\registry\os-info\edition.yml'}
+  - !task: {path: 'Tasks\registry\os-info\oem-info.yml'}
+
+  - !task: {path: 'Tasks\start.yml'}
+  
+  - !task: {path: 'Tasks\packages\app-win32.yml'}
+  # Uninstalling WinSxS packages before app-win32 could leave leftovers
+  - !task: {path: 'Tasks\packages\win-sxs.yml'}
+  - !task: {path: 'Tasks\packages\appx.yml'}
+
+  
+  # Defender requires explorer to be running to disable certain protections, so that's why Explorer is terminated afterward
+  - !taskKill: {name: "explorer", errorAction: Ignore}
+  - !taskKill: {name: "SearchApp", errorAction: Ignore}
+  - !taskKill: {name: "SearchHost", errorAction: Ignore}
+  - !taskKill: {name: "RuntimeBroker", errorAction: Ignore}
+  - !taskKill: {name: "TextInputHost", errorAction: Ignore}
+  - !taskKill: {name: "ShellExperienceHost", errorAction: Ignore}
+  - !taskKill: {name: "backgroundTaskHost", errorAction: Ignore}
+  - !taskKill: {name: "Widgets", errorAction: Ignore}
+
+  - !task: {path: 'Tasks\software.yml'}
+  - !task: {path: 'Tasks\services.yml'}
+  
+  - !task: {path: 'Tasks\registry.yml'}
+  - !task: {path: 'Tasks\revert.yml'}
+  - !task: {path: 'Tasks\final.yml'}
