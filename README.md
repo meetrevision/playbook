@@ -57,7 +57,7 @@ Explore our documentation for more information:
 - [Playbook](https://www.revi.cc/docs/playbook/general)
 - [Installing Windows](https://www.revi.cc/docs/playbook/installwindows)
 - [Installing & Updating ReviOS](https://www.revi.cc/docs/playbook/install)
-- [Frequently Asked Questions](https://www.revi.cc/docs/faq)
+- [Frequently Asked Questions](https://www.revi.cc/docs/category/faq)
 
 ## 📝 License
 
