@@ -18,6 +18,7 @@ actions:
   # ------> https://www.howtogeek.com/224159/how-to-disable-bing-in-the-windows-10-start-menu/
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.WindowsExplorer::DisableSearchBoxSuggestions
   - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\Explorer', value: 'DisableSearchBoxSuggestions', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Policies\Microsoft\Windows\Explorer', value: 'DisableSearchBoxSuggestions', type: REG_DWORD, data: '1'}
 
   # === Allow Cloud Search - User Selected
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=FullArmor.Policies.3B9EA2B5_A1D1_4CD5_9EDE_75B22990BC21::AllowCloudSearch
@@ -58,7 +59,9 @@ actions:
   # ------> Only applies to 1909 and lower.
   # ------> https://www.howtogeek.com/224159/how-to-disable-bing-in-the-windows-10-start-menu/
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Search', value: 'CortanaConsent', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Search', value: 'CortanaConsent', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Search', value: 'BingSearchEnabled', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Search', value: 'BingSearchEnabled', type: REG_DWORD, data: '0'}
 
   # === Automatic Update of Speech Data - Off
   # ------> https://www.howto-connect.com/enable-disable-automatic-update-speech-data-windows-10/

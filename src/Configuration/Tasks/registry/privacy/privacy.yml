@@ -32,6 +32,7 @@ actions:
 
   # === Turn off tracking of app usage - Enabled
   - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\EdgeUI', value: 'DisableMFUTracking', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Policies\Microsoft\Windows\EdgeUI', value: 'DisableMFUTracking', type: REG_DWORD, data: '1'}
 
   # ===========================================================
   # === Restrict Internet communication (HKEY_CURRENT_USER) ===

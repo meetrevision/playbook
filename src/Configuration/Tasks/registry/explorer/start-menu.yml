@@ -37,3 +37,4 @@ actions:
   # === Do not use the search-based method when resolving shell shortcuts - Enabled
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.StartMenu::NoResolveSearch
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'NoResolveSearch', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'NoResolveSearch', type: REG_DWORD, data: '1'}

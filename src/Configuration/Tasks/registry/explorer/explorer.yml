@@ -8,9 +8,13 @@ actions:
   # ------> Disabling it fixes the 'folder always loading' issue when a folder contains a lot of media files.  
   # ------> https://www.windowslatest.com/2024/03/04/windows-11-can-open-big-folders-in-file-explorer-faster-if-you-turn-off-folder-discovery/
   - !registryValue: {path: 'HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell', value: 'FolderType', type: REG_SZ, data: 'NotSpecified'} 
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell', value: 'FolderType', type: REG_SZ, data: 'NotSpecified'}
+  
 
   # === perf: Force explorer to use high performance GPU
   - !registryValue: { path: 'HKCU\Software\Microsoft\DirectX\UserGpuPreferences', value: 'C:\Windows\explorer.exe', type: REG_SZ, data: 'GpuPreference=2;' }
+  - !registryValue: { path: 'HKU\.DEFAULT\Software\Microsoft\DirectX\UserGpuPreferences', value: 'C:\Windows\explorer.exe', type: REG_SZ, data: 'GpuPreference=2;' }
+
 
   # === perf: Disable 'Include account-based insights, recent, favorite and recommended' for OneDrive in File Explorer
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer', value: 'DisableGraphRecentItems', type: REG_DWORD, data: '1' }
@@ -48,17 +52,21 @@ actions:
   # === Increased context options time threshold
   # ------> If selecting and right clicking more than x amount of items, some context options disappear (i.e. Take ownership), this will increase the threshold.
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer', value: 'MultipleInvokePromptMinimum', type: REG_DWORD, data: '100'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer', value: 'MultipleInvokePromptMinimum', type: REG_DWORD, data: '100'}
   - !registryValue: {path: 'HKCU\Software\Winaero.com\Winaero Tweaker\Changes', value: 'pageContextMenuSelectionLimit', type: REG_DWORD, data: '1'}
   
   # === Disable ' - Shortcut.' text on shortcut creation.
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'link', type: REG_BINARY, data: '00000000'}
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'link', type: REG_BINARY, data: '00000000'}
   
   # === Always show more details in a file copy dialog - Enabled
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager', value: 'EnthusiastMode', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager', value: 'EnthusiastMode', type: REG_DWORD, data: '1'}
   
   # === AutoPlay - Disabled
   # ------> Auto play is the notification that pops up when you insert an external storage device, like a USB.
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers', value: 'DisableAutoplay', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers', value: 'DisableAutoplay', type: REG_DWORD, data: '1'}
   
   # === AutoRun - Disabled
   # ------> Disable autorun will limit the functionality of autorun.inf on all disks.
@@ -69,6 +77,7 @@ actions:
   # === Windows low disk space checking - Disabled
   # ------> (Also prevents idle hard disks from going into standby)
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'NoLowDiskSpaceChecks', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'NoLowDiskSpaceChecks', type: REG_DWORD, data: '1'}
 
   # === Speed up shutdown time by lowering the amount of time it takes the OS to close/kill background Services.
   # ------> Changed to 1.5 seconds (1500), default is 5 seconds (5000).
@@ -78,12 +87,15 @@ actions:
   # === Do not track Shell shortcuts during roaming - Enabled
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.WindowsExplorer::LinkResolveIgnoreLinkInfo
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'LinkResolveIgnoreLinkInfo', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'LinkResolveIgnoreLinkInfo', type: REG_DWORD, data: '1'}
 
 
   # === Disable Taskbar Animations. (prevents the pop up windows in the taskbar from getting stuck too)
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', type: REG_DWORD, data: '0', option: 'configure-explorer-taskbar-animations'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', type: REG_DWORD, data: '0', option: 'configure-explorer-taskbar-animations'}
   
   - !registryValue: { path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', operation: delete, option: '!configure-explorer-taskbar-animations' }
+  - !registryValue: { path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', operation: delete, option: '!configure-explorer-taskbar-animations' }
 
   # === Allow Windows Ink Workspace - Enabled (On, but disallow access above lock)
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.WindowsInkWorkspace::AllowSuggestedAppsInWindowsInkWorkspace
@@ -94,16 +106,21 @@ actions:
 
   # === 'Show recommendations for tips, shortcuts, new apps, and more' - Disabled
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_IrisRecommendations', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_IrisRecommendations', type: REG_DWORD, data: '0'}
 
   # === 'Show account related notifications occasionally in Start' - Disabled
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_AccountNotifications', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_AccountNotifications', type: REG_DWORD, data: '0'}
 
   # === 'End Task' - Enabled
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings', value: 'TaskbarEndTask', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings', value: 'TaskbarEndTask', type: REG_DWORD, data: '1'}
 
   # === Open File Explorer to This PC by Default
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'LaunchTo', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'LaunchTo', type: REG_DWORD, data: '1'}
 
   # === Show Pop-up Description - Hide
   # ------> https://www.tenforums.com/tutorials/89239-hide-show-pop-up-descriptions-windows-10-a.html
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowInfoTip', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowInfoTip', type: REG_DWORD, data: '0'}

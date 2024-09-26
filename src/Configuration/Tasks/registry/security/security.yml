@@ -7,6 +7,7 @@ actions:
   # === Hide the Account Protection page in Defender
   # ------> Everything it provides redirects to the Windows Settings anyway. Done for annoyance reduction.
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows Security Health\State', value: 'AccountProtection_MicrosoftAccount_Disconnected', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows Security Health\State', value: 'AccountProtection_MicrosoftAccount_Disconnected', type: REG_DWORD, data: '0'}
 
   # === Windows Defender Antivirus
   # In early days of ReviOS, Defender used to disabled via registry. We now use a different method and makes most of policies & registries obsolete. Therefore, we've removed most of the comments.

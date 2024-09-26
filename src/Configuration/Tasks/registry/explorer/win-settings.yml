@@ -44,21 +44,33 @@ actions:
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell', value: 'SignInMode', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell', value: 'TabletMode', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell', value: 'ConvertibleSlateModePromptPreference', type: REG_DWORD, data: '2'}
+  # DEFAULT USER
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell', value: 'SignInMode', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell', value: 'TabletMode', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell', value: 'ConvertibleSlateModePromptPreference', type: REG_DWORD, data: '2'}
 
   # === Hide app icons on the taskbar in tablet mode - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAppsVisibleInTabletMode', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAppsVisibleInTabletMode', type: REG_DWORD, data: '1'}
+
 
   # === Automatically hide the taskbar in tablet mode - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAutoHideInTabletMode', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAutoHideInTabletMode', type: REG_DWORD, data: '0'}
+
 
   # ======> Multitasking
   # === Show suggestions occasionally in your timeline - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SubscribedContent-353698Enabled', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SubscribedContent-353698Enabled', type: REG_DWORD, data: '0'}
+
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SystemPaneSuggestionsEnabled', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SystemPaneSuggestionsEnabled', type: REG_DWORD, data: '0'}
 
   # ======> Clipboard
   # === Clipboard History - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Clipboard', value: 'EnableClipboardHistory', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Clipboard', value: 'EnableClipboardHistory', type: REG_DWORD, data: '0'}
 
   # === Allow Clipboard History - Enabled (default)
   # ------> Clipboard won't work if disabled.
@@ -115,6 +127,7 @@ actions:
   # ======> AutoPlay
   # === Use AutoPlay for all media and devices - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers', value: 'DisableAutoplay', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers', value: 'DisableAutoplay', type: REG_DWORD, data: '1'}
 
   # =======================
   # === Personalization ===
@@ -135,15 +148,21 @@ actions:
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '0', option: "configure-darkmode", weight: 70}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '0', option: "configure-darkmode", weight: 50}
 
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '0', option: "configure-darkmode", weight: 70}
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '0', option: "configure-darkmode", weight: 50}
+
   ## if dark mode is deselected, then revert to light mode
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '1', option: "!configure-darkmode", weight: 70}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '1', option: "!configure-darkmode", weight: 50}
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '1', option: "!configure-darkmode", weight: 70}
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '1', option: "!configure-darkmode", weight: 50}
   ##
 
 
   # ======> Start
   # === Show suggestions occasionally in Start - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SubscribedContent-338388Enabled', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SubscribedContent-338388Enabled', type: REG_DWORD, data: '0'}
 
   # ============
   # === Apps ===
@@ -224,6 +243,7 @@ actions:
   # === Record game clips, screenshots and broadcast using Game bar - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', type: REG_DWORD, data: '0', option: 'remove-appx-xbox'}
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_Enabled', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\System\GameConfigStore', value: 'GameDVR_Enabled', type: REG_DWORD, data: '0'}
 
   # ===============
   # === Privacy ===
@@ -244,6 +264,7 @@ actions:
   # === Allow webistes to provide locally relevant content by accessing my language list - Off
   # ------> Do not let websites access local language list - Enabled
   - !registryValue: {path: 'HKCU\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1', weight: 50}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1', weight: 50}
 
   # === Allow Windows to track app launches to improve Start and search - Off
   # [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
@@ -253,11 +274,13 @@ actions:
   # === Show me notifications in the Settings app - Off
   # ------> Found in 22631.3527
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\SystemSettings\AccountNotifications', value: 'EnableAccountNotifications', type: REG_DWORD, data: '1', weight: 50}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\SystemSettings\AccountNotifications', value: 'EnableAccountNotifications', type: REG_DWORD, data: '1', weight: 50}
   
 
   # ======> Speech
   # === Online speech recognition - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy', value: 'HasAccepted', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy', value: 'HasAccepted', type: REG_DWORD, data: '0'}
 
   # ======> Inking & typing personalization
   # === Getting to know you - Off
@@ -293,6 +316,7 @@ actions:
 
   # === Tailored experiences - Off
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy', value: 'TailoredExperiencesWithDiagnosticDataEnabled', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Privacy', value: 'TailoredExperiencesWithDiagnosticDataEnabled', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CPSS\DevicePolicy\TailoredExperiencesWithDiagnosticDataEnabled', value: 'DefaultValue', type: REG_DWORD, data: '0'}
 
   # === View diagnostic data - Off
@@ -301,6 +325,9 @@ actions:
   # === Feedback frequency - Never
   - !registryValue: {path: 'HKCU\Software\Microsoft\Siuf\Rules', value: 'NumberOfSIUFInPeriod', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Siuf\Rules', value: 'PeriodInNanoSeconds', operation: delete}
+
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Siuf\Rules', value: 'NumberOfSIUFInPeriod', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Siuf\Rules', value: 'PeriodInNanoSeconds', operation: delete}
 
   # ======> Activity history
   # === Allow upload of User Activities - Disabled
@@ -317,6 +344,8 @@ actions:
 
   # === Location - Off
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location', value: 'Value', type: REG_SZ, data: 'Deny'}
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location', value: 'Value', type: REG_SZ, data: 'Deny'}
+  
   # REMINDER
   # [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
   # "Value"="Deny"

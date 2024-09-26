@@ -6,18 +6,23 @@ actions:
 
   # === Disable Wallpaper JPEG (.jpg) image Compression.
   - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'JPEGImportQuality', type: REG_DWORD, data: '100'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Desktop', value: 'JPEGImportQuality', type: REG_DWORD, data: '100'}
   
   # === Disable system beeps.
   - !registryValue: {path: 'HKCU\Control Panel\Sound', value: 'Beep', type: REG_SZ, data: 'no'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Sound', value: 'Beep', type: REG_SZ, data: 'no'}
 
   # === Changes the time (milliseconds) it takes for the tooltips to pop up when hovering your mouse over elements to 30 ms. (default = 400 ms)
   - !registryValue: {path: 'HKCU\Control Panel\Mouse', value: 'MouseHoverTime', type: REG_SZ, data: '30'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Mouse', value: 'MouseHoverTime', type: REG_SZ, data: '30'}
   
   # === Makes the Start Menu appear almost instantly when you click on the Windows icon in the Taskbar.
   - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'MenuShowDelay', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Desktop', value: 'MenuShowDelay', type: REG_SZ, data: '0'}
   
   # === Specifies time (in milliseconds) that the mouse needs to remain over a window before the window is activated. (current setting is 10 ms)
   - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'ActiveWndTrkTimeout', type: REG_DWORD, data: '10'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Desktop', value: 'ActiveWndTrkTimeout', type: REG_DWORD, data: '10'}
 
   # === Disables the blue screen that pops up when you're trying to shutdown or restart, asking you to save your work.
   - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'AutoEndTasks', type: REG_SZ, data: '0'}
@@ -44,7 +49,14 @@ actions:
 
   # === Removes Ease of Access -> MouseKeys features tied to alteration of Sensitivity, so that it'll never change even when using MouseKeys.
   - !registryValue: {path: 'HKCU\Control Panel\Accessibility\MouseKeys', value: 'MaximumSpeed', operation: delete}
+  - !registryValue: {path: 'HKCU\Control Panel\Accessibility\MouseKeys', value: 'MaximumSpeed', operation: delete}
   - !registryValue: {path: 'HKCU\Control Panel\Accessibility\MouseKeys', value: 'TimeToMaximumSpeed', operation: delete}
+  - !registryValue: {path: 'HKCU\Control Panel\Accessibility\MouseKeys', value: 'TimeToMaximumSpeed', operation: delete}
+  # DEFAULT USER
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys', value: 'MaximumSpeed', operation: delete}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys', value: 'MaximumSpeed', operation: delete}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys', value: 'TimeToMaximumSpeed', operation: delete}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys', value: 'TimeToMaximumSpeed', operation: delete}
 
     
   # === Unticks Enhance Pointer Precision in Control Panel -> Mouse -> Pointer Options
@@ -61,10 +73,10 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'AllowOnlineTips', type: REG_DWORD, data: '0'}
 
   
-    # =================================================
-    # === Remove Ease of Access hives from Registry ===
-    # =================================================
-    # === Remove and clean up Ease of Access registry entries and keys (HKEY_CURRENT_USER)
+  # =================================================
+  # === Remove Ease of Access hives from Registry ===
+  # =================================================
+  # === Remove and clean up Ease of Access registry entries and keys (HKEY_CURRENT_USER)
   - !registryKey: {path: 'HKCU\Control Panel\Accessibility\AudioDescription'}
   - !registryKey: {path: 'HKCU\Control Panel\Accessibility\Blind Access'}
   - !registryKey: {path: 'HKCU\Control Panel\Accessibility\HighContrast'}
@@ -78,6 +90,20 @@ actions:
   - !registryKey: {path: 'HKCU\Control Panel\Accessibility\StickyKeys'}
   - !registryKey: {path: 'HKCU\Control Panel\Accessibility\TimeOut'}
   - !registryKey: {path: 'HKCU\Control Panel\Accessibility\ToggleKeys'}
+  # DEFAULT USER
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\AudioDescription'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\Blind Access'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\HighContrast'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Preference'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\On'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\ShowSounds'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\SlateLaunch'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\SoundSentry'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\StickyKeys'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\TimeOut'}
+  - !registryKey: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\ToggleKeys'}
    
   # ===================================================
   # === Disable Ease of Access features in Registry ===
@@ -96,3 +122,17 @@ actions:
   - !registryValue: {path: 'HKCU\Control Panel\Accessibility\StickyKeys', value: 'Flags', type: REG_SZ, data: '0'}
   - !registryValue: {path: 'HKCU\Control Panel\Accessibility\TimeOut', value: 'Flags', type: REG_SZ, data: '0'}
   - !registryValue: {path: 'HKCU\Control Panel\Accessibility\ToggleKeys', value: 'Flags', type: REG_SZ, data: '0'}
+  # DEFAULT USER
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\AudioDescription', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\Blind Access', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\HighContrast', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Preference', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\On', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\ShowSounds', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\SlateLaunch', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\SoundSentry', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\StickyKeys', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\TimeOut', value: 'Flags', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Accessibility\ToggleKeys', value: 'Flags', type: REG_SZ, data: '0'}
