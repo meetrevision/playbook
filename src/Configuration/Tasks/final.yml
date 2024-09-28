@@ -81,7 +81,7 @@ actions:
     option: "configure-wallpaper"
     weight: 45  
 
-    # Necessary to refresh start menu entries etc.
+  # Necessary to refresh start menu entries etc.
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
   - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*', option: "remove-pinned-items-startmenu"}
   - !appx: {operation: clearCache, name: '*Windows.Search*'}
@@ -96,3 +96,9 @@ actions:
   # Force update group policy
   - !run: 
     exe: "gpupdate.exe"
+
+  # Fixes cores parking on some AMD CPUs
+  - !powerShell:
+    command: |
+      Start-Process -FilePath 'rundll32.exe' -ArgumentList 'advapi32.dll,ProcessIdleTasks' -Wait -NoNewWindow
+      Start-Process -FilePath 'defrag' -ArgumentList "$env:SystemDrive -b" -Wait -NoNewWindow

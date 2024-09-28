@@ -78,10 +78,6 @@ actions:
       $path = ${env:ProgramFiles(x86)} + '\Revision Tool\data\flutter_assets\additionals\EnableSF.bat'
       Start-Process -FilePath $path -Wait -NoNewWindow
 
-      # Additional fixes
-      Start-Process -FilePath 'rundll32.exe' -ArgumentList 'advapi32.dll,ProcessIdleTasks' -Wait -NoNewWindow
-      Start-Process -FilePath 'defrag' -ArgumentList "$env:SystemDrive -b" -Wait -NoNewWindow
-
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction', value: 'Enable', operation: delete}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OptimalLayout', value: 'EnableAutoLayout', operation: delete}
 
