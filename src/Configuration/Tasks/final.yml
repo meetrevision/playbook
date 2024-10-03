@@ -99,9 +99,10 @@ actions:
 
   # Fixes cores parking on some AMD CPUs
   - !cmd:
+    wait: true
     command: |
       rundll32.exe advapi32.dll,ProcessIdleTasks
-      defrag $env:SystemDrive -b
+      defrag %SystemDrive% -b
 
   # Apply micro patches via Revision Tool in order to avoid new playbook releases for minor changes
   - !run:
