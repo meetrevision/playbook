@@ -98,7 +98,15 @@ actions:
     exe: "gpupdate.exe"
 
   # Fixes cores parking on some AMD CPUs
-  - !powerShell:
+  - !cmd:
     command: |
-      Start-Process -FilePath 'rundll32.exe' -ArgumentList 'advapi32.dll,ProcessIdleTasks' -Wait -NoNewWindow
-      Start-Process -FilePath 'defrag' -ArgumentList "$env:SystemDrive -b" -Wait -NoNewWindow
+      rundll32.exe advapi32.dll,ProcessIdleTasks
+      defrag $env:SystemDrive -b
+
+  # Apply micro patches via Revision Tool in order to avoid new playbook releases for minor changes
+  - !run:
+    path: "%ProgramFiles(x86)%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "playbook-patches apply"
+    wait: true
+    runas: currentUserElevated

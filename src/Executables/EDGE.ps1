@@ -35,7 +35,6 @@ function Uninstall-Process {
     New-Item -ItemType File -Path $folderPath -Name "MicrosoftEdge.exe" -Force | Out-Null
     #
 
-    $orignalWindir = [System.Environment]::GetEnvironmentVariable("windir","Machine")
     # Setting windir to an empty string allows the Edge uninstallation to work
     [microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment', 'windir', "", [Microsoft.Win32.RegistryValueKind]::ExpandString) | Out-Null
     $env:windir = [System.Environment]::GetEnvironmentVariable("windir","Machine")
@@ -61,7 +60,7 @@ function Uninstall-Process {
     [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', $originalNation, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
 
     # Restore windir
-    [microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment', 'windir', $orignalWindir, [Microsoft.Win32.RegistryValueKind]::ExpandString) | Out-Null
+    [microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment', 'windir', '%SystemRoot%', [Microsoft.Win32.RegistryValueKind]::ExpandString) | Out-Null
 
     if ((Get-ItemProperty -Path $baseKey).IsEdgeStableUninstalled -eq 1) {
         Write-Host "[$Mode] Edge Stable has been successfully uninstalled"
