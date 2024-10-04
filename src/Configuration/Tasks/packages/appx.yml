@@ -15,7 +15,6 @@ actions:
       .\APPX-REMOVER.ps1 -Packages @(
         'Microsoft.Windows.SecureAssessmentBrowser',
         'Microsoft.Windows.PeopleExperienceHost',
-        'Microsoft.Windows.Photos',
         'Microsoft.WindowsCamera',
         'MicrosoftWindows.Client.WebExperience',
         'Microsoft.WidgetsPlatformRuntime',
@@ -62,6 +61,16 @@ actions:
         'MSTeams', # New Teams
         'Microsoft.StartExperiencesApp'
       )
+
+  - !writeStatus: {status: "Removing Photos"}
+  - !powerShell:
+    option: "remove-appx-photos"
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    weight: 10
+    command: >-
+      .\APPX-REMOVER.ps1 -Packages 'Microsoft.Windows.Photos'
 
   - !writeStatus: {status: "Removing Dev Home", option: "remove-appx-devhome"}
   - !powerShell:
