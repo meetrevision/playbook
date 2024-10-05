@@ -6,7 +6,6 @@ on:
       - '*'
 
 env:
-    SXSC_REPO: 'https://github.com/Atlas-OS/sxsc'
     FILENAME: 'Revi-PB-${{ github.ref_name }}.apbx'
 
 jobs:

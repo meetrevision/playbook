@@ -25,8 +25,8 @@ actions:
   - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Desktop', value: 'ActiveWndTrkTimeout', type: REG_DWORD, data: '10'}
 
   # === Disables the blue screen that pops up when you're trying to shutdown or restart, asking you to save your work.
-  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'AutoEndTasks', type: REG_SZ, data: '0'}
-  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Desktop', value: 'AutoEndTasks', type: REG_SZ, data: '0'}
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'AutoEndTasks', type: REG_SZ, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\Desktop', value: 'AutoEndTasks', type: REG_SZ, data: '1'}
   
   # === HungAppTimeout also specifies how long (5 seconds by default) the system waits for user processes to end after the user clicks/taps on the End task button in Task Manager.
   # ------> Changed 2 seconds (2000), default is 5 seconds (5000).
