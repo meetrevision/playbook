@@ -12,6 +12,13 @@ actions:
     value: 'Enabled'
     type: REG_DWORD
     data: '0'
+  
+  # Fixes cores parking on some AMD CPUs
+  - !cmd:
+    wait: false
+    command: |
+      rundll32.exe advapi32.dll,ProcessIdleTasks
+      defrag %SystemDrive% -b
 
   - !cmd:
     exeDir: true

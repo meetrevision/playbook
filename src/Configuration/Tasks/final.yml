@@ -38,7 +38,6 @@ actions:
 
   - !writeStatus: {status: "Finalizing process"}
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0', weight: 70}
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', type: REG_DWORD, data: '1', weight: 60}
 
   - !powerShell: {command: 'Get-ScheduledTask -TaskPath "\Microsoft\Office\*" | Disable-ScheduledTask'}
 
@@ -96,13 +95,6 @@ actions:
   # Force update group policy
   - !run: 
     exe: "gpupdate.exe"
-
-  # Fixes cores parking on some AMD CPUs
-  - !cmd:
-    wait: true
-    command: |
-      rundll32.exe advapi32.dll,ProcessIdleTasks
-      defrag %SystemDrive% -b
 
   # Apply micro patches via Revision Tool in order to avoid new playbook releases for minor changes
   - !run:
