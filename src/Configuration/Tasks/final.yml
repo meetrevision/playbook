@@ -4,6 +4,16 @@ description: Applies some Revision configurations
 privilege: TrustedInstaller
 actions:
 
+  # Disable transparency and animations for low end devices
+  - !powerShell:
+    runas: currentUserElevated
+    command: |
+      $mem = (Get-CimInstance Win32_PhysicalMemory | Measure-Object Capacity -Sum).Sum
+      if ($mem -lt 9000000000) {
+        [microsoft.win32.registry]::SetValue('HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', 'EnableTransparency', 0, [Microsoft.Win32.RegistryValueKind]::DWord)
+        [microsoft.win32.registry]::SetValue('HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics', 'MinAnimate', 0, [Microsoft.Win32.RegistryValueKind]::DWord)
+      }
+
   # Disable Memory Compression
   - !powerShell: 
     command: 'Disable-MMAgent -mc'
