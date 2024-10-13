@@ -1,0 +1,63 @@
+name: Archive and Pre-Release
+
+on:
+  # Allow manual triggering
+  workflow_dispatch:
+
+env:
+  FILENAME: 'Revi-PB-${{ github.event.workflow_run.started_at }}.apbx'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: 'dev'
+
+      - name: Set version
+        id: set_version
+        run: |
+          # Get current date in "YY.MM.DD" format
+          CURRENT_DATE=$(date +%y.%m.%d)
+          echo "VERSION=${CURRENT_DATE}" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Update version
+        run: |
+          $version = "${{ env.VERSION }}"
+          $playbookConfPath = "src\playbook.conf"
+          $finalizeCMDPath = "src\Executables\FINALIZE.cmd"
+
+          (Get-Content -Path $playbookConfPath) -replace '<Version>.*</Version>', "<Version>$version</Version>" | Set-Content -Path $playbookConfPath
+
+          (Get-Content -Path $finalizeCMDPath) -replace 'set version=.+', "set version=$version" | Set-Content -Path $finalizeCMDPath
+        shell: pwsh
+
+      - name: Archive content
+        run: |
+          7z a -pmalte -mhe=on "Revi-PB-${{ env.VERSION }}.apbx" ./src/*
+
+      - name: Generate SHA256
+        run: |
+          $hash = (Get-FileHash -Algorithm SHA256 -Path "Revi-PB-${{ env.VERSION }}.apbx").Hash
+          echo ("HASH=" + $hash) >> $env:GITHUB_ENV
+
+      - name: Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Uses GitHub token for authentication
+          file: "Revi-PB-${{ env.VERSION }}.apbx"
+          asset_name: "Revi-PB-${{ env.VERSION }}.apbx"
+          tag: ${{ env.VERSION }}
+          overwrite: true
+          release_name: ${{ env.VERSION }}
+          prerelease: true # Set to true for pre-release
+          body: |
+            # Pre-release Download ✨
+
+            ## ⚠️ This is a pre-release version for testing purposes. Installing this can cause issues and may require you to reinstall Windows, use at your own risk. ⚠️
+
+            SHA256: `${{ env.HASH }}`
