@@ -1,4 +1,4 @@
-name: Archive and Release
+name: Archive and Pre-Release
 
 on:
   # Allow manual triggering
@@ -15,13 +15,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: 'main'
+          ref: 'dev'
 
       - name: Set version
         id: set_version
         run: |
-          # Get current date in "YY.MM" format
-          CURRENT_DATE=$(date +%y.%m)
+          # Get current date in "YY.MM.DD" format
+          CURRENT_DATE=$(date +%y.%m.%d)
           echo "VERSION=${CURRENT_DATE}" >> $GITHUB_ENV
         shell: bash
 
@@ -54,12 +54,10 @@ jobs:
           tag: ${{ env.VERSION }}
           overwrite: true
           release_name: ${{ env.VERSION }}
-          prerelease: false # Always set to false
+          prerelease: true # Set to true for pre-release
           body: |
-            # Download Link ✨
+            # Pre-release Download ✨
 
-            If you would like to support Revision, kindly download the Playbook from the provided link below.
-
-            📌Link: 
+            ## ⚠️ This is a pre-release version for testing purposes. Installing this can cause issues and may require you to reinstall Windows, use at your own risk. ⚠️
 
             SHA256: `${{ env.HASH }}`
