@@ -113,3 +113,12 @@ actions:
     args: "playbook-patches apply"
     wait: true
     runas: currentUserElevated
+    
+  - !powerShell:
+    command: |
+      $explorerProcess = Get-Process -Name explorer -ErrorAction SilentlyContinue
+      if ($explorerProcess) {
+        Stop-Process -Name explorer -Force
+      }
+      Start-Process explorer
+    runas: currentUserElevated
