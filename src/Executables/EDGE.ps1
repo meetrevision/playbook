@@ -36,8 +36,9 @@ function Uninstall-Process {
     #
 
     # Setting windir to an empty string allows the Edge uninstallation to work
-    [microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment', 'windir', "", [Microsoft.Win32.RegistryValueKind]::ExpandString) | Out-Null
-    $env:windir = [System.Environment]::GetEnvironmentVariable("windir","Machine")
+    #[microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment', 'windir', "", [Microsoft.Win32.RegistryValueKind]::ExpandString) | Out-Null
+    #$env:windir = [System.Environment]::GetEnvironmentVariable("windir","Machine")
+    $env:windir = ""
 
     $uninstallString = (Get-ItemProperty -Path $registryPath).UninstallString
     $uninstallArguments = (Get-ItemProperty -Path $registryPath).UninstallArguments
@@ -60,7 +61,7 @@ function Uninstall-Process {
     [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', $originalNation, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
 
     # Restore windir
-    [microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment', 'windir', '%SystemRoot%', [Microsoft.Win32.RegistryValueKind]::ExpandString) | Out-Null
+    #[microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment', 'windir', '%SystemRoot%', [Microsoft.Win32.RegistryValueKind]::ExpandString) | Out-Null
 
     if ((Get-ItemProperty -Path $baseKey).IsEdgeStableUninstalled -eq 1) {
         Write-Host "[$Mode] Edge Stable has been successfully uninstalled"
