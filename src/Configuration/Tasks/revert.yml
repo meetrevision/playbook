@@ -105,3 +105,11 @@ actions:
 
   # Allow users to log on using biometrics
   - !registryKey: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Biometrics', operation: delete}
+
+  # Fix KGL mismatch in Xbox Game Bar
+  # Disabling background apps breaks Xbox Game Bar KGL update. We remove bloat apps anyway and it can be toggled in Revision Tool
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\AppPrivacy', value: 'LetAppsRunInBackground', operation: delete}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Search', value: 'BackgroundAppGlobalToggle', operation: delete}
+  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Search', value: 'BackgroundAppGlobalToggle', operation: delete}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', operation: delete}
+  - !appx: {operation: clearCache, name: '*XboxGamingOverlay*'}

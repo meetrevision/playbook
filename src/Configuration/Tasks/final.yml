@@ -95,12 +95,6 @@ actions:
   - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*', option: "remove-pinned-items-startmenu"}
   - !appx: {operation: clearCache, name: '*Windows.Search*'}
   - !appx: {operation: clearCache, name: '*TCUI*'}
-    # Workaround for KGL versions to match
-  - !appx: {operation: clearCache, name: '*XboxGameCallableUI*'}
-  - !appx: {operation: clearCache, name: '*XboxGameOverlay*'}
-  - !appx: {operation: clearCache, name: '*XboxGamingOverlay*'}
-  - !appx: {operation: clearCache, name: '*XboxIdentityProvider*'}
-  - !appx: {operation: clearCache, name: '*XboxSpeechToTextOverlay*'}
 
   # Force update group policy
   - !run: 
