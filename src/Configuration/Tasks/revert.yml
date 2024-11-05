@@ -113,3 +113,15 @@ actions:
   - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Search', value: 'BackgroundAppGlobalToggle', operation: delete}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', operation: delete}
   - !appx: {operation: clearCache, name: '*XboxGamingOverlay*'}
+
+
+  # Internet Explorer
+  - !registryKey: {path: 'HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings', operation: delete}
+  - !registryKey: {path: 'HKLM\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings', operation: delete}
+
+  - !registryKey: {path: 'HKCU\Software\Policies\Microsoft\Internet Explorer', operation: delete}
+  - !registryKey: {path: 'HKLM\Software\Policies\Microsoft\Internet Explorer', operation: delete}
+
+
+  
+  

@@ -55,7 +55,6 @@ actions:
   - !writeStatus: {status: "Configuring Updates"}
   - !task: {path: 'Tasks\registry\updates\updates.yml'}
   - !task: {path: 'Tasks\registry\updates\drivers.yml'}
-  - !task: {path: 'Tasks\registry\updates\internet-explorer.yml'}
   - !task: {path: 'Tasks\registry\updates\ms-store.yml'}
 
   # Miscellaneous
