@@ -2,6 +2,7 @@
 title: Restore classic Windows Photo Viewer
 description: Restore classic Windows Photo Viewer
 privilege: TrustedInstaller
+option: 'remove-appx-photos'
 actions:
 
   - !registryValue: {path: 'HKCR\Applications\photoviewer.dll\shell\open', value: 'MuiVerb', type: REG_SZ, data: '@photoviewer.dll,-3043', option: "configure-lpv"}
