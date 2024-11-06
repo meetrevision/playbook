@@ -20,7 +20,7 @@ actions:
 
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\Pending\7971f918-a847-4430-9279-4a52d1efe18d', value: 'RegisterWithAU', type: REG_DWORD, data: '0'}
   
-  # [!] Breaks 'defrag c: -b' and cores parking on some AMD CPUs
+  # [!] Breaks 'defrag c: -b'
   # Disable Superfetch for SSDs
   # Detection of mediaType might not work on VMs
   # - !powerShell:

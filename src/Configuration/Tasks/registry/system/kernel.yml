@@ -10,7 +10,7 @@ actions:
   # - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Kernel', value: 'DisableTsx', type: REG_DWORD, data: '0'}
   - !powerShell: 
     command: |
-      if ((Get-WmiObject Win32_Processor).Manufacturer -eq 'GenuineIntel') {
+      if ((Get-CimInstance Win32_Processor).Manufacturer -eq 'GenuineIntel') {
         [microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Kernel', 'DisableTsx', 0, [Microsoft.Win32.RegistryValueKind]::DWord)
       } else {
         Remove-ItemProperty -Path 'HKLM:\SYSTEM\ControlSet001\Control\Session Manager\Kernel' -Name 'DisableTsx' -ErrorAction SilentlyContinue | Out-Null

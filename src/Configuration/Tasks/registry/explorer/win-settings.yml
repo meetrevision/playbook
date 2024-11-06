@@ -359,8 +359,8 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone', value: 'Value', type: REG_SZ, data: 'Allow'}
 
   # === Notifications - Off
-  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener', value: 'Value', type: REG_SZ, data: 'Deny'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener', value: 'Value', type: REG_SZ, data: 'Deny'}
+  # - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener', value: 'Value', type: REG_SZ, data: 'Deny'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener', value: 'Value', type: REG_SZ, data: 'Deny'}
 
   # === Motion - Off
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity', value: 'Value', type: REG_SZ, data: 'Deny'}
