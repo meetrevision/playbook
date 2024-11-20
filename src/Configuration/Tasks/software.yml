@@ -13,18 +13,13 @@ actions:
     exeDir: true
     command: '.\UPDATE-APPX.ps1'
 
-  - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
-  - !cmd:
-    # command: 'winget install Brave.Brave --source winget --scope machine --silent --accept-source-agreements --accept-package-agreements'
-    command: 'winget install XP8C9QZMS2PC1T --source msstore --silent --accept-source-agreements --accept-package-agreements'
-    weight: 150
-    wait: true
-    runas: currentUserElevated
+  - !writeStatus: {status: 'Installing Brave on reboot', option: "browser-brave"}
+  - !registryValue: 
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+    value: 'Install Brave'
+    type: REG_SZ
+    data: 'cmd /c title BraveBrowser && winget install XP8C9QZMS2PC1T --source msstore --silent --accept-source-agreements --accept-package-agreements'
     option: "browser-brave"
-
-  # - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/brave/brave-browser/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'BraveBrowserStandaloneSetup.exe' }).browser_download_url -OutFile \"$env:TEMP\\BraveBrowserStandaloneSetup.exe\" }" , weight: 150, option: "browser-brave"}
-  # - !writeStatus: {status: 'Installing Brave', option: "browser-brave"}
-  # - !cmd: {command: 'call "%temp%\BraveBrowserStandaloneSetup.exe" /silent /install', runas: currentUserElevated, weight: 50, option: "browser-brave"}
 
   - !writeStatus: {status: 'Configuring Brave', option: "browser-brave"}
   - !cmd:
@@ -35,12 +30,10 @@ actions:
     option: "browser-brave"
 
   # Firefox
-  - !writeStatus: {status: 'Installing Firefox', option: "browser-firefox"}
-  - !cmd:
-    command: 'winget install Mozilla.Firefox --source winget --silent --accept-source-agreements --accept-package-agreements'
-    weight: 150
-    runas: currentUserElevated
-    wait: true
+  - !writeStatus: {status: 'Installing Firefox on reboot', option: "browser-firefox"}
+  - !registryValue: 
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+    value: 'Install Firefox'
+    type: REG_SZ
+    data: 'cmd /c title Firefox && winget install Mozilla.Firefox --source winget --silent --accept-source-agreements --accept-package-agreements'
     option: "browser-firefox"
-  # - !writeStatus: {status: 'Configuring Firefox', option: "browser-firefox"}
-  # - !run: {exe: 'FIREFOX.cmd', exeDir: true, weight: 20, option: "browser-firefox"}
