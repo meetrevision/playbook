@@ -84,7 +84,6 @@ actions:
       .\APPX-REMOVER.ps1 -Packages 'Microsoft.Windows.DevHome'
     
   - !writeStatus: {status: "Removing Xbox Apps", option: "remove-appx-xbox"}
-  - !appx: {name: 'Microsoft.XboxGameCallableUI*', type: family, weight: 10, option: "remove-appx-xbox"}
   - !powerShell:
     option: "remove-appx-xbox"
     # runas: currentUserElevated
@@ -99,7 +98,14 @@ actions:
         'Microsoft.GamingApp',
         'Microsoft.XboxGameCallableUI'
       )
-  
+  - !appx: {name: 'Microsoft.XboxGameCallableUI*', type: family, weight: 10, option: "remove-appx-xbox"}
+
+    #139
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: 'URL:ms-gamebar', option: "remove-appx-xbox"}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: 'URL Protocol', type: REG_SZ, data: '', option: "remove-appx-xbox"}
+  - !registryKey: {path: 'HKCR\ms-gamebar\shell\open\command', operation: add, option: "remove-appx-xbox"}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: '%SystemRoot%\System32\systray.exe', option: "remove-appx-xbox"}
+
   - !writeStatus: {status: "Removing Your Phone", option: "remove-appx-yourphone"}
   - !powerShell:
     option: "remove-appx-yourphone"
