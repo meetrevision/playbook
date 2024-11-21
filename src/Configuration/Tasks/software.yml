@@ -35,5 +35,5 @@ actions:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
     value: 'Install Firefox'
     type: REG_SZ
-    data: 'cmd /c title Firefox && winget install Mozilla.Firefox --source winget --silent --accept-source-agreements --accept-package-agreements'
+    data: 'cmd /c title Firefox && winget install Mozilla.Firefox --source winget --override "/S /MaintenanceService=false" --accept-source-agreements --accept-package-agreements'
     option: "browser-firefox"
