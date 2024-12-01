@@ -1,0 +1,30 @@
+---
+title: Configure Security -> Virtualization Based Security
+description: Configure VBS
+privilege: TrustedInstaller
+actions:
+
+  # Disabling VBS improves gaming performance
+  # https://support.microsoft.com/en-us/windows/options-to-optimize-gaming-performance-in-windows-11-a255f612-2949-4373-a566-ff6f3f474613
+
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard', value: 'EnableVirtualizationBasedSecurity', type: REG_DWORD, data: '0'}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\Policies\Microsoft\Windows\DeviceGuard', value: 'HVCIMATRequired', type: REG_DWORD, data: '0'}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard', value: 'Locked', type: REG_DWORD, data: '0'}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard', value: 'RequirePlatformSecurityFeatures', type: REG_DWORD, data: '0'}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard', value: 'EnableVirtualizationBasedSecurity', type: REG_DWORD, data: '0'}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity', value: 'Enabled', type: REG_DWORD, data: '0'}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity', value: 'ChangedInBootCycle', operation: delete}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity', value: 'HVCIMATRequired', type: REG_DWORD, data: '0'}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity', value: 'Locked', type: REG_DWORD, data: '0'}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity', value: 'WasEnabledBy', operation: delete}
+
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Lsa', value: 'LsaCfgFlags', type: REG_DWORD, data: '0'}

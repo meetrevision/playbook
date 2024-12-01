@@ -1,0 +1,158 @@
+---
+title: Configure general updates settings
+description: Configure general updates settings
+privilege: TrustedInstaller
+actions:
+
+
+  # ======================
+  # === Windows Update ===
+  # ======================
+
+
+  # === Configure Automatic Updates - Disabled
+  # ------> NOTE: Used to break Xbox Sign-in in older Windows 10 versions
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', type: REG_DWORD, data: '1'}
+
+   # === Pause Windows Updates to 2038 January 19
+   # === FlightSettingsMaxPauseDays is responsible for the rest regs to work
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'FlightSettingsMaxPauseDays', type: REG_DWORD, data: '5269'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'PauseFeatureUpdatesStartTime', type: REG_SZ, data: '2023-08-17T12:47:51Z'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'PauseFeatureUpdatesEndTime', type: REG_SZ, data: '2038-01-19T03:14:07Z'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'PauseQualityUpdatesStartTime', type: REG_SZ, data: '2023-08-17T12:47:51Z'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'PauseQualityUpdatesEndTime', type: REG_SZ, data: '2038-01-19T03:14:07Z'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'PauseUpdatesStartTime', type: REG_SZ, data: '2023-08-17T12:47:51Z'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'PauseUpdatesExpiryTime', type: REG_SZ, data: '2038-01-19T03:14:07Z'}
+  
+
+  #   # === Do not allow update deferral policies to cause scans against Windows Update - Enabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'DisableDualScan', type: REG_DWORD, data: '1'}  
+  
+  #   # === Do not include drivers with Windows Updates - Enabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'ExcludeWUDriversInQualityUpdate', type: REG_DWORD, data: '1'}
+  #   # === Enabling Windows Update Power Management to automatically wake up the system to install scheduled updates - Disabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'AUPowerManagement', type: REG_DWORD, data: '0'}
+
+  #   # === Turn off auto-restart notifications for update installations - Enabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'SetAutoRestartNotificationDisable', type: REG_DWORD, data: '1'}
+  #   # === Turn on recommended updates via Automatic Updates - Disabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'IncludeRecommendedUpdates', type: REG_DWORD, data: '0'}
+
+
+  # === Windows Update Notifications - Disabled
+  # ------> https://www.askvg.com/fix-how-to-stop-automatic-forced-upgrade-to-feature-updates-in-windows-10/
+  - !registryValue: {path: 'HKLM\SYSTEM\Setup\UpgradeNotification', value: 'UpgradeAvailable', type: REG_DWORD, data: '0'}
+
+  # ===================================
+  # === Windows Update for Business ===
+  # ===================================
+  # ======> Preview builds
+
+  # === Manage preview builds - Enabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'ManagePreviewBuilds', type: REG_DWORD, data: '1'}
+  #   # === Set the behavior for receiving preview builds - Disable preview builds
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'ManagePreviewBuildsPolicyValue', type: REG_DWORD, data: '0'}
+  #   # ======> Feature Updates
+  #   # === Select when Preview Builds and Feature Updates are received - Enabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'DeferFeatureUpdates', type: REG_DWORD, data: '1'}
+  #   # === Select the Windows readiness level for the updates you want to receive - Semi-Annual Channel
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'BranchReadinessLevel', type: REG_DWORD, data: '20'}
+  #   # === After a Preview Build or Feature Update is released, defer receiving it for this many days - 365 days (1 year)
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'DeferFeatureUpdatesPeriodInDays', type: REG_DWORD, data: '365'}
+  #   # ======> Quality Updates
+  #   # === Select when Quality Updates are received - Enabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'DeferQualityUpdates', type: REG_DWORD, data: '1'}
+  #   # === After a quality update is released, defer receiving it for this many days - Enabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', value: 'DeferQualityUpdatesPeriodInDays', type: REG_DWORD, data: '4'}
+  
+  # =========================================
+  # === Malicious Software Reporting Tool ===
+  # =========================================
+  # === Prevent Malicious Software Removal Tool from installing - Enabled
+  # ------> https://winaero.com/blog/disable-malicious-software-removal-tool/
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\MRT', value: 'DontOfferThroughWUAU', type: REG_DWORD, data: '1'}
+  
+  # === Disable Malicious Software Reporting tool diagnostic data - Enabled
+  # ------> https://admx.help/?Category=Windows10_Telemetry&Policy=Microsoft.Policies.Win10Privacy::DontReportInfection
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\MRT', value: 'DontReportInfectionInformation', type: REG_DWORD, data: '0'}
+
+  # =========================
+  # === Update & Security ===
+  # =========================
+
+  # ======> Delivery Optimization
+
+  # === Allow downloads from other PCs - Off
+  # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.DeliveryOptimization::DownloadMode
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings', value: 'DownloadMode', type: REG_SZ, data: '0'}
+
+  # ======> Windows Insider Program
+
+  # === Windows Insider Program - Disabled
+  # ------> For Version 1703 and below.
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds', value: 'AllowBuildPreview', type: REG_DWORD, data: '0'}
+  
+    
+
+  # =============
+  # === Extra ===
+  # =============
+
+  # === Download repair content and optional features directly from Windows Update instead of Windows Server Update Services (WSUS) - True
+  # ------> Enable WSUS Fondue.
+  # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.Servicing::Servicing
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Servicing', value: 'RepairContentServerSource', type: REG_DWORD, data: '2'}
+
+  # === Reserved Storage (for updates) - Disabled
+  # ------> https://www.howtogeek.com/425563/how-to-disable-reserved-storage-on-windows-10/
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager', value: 'ShippedWithReserves', type: REG_DWORD, data: '0'}
+
+  # === Prevent Automatic Updates - Enabled
+  # ------> Media Player Updates auto update disabled.
+  # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.MediaPlayer::DisableAutoUpdate
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\WindowsMediaPlayer', value: 'DisableAutoUpdate', type: REG_DWORD, data: '0'}
+
+  # --- Prevent Windows Update Orchestrator automatically instaling unwanted updates: 
+  # ------> DevHome, Outlook
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate', operation: 'delete'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate', value: 'workCompleted', type: REG_DWORD, data: '1'}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate', operation: 'delete'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate', value: 'workCompleted', type: REG_DWORD, data: '1'}
+
+
+  # === Disable Windows Upgrade notice
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'HideMCTLink', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'RestartNotificationsAllowed2', type: REG_DWORD, data: '0'}
+
+  
+  
+
+  # ========================
+  # === Discarded Tweaks ===
+  # ========================
+
+  # === Do not connect to any Windows Update Internet locations - Disabled
+  # ------> Breaks Store and Update if Enabled, therefore discarded.
+  # [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
+  # "DoNotConnectToWindowsUpdateInternetLocations"=dword:00000000
+
+  # === Defer/delay Quality (Security) for a few days to avoid day one bugs - https://gpsearch.azurewebsites.net/#13436
+  # [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate]
+  # "DeferUpgrade"=dword:00000001
+  # "DeferUpgradePeriod"=dword:00000001
+  # === Allow Automatic Updates immediate installation - Disabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AUOptions', type: REG_DWORD, data: '2'}
+
+  # === Allow Automatic Updates immediate installation - Disabled (Not supported anymore)
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AutoInstallMinorUpdates', type: REG_DWORD, data: '0'}
+ 
+  # === Do not adjust default option to 'Install Updates and Shut Down' in Shut Down Windows dialog box - Enabled (Not supported anymore)
+  # - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', type: REG_DWORD, data: '1'}
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUAsDefaultShutdownOption', type: REG_DWORD, data: '1'}
+  # === Do not display 'Install Updates and Shut Down' option in Shut Down Windows dialog box - Enabled (Not supported anymore)
+  # - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUShutdownOption', type: REG_DWORD, data: '1'}
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAUShutdownOption', type: REG_DWORD, data: '1'}
+  # === No auto-restart with logged on users for scheduled automatic updates installations - Enabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoRebootWithLoggedOnUsers', type: REG_DWORD, data: '1'}
+  # === Turn on Software Notifications - Disabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'EnableFeaturedSoftware', type: REG_DWORD, data: '0'}

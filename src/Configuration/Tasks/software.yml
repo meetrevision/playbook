@@ -1,0 +1,39 @@
+---
+title: Software
+description: Installs preferred softwares 
+privilege: TrustedInstaller
+actions:
+
+    # https://github.com/meetrevision/playbook/issues/81
+  - !writeStatus: {status: 'Updating Winget'}
+  - !powerShell:
+    weight: 50
+    runas: currentUserElevated
+    wait: true
+    exeDir: true
+    command: '.\UPDATE-APPX.ps1'
+
+  - !writeStatus: {status: 'Installing Brave on reboot', option: "browser-brave"}
+  - !registryValue: 
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+    value: 'Install Brave'
+    type: REG_SZ
+    data: 'cmd /c title BraveBrowser && winget install XP8C9QZMS2PC1T --source msstore --silent --accept-source-agreements --accept-package-agreements'
+    option: "browser-brave"
+
+  - !writeStatus: {status: 'Configuring Brave', option: "browser-brave"}
+  - !cmd:
+    exeDir: true
+    command: 'robocopy "BraveSoftware" "%ProgramFiles%\BraveSoftware" /E /IM /IT /NP & robocopy "BraveSoftware" "%localappdata%\BraveSoftware" /E /IM /IT /NP'
+    ignoreErrors: true
+    weight: 20
+    option: "browser-brave"
+
+  # Firefox
+  - !writeStatus: {status: 'Installing Firefox on reboot', option: "browser-firefox"}
+  - !registryValue: 
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+    value: 'Install Firefox'
+    type: REG_SZ
+    data: 'cmd /c title Firefox && winget install Mozilla.Firefox --source winget --override "/S /MaintenanceService=false" --accept-source-agreements --accept-package-agreements'
+    option: "browser-firefox"

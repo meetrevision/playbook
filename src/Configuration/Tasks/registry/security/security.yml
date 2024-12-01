@@ -1,0 +1,87 @@
+---
+title: Configure Security
+description: Configure security settings
+privilege: TrustedInstaller
+actions:
+  
+  # === Hide the Account Protection page in Defender
+  # ------> Everything it provides redirects to the Windows Settings anyway. Done for annoyance reduction.
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows Security Health\State', value: 'AccountProtection_MicrosoftAccount_Disconnected', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows Security Health\State', value: 'AccountProtection_MicrosoftAccount_Disconnected', type: REG_DWORD, data: '0'}
+
+  # === Windows Defender Antivirus
+  # In early days of ReviOS, Defender used to disabled via registry. We now use a different method and makes most of policies & registries obsolete. Therefore, we've removed most of the comments.
+
+  # ==============================================
+  # === Windows Defender Antivirus - Reporting ===
+  # ==============================================
+
+  # === Configure Watson events - Disabled
+  # ------> https://docs.microsoft.com/en-us/windows/privacy/configure-windows-diagnostic-data-in-your-organization
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\Reporting', value: 'DisableGenericRePorts', type: REG_DWORD, data: '1'}
+
+  # === Turn off enhanced notifications - Enabled
+  # [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows Defender\Reporting]
+  # "DisableEnhancedNotifications"=dword:00000001
+
+  # ==================================================================
+  # === Windows Defender Antivirus - Security Intelligence Updates ===
+  # ==================================================================
+
+  # === Allow security intelligence updates when running on battery power - Disabled
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates', value: 'DisableScheduledSignatureUpdateOnBattery', type: REG_DWORD, data: '1'}
+  
+
+  # ====================================
+  # === Windows Defender SmartScreen ===
+  # ====================================
+
+  # === Configure App Install Control - Enabled
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen', value: 'ConfigureAppInstallControlEnabled', type: REG_DWORD, data: '1'}
+
+  # === Pick one of the following settings - Turn off app recommendations
+  # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.SmartScreen::ConfigureAppInstallControl
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen', value: 'ConfigureAppInstallControl', type: REG_SZ, data: 'Anywhere'}
+
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost', value: 'EnableWebContentEvaluation', type: REG_DWORD, data: '0'}
+
+  # === Configure Windows Defender SmartScreen - Disabled
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\System', value: 'EnableSmartScreen', type: REG_DWORD, data: '0'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
+
+  # === Configure Windows Defender SmartScreen (Microsoft Edge) - Disabled
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter', value: 'EnabledV9', type: REG_DWORD, data: '0'}
+
+  
+  # ========================
+  # === Windows Security ===
+  # ========================
+
+  # === Hide Windows Security Systray - Enabled
+  # ------> https://www.tenforums.com/tutorials/11974-hide-show-windows-security-notification-area-icon-windows-10-a.html
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray', value: 'HideSystray', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run', value: 'SecurityHealth', operation: delete}
+
+  # Discarded:
+
+  # ============================
+  # === Spectre and Meltdown ===
+  # ============================
+
+  # === Spectre and Meltdown Mitigations
+  # ------> While disabling it could potentially increase performance on older hardware, some users have reported that it causes system instability.
+  # ------> FeatureSettings has to be set to 1 hexadecimal to fully disable these security protections.
+  # - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management', value: 'FeatureSettings', type: REG_DWORD, data: '1'}
+  # - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverride', type: REG_DWORD, data: '3'}
+  # - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverrideMask', type: REG_DWORD, data: '3'}
+
+  # =============================================================
+  # === Service Control Manager Settings -> Security Settings ===
+  # =============================================================
+
+  # === Enable svchost.exe mitigation options - Disabled
+  # ------> Don't enforce stricter svchost.exe services policy.
+  # [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SCMConfig]
+  # "EnableSvchostMitigationPolicy"=dword:00000000
+  # [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\SCMConfig]
+  # "EnableSvchostMitigationPolicy"=dword:00000000

@@ -1,0 +1,71 @@
+---
+title: fixes
+description: fixes
+privilege: TrustedInstaller
+actions:
+
+
+  # === Fix certain windows (mmc.exe, device manager, etc) from becoming blurry due to improper scaling in Windows 10.
+  # ------> 8.1 specific fixes, they are fixed in latest updates
+  # [HKEY_CURRENT_USER\Control Panel\Desktop]
+  # "Win8DpiScaling"=dword:00000000
+  # "DpiScalingVer"=dword:00001000
+  # "LogPixels"=dword:00000096
+
+  # === Some builds had issue with registry hive not existing and thus not saving volume mixer per application settings.
+
+  # === Touchpad fix.
+  # [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad]
+  # "AAPThreshold"=dword:00000000
+  # [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad]
+  # "AAPThreshold"=dword:00000000
+
+  # === Changes Time zone configuration from local time to UTC (Coordinated Universal Time).
+  # ------> Sets default time to UTC to fix Windows and Linux showing different Times when dual booting and to provide a more universal Time configuration. Most Linux distros use UTC by default.
+  # ------> https://www.howtogeek.com/323390/how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/
+  - !registryKey: {path: 'HKCU\Software\Microsoft\Internet Explorer\LowRegistry\Audio\PolicyConfig\PropertyStore', operation: add}
+  - !registryValue: {path: 'HKLM\System\CurrentControlSet\Control\TimeZoneInformation', value: 'RealTimeIsUniversal', type: REG_DWORD, data: '1'}
+
+  # === Workaround and fix for Mapped Network Drives and UAC.
+  # ------> https://docs.microsoft.com/en-us/troubleshoot/windows-client/networking/mapped-drives-not-available-from-elevated-command#workaround---method-2
+  # ------> https://serverfault.com/q/182758
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableLinkedConnections', type: REG_DWORD, data: '1'}
+
+  # === Enable CFG mitigation for Valorant
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\vgc.exe', value: 'MitigationOptions', type: REG_BINARY, data: '000000000001000000000000000000000000000000000000'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\vgc.exe', value: 'MitigationAuditOptions', type: REG_BINARY, data: '000000000000000000000000000000000000000000000000'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\vgc.exe', value: 'EAFModules', type: REG_SZ, data: ''}
+
+  # === Enable ASLR mitigation for osu!
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\osu!.exe', value: 'MitigationOptions', type: REG_BINARY, data: '000021000000000000000000000000000000000000000000'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\osu!.exe', value: 'MitigationAuditOptions', type: REG_BINARY, data: '000000000000000000000000000000000000000000000000'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\osu!.exe', value: 'EAFModules', type: REG_SZ, data: ''}  
+
+  # === ctfmon is needed to type something in search bar or WiFi password section, Snip & Sketch, etc.
+  # ------> ctfmon depends on TabletInputService
+  # ------> https://answers.microsoft.com/en-us/windows/forum/all/ctfmonexe-or-ctf-loader-not-automaticly-starting/4b6b91b3-e363-43cb-9715-92a1976e270f
+  # [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
+  # "ctfmon"="C:\Windows\System32\ctfmon.exe"
+
+  # === Fix WU Taskbar
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'TrayIconVisibility', type: REG_DWORD, data: '0'}
+
+  # === Stop indexing src and Licenses folders
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///C:\Users\Default\Documents\Workspace\Revision-Tool\bin\*'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*', type: REG_SZ, data: 'file:///%userprofile%\Documents\Workspace\Revision-Tool\bin\*'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Windows\src\*', type: REG_SZ, data: 'file:///C:\Windows\src\*'}
+  # - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\PreventIndexingCertainPaths', value: 'file:///C:\Licenses\*', type: REG_SZ, data: 'file:///C:\Licenses\*'}
+
+  # === Prevent MS Edge Chromium being installed after updates (Legacy Edge still gets installed)
+
+  # === Fix for VS not being allowed to install WebView2
+  # ------> Credits to https://github.com/AveYo
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate', value: 'InstallDefault', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate', value: 'Install{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate', value: 'Install{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate', value: 'DoNotUpdateToEdgeWithChromium', type: REG_DWORD, data: '1'}
+
+
+  # === Disable WPBT
+  # ------> https://github.com/Jamesits/dropWPBT
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager', value: 'DisableWpbtExecution', type: REG_DWORD, data: '1'}

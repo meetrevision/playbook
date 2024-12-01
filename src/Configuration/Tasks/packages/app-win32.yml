@@ -1,0 +1,66 @@
+---
+title: Remove Win32 apps
+description: Removal of Win32 apps
+privilege: TrustedInstaller
+actions:
+
+  # Microsoft Edge
+  - !writeStatus: {status: "Removing MS Edge", option: "remove-edge"}
+  - !taskKill: {name: "MicrosoftEdgeUpdate", errorAction: Ignore, option: "remove-edge"}
+  - !taskKill: {name: "msedge", errorAction: Ignore, option: "remove-edge"}
+  - !taskKill: {name: "MicrosoftEdge*", errorAction: Ignore, option: "remove-edge"}
+  - !taskKill: {name: "setup", errorAction: Ignore, pathContains: "\\Edge", option: "remove-edge"}
+
+  # Remove the new Copilot UWP app before removing Edge to avoid leftovers
+  - !powerShell:
+    option: "remove-edge"
+    exeDir: true
+    errorAction: Ignore
+    weight: 30
+    command: >-
+      .\APPX-REMOVER.ps1 -Packages 'Microsoft.Copilot'
+  
+  - !powerShell:
+    command: '.\EDGE.ps1 -Mode EdgeBrowser'
+    exeDir: true
+    runas: currentUserElevated
+    option: "remove-edge"
+    weight: 40
+
+  - !powerShell:
+    option: "remove-edge"
+    exeDir: true
+    errorAction: Ignore
+    weight: 30
+    command: >-
+      .\APPX-REMOVER.ps1 -Packages @(
+        'Microsoft.Copilot',
+        'Microsoft.MicrosoftEdge',
+        'Microsoft.MicrosoftEdgeDevToolsClient'
+      )
+
+  - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
+
+
+  # OneDrive
+  - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
+  - !taskKill: {name: "OneDriveStandaloneUpdater", errorAction: Ignore, option: "remove-onedrive"}
+  - !taskKill: {name: "OneDriveSetup", errorAction: Ignore, option: "remove-onedrive"}
+  - !taskKill: {name: "OneDrive*", errorAction: Ignore, option: "remove-onedrive"}
+
+  - !run: {exeDir: true, exe: "ONED.cmd", option: "remove-onedrive", weight: 40}
+  - !file: {path: "%SystemDrive%\\OneDriveTemp", option: "remove-onedrive"}
+  - !file: {path: "%ProgramData%\\Microsoft OneDrive", option: "remove-onedrive"}
+
+  - !powerShell:
+    option: "remove-onedrive"
+    # runas: currentUserElevated
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    weight: 10
+    command: >-
+      .\APPX-REMOVER.ps1 -Packages @(
+        'OneDrive',
+        'microsoft.microsoftskydrive'
+      )

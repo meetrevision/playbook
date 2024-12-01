@@ -1,0 +1,118 @@
+---
+title: Configuration
+description: Applies some Revision configurations
+privilege: TrustedInstaller
+actions:
+
+  # Disable transparency and animations for low end devices
+  - !powerShell:
+    runas: currentUserElevated
+    command: |
+      $mem = (Get-CimInstance Win32_PhysicalMemory | Measure-Object Capacity -Sum).Sum
+      if ($mem -lt 9000000000) {
+        [microsoft.win32.registry]::SetValue('HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', 'EnableTransparency', 0, [Microsoft.Win32.RegistryValueKind]::DWord)
+        [microsoft.win32.registry]::SetValue('HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics', 'MinAnimate', 0, [Microsoft.Win32.RegistryValueKind]::DWord)
+      }
+
+  # Disable Memory Compression
+  - !powerShell: 
+    command: 'Disable-MMAgent -mc'
+
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\Pending\7971f918-a847-4430-9279-4a52d1efe18d', value: 'RegisterWithAU', type: REG_DWORD, data: '0'}
+  
+  # [!] Breaks 'defrag c: -b'
+  # Disable Superfetch for SSDs
+  # Detection of mediaType might not work on VMs
+  # - !powerShell:
+  #   command: |
+  #     $mediaType = (Get-PhysicalDisk -SerialNumber (Get-Disk -Number (Get-Partition -DriveLetter $env:SystemDrive.Substring(0, 1)).DiskNumber).SerialNumber.TrimStart()).MediaType
+  #     if ($mediaType -eq 'SSD') {
+  #       $path = ${env:ProgramFiles(x86)} + '\Revision Tool\data\flutter_assets\additionals\DisableSF.bat'
+  #       Start-Process -FilePath $path -Wait -NoNewWindow
+  #     }
+  
+  - !cmd:
+    command: 'setx DOTNET_CLI_TELEMETRY_OPTOUT 1'
+    runas: currentUserElevated
+    
+  - !cmd:
+    command: 'setx POWERSHELL_TELEMETRY_OPTOUT 1'
+    runas: currentUserElevated
+
+  - !writeStatus: {status: "Removing logs"}
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File CLEANER.ps1'
+    weight: 150
+
+  - !writeStatus: {status: "Finalizing process"}
+  - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0', weight: 70}
+
+  - !powerShell: {command: 'Get-ScheduledTask -TaskPath "\Microsoft\Office\*" | Disable-ScheduledTask'}
+
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File SVCGROUP.ps1'
+    weight: 50
+
+  - !run: {exeDir: true, exe: "FINALIZE.cmd", weight: 200}
+
+  - !run:
+    exeDir: true
+    exe: "STARTMENU.cmd"
+    option: "remove-pinned-items-startmenu"
+    weight: 100
+
+  - !run:
+    exeDir: true
+    exe: "FILEASSOC.cmd"
+    option: "remove-appx-photos"
+    weight: 150
+
+  - !cmd:
+    exeDir: true
+    command: 'robocopy "Wallpapers" "%systemroot%\Web\Wallpaper\MeetRevision\v2" /E /PURGE /IM /IT /NP'
+    ignoreErrors: true
+
+  - !powerShell:
+    command: '.\WALLPAPER.ps1 -Mode Desktop -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\desktop.jpg'
+    exeDir: true
+    runas: currentUserElevated
+    option: "configure-wallpaper"
+    weight: 45
+
+  - !powerShell: 
+    command: '.\WALLPAPER.ps1 -Mode LockScreen -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\lockscreen.jpg'
+    exeDir: true
+    runas: currentUserElevated
+    option: "configure-wallpaper"
+    weight: 45  
+
+  # Necessary to refresh start menu entries etc.
+  - !appx: {operation: clearCache, name: '*Client.CBS*'}
+  - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*', option: "remove-pinned-items-startmenu"}
+  - !appx: {operation: clearCache, name: '*Windows.Search*'}
+  - !appx: {operation: clearCache, name: '*TCUI*'}
+
+  # Force update group policy
+  - !run: 
+    exe: "gpupdate.exe"
+
+  # Apply micro patches via Revision Tool in order to avoid new playbook releases for minor changes
+  - !run:
+    path: "%ProgramFiles(x86)%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "playbook-patches apply"
+    wait: true
+    runas: currentUserElevated
+    
+  - !powerShell:
+    command: |
+      $explorerProcess = Get-Process -Name explorer -ErrorAction SilentlyContinue
+      if ($explorerProcess) {
+        Stop-Process -Name explorer -Force
+      }
+      Start-Process explorer
+    runas: currentUserElevated

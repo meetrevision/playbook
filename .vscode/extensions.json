@@ -1,5 +1,7 @@
 {
     "recommendations": [
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "ms-vscode.powershell",
+        "ms-vscode.powershell"
     ]
 }

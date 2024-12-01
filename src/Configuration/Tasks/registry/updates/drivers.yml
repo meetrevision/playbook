@@ -1,0 +1,25 @@
+---
+title: Configure Updates -> Drivers
+description: Configure Windows Update settings for device drivers
+privilege: TrustedInstaller
+actions:
+
+  # === Turn off Windows Update device driver searching - Enabled
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching', value: 'DontSearchWindowsUpdate', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching', value: 'DriverUpdateWizardWuSearchEnabled', type: REG_DWORD, data: '0'}
+  
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate', value: 'ExcludeWUDriversInQualityUpdate', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings', value: 'ExcludeWUDriversInQualityUpdate', type: REG_DWORD, data: '1'}
+
+  # === Turn off Windows Update device driver search prompt - Enabled
+  # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.DeviceSoftwareSetup::DriverSearchPlaces_DontPromptForWindowsUpdate_1
+  - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\DriverSearching', value: 'DontPromptForWindowsUpdate', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\DriverSearching', value: 'DontPromptForWindowsUpdate', type: REG_DWORD, data: '1'}
+
+  # === Prevent device metadata retrieval from the Internet - Enabled
+   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.DeviceSoftwareSetup::DeviceMetadata_PreventDeviceMetadataFromNetwork
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Device Metadata', value: 'PreventDeviceMetadataFromNetwork', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata', value: 'PreventDeviceMetadataFromNetwork', type: REG_DWORD, data: '1'}
+  
+  # === Specify search order for device driver source locations - Do not search Windows Update
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\DriverSearching', value: 'SearchOrderConfig', type: REG_DWORD, data: '0'}

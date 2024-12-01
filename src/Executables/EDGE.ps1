@@ -15,28 +15,6 @@ function Uninstall-Process {
     # Set Nation to 84 (France) temporarily
     [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', 84, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
     
-    # credits to he3als for the Acl commands
-    $fileName = "IntegratedServicesRegionPolicySet.json"
-    $pathISRPS = [Environment]::SystemDirectory + "\" + $fileName
-    $aclISRPS = Get-Acl -Path $pathISRPS
-    $aclISRPSBackup = [System.Security.AccessControl.FileSecurity]::new()
-    $aclISRPSBackup.SetSecurityDescriptorSddlForm($acl.Sddl)
-    if (Test-Path -Path $pathISRPS) {
-        try {
-            $admin = [System.Security.Principal.NTAccount]$(New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544')).Translate([System.Security.Principal.NTAccount]).Value
-        
-            $aclISRPS.SetOwner($admin)
-            $rule = New-Object System.Security.AccessControl.FileSystemAccessRule($admin, 'FullControl', 'Allow')
-            $aclISRPS.AddAccessRule($rule)
-            Set-Acl -Path $pathISRPS -AclObject $aclISRPS
-        
-            Rename-Item -Path $pathISRPS -NewName ($fileName + '.bak') -Force
-        }
-        catch {
-            Write-Error "[$Mode] Failed to set owner for $pathISRPS"
-        }	
-    }
-    
     $baseKey = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate'
     $registryPath = $baseKey + '\ClientState\' + $Key
 
@@ -46,6 +24,21 @@ function Uninstall-Process {
     }
 
     Remove-ItemProperty -Path $registryPath -Name "experiment_control_labels" -ErrorAction SilentlyContinue | Out-Null
+
+    # Needed to activate BrowserReplacement
+    # Not needed if windir is set to an empty string, but keeping it in case Windows Updates reinstalls Edge
+    $folderPath = "$env:SystemRoot\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe"
+
+    if (!(Test-Path -Path $folderPath)) {
+        New-Item -ItemType Directory -Path $folderPath -Force | Out-Null
+    }
+    New-Item -ItemType File -Path $folderPath -Name "MicrosoftEdge.exe" -Force | Out-Null
+    #
+
+    # Setting windir to an empty string allows the Edge uninstallation to work
+    #[microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment', 'windir', "", [Microsoft.Win32.RegistryValueKind]::ExpandString) | Out-Null
+    #$env:windir = [System.Environment]::GetEnvironmentVariable("windir","Machine")
+    $env:windir = ""
 
     $uninstallString = (Get-ItemProperty -Path $registryPath).UninstallString
     $uninstallArguments = (Get-ItemProperty -Path $registryPath).UninstallArguments
@@ -64,18 +57,15 @@ function Uninstall-Process {
     }
     Start-Process -FilePath $uninstallString -ArgumentList $uninstallArguments -Wait -NoNewWindow -Verbose
 
-    # Restore Acl
-    if (Test-Path -Path ($pathISRPS + '.bak')) {
-        Rename-Item -Path ($pathISRPS + '.bak') -NewName $fileName -Force
-        Set-Acl -Path $pathISRPS -AclObject $aclISRPSBackup
-    }
-
     # Restore Nation
     [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', $originalNation, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
 
+    # Restore windir
+    #[microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment', 'windir', '%SystemRoot%', [Microsoft.Win32.RegistryValueKind]::ExpandString) | Out-Null
+
     if ((Get-ItemProperty -Path $baseKey).IsEdgeStableUninstalled -eq 1) {
         Write-Host "[$Mode] Edge Stable has been successfully uninstalled"
-    } 
+    }
 }
 
 function Uninstall-Edge {

@@ -1,8 +1,0 @@
----
-title: disable-disk-checking
-description: disable-disk-checking
-privilege: TrustedInstaller
-actions:
-
-    # === autocheck autochk /k:C*
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager', value: 'BootExecute', type: REG_MULTI_SZ, data: 'autocheck autochk /k:C*'}
