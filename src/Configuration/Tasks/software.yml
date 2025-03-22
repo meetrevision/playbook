@@ -1,6 +1,6 @@
 ---
 title: Software
-description: Installs preferred softwares 
+description: Installs preferred software 
 privilege: TrustedInstaller
 actions:
 

@@ -261,7 +261,7 @@ actions:
   # === Turn off the advertising ID - Enabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo', value: 'DisabledByGroupPolicy', type: REG_DWORD, data: '1'}
 
-  # === Allow webistes to provide locally relevant content by accessing my language list - Off
+  # === Allow websites to provide locally relevant content by accessing my language list - Off
   # ------> Do not let websites access local language list - Enabled
   - !registryValue: {path: 'HKCU\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1', weight: 50}
   - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1', weight: 50}

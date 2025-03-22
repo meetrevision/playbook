@@ -112,7 +112,7 @@ actions:
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.MediaPlayer::DisableAutoUpdate
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\WindowsMediaPlayer', value: 'DisableAutoUpdate', type: REG_DWORD, data: '0'}
 
-  # --- Prevent Windows Update Orchestrator automatically instaling unwanted updates: 
+  # --- Prevent Windows Update Orchestrator automatically installing unwanted updates: 
   # ------> DevHome, Outlook
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate', operation: 'delete'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate', value: 'workCompleted', type: REG_DWORD, data: '1'}
