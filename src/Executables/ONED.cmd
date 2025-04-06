@@ -25,7 +25,7 @@ foreach ($user in $users) {
             $uninstallFilePath = [System.IO.Path]::GetDirectoryName($uninstallString)
             $uninstallRegPaths.Add($uninstallFilePath)
         }
-        
+
         Remove-ItemProperty -Path "HKU:\$($user.PSChildName)\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "OneDrive" -EA SilentlyContinue
 
         Remove-Item -Path "HKU:\$($user.PSChildName)\Software\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe" -Force -EA SilentlyContinue

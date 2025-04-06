@@ -1,4 +1,3 @@
-
 @REM copy /y "Associations.dll" "%WINDIR%\System32\OEMDefaultAssociations.dll"
 copy /y "OEMDefaultAssociations.xml" "%WINDIR%\System32\OEMDefaultAssociations.xml"
 

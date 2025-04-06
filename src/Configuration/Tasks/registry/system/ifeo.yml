@@ -11,7 +11,7 @@ actions:
   # === Webcam Telemetry
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
 
-    # === Microsoft PC Manager spread
+  # === Microsoft PC Manager spread
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FeatureLoader.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
 
   # === Bing pop-up ads
@@ -20,14 +20,13 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BGAUpsell.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BCILauncher.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe'}
 
-
-    # === Change CPU priority to Below Normal
-    #  1 Idle
-    #  2 Normal
-    #  3 High
-    #  4 RealTime (n.a.)
-    #  5 Below Normal
-    #  6 Above Normal
+  # === Change CPU priority to Below Normal
+  #  1 Idle
+  #  2 Normal
+  #  3 High
+  #  4 RealTime (n.a.)
+  #  5 Below Normal
+  #  6 Above Normal
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SearchIndexer.exe\PerfOptions', value: 'CpuPriorityClass', type: REG_DWORD, data: '5'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ctfmon.exe\PerfOptions', value: 'CpuPriorityClass', type: REG_DWORD, data: '5'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\fontdrvhost.exe\PerfOptions', value: 'CpuPriorityClass', type: REG_DWORD, data: '1'}

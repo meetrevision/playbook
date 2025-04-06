@@ -4,7 +4,7 @@ Get-ScheduledTask -TaskPath "\Microsoft\Windows\.NET Framework\" | Start-Schedul
 $env:PATH = [Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()
 [AppDomain]::CurrentDomain.GetAssemblies() | ForEach-Object {
     $path = $_.Location
-    if ($path) { 
+    if ($path) {
         $name = Split-Path $path -Leaf
         Write-Host -ForegroundColor Yellow "`r`nRunning ngen on '$name'"
         ngen.exe install $path /nologo

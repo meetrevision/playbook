@@ -15,11 +15,11 @@ actions:
       }
 
   # Disable Memory Compression
-  - !powerShell: 
+  - !powerShell:
     command: 'Disable-MMAgent -mc'
 
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\Pending\7971f918-a847-4430-9279-4a52d1efe18d', value: 'RegisterWithAU', type: REG_DWORD, data: '0'}
-  
+
   # [!] Breaks 'defrag c: -b'
   # Disable Superfetch for SSDs
   # Detection of mediaType might not work on VMs
@@ -30,11 +30,11 @@ actions:
   #       $path = ${env:ProgramFiles(x86)} + '\Revision Tool\data\flutter_assets\additionals\DisableSF.bat'
   #       Start-Process -FilePath $path -Wait -NoNewWindow
   #     }
-  
+
   - !cmd:
     command: 'setx DOTNET_CLI_TELEMETRY_OPTOUT 1'
     runas: currentUserElevated
-    
+
   - !cmd:
     command: 'setx POWERSHELL_TELEMETRY_OPTOUT 1'
     runas: currentUserElevated
@@ -83,12 +83,12 @@ actions:
     option: "configure-wallpaper"
     weight: 45
 
-  - !powerShell: 
+  - !powerShell:
     command: '.\WALLPAPER.ps1 -Mode LockScreen -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\lockscreen.jpg'
     exeDir: true
     runas: currentUserElevated
     option: "configure-wallpaper"
-    weight: 45  
+    weight: 45
 
   # Necessary to refresh start menu entries etc.
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
@@ -97,7 +97,7 @@ actions:
   - !appx: {operation: clearCache, name: '*TCUI*'}
 
   # Force update group policy
-  - !run: 
+  - !run:
     exe: "gpupdate.exe"
 
   # Apply micro patches via Revision Tool in order to avoid new playbook releases for minor changes
@@ -107,7 +107,7 @@ actions:
     args: "playbook-patches apply"
     wait: true
     runas: currentUserElevated
-    
+
   - !powerShell:
     command: |
       $explorerProcess = Get-Process -Name explorer -ErrorAction SilentlyContinue

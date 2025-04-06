@@ -21,22 +21,22 @@ function Set-DesktopWallpaper {
         $userKey = $_.Name
         [microsoft.win32.registry]::SetValue("$userKey\Control Panel\Desktop", "WallPaper", $imagePath, [Microsoft.Win32.RegistryValueKind]::String)
     }
-    
+
     # https://gist.github.com/s7ephen/714023?permalink_comment_id=3611772#gistcomment-3611772
     $setwallpapersrc = @"
     using System.Runtime.InteropServices;
 
     public class DesktopWallpaper
     {
-      public const int SetDesktopWallpaper = 20;
-      public const int UpdateIniFile = 0x01;
-      public const int SendWinIniChange = 0x02;
-      [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-      private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
-      public static void SetWallpaper(string path)
-      {
-        SystemParametersInfo(SetDesktopWallpaper, 0, path, UpdateIniFile |  SendWinIniChange);
-      }
+        public const int SetDesktopWallpaper = 20;
+        public const int UpdateIniFile = 0x01;
+        public const int SendWinIniChange = 0x02;
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+        public static void SetWallpaper(string path)
+        {
+            SystemParametersInfo(SetDesktopWallpaper, 0, path, UpdateIniFile |  SendWinIniChange);
+        }
     }
 "@
     if (-not ([System.Management.Automation.PSTypeName]'DesktopWallpaper').Type) {

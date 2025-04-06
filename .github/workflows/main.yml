@@ -60,6 +60,6 @@ jobs:
 
             If you would like to support Revision, kindly download the Playbook from the provided link below.
 
-            📌Link: 
+            📌Link:
 
             SHA256: `${{ env.HASH }}`

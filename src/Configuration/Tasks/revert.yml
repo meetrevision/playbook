@@ -16,7 +16,7 @@ actions:
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Download', value: 'CheckExeSignatures', operation: delete }
   - !registryValue: { path: 'HKCU\SOFTWARE\Policies\Microsoft\Internet Explorer\Privacy', value: 'ClearBrowsingHistoryOnExit', operation: delete }
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Privacy', value: 'ClearBrowsingHistoryOnExit', operation: delete }
-  
+
   # https://github.com/meetrevision/playbook/issues/27
   - !run: {exe: 'netsh', args: 'int tcp set supplemental internet congestionprovider=default', showOutput: false, showError: false}
 
@@ -37,7 +37,7 @@ actions:
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', operation: delete, option: '!remove-appx-xbox'}
 
   # Revert services
-  - !service: {name: 'Beep', operation: change, startup: 1} 
+  - !service: {name: 'Beep', operation: change, startup: 1}
   - !service: {name: 'GraphicsPerfSvc', operation: change, startup: 3}
   - !service: {name: 'Ndu', operation: change, startup: 2}
 
@@ -49,13 +49,13 @@ actions:
     data: '1'
 
   # Revert mitigation tweaks
-  - !registryKey: 
+  - !registryKey:
     path: 'HKCU\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions'
     operation: delete
-  - !registryKey: 
+  - !registryKey:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions'
     operation: delete
-    
+
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management', value: 'FeatureSettings', operation: delete}
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverride', operation: delete}
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverrideMask', operation: delete}
@@ -71,7 +71,7 @@ actions:
   - !registryKey: {path: 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate', operation: delete}
 
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Servicing', value: 'RepairContentServerSource', operation: delete}
-  
+
   # Breaks 'defrag c: -b'
   - !powerShell:
     command: |
@@ -97,7 +97,7 @@ actions:
 
   # Revert Windows Defender Antivirus - Security Intelligence Updates policies
   - !registryKey: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates', operation: delete}
-  
+
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates', value: 'DisableScheduledSignatureUpdateOnBattery', type: REG_DWORD, data: '1'}
 
   # Default Auto Tray behavior
@@ -121,7 +121,3 @@ actions:
 
   - !registryKey: {path: 'HKCU\Software\Policies\Microsoft\Internet Explorer', operation: delete}
   - !registryKey: {path: 'HKLM\Software\Policies\Microsoft\Internet Explorer', operation: delete}
-
-
-  
-  

@@ -3,7 +3,7 @@ title: Configure Security
 description: Configure security settings
 privilege: TrustedInstaller
 actions:
-  
+
   # === Hide the Account Protection page in Defender
   # ------> Everything it provides redirects to the Windows Settings anyway. Done for annoyance reduction.
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows Security Health\State', value: 'AccountProtection_MicrosoftAccount_Disconnected', type: REG_DWORD, data: '0'}
@@ -30,7 +30,6 @@ actions:
 
   # === Allow security intelligence updates when running on battery power - Disabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates', value: 'DisableScheduledSignatureUpdateOnBattery', type: REG_DWORD, data: '1'}
-  
 
   # ====================================
   # === Windows Defender SmartScreen ===
@@ -52,7 +51,6 @@ actions:
   # === Configure Windows Defender SmartScreen (Microsoft Edge) - Disabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter', value: 'EnabledV9', type: REG_DWORD, data: '0'}
 
-  
   # ========================
   # === Windows Security ===
   # ========================

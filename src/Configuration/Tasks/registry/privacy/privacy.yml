@@ -21,7 +21,7 @@ actions:
   # ------> Disables backup and restore of cellular text messages to Microsoft's cloud service
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.Messaging::AllowMessageSync
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\Messaging', value: 'AllowMessageSync', type: REG_DWORD, data: '0'}
-  
+
 
   # ===============
   # === Edge UI ===
@@ -85,7 +85,7 @@ actions:
 
   # === NVIDIA Telemetry - Disabled
   - !registryValue: {path: 'HKCU\Software\NVIDIA Corporation\NVControlPanel2\Client', value: 'OptInOrOutPreference', type: REG_DWORD, data: '0'}
-  
+
   # [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator]
   # "NoActiveProbe"=dword:00000001
   # ---> Block CEIP, Telemetry Client and Windows Insider via Firewall

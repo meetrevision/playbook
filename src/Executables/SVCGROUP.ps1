@@ -34,7 +34,7 @@ $services = @(
     "WpnService",
     "gpsvc",
     "iphlpsvc",
-	"wuauserv",
+    "wuauserv",
 
     "WinHttpAutoProxySvc",
     "EventLog",
@@ -45,24 +45,24 @@ $services = @(
     "FontCache",
     "nsi",
     "netprofm",
-	"SstpSvc",
+    "SstpSvc",
     "DispBrokerDesktopSvc",
     "CDPSvc",
     "EventSystem",
-	"LicenseManager",
+    "LicenseManager",
 
     "SystemEventsBroker",
     "Power",
     "LSM",
     "DcomLaunch",
     "BrokerInfrastructure",
-	
+
     "CoreMessagingRegistrar",
     "DPS",
     "NcdAutoSetup",
-	
-	"AppXSvc",
-	"ClipSVC",
+
+    "AppXSvc",
+    "ClipSVC",
 
     "camsvc",
     "StateRepository",
@@ -95,7 +95,6 @@ foreach ($service in $userServices) {
     $matchingServices = Get-Service | Where-Object { $_.Name -like $service }
 
     foreach ($matchingService in $matchingServices) {
-		New-ItemProperty -Path "$registryPath\$($matchingService.Name)" -Name "SvcHostSplitDisable" -Value 1 -PropertyType  DWord -Force
-    
+        New-ItemProperty -Path "$registryPath\$($matchingService.Name)" -Name "SvcHostSplitDisable" -Value 1 -PropertyType  DWord -Force
     }
 }

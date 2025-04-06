@@ -14,7 +14,7 @@ body:
       required: true
     attributes:
       label: Description
-      description: A clear and concise description 
+      description: A clear and concise description
       placeholder: Add a feature that does X.
 
   - type: textarea

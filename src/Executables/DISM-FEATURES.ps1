@@ -3,12 +3,12 @@ function Update-Feature {
         [string]$featureName,
         [bool]$bool
     )
-    
+
     $regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures"
     $regKey = Get-ItemProperty -Path "$regPath\$featureName" -ErrorAction SilentlyContinue
-	
-	$dismCmd = if ($bool) { "Enable" } else { "Disable" }
-	
+
+    $dismCmd = if ($bool) { "Enable" } else { "Disable" }
+
     if ($null -eq $regKey -or ($regKey.Selection -eq 0 -and $bool) -or ($regKey.Selection -eq 1 -and !$bool)) {
         Write-Host "$dismCmd $featureName"
         if ($bool) {
@@ -19,7 +19,6 @@ function Update-Feature {
     }
 }
 
-
 $features = @(
     @{ Name = "DirectPlay"; Bool = $true },
     @{ Name = "LegacyComponents"; Bool = $true },
@@ -29,7 +28,7 @@ $features = @(
     @{ Name = "Printing-Foundation-Features"; Bool = $false },
     @{ Name = "Printing-Foundation-InternetPrinting-Client"; Bool = $false },
     @{ Name = "WorkFolders-Client"; Bool = $false }
-	# @{ Name = "SmbDirect"; Bool = $false }
+    # @{ Name = "SmbDirect"; Bool = $false }
 )
 foreach ($feature in $features) {
     Update-Feature -featureName $feature.Name -bool $feature.Bool

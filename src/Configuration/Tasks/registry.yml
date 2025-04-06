@@ -2,7 +2,7 @@
 title: Registry
 description: Revision registry configuration
 privilege: TrustedInstaller
-actions: 
+actions:
   - !writeStatus: {status: "Tweaking registry"}
 
   # OS Info

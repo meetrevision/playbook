@@ -32,7 +32,6 @@ $registryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Volume
 foreach ($item in $volumeCache.GetEnumerator()) {
     $keyPath = Join-Path $registryPath $item.Key
     if (Test-Path $keyPath) {
-        
         New-ItemProperty -Path $keyPath -Name StateFlags1337 -Value $item.Value -PropertyType DWord | Out-Null
     }
 }

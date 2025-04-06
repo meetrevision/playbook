@@ -5,11 +5,11 @@ privilege: TrustedInstaller
 actions:
 
   # === perf: Disables Automatic Folder Type Discovery
-  # ------> Disabling it fixes the 'folder always loading' issue when a folder contains a lot of media files.  
+  # ------> Disabling it fixes the 'folder always loading' issue when a folder contains a lot of media files.
   # ------> https://www.windowslatest.com/2024/03/04/windows-11-can-open-big-folders-in-file-explorer-faster-if-you-turn-off-folder-discovery/
-  - !registryValue: {path: 'HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell', value: 'FolderType', type: REG_SZ, data: 'NotSpecified'} 
+  - !registryValue: {path: 'HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell', value: 'FolderType', type: REG_SZ, data: 'NotSpecified'}
   - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell', value: 'FolderType', type: REG_SZ, data: 'NotSpecified'}
-  
+
 
   # === perf: Force explorer to use high performance GPU
   - !registryValue: { path: 'HKCU\Software\Microsoft\DirectX\UserGpuPreferences', value: 'C:\Windows\explorer.exe', type: REG_SZ, data: 'GpuPreference=2;' }
@@ -20,7 +20,7 @@ actions:
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer', value: 'DisableGraphRecentItems', type: REG_DWORD, data: '1' }
 
   # === perf: Disable 'Group By' in the Downloads folder to avoid unnecessary dates comparison
-  - !powerShell: 
+  - !powerShell:
     runas: trustedInstaller
     command: |
       $folderTypesKey = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderTypes'
@@ -32,9 +32,9 @@ actions:
             Set-ItemProperty -Path $_.PSPath -Name GroupBy -Value ''
           }
       }
-    
+
   # Necessary to refresh 'Bags'
-  - !powerShell: 
+  - !powerShell:
     runas: currentUserElevated
     command: |
       $downloadsFolderID = '{885a186e-a440-4ada-812b-db871b942259}'
@@ -43,7 +43,7 @@ actions:
         $fullPath = Join-Path -Path $_.PSPath -ChildPath 'Shell\{885A186E-A440-4ADA-812B-DB871B942259}'
         if (Test-Path -Path $fullPath) {
           Remove-Item -Path $fullPath -Recurse
-        } 
+        }
       }
 
   # === Disable the new Spotlight icon on Desktop (24H2)
@@ -54,26 +54,26 @@ actions:
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer', value: 'MultipleInvokePromptMinimum', type: REG_DWORD, data: '100'}
   - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer', value: 'MultipleInvokePromptMinimum', type: REG_DWORD, data: '100'}
   - !registryValue: {path: 'HKCU\Software\Winaero.com\Winaero Tweaker\Changes', value: 'pageContextMenuSelectionLimit', type: REG_DWORD, data: '1'}
-  
+
   # === Disable ' - Shortcut.' text on shortcut creation.
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'link', type: REG_BINARY, data: '00000000'}
   - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'link', type: REG_BINARY, data: '00000000'}
-  
+
   # === Always show more details in a file copy dialog - Enabled
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager', value: 'EnthusiastMode', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager', value: 'EnthusiastMode', type: REG_DWORD, data: '1'}
-  
+
   # === AutoPlay - Disabled
   # ------> Auto play is the notification that pops up when you insert an external storage device, like a USB.
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers', value: 'DisableAutoplay', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers', value: 'DisableAutoplay', type: REG_DWORD, data: '1'}
-  
+
   # === AutoRun - Disabled
   # ------> Disable autorun will limit the functionality of autorun.inf on all disks.
   # ------> https://learn.microsoft.com/en-us/windows/win32/shell/autoplay-reg
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'NoDriveTypeAutoRun', type: REG_DWORD, data: '255'}
   - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'NoDriveTypeAutoRun', type: REG_DWORD, data: '255'}
-   
+
   # === Windows low disk space checking - Disabled
   # ------> (Also prevents idle hard disks from going into standby)
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'NoLowDiskSpaceChecks', type: REG_DWORD, data: '1'}
@@ -93,14 +93,14 @@ actions:
   # === Disable Taskbar Animations. (prevents the pop up windows in the taskbar from getting stuck too)
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', type: REG_DWORD, data: '0', option: 'configure-explorer-taskbar-animations'}
   - !registryValue: {path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', type: REG_DWORD, data: '0', option: 'configure-explorer-taskbar-animations'}
-  
+
   - !registryValue: { path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', operation: delete, option: '!configure-explorer-taskbar-animations' }
   - !registryValue: { path: 'HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', operation: delete, option: '!configure-explorer-taskbar-animations' }
 
   # === Allow Windows Ink Workspace - Enabled (On, but disallow access above lock)
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.WindowsInkWorkspace::AllowSuggestedAppsInWindowsInkWorkspace
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace', value: 'AllowWindowsInkWorkspace', type: REG_DWORD, data: '1'}
-  
+
   # === Allow suggested apps in Windows Ink Workspace - Disabled
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace', value: 'AllowSuggestedAppsInWindowsInkWorkspace', type: REG_DWORD, data: '0'}
 

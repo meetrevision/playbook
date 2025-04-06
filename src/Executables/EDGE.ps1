@@ -1,4 +1,4 @@
-param (   
+param (
     [Parameter(Mandatory = $true)]
     [ValidateSet("EdgeBrowser", "WebView", "EdgeUpdate")]
     [string]$Mode
@@ -14,7 +14,7 @@ function Uninstall-Process {
 
     # Set Nation to 84 (France) temporarily
     [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', 84, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
-    
+
     $baseKey = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate'
     $registryPath = $baseKey + '\ClientState\' + $Key
 
@@ -70,11 +70,11 @@ function Uninstall-Process {
 
 function Uninstall-Edge {
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge" -Name "NoRemove" -ErrorAction SilentlyContinue | Out-Null
-   
+
     [microsoft.win32.registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev", "AllowUninstall", 1, [Microsoft.Win32.RegistryValueKind]::DWord) | Out-Null
 
     Uninstall-Process -Key '{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}'
-    
+
     @( "$env:ProgramData\Microsoft\Windows\Start Menu\Programs",
        "$env:PUBLIC\Desktop",
        "$env:USERPROFILE\Desktop" ) | ForEach-Object {
@@ -83,13 +83,12 @@ function Uninstall-Edge {
             Remove-Item -Path $shortcutPath -Force
         }
     }
-
 }
 
 function Uninstall-WebView {
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView" -Name "NoRemove" -ErrorAction SilentlyContinue | Out-Null
 
-    # Force to use system-wide WebView2 
+    # Force to use system-wide WebView2
     # [microsoft.win32.registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\WebView2\BrowserExecutableFolder", "*", "%%SystemRoot%%\System32\Microsoft-Edge-WebView")
 
     Uninstall-Process -Key '{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}'

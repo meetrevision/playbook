@@ -3,7 +3,7 @@ title: APPX
 description: Removal of APPX packages
 privilege: TrustedInstaller
 actions:
-  
+
   - !writeStatus: {status: "Removing Appx Packages"}
   - !powerShell:
     # runas: currentUserElevated
@@ -82,7 +82,7 @@ actions:
     weight: 10
     command: >-
       .\APPX-REMOVER.ps1 -Packages 'Microsoft.Windows.DevHome'
-    
+
   - !writeStatus: {status: "Removing Xbox Apps", option: "remove-appx-xbox"}
   - !powerShell:
     option: "remove-appx-xbox"
@@ -131,7 +131,7 @@ actions:
     weight: 10
     command: >-
       .\APPX-REMOVER.ps1 -Packages 'MicrosoftWindows.Client.AIX'
-  
+
 #   - !writeStatus: {status: "Removing Appx Packages"}
 #   # - !appx: {name: '*Disney*', type: family, weight: 10}
 
@@ -157,7 +157,7 @@ actions:
 #   - !appx: {name: '*Microsoft.Windows.Photos*', type: family, option: "remove-appx-photos", weight: 10}
 #   - !writeStatus: {status: "Removing Camera"}
 #   - !appx: {name: '*Microsoft.WindowsCamera*', type: family, weight: 10}
-  
+
 #   - !writeStatus: {status: "Removing Widgets"}
 #   - !powerShell:
 #     command: 'Get-AppxPackage MicrosoftWindows.Client.WebExperience | Remove-AppxPackage'
@@ -166,13 +166,13 @@ actions:
 
 #   - !writeStatus: {status: "Removing Alarms"}
 #   - !appx: {name: '*Microsoft.WindowsAlarms*', type: family, weight: 10}
- 
+
 #   - !writeStatus: {status: "Removing Maps"}
 #   - !appx: {name: '*Microsoft.WindowsMaps*', type: family, weight: 10}
-  
+
 #   - !writeStatus: {status: "Removing Sticky Notes"}
 #   - !appx: {name: '*Microsoft.MicrosoftStickyNotes*', type: family, weight: 10}
-  
+
 #   - !writeStatus: {status: "Removing Mail"}
 #   - !powerShell:
 #     command: 'Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage'
@@ -213,12 +213,12 @@ actions:
 #     # Cortana
 #   - !writeStatus: {status: "Removing Cortana"}
 #   - !appx: {name: '*Microsoft.549981C3F5F10*', type: family, weight: 10}
-  
+
 #   - !writeStatus: {status: "Removing QuickAssist"}
 #   - !appx: {name: '*MicrosoftCorporationII.QuickAssist*', type: family, weight: 10}
 #   - !writeStatus: {status: "Removing MS Family"}
 #   - !appx: {name: '*MicrosoftCorporationII.MicrosoftFamily*', type: family, weight: 10}
-  
+
 #   - !writeStatus: {status: "Removing ZuneMusic"}
 #   - !appx: {name: '*Microsoft.ZuneMusic*', type: family, weight: 10}
 #   - !writeStatus: {status: "Removing ZuneVideo"}
@@ -232,7 +232,7 @@ actions:
 
 #   - !writeStatus: {status: "Removing skydrive"}
 #   - !appx: {name: '*microsoft.microsoftskydrive*', type: family, weight: 10}
-  
+
 #   - !writeStatus: {status: "Removing TeamsforSurfaceHub"}
 #   - !appx: {name: '*Microsoft.MicrosoftTeamsforSurfaceHub*', type: family, weight: 10}
 #   - !writeStatus: {status: "Removing MailforSurfaceHub"}
@@ -241,7 +241,7 @@ actions:
 #   - !appx: {name: '*Microsoft.MicrosoftPowerBIForWindows*', type: family, weight: 10}
 #   - !writeStatus: {status: "Removing Skype"}
 #   - !appx: {name: '*Microsoft.SkypeApp*', type: family, weight: 10}
- 
+
 #   - !writeStatus: {status: "Removing UWP Office"}
 #   - !appx: {name: '*Microsoft.MicrosoftOfficeHub*', type: family, weight: 10}
 #   - !appx: {name: '*Microsoft.Office.Excel*', type: family, weight: 10}
@@ -260,7 +260,7 @@ actions:
 
 #   - !writeStatus: {status: "Removing MixedRealityPortal"}
 #   - !appx: {name: '*MixedReality.Portal*', type: family, weight: 10}
-  
+
 #     # Paint 3D
 #   - !writeStatus: {status: "Removing Paint 3D"}
 #   - !appx: {name: '*Microsoft.MSPaint*', type: family, weight: 10}
@@ -282,7 +282,7 @@ actions:
 
 #   - !writeStatus: {status: "Removing Dev Home"}
 #   - !appx: {name: '*DevHome*', type: family, option: "remove-appx-devhome", weight: 10}
-  
+
 #   # - !writeStatus: {status: "Removing Windows Backup"}
 #   # - !appx: {name: '*WindowsBackup*', type: app, unregister: true, option: "remove-appx-wbackup", weight: 10}
 
@@ -293,9 +293,8 @@ actions:
 #   - !appx: {name: '*Microsoft.Xbox*', type: family, weight: 10, option: "remove-appx-xbox"}
 #   - !appx: {name: '*Microsoft.GamingApp*', type: family, option: "remove-appx-xbox"}
 #   # Xbox Console Companion is deprecated
-#   - !appx: {name: '*Microsoft.XboxApp*', type: family} 
+#   - !appx: {name: '*Microsoft.XboxApp*', type: family}
 
-  
 #   - !writeStatus: {status: "Removing Your Phone", option: "remove-appx-yourphone"}
 #   - !appx: {name: '*Microsoft.YourPhone*', type: family, weight: 10, option: "remove-appx-yourphone"}
 #   - !appx: {name: '*MicrosoftWindows.CrossDevice*', type: family, weight: 10, option: "remove-appx-yourphone"}

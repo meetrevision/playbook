@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Thank you for taking your time to file a bug report! Please fill out the following information to help us fix the bug
-  
+
   - type: textarea
     id: describe-bug
     validations:
@@ -16,7 +16,7 @@ body:
       label: Describe the bug
       description: A clear and concise description of what the bug is.
       placeholder: I was trying to do X, but Y happened instead
-  
+
   - type: textarea
     id: steps-to-reproduce
     validations:
@@ -34,7 +34,7 @@ body:
         2. Click on '....'
         3. Scroll down to '....'
         4. See error
-  
+
   - type: textarea
     id: expected-behavior
     validations:
@@ -43,7 +43,7 @@ body:
       label: Expected behavior
       description: A clear and concise description of what you expected to happen
       placeholder: I expected Z to happen.
-  
+
   - type: textarea
     id: environment
     validations:
@@ -60,7 +60,7 @@ body:
         - OS Build Number & Edition: `19045.3633, Home`
         - ReviOS version: `23.10`
         - Specs: `PC, Intel Core i5-10400, 16GB RAM, NVIDIA GeForce GTX 1650`
-  
+
   - type: textarea
     id: additional-info
     attributes:
@@ -69,7 +69,7 @@ body:
         Add any other context about the problem here
       placeholder: |
         I disabled Windows Defender, but it is still running after reboot.
-  
+
   - type: checkboxes
     id: search-before-submit
     attributes:

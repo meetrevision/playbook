@@ -1,6 +1,6 @@
 ---
 title: Software
-description: Installs preferred software 
+description: Installs preferred software
 privilege: TrustedInstaller
 actions:
 
@@ -14,7 +14,7 @@ actions:
     command: '.\UPDATE-APPX.ps1'
 
   - !writeStatus: {status: 'Installing Brave on reboot', option: "browser-brave"}
-  - !registryValue: 
+  - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
     value: 'Install Brave'
     type: REG_SZ
@@ -31,7 +31,7 @@ actions:
 
   # Firefox
   - !writeStatus: {status: 'Installing Firefox on reboot', option: "browser-firefox"}
-  - !registryValue: 
+  - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
     value: 'Install Firefox'
     type: REG_SZ

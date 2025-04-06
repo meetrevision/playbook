@@ -3,7 +3,7 @@ title: Initialization
 description: Copies Revision folders/files, and configures some initial settings
 privilege: TrustedInstaller
 actions:
-  
+
   - !writeStatus: {status: "Initializing"}
 
   # Prevent annoying notifications during deployment
@@ -18,7 +18,7 @@ actions:
     command: 'robocopy "Licenses" "%SystemDrive%\Licenses" /E /PURGE /IM /IT /NP'
     ignoreErrors: true
     weight: 30
-    
+
   - !cmd:
     exeDir: true
     command: 'copy /y "hosts" "%WINDIR%\System32\drivers\etc\hosts"'
@@ -28,7 +28,7 @@ actions:
   - !cmd:
     command: 'ipconfig /flushdns'
 
-  # Wakelock modification isn't available in AME Wizard, therefore activating a custom high performance powerplan before we proceed to prevent sleep 
+  # Wakelock modification isn't available in AME Wizard, therefore activating a custom high performance powerplan before we proceed to prevent sleep
   - !writeStatus: {status: "Configuring a power plan"}
   - !run: {exe: "powercfg", args: "/hibernate off"}
   # https://github.com/meetrevision/playbook/issues/105

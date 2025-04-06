@@ -8,15 +8,15 @@ function Delete-UserChoiceKey {
   using System;
   using System.Runtime.InteropServices;
   using Microsoft.Win32;
-  
+
   namespace Registry {
     public class Utils {
       [DllImport("advapi32.dll", SetLastError = true)]
       private static extern int RegOpenKeyEx(UIntPtr hKey, string subKey, int ulOptions, int samDesired, out UIntPtr hkResult);
-  
+
       [DllImport("advapi32.dll", SetLastError=true, CharSet = CharSet.Unicode)]
       private static extern uint RegDeleteKey(UIntPtr hKey, string subKey);
-  
+
       public static void DeleteKey(string key) {
         UIntPtr hKey = UIntPtr.Zero;
         RegOpenKeyEx((UIntPtr)0x80000003u, key, 0, 0x20019, out hKey);
@@ -64,7 +64,7 @@ for ($i = 2; $i -lt $args.Length; $i++) {
   } else {
     If (-NOT (Test-Path "HKU:\$Hive\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\$($splitArg[0])")) {
     New-Item -Path "HKU:\$Hive\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\$($splitArg[0])" -Force | Out-Null
-    } 
+    }
     If (Test-Path "HKU:\$Hive\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\$($splitArg[0])\UserChoice") {
     Delete-UserChoiceKey "$Hive\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\$($splitArg[0])\UserChoice"
     }

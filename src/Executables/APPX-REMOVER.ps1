@@ -27,7 +27,7 @@ foreach ($package in $Packages) {
         if (Test-Path $inboxAppsPath) {
             Remove-Item -Path $inboxAppsPath -Force
         }
-        
+
         if ($pkg.NonRemovable -eq 1) {
             Set-NonRemovableAppsPolicy -Online -PackageFamilyName $packageFamilyName -NonRemovable 0
         }
@@ -38,7 +38,7 @@ foreach ($package in $Packages) {
             $endOfLifePath = "$baseRegistryPath\EndOfLife\$userSid\$fullPackageName"
             New-Item -Path $endOfLifePath -Force
 
-            # Errors may occur if the package is not added to the EndOfLife registry key for every user who has it installed 
+            # Errors may occur if the package is not added to the EndOfLife registry key for every user who has it installed
             Remove-AppxPackage -Package $fullPackageName -User $userSid
         }
 

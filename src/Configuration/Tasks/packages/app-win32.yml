@@ -19,7 +19,7 @@ actions:
     weight: 30
     command: >-
       .\APPX-REMOVER.ps1 -Packages 'Microsoft.Copilot'
-  
+
   - !powerShell:
     command: '.\EDGE.ps1 -Mode EdgeBrowser'
     exeDir: true
