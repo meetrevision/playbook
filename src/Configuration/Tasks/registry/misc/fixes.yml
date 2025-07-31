@@ -12,7 +12,7 @@ actions:
   # "DpiScalingVer"=dword:00001000
   # "LogPixels"=dword:00000096
 
-  # === Some builds had issue with registry hive not existing and thus not saving volume mixer per application settings.
+  # === Some builds had issues with registry hive not existing and thus not saving volume mixer per application settings.
 
   # === Touchpad fix.
   # [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad]
