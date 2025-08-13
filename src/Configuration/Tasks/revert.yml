@@ -32,7 +32,7 @@ actions:
   # Breaks Efficiency Mode in Task Manager
   - !service: {name: 'bam', operation: change, startup: 1}
 
-  #  The Start Recording button on GameBar is gray outed - #74
+  #  The Start Recording button on GameBar is grayed out - #74
   - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', operation: delete}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR', value: 'AppCaptureEnabled', operation: delete, option: '!remove-appx-xbox'}
 
