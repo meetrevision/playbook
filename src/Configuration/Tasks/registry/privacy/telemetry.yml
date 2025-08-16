@@ -53,3 +53,8 @@ actions:
 
   # === Allow Experimentation - Disabled
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\System', value: 'AllowExperimentation', type: REG_DWORD, data: '0'}
+
+  # === WMI\Autologger - Disabled
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\Diagtrack-Listener', value: 'Start', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\SQMLogger', value: 'Start', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\SetupPlatformTel', value: 'Start', type: REG_DWORD, data: '0'}

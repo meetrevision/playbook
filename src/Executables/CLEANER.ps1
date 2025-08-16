@@ -79,10 +79,10 @@ foreach ($folderName in $foldersToRemove) {
 
 # Remove-Item -Path "C:\Program Files\WindowsApps\MicrosoftWindows.Client.WebExperience*" -Recurse -Force
 
-Get-ChildItem -Path "$env:SystemRoot" -Filter *.log -File -Recurse -Force | Remove-Item -Recurse -Force | Out-Null
+# Get-ChildItem -Path "$env:SystemRoot" -Filter *.log -File -Recurse -Force | Remove-Item -Recurse -Force | Out-Null
 
 Write-Host "Cleaning up %TEMP%"
-Get-ChildItem -Path "$env:TEMP" -Exclude "AME" | Remove-Item -Recurse -Force
+Get-ChildItem -Path "$env:TEMP" -Exclude "AME", "Revision-Tool" | Remove-Item -Recurse -Force
 
 # Just in case
 Start-ScheduledTask -TaskPath "\Microsoft\Windows\DiskCleanup\" -TaskName "SilentCleanup"

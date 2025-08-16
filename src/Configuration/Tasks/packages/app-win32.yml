@@ -11,15 +11,6 @@ actions:
   - !taskKill: {name: "MicrosoftEdge*", errorAction: Ignore, option: "remove-edge"}
   - !taskKill: {name: "setup", errorAction: Ignore, pathContains: "\\Edge", option: "remove-edge"}
 
-  # Remove the new Copilot UWP app before removing Edge to avoid leftovers
-  - !powerShell:
-    option: "remove-edge"
-    exeDir: true
-    errorAction: Ignore
-    weight: 30
-    command: >-
-      .\APPX-REMOVER.ps1 -Packages 'Microsoft.Copilot'
-  
   - !powerShell:
     command: '.\EDGE.ps1 -Mode EdgeBrowser'
     exeDir: true
@@ -34,9 +25,9 @@ actions:
     weight: 30
     command: >-
       .\APPX-REMOVER.ps1 -Packages @(
-        'Microsoft.Copilot',
         'Microsoft.MicrosoftEdge',
-        'Microsoft.MicrosoftEdgeDevToolsClient'
+        'Microsoft.MicrosoftEdgeDevToolsClient',
+        'Microsoft.Edge.GameAssist'
       )
 
   - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
@@ -48,13 +39,12 @@ actions:
   - !taskKill: {name: "OneDriveSetup", errorAction: Ignore, option: "remove-onedrive"}
   - !taskKill: {name: "OneDrive*", errorAction: Ignore, option: "remove-onedrive"}
 
-  - !run: {exeDir: true, exe: "ONED.cmd", option: "remove-onedrive", weight: 40}
+  - !run: {exeDir: true, exe: "ONED.cmd", option: "remove-onedrive", oobe: false, iso: false, weight: 40}
   - !file: {path: "%SystemDrive%\\OneDriveTemp", option: "remove-onedrive"}
   - !file: {path: "%ProgramData%\\Microsoft OneDrive", option: "remove-onedrive"}
 
   - !powerShell:
     option: "remove-onedrive"
-    # runas: currentUserElevated
     wait: true
     exeDir: true
     errorAction: Ignore

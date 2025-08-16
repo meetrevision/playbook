@@ -4,33 +4,12 @@ description: Applies some Revision configurations
 privilege: TrustedInstaller
 actions:
 
-  # Disable transparency and animations for low end devices
-  - !powerShell:
-    runas: currentUserElevated
-    command: |
-      $mem = (Get-CimInstance Win32_PhysicalMemory | Measure-Object Capacity -Sum).Sum
-      if ($mem -lt 9000000000) {
-        [microsoft.win32.registry]::SetValue('HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', 'EnableTransparency', 0, [Microsoft.Win32.RegistryValueKind]::DWord)
-        [microsoft.win32.registry]::SetValue('HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics', 'MinAnimate', 0, [Microsoft.Win32.RegistryValueKind]::DWord)
-      }
-
   # Disable Memory Compression
   - !powerShell: 
     command: 'Disable-MMAgent -mc'
 
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\Pending\7971f918-a847-4430-9279-4a52d1efe18d', value: 'RegisterWithAU', type: REG_DWORD, data: '0'}
-  
-  # [!] Breaks 'defrag c: -b'
-  # Disable Superfetch for SSDs
-  # Detection of mediaType might not work on VMs
-  # - !powerShell:
-  #   command: |
-  #     $mediaType = (Get-PhysicalDisk -SerialNumber (Get-Disk -Number (Get-Partition -DriveLetter $env:SystemDrive.Substring(0, 1)).DiskNumber).SerialNumber.TrimStart()).MediaType
-  #     if ($mediaType -eq 'SSD') {
-  #       $path = ${env:ProgramFiles(x86)} + '\Revision Tool\data\flutter_assets\additionals\DisableSF.bat'
-  #       Start-Process -FilePath $path -Wait -NoNewWindow
-  #     }
-  
+
   - !cmd:
     command: 'setx DOTNET_CLI_TELEMETRY_OPTOUT 1'
     runas: currentUserElevated
@@ -88,7 +67,30 @@ actions:
     exeDir: true
     runas: currentUserElevated
     option: "configure-wallpaper"
-    weight: 45  
+    weight: 45
+
+  - !powerShell:
+    command: 'Copy-Item -Path .\WALLPAPER.ps1 -Destination "$env:systemroot\Web\Wallpaper\MeetRevision" -Force'
+    exeDir: true
+    option: "configure-wallpaper"
+  
+  - !powerShell:
+    command: 'Copy-Item -Path .\WallpaperStartup.cmd -Destination "$env:systemroot\Web\Wallpaper\MeetRevision" -Force'
+    exeDir: true
+    option: "configure-wallpaper"
+
+  - !powerShell:
+    command: '.\Set-Theme.ps1 -WallpaperPath "$env:SystemRoot\Web\Wallpaper\MeetRevision\v2\desktop.jpg" -ThemeExportPath "$env:SystemRoot\Resources\Themes\revi.theme" -SystemMode "Dark" -AppMode "Dark"'
+    exeDir: true
+    runas: currentUserElevated
+    option: "configure-wallpaper"
+
+  - !registryValue: 
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+    value: 'RevisionWallpaperStartup'
+    type: REG_SZ
+    oobe: only
+    data: 'cmd /c "%SystemRoot%\Web\Wallpaper\MeetRevision\WallpaperStartup.cmd"'
 
   # Necessary to refresh start menu entries etc.
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
@@ -102,7 +104,7 @@ actions:
 
   # Apply micro patches via Revision Tool in order to avoid new playbook releases for minor changes
   - !run:
-    path: "%ProgramFiles(x86)%\\Revision Tool"
+    path: "%ProgramFiles%\\Revision Tool"
     exe: "revitool.exe"
     args: "playbook-patches apply"
     wait: true

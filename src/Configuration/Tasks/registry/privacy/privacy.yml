@@ -75,7 +75,8 @@ actions:
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\SearchCompanion', value: 'DisableContentFileUpdates', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows NT\Printers', value: 'DisableHTTPPrinting', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows NT\Printers', value: 'DisableWebPnPDownload', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\DriverSearching', value: 'DontSearchWindowsUpdate', type: REG_DWORD, data: '1'}
+  # Found in drivers.yml
+  # - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\DriverSearching', value: 'DontSearchWindowsUpdate', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\HandwritingErrorReports', value: 'PreventHandwritingErrorReports', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\TabletPC', value: 'PreventHandwritingDataSharing', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\WindowsMovieMaker', value: 'WebHelp', type: REG_DWORD, data: '1'}

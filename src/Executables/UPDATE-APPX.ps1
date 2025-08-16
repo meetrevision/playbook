@@ -3,7 +3,7 @@ Write-Host 'Updating Microsoft Store apps...'
 # Add-AppPackage 'https://cdn.winget.microsoft.com/cache/source.msix' -ForceApplicationShutdown -Verbose
 $productName = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').ProductName
 Write-Host "Product Name: $productName"
-$path = Join-Path ${env:ProgramFiles(x86)} 'Revision Tool'
+$path = Join-Path $env:ProgramFiles 'Revision Tool'
 $file = Join-Path $path 'revitool.exe'
 
 if (!(Test-Path $path) -or !(Test-Path $file)) {

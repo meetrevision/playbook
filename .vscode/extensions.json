@@ -2,6 +2,6 @@
     "recommendations": [
         "redhat.vscode-yaml",
         "ms-vscode.powershell",
-        "ms-vscode.powershell"
+        "redhat.vscode-xml"
     ]
 }

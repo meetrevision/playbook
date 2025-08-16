@@ -144,6 +144,20 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Accents\3\Theme0', value: 'Color', type: REG_DWORD, data: '4294901930'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Accents\3\Theme1', value: 'Color', type: REG_DWORD, data: '4294967064'}
 
+  # === Disable transparency and animations
+  - !registryValue:
+    path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize'
+    value: 'EnableTransparency'
+    type: REG_DWORD
+    data: '0'
+    option: 'configure-te'
+  - !registryValue:
+    path: 'HKCU\Control Panel\Desktop\WindowMetrics'
+    value: 'MinAnimate'
+    type: REG_DWORD
+    data: '0'
+    option: 'configure-te'
+
   # === Choose your default app mode - Dark (theme)
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '0', option: "configure-darkmode", weight: 70}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '0', option: "configure-darkmode", weight: 50}
@@ -176,6 +190,9 @@ actions:
 
   # === Automatically update maps - Off
   - !registryValue: {path: 'HKLM\SYSTEM\Maps', value: 'AutoUpdateEnabled', type: REG_DWORD, data: '0'}
+
+  # === Resume - Off
+  - !registryValue: {path: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration', value: 'IsResumeAllowed', type: REG_DWORD, data: '0'}
 
   # ================
   # === Accounts ===
@@ -261,7 +278,7 @@ actions:
   # === Turn off the advertising ID - Enabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo', value: 'DisabledByGroupPolicy', type: REG_DWORD, data: '1'}
 
-  # === Allow webistes to provide locally relevant content by accessing my language list - Off
+  # === Allow websites to provide locally relevant content by accessing my language list - Off
   # ------> Do not let websites access local language list - Enabled
   - !registryValue: {path: 'HKCU\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1', weight: 50}
   - !registryValue: {path: 'HKU\.DEFAULT\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1', weight: 50}
@@ -465,41 +482,3 @@ actions:
 
   # === Enable Sudo - On (Inline)
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Sudo', value: 'Enabled', type: REG_DWORD, data: '3'}
-
-
-  # ========================
-  # === Discarded Tweaks ===
-  # ========================
-
-  # === Block Cortana connections via Firewall
-  # ------> Cortana gets removed either way, so these are discarded from integration for compatibility reasons + not to flood the Firewall registry entry.
-  # [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules]
-  # "Block Cortana ActionUriServer.exe"="v2.26|Action=Block|Active=TRUE|Dir=Out|RA42=IntErnet|RA62=IntErnet|App=C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\ActionUriServer.exe|Name=Block Cortana ActionUriServer.exe|Desc=Block Cortana Outbound UDP/TCP Traffic|"
-  # [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules]
-  # "Block Cortana PlacesServer.exe"="v2.26|Action=Block|Active=TRUE|Dir=Out|RA42=IntErnet|RA62=IntErnet|App=C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\PlacesServer.exe|Name=Block Cortana PlacesServer.exe|Desc=Block Cortana Outbound UDP/TCP Traffic|"
-  # [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules]
-  # "Block Cortana RemindersServer.exe"="v2.26|Action=Block|Active=TRUE|Dir=Out|RA42=IntErnet|RA62=IntErnet|App=C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\RemindersServer.exe|Name=Block Cortana RemindersServer.exe|Desc=Block Cortana Outbound UDP/TCP Traffic|"
-  # [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules]
-  # "Block Cortana RemindersShareTargetApp.exe"="v2.26|Action=Block|Active=TRUE|Dir=Out|RA42=IntErnet|RA62=IntErnet|App=C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\RemindersShareTargetApp.exe|Name=Block Cortana RemindersShareTargetApp.exe|Desc=Block Cortana Outbound UDP/TCP Traffic|"
-  # [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules]
-  # "Block Cortana SearchUI.exe"="v2.26|Action=Block|Active=TRUE|Dir=Out|RA42=IntErnet|RA62=IntErnet|App=C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe|Name=Block Cortana SearchUI.exe|Desc=Block Cortana Outbound UDP/TCP Traffic|"
-  # [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules]
-  # "Block Cortana Package"="v2.26|Action=Block|Active=TRUE|Dir=Out|RA42=IntErnet|RA62=IntErnet|Name=Block Cortana Package|Desc=Block Cortana Outbound UDP/TCP Traffic|AppPkgId=S-1-15-2-1861897761-1695161497-2927542615-642690995-327840285-2659745135-2630312742|Platform=2:6:2|Platform2=GTEQ|"
-
-  # === Disable DeliveryOptimization
-  # ------> May conflict with Microsoft Store functions.
-  # HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
-  # "DODownloadMode"=dword:00000100
-
-  # === Autocorrect misspelled words I type (?)
-  # ------> Undocumented, therefore discarded.
-  # ------> Hardware keyboard
-  # [HKEY_CURRENT_USER\Software\Microsoft\Input\Settings]
-  # "EnableHwkbAutocorrection2"=dword:00000000
-  # [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Input\Settings]
-  # "EnableHwkbAutocorrection2"=dword:00000000
-
-  # === Disable Speech
-  # ------> Undocumented, discarded.
-  # [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech_OneCore\Preferences]
-  # "VoiceActivationDefaultOn"=dword:00000000

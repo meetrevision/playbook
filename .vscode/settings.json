@@ -16,5 +16,12 @@
     ],
     "yaml.schemas": {
         "https://json.schemastore.org/github-issue-config.json": "file:///workspaces/playbook/.github/ISSUE_TEMPLATE/config.yml"
+    },
+    "files.associations": {
+        "*.conf": "xml"
+    },
+    "[xml]": {
+        "editor.autoClosingBrackets": "never",
+        "files.trimFinalNewlines": true
     }
 }

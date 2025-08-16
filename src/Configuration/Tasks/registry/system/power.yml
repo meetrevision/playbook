@@ -4,19 +4,39 @@ description: configure-power-control
 privilege: TrustedInstaller
 actions:
 
-  # === Require use of fast startup - Disabled
-  # ------> Enhances compatibility with Linux dual boot.
-  # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.WindowsInitialization::Hiberboot
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\System', value: 'HiberbootEnabled', type: REG_DWORD, data: '0'}
+  # === Disable Hibernate via revitool
+  # ------> Disabling hibernate improves system stability, fixes dual-boot and upgrade issues, and frees up disk space
+  # ------> NOTE: It can cause overheating in sleep mode.
+  - !run:
+    path: "%ProgramFiles%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "misc hibernate --disable"
+    wait: true
+    runas: currentUserElevated
+    option: disable-hibernate
+  - !run:
+    path: "%ProgramFiles%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "misc fast-startup --disable"
+    wait: true
+    runas: currentUserElevated
+    option: disable-hibernate
 
-  # === Disable Fast startup.
-  # ------> Enhances compatibility with Linux dual boot.
-  # ------> https://support.bromium.com/s/article/Disabling-Windows-10-Fast-Startup?language=en_US
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager\Power', value: 'HiberbootEnabled', type: REG_DWORD, data: '0'}
-
-  # === Shutdown Menu - Hibernate - Disabled
-  # ------> https://www.tenforums.com/tutorials/7445-add-remove-hibernate-power-menu-windows-10-a.html
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings', value: 'ShowHibernateOption', type: REG_DWORD, data: '0'}
+  # === Enable Hibernate via revitool
+  - !run:
+    path: "%ProgramFiles%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "misc hibernate --enable"
+    wait: true
+    runas: currentUserElevated
+    option: enable-hibernate
+  - !run:
+    path: "%ProgramFiles%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "misc fast-startup --enable"
+    wait: true
+    runas: currentUserElevated
+    option: enable-hibernate
 
   # === Shutdown Menu - Sleep - Enabled
   # ------> https://www.tenforums.com/tutorials/7445-add-remove-hibernate-power-menu-windows-10-a.html
@@ -26,7 +46,3 @@ actions:
   # ------> https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/shutdown-allow-system-to-be-shut-down-without-having-to-log-on
   # ------> https://www.stigviewer.com/stig/windows_server_2012_member_server/2014-01-07/finding/V-1075
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ShutdownWithoutLogon', type: REG_DWORD, data: '1'}
-
-  # === Hibernation - Disabled
-  # ------> https://www.tenforums.com/tutorials/2859-enable-disable-hibernate-windows-10-a.html
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Power', value: 'HibernateEnabled', type: REG_DWORD, data: '0'}

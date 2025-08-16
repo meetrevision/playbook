@@ -30,7 +30,6 @@ actions:
 
   # Wakelock modification isn't available in AME Wizard, therefore activating a custom high performance powerplan before we proceed to prevent sleep 
   - !writeStatus: {status: "Configuring a power plan"}
-  - !run: {exe: "powercfg", args: "/hibernate off"}
   # https://github.com/meetrevision/playbook/issues/105
   # - !run: {exe: "powercfg", args: "-restoredefaultschemes"}
   # Delete existing Revision power plan if it exists
@@ -58,8 +57,15 @@ actions:
   - !run: {exe: "powercfg", args: "/setactive scheme_current"}
 
   - !writeStatus: {status: 'Installing Revision Tool'}
-  - !powerShell: {command: "& { Invoke-WebRequest ((Invoke-RestMethod -Uri 'https://api.github.com/repos/meetrevision/revision-tool/releases/latest' -Method Get | ConvertTo-Json | ConvertFrom-Json).assets | where-object { $_.name -eq 'RevisionTool-Setup.exe' }).browser_download_url -OutFile \"$env:TEMP\\RevisionTool-Setup.exe\" }", errorAction: Halt, wait: true}
-  - !cmd: {command: 'call "%temp%\RevisionTool-Setup.exe" /VERYSILENT /TASKS="desktopicon"', errorAction: Halt, wait: true, weight: 150}
+  - !download: 
+    url: 'https://github.com/meetrevision/revision-tool/releases/latest/download/RevisionTool-Setup.exe'
+    destination: "RevisionTool-Setup.exe"
+    overwrite: true
+  - !run:
+    exeDir: true
+    exe: "RevisionTool-Setup.exe"
+    args: '/VERYSILENT /TASKS="desktopicon"'
+    weight: 150
 
   - !writeStatus: {status: "Optimizing PowerShell"}
   - !run:

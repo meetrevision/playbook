@@ -1,27 +1,48 @@
 ---
 title: Software
-description: Installs preferred softwares 
+description: Installs preferred software 
 privilege: TrustedInstaller
 actions:
 
-    # https://github.com/meetrevision/playbook/issues/81
-  - !writeStatus: {status: 'Updating Winget'}
-  - !powerShell:
-    weight: 50
-    runas: currentUserElevated
-    wait: true
-    exeDir: true
-    command: '.\UPDATE-APPX.ps1'
+  # https://github.com/meetrevision/playbook/issues/81
+  # - !status: {status: 'Updating Winget'}
+  # - !powerShell:
+  #   weight: 50
+  #   runas: currentUserElevated
+  #   wait: true
+  #   exeDir: true
+  #   command: '.\UPDATE-APPX.ps1'
 
-  - !writeStatus: {status: 'Installing Brave on reboot', option: "browser-brave"}
-  - !registryValue: 
-    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
-    value: 'Install Brave'
-    type: REG_SZ
-    data: 'cmd /c title BraveBrowser && winget install XP8C9QZMS2PC1T --source msstore --silent --accept-source-agreements --accept-package-agreements'
+  - !status: {status: 'Installing Brave', option: "browser-brave"}
+  - !download: 
+    option: "browser-brave"
+    url: 'https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetup.exe'
+    destination: "BraveBrowserStandaloneSetup.exe"
+    cpuArch: X64
+    package: 'brave'
+  - !run:
+    exeDir: true
+    exe: "BraveBrowserStandaloneSetup.exe"
+    args: "/silent /install"
+    cpuArch: X64
+    weight: 150
     option: "browser-brave"
 
-  - !writeStatus: {status: 'Configuring Brave', option: "browser-brave"}
+  - !download: 
+    option: "browser-brave"
+    url: 'https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetup.exe'
+    destination: "BraveBrowserStandaloneSetupArm64.exe"
+    cpuArch: Arm64
+    package: 'brave'
+  - !run:
+    exeDir: true
+    exe: "BraveBrowserStandaloneSetupArm64.exe"
+    args: "/silent /install"
+    cpuArch: Arm64
+    weight: 150
+    option: "browser-brave"
+
+  - !status: {status: 'Configuring Brave', option: "browser-brave"}
   - !cmd:
     exeDir: true
     command: 'robocopy "BraveSoftware" "%ProgramFiles%\BraveSoftware" /E /IM /IT /NP & robocopy "BraveSoftware" "%localappdata%\BraveSoftware" /E /IM /IT /NP'
@@ -30,10 +51,10 @@ actions:
     option: "browser-brave"
 
   # Firefox
-  - !writeStatus: {status: 'Installing Firefox on reboot', option: "browser-firefox"}
-  - !registryValue: 
-    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
-    value: 'Install Firefox'
-    type: REG_SZ
-    data: 'cmd /c title Firefox && winget install Mozilla.Firefox --source winget --override "/S /MaintenanceService=false" --accept-source-agreements --accept-package-agreements'
+  - !status: {status: 'Installing Firefox', option: "browser-firefox"}
+  - !software:
+    name: "Firefox"
+    source: chocolatey
     option: "browser-firefox"
+    package: 'firefox'
+    weight: 150

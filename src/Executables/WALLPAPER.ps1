@@ -59,7 +59,7 @@ function Set-LockScreenWallpaper {
     }
 
     # https://superuser.com/a/1343640
-# License: https://creativecommons.org/licenses/by-sa/4.0/
+    # License: https://creativecommons.org/licenses/by-sa/4.0/
     $newImagePath = [System.IO.Path]::GetDirectoryName($imagePath) + '\' + (New-Guid).Guid + [System.IO.Path]::GetExtension($imagePath)
     Copy-Item $imagePath $newImagePath
     [Windows.System.UserProfile.LockScreen, Windows.System.UserProfile, ContentType = WindowsRuntime] | Out-Null
@@ -80,6 +80,14 @@ function Set-LockScreenWallpaper {
     $image = Await ([Windows.Storage.StorageFile]::GetFileFromPathAsync($newImagePath)) ([Windows.Storage.StorageFile])
     AwaitAction ([Windows.System.UserProfile.LockScreen]::SetImageFileAsync($image))
     Remove-Item $newImagePath -Force
+
+    # Use policy to set the lock screen image (works only for Enterprise editions)
+    [microsoft.win32.registry]::SetValue(
+        "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization",
+        "LockScreenImage",
+        $imagePath,
+        [Microsoft.Win32.RegistryValueKind]::String
+    )
 }
 
 $path = Get-ChildItem $ImagePath -Force | Select-Object -ExpandProperty FullName

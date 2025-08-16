@@ -33,7 +33,7 @@ actions:
           }
       }
     
-  # Necesarry to refresh 'Bags'
+  # Necessary to refresh 'Bags'
   - !powerShell: 
     runas: currentUserElevated
     command: |
