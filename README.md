@@ -18,11 +18,11 @@ ReviOS Playbook📜
 
 </div>
 
-ReviOS is a customized version of Windows, designed to be lightweight, stable, and focused on improving performance, privacy and compatibility. It aspires to re-create what Windows as an operating system should have been - easy and simple. Now compatible with [AME Wizard](https://ameliorated.io)🧙.
+ReviOS is a customized version of Windows, designed to be lightweight, stable, and focused on improving performance, privacy and compatibility. It aspires to re-create what Windows as an operating system should have been - easy and simple. Compatible with [AME Beta](https://ameliorated.io).
 
 ## ✨ Key Features
 
-- 🎯 Easy to use, just drag and drop the playbook into [AME Wizard](https://ameliorated.io)
+- 🎯 Easy to use, just drag and drop the playbook into [AME Beta](https://ameliorated.io)
 - 🗑 Removes bloatware and unnecessary system components
 - ⚡ Optimizes your system for performance and improved privacy
 - 🔧 Integrates the [Revision Tool](https://github.com/meetrevision/revision-tool) to customize your system further
