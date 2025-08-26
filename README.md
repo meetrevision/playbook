@@ -47,7 +47,7 @@ Ready to elevate your Windows experience? Follow these simple steps:
 > [!CAUTION]
 > It's recommended to start with a fresh, stock Windows installation before applying the playbook to avoid potential conflicts with existing software and user data.
 
-1. Download [AME Wizard](https://ameliorated.io) and our playbook from the latest [releases](https://github.com/meetrevision/playbook/releases).
+1. Download [AME Beta](https://ameliorated.io) and our playbook from the latest [releases](https://github.com/meetrevision/playbook/releases).
 2. Launch the AME Wizard and drag-and-drop the playbook into the interface.
 3. Follow the on-screen instructions to complete the installation.
 
