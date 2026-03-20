@@ -3,7 +3,7 @@
 # (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\*" | Where-Object -Property SvcHostSplitDisable).PSChildName
 #
 
-$registryPath = "HKLM:\SYSTEM\ControlSet001\Services\"
+$registryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\"
 
 # These services are grouped when SVC Split is not available, but the list is not complete, it could be different on other Windows editions
 $services = @(
@@ -34,7 +34,7 @@ $services = @(
     "WpnService",
     "gpsvc",
     "iphlpsvc",
-	"wuauserv",
+    "wuauserv",
 
     "WinHttpAutoProxySvc",
     "EventLog",
@@ -45,11 +45,11 @@ $services = @(
     "FontCache",
     "nsi",
     "netprofm",
-	"SstpSvc",
+    "SstpSvc",
     "DispBrokerDesktopSvc",
     "CDPSvc",
     "EventSystem",
-	"LicenseManager",
+    "LicenseManager",
 
     "SystemEventsBroker",
     "Power",
@@ -61,8 +61,8 @@ $services = @(
     "DPS",
     "NcdAutoSetup",
 	
-	"AppXSvc",
-	"ClipSVC",
+    "AppXSvc",
+    "ClipSVC",
 
     "camsvc",
     "StateRepository",
@@ -95,7 +95,7 @@ foreach ($service in $userServices) {
     $matchingServices = Get-Service | Where-Object { $_.Name -like $service }
 
     foreach ($matchingService in $matchingServices) {
-		New-ItemProperty -Path "$registryPath\$($matchingService.Name)" -Name "SvcHostSplitDisable" -Value 1 -PropertyType  DWord -Force
+        New-ItemProperty -Path "$registryPath\$($matchingService.Name)" -Name "SvcHostSplitDisable" -Value 1 -PropertyType  DWord -Force
     
     }
 }

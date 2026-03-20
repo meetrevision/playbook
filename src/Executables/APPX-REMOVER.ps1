@@ -38,16 +38,19 @@ foreach ($package in $Packages) {
         foreach ($userInfo in $pkg.PackageUserInformation) {
             $userSid = $userInfo.UserSecurityID.SID
             $endOfLifePath = "$baseRegistryPath\EndOfLife\$userSid\$fullPackageName"
-            New-Item -Path $endOfLifePath -Force
+            New-Item -Path $endOfLifePath -Force -ErrorAction SilentlyContinue | Out-Null
 
-            # Errors may occur if the package is not added to the EndOfLife registry key for every user who has it installed 
-            if ($Unregister) {
-                Remove-AppxPackage -Package $fullPackageName -User $userSid -PreserveRoamableApplicationData
+            try {
+                if ($Unregister) {
+                    Remove-AppxPackage -Package $fullPackageName -User $userSid -PreserveRoamableApplicationData -ErrorAction Stop
+                }
+                else {
+                    Remove-AppxPackage -Package $fullPackageName -User $userSid -ErrorAction Stop
+                }
             }
-            else {
-                Remove-AppxPackage -Package $fullPackageName -User $userSid
+            catch {
+                Write-Warning "Failed to remove $fullPackageName for user $userSid`: $_"
             }
-
         }
 
         # Second attempt

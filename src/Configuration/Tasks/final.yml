@@ -13,10 +13,19 @@ actions:
   - !cmd:
     command: 'setx DOTNET_CLI_TELEMETRY_OPTOUT 1'
     runas: currentUserElevated
-    
+
   - !cmd:
     command: 'setx POWERSHELL_TELEMETRY_OPTOUT 1'
     runas: currentUserElevated
+
+  - !powerShell:
+    command: 'Get-AppxPackage Microsoft.OutlookForWindows* -ErrorAction SilentlyContinue | Remove-AppxPackage -ErrorAction SilentlyContinue'
+    runas: currentUserElevated
+
+  - !run:
+    exeDir: true
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File HOSTS-BLOCK.ps1'
 
   - !writeStatus: {status: "Removing logs"}
   - !run:

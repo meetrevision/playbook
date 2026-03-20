@@ -7,3 +7,5 @@ actions:
   # === NetworkThrottlingIndex - 10 (default)
   # -----> https://github.com/djdallmann/GamingPCSetup/blob/master/CONTENT/RESEARCH/NETWORK/README.md#networkthrottlingindex
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile', value: 'NetworkThrottlingIndex', type: REG_DWORD, data: '10'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile', value: 'SystemResponsiveness', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers', value: 'HwSchMode', type: REG_DWORD, data: '2'}

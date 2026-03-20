@@ -7,7 +7,7 @@ actions:
 
   - !writeStatus: {status: "Removing Outdated Changes"}
 
-  - !registryValue: { path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager', value: 'HeapDeCommitFreeBlockThreshold', type: REG_DWORD, data: '0' }
+  - !registryValue: { path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager', value: 'HeapDeCommitFreeBlockThreshold', type: REG_DWORD, data: '0' }
 
   - !registryValue: { path: 'HKCU\SOFTWARE\Policies\Microsoft\Internet Explorer\Security', value: 'DisableSecuritySettingsCheck', operation: delete }
   - !registryValue: { path: 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Security', value: 'DisableSecuritySettingsCheck', operation: delete }
@@ -27,7 +27,7 @@ actions:
   - !registryValue: {path: 'HKLM\Software\Classes\CLSID', value: 'IsModernRCEnabled', operation: delete}
 
   # Breaks XboxGipSvc - https://github.com/meetrevision/playbook/issues/34
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control', value: 'SvcHostSplitThresholdInKB', type: REG_DWORD, data: '3670016'}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control', value: 'SvcHostSplitThresholdInKB', type: REG_DWORD, data: '3670016'}
 
   # Breaks Efficiency Mode in Task Manager
   - !service: {name: 'bam', operation: change, startup: 1}
@@ -128,3 +128,12 @@ actions:
   # SafeSearch revert
   # Web search is not allowed, removing this in case web search gets enabled
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search', value: 'ConnectedSearchSafeSearch', operation: delete}
+
+  # IFEO Debugger revert - remove taskkill shims applied in previous playbook versions
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CompatTelRunner.exe', operation: delete}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\AggregatorHost.exe', operation: delete}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe', operation: delete}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FeatureLoader.exe', operation: delete}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BingChatInstaller.exe', operation: delete}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BGAUpsell.exe', operation: delete}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BCILauncher.exe', operation: delete}

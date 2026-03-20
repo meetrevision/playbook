@@ -76,14 +76,14 @@ function New-CustomTheme {
     
     Copy-Item -Path $baseTheme -Destination $themeExportPath -Force
     
-    (Get-Content $themeExportPath) | ForEach-Object {
+    (Get-Content $themeExportPath -Encoding Unicode) | ForEach-Object {
         switch -Regex ($_) {
             '^Wallpaper=' { "Wallpaper=$wallpaperPath" }
             '^SystemMode=' { "SystemMode=$systemMode" }
             '^AppMode=' { "AppMode=$appMode" }
             default { $_ }
         }
-    } | Set-Content $themeExportPath
+    } | Set-Content $themeExportPath -Encoding Unicode
     
     Write-Host "Custom theme created at $themeExportPath"
     

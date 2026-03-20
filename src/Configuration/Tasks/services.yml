@@ -39,6 +39,7 @@ actions:
 
   # === Unified Telemetry Client - Disabled
   - !service: {name: 'DiagTrack', operation: change, startup: 4}
+  - !service: {name: 'dmwappushservice', operation: change, startup: 4}
 
   # === Windows Insider Service - Disabled
   - !service: {name: 'wisvc', operation: change, startup: 4}

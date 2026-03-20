@@ -82,7 +82,7 @@ actions:
   # === Speed up shutdown time by lowering the amount of time it takes the OS to close/kill background Services.
   # ------> Changed to 1.5 seconds (1500), default is 5 seconds (5000).
   # ------> https://www.sevenforums.com/tutorials/717-shut-down-speed-up.html
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control', value: 'WaitToKillServiceTimeout', type: REG_SZ, data: '1500'}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control', value: 'WaitToKillServiceTimeout', type: REG_SZ, data: '1500'}
 
   # === Do not track Shell shortcuts during roaming - Enabled
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.WindowsExplorer::LinkResolveIgnoreLinkInfo

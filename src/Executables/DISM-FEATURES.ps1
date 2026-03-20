@@ -11,11 +11,19 @@ function Update-Feature {
 	
     if ($null -eq $regKey -or ($regKey.Selection -eq 0 -and $bool) -or ($regKey.Selection -eq 1 -and !$bool)) {
         Write-Host "$dismCmd $featureName"
-        if ($bool) {
-            Enable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart -All
-        } else {
-            Disable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart
+        try {
+            if ($bool) {
+                Enable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart -All -ErrorAction Stop | Out-Null
+            } else {
+                Disable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart -ErrorAction Stop | Out-Null
+            }
+            Write-Host "Done: $featureName"
         }
+        catch {
+            Write-Warning "Failed [$featureName]: $_"
+        }
+    } else {
+        Write-Host "Skipped (already set): $featureName"
     }
 }
 

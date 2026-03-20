@@ -1,7 +1,7 @@
 <# :
 @echo off &pushd "%~dp0"
 @set batch_args=%*
-@powershell "iex (cat -Raw '%~f0')"
+@powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "$s=[System.IO.File]::ReadAllText('%~f0'); $ps=$s.Substring($s.IndexOf(': #>')+4); & ([scriptblock]::Create($ps))"
 @exit /b %ERRORLEVEL%
 : #>
 

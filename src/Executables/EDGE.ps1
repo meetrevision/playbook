@@ -43,10 +43,12 @@ function Restore-DeviceRegion {
             [microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Control Panel\DeviceRegion', 'DeviceRegion', $originalNation, [Microsoft.Win32.RegistryValueKind]::DWord) | Out-Null
             [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', $originalNation, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
             
-            Remove-ItemProperty -Path "HKCU:\Control Panel\International\Geo" -Name "OriginalNation" -ErrorAction SilentlyContinue | Out-Null
+            [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'OriginalNation', $null, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
+            Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Control Panel\DeviceRegion" -Name "OriginalNation" -ErrorAction SilentlyContinue | Out-Null
             
             Write-Host "[RestoreDeviceRegion] Device region and Nation restored to: $originalNation"
-        } else {
+        }
+        else {
             Write-Host "[RestoreDeviceRegion] No original region value was found to restore, Setting to US (244)"
             [microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Control Panel\DeviceRegion', 'DeviceRegion', 244, [Microsoft.Win32.RegistryValueKind]::DWord) | Out-Null
             [microsoft.win32.registry]::SetValue('HKEY_USERS\.DEFAULT\Control Panel\International\Geo', 'Nation', 244, [Microsoft.Win32.RegistryValueKind]::String) | Out-Null
@@ -75,8 +77,6 @@ function Uninstall-Process {
     Remove-ItemProperty -Path $registryPath -Name "experiment_control_labels" -ErrorAction SilentlyContinue | Out-Null
     
     try {
-        # Activates BrowserReplacement and allows uninstallation directly from Settings > Apps, even after Edge gets reinstalled
-        # Region must be set to non-EU country for this to work (handled separately with TrustedInstaller)
         $folderPath = "$env:SystemRoot\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe"
 
         if (!(Test-Path -Path $folderPath)) {
@@ -90,11 +90,6 @@ function Uninstall-Process {
         return
     }
     
-
-    # Setting windir temporarily to an empty string allows the Edge uninstallation to work
-    # "Uninstall allowed: No Windows directory set as env var" (Legacy, not found in newer updates)
-    $env:windir = ""
-
     $uninstallString = (Get-ItemProperty -Path $registryPath).UninstallString
     $uninstallArguments = (Get-ItemProperty -Path $registryPath).UninstallArguments
 
@@ -105,14 +100,20 @@ function Uninstall-Process {
 
     $uninstallArguments += " --force-uninstall --delete-profile"
 
-    # $uninstallCommand = "`"$uninstallString`"" + $uninstallArguments
     if (!(Test-Path -Path $uninstallString)) {
         Write-Host "[$Mode] setup.exe not found at: $uninstallString"
         return
     }
 
-    $process = Start-Process -FilePath $uninstallString -ArgumentList $uninstallArguments -Wait -Verbose -NoNewWindow -PassThru
-    Write-Host "[$Mode] Uninstallation process exit code: $($process.ExitCode)"
+    $savedWindir = $env:windir
+    $env:windir = ""
+    try {
+        $process = Start-Process -FilePath $uninstallString -ArgumentList $uninstallArguments -Wait -Verbose -NoNewWindow -PassThru
+        Write-Host "[$Mode] Uninstallation process exit code: $($process.ExitCode)"
+    }
+    finally {
+        $env:windir = $savedWindir
+    }
 
     if ((Get-ItemProperty -Path $baseKey).IsEdgeStableUninstalled -eq 1) {
         Write-Host "[$Mode] Edge Stable has been successfully uninstalled"
@@ -139,9 +140,6 @@ function Uninstall-Edge {
 
 function Uninstall-WebView {
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView" -Name "NoRemove" -ErrorAction SilentlyContinue | Out-Null
-
-    # Force to use system-wide WebView2 
-    # [microsoft.win32.registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\WebView2\BrowserExecutableFolder", "*", "%%SystemRoot%%\System32\Microsoft-Edge-WebView")
 
     Uninstall-Process -Key '{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}'
 }

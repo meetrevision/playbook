@@ -59,7 +59,6 @@ schtasks /change /tn "\Microsoft\Windows\Application Experience\Microsoft Compat
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable >NUL 2>nul
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable >NUL 2>nul
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /disable >NUL 2>nul
-schtasks /change /tn "\Microsoft\Windows\WindowsUpdate\Scheduled Start" /disable >NUL 2>nul
 
 schtasks /change /tn "\Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScanAfterUpdate" /disable >NUL 2>nul
 schtasks /change /tn "\Microsoft\Windows\UpdateOrchestrator\Start Oobe Expedite Work" /disable >NUL 2>nul
@@ -89,5 +88,7 @@ echo Configuring Windows settings
 net accounts /maxpwage:unlimited
   
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"
-setx DOTNET_CLI_TELEMETRY_OPTOUT 1
-setx POWERSHELL_TELEMETRY_OPTOUT 1
+
+reg add "HKLM\SOFTWARE\ReviOS" /v "PlaybookVersion" /t REG_SZ /d "%version%" /f >NUL 2>nul
+reg add "HKLM\SOFTWARE\ReviOS" /v "InstallDate" /t REG_SZ /d "%date%" /f >NUL 2>nul
+reg add "HKLM\SOFTWARE\ReviOS" /v "WindowsBuild" /t REG_SZ /d "%build%" /f >NUL 2>nul
