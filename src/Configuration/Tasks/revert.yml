@@ -135,3 +135,6 @@ actions:
 
   # DPS is needed for the Data Usage page in Settings and Network monitoring in Task Manager.
   - !service: {name: 'DPS', operation: change, startup: 2}
+
+  # Fixes slow logon times when account is protected with Windows Hello
+  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System', value: 'DisableAutomaticRestartSignOn', operation: delete}

@@ -9,11 +9,3 @@ actions:
     
   # === Turn off Windows Startup sound - Enabled
   - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System', value: 'DisableStartupSound', type: REG_DWORD, data: '1'}
-  
-  # =============================
-  # === Windows Logon Options ===
-  # =============================
-  
-  # === Sign-in and lock last interactive user automatically after a restart - Disabled
-  # ------> Prevents apps from automatically reopening after a restart or an update.
-  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System', value: 'DisableAutomaticRestartSignOn', type: REG_DWORD, data: '1'}
