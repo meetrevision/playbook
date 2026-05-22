@@ -29,7 +29,7 @@ actions:
 
   # === Disable Malicious Software Reporting tool diagnostic data - Enabled
   # ------> https://admx.help/?Category=Windows10_Telemetry&Policy=Microsoft.Policies.Win10Privacy::DontReportInfection
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\MRT', value: 'DontReportInfectionInformation', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\MRT', value: 'DontReportInfectionInformation', type: REG_DWORD, data: '1'}
 
   # =========================
   # === Update & Security ===
@@ -59,7 +59,7 @@ actions:
   # === Prevent Automatic Updates - Enabled
   # ------> Media Player Updates auto update disabled.
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.MediaPlayer::DisableAutoUpdate
-  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\WindowsMediaPlayer', value: 'DisableAutoUpdate', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\WindowsMediaPlayer', value: 'DisableAutoUpdate', type: REG_DWORD, data: '1'}
 
   # --- Prevent Windows Update Orchestrator automatically installing unwanted updates: 
   # ------> DevHome, Outlook
