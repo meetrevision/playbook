@@ -30,7 +30,7 @@ actions:
 
   - !download: 
     option: "browser-brave"
-    url: 'https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetup.exe'
+    url: 'https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetupArm64.exe'
     destination: "BraveBrowserStandaloneSetupArm64.exe"
     cpuArch: Arm64
     package: 'brave'
