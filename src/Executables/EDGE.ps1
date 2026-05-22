@@ -1,6 +1,6 @@
 param (   
     [Parameter(Mandatory = $true)]
-    [ValidateSet("EdgeBrowser", "WebView", "EdgeUpdate", "SetDeviceRegion", "RestoreDeviceRegion")]
+    [ValidateSet("EdgeBrowser", "WebView", "EdgeUpdate")]
     [string]$Mode
 )
 
@@ -136,7 +136,5 @@ switch ($Mode) {
     "EdgeBrowser" { Uninstall-Edge }
     "WebView" { Uninstall-WebView }
     "EdgeUpdate" { Uninstall-EdgeUpdate }
-    "SetDeviceRegion" { Set-DeviceRegion -Region $DeviceRegion }
-    "RestoreDeviceRegion" { Restore-DeviceRegion }
     default { Write-Host "Invalid mode: $Mode" }
 }
