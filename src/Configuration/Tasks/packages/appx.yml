@@ -112,3 +112,18 @@ actions:
         'Microsoft.YourPhone',
         'MicrosoftWindows.CrossDevice'
       )
+
+  - !writeStatus: {status: "Restoring VCLibs"}
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    weight: 20
+    command: >-
+      $urls = @('https://aka.ms/Microsoft.VCLibs.x64.14.00.appx', 'https://aka.ms/Microsoft.VCLibs.x86.14.00.appx');
+      foreach ($url in $urls) {
+          $file = "$env:TEMP\$(Split-Path $url -Leaf)";
+          Invoke-WebRequest -Uri $url -OutFile $file -UseBasicParsing;
+          Add-AppxPackage -Path $file;
+          Remove-Item -Path $file -Force -ErrorAction SilentlyContinue;
+      }
