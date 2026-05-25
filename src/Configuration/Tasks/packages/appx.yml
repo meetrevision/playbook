@@ -120,7 +120,7 @@ actions:
     errorAction: Ignore
     weight: 20
     command: >-
-      $urls = @('https://aka.ms/Microsoft.VCLibs.x64.14.00.appx', 'https://aka.ms/Microsoft.VCLibs.x86.14.00.appx');
+      $urls = @('https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx', 'https://aka.ms/Microsoft.VCLibs.x86.14.00.Desktop.appx');
       foreach ($url in $urls) {
           $file = "$env:TEMP\$(Split-Path $url -Leaf)";
           Invoke-WebRequest -Uri $url -OutFile $file -UseBasicParsing;
