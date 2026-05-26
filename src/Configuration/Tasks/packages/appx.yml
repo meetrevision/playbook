@@ -114,16 +114,53 @@ actions:
       )
 
   - !writeStatus: {status: "Restoring VCLibs"}
+
+  # === x64 Environment ===
+  - !download:
+    url: 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
+    destination: 'Microsoft.VCLibs.x64.14.00.Desktop.appx'
+    cpuArch: X64
   - !powerShell:
     wait: true
     exeDir: true
     errorAction: Ignore
-    weight: 20
-    command: >-
-      $urls = @('https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx', 'https://aka.ms/Microsoft.VCLibs.x86.14.00.Desktop.appx');
-      foreach ($url in $urls) {
-          $file = "$env:TEMP\$(Split-Path $url -Leaf)";
-          Invoke-WebRequest -Uri $url -OutFile $file -UseBasicParsing;
-          Add-AppxPackage -Path $file;
-          Remove-Item -Path $file -Force -ErrorAction SilentlyContinue;
-      }
+    cpuArch: X64
+    weight: 10
+    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.x64.14.00.Desktop.appx'"
+
+  - !download:
+    url: 'https://aka.ms/Microsoft.VCLibs.x86.14.00.Desktop.appx'
+    destination: 'Microsoft.VCLibs.x86.14.00.Desktop.appx'
+    cpuArch: X64
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    cpuArch: X64
+    weight: 10
+    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.x86.14.00.Desktop.appx'"
+
+  # === ARM64 Environment ===
+  - !download:
+    url: 'https://aka.ms/Microsoft.VCLibs.arm64.14.00.Desktop.appx'
+    destination: 'Microsoft.VCLibs.arm64.14.00.Desktop.appx'
+    cpuArch: Arm64
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    cpuArch: Arm64
+    weight: 10
+    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.arm64.14.00.Desktop.appx'"
+
+  - !download:
+    url: 'https://aka.ms/Microsoft.VCLibs.arm.14.00.Desktop.appx'
+    destination: 'Microsoft.VCLibs.arm.14.00.Desktop.appx'
+    cpuArch: Arm64
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    cpuArch: Arm64
+    weight: 10
+    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.arm.14.00.Desktop.appx'"
