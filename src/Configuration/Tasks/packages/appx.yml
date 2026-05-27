@@ -112,3 +112,57 @@ actions:
         'Microsoft.YourPhone',
         'MicrosoftWindows.CrossDevice'
       )
+
+
+  # https://github.com/meetrevision/playbook/issues/219
+  - !writeStatus: {status: "Restoring VCLibs"}
+
+  # x64
+  - !download:
+    url: 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
+    destination: 'Microsoft.VCLibs.x64.14.00.Desktop.appx'
+    cpuArch: X64
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    cpuArch: X64
+    weight: 10
+    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.x64.14.00.Desktop.appx'"
+
+  - !download:
+    url: 'https://aka.ms/Microsoft.VCLibs.x86.14.00.Desktop.appx'
+    destination: 'Microsoft.VCLibs.x86.14.00.Desktop.appx'
+    cpuArch: X64
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    cpuArch: X64
+    weight: 10
+    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.x86.14.00.Desktop.appx'"
+
+  # ARM64
+  - !download:
+    url: 'https://aka.ms/Microsoft.VCLibs.arm64.14.00.Desktop.appx'
+    destination: 'Microsoft.VCLibs.arm64.14.00.Desktop.appx'
+    cpuArch: Arm64
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    cpuArch: Arm64
+    weight: 10
+    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.arm64.14.00.Desktop.appx'"
+
+  - !download:
+    url: 'https://aka.ms/Microsoft.VCLibs.arm.14.00.Desktop.appx'
+    destination: 'Microsoft.VCLibs.arm.14.00.Desktop.appx'
+    cpuArch: Arm64
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    cpuArch: Arm64
+    weight: 10
+    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.arm.14.00.Desktop.appx'"
