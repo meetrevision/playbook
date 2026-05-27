@@ -113,9 +113,11 @@ actions:
         'MicrosoftWindows.CrossDevice'
       )
 
+
+  # https://github.com/meetrevision/playbook/issues/219
   - !writeStatus: {status: "Restoring VCLibs"}
 
-  # === x64 Environment ===
+  # x64
   - !download:
     url: 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
     destination: 'Microsoft.VCLibs.x64.14.00.Desktop.appx'
@@ -140,7 +142,7 @@ actions:
     weight: 10
     command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.x86.14.00.Desktop.appx'"
 
-  # === ARM64 Environment ===
+  # ARM64
   - !download:
     url: 'https://aka.ms/Microsoft.VCLibs.arm64.14.00.Desktop.appx'
     destination: 'Microsoft.VCLibs.arm64.14.00.Desktop.appx'
