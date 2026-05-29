@@ -102,9 +102,6 @@ actions:
   
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates', value: 'DisableScheduledSignatureUpdateOnBattery', type: REG_DWORD, data: '1'}
 
-  # Revert Windows Defender Antivirus - Spynet/Sample Submission policy
-  - !registryKey: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\Spynet', operation: delete}
-
   # Default Auto Tray behavior
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer', value: 'EnableAutoTray', operation: delete}
 
