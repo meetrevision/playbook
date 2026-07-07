@@ -1,0 +1,30 @@
+name: Validate Playbook
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - dev
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install validation dependencies
+        run: python -m pip install --upgrade pyyaml
+
+      - name: Validate playbook files
+        run: python scripts/validate_playbook.py

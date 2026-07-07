@@ -4,24 +4,13 @@ description: Applies some Revision configurations
 privilege: TrustedInstaller
 actions:
 
-  - !writeStatus: {status: "Optimizing NTFS"}
+  - !writeStatus: {status: "Applying Revision performance override"}
   - !run:
     path: "%ProgramFiles%\\Revision Tool"
     exe: "revitool.exe"
-    args: "tweaks performance ntfs-last-access disable"
+    args: "tweak enable performance.memory-compression --yes"
     wait: true
     runas: currentUserElevated
-  - !run:
-    path: "%ProgramFiles%\\Revision Tool"
-    exe: "revitool.exe"
-    args: "tweaks performance ntfs-8dot3-naming disable"
-    wait: true
-    runas: currentUserElevated
-    
-
-  # Disable Memory Compression
-  - !powerShell: 
-    command: 'Disable-MMAgent -mc'
 
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\Pending\7971f918-a847-4430-9279-4a52d1efe18d', value: 'RegisterWithAU', type: REG_DWORD, data: '0'}
 
@@ -44,15 +33,6 @@ actions:
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0', weight: 70}
 
   - !powerShell: {command: 'Get-ScheduledTask -TaskPath "\Microsoft\Office\*" | Disable-ScheduledTask'}
-
-  # Alternative way to group services without breaking services like XboxGipSvc
-  - !run:
-    path: "%ProgramFiles%\\Revision Tool"
-    exe: "revitool.exe"
-    args: "tweaks performance service-grouping set recommended"
-    wait: true
-    runas: currentUserElevated
-    weight: 50
 
   - !run: {exeDir: true, exe: "FINALIZE.cmd", weight: 200}
 
@@ -151,7 +131,7 @@ actions:
   - !run:
     path: "%ProgramFiles%\\Revision Tool"
     exe: "revitool.exe"
-    args: "tweaks patches"
+    args: "tweak enable playbook.patches --include-dangerous --yes"
     wait: true
     runas: currentUserElevated
     

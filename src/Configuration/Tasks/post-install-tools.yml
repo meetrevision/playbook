@@ -1,0 +1,13 @@
+---
+title: Post-install Tools
+description: Deploys user-run toggles and troubleshooting helpers after installation
+privilege: TrustedInstaller
+actions:
+
+  - !writeStatus: {status: "Installing ReviOS Tools"}
+
+  - !cmd:
+    exeDir: true
+    command: 'robocopy "ReviOSTools" "%SystemRoot%\ReviOSTools" /E /PURGE /IM /IT /NP'
+    ignoreErrors: true
+    weight: 30
