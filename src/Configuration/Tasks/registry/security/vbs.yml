@@ -4,12 +4,23 @@ description: Configure VBS
 privilege: TrustedInstaller
 actions:
 
-  # Disabling VBS improves gaming performance
+  # Disabling VBS can improve gaming performance on some systems, but lowers isolation security.
   # https://support.microsoft.com/en-us/windows/options-to-optimize-gaming-performance-in-windows-11-a255f612-2949-4373-a566-ff6f3f474613
 
+  - !writeStatus: {status: "Enabling Core Isolation / VBS", option: "enable-vbs"}
+  - !run:
+    path: "%ProgramFiles%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "tweaks security vbs enable"
+    wait: true
+    runas: currentUserElevated
+    option: "enable-vbs"
+
+  - !writeStatus: {status: "Disabling Core Isolation / VBS", option: "disable-vbs"}
   - !run:
     path: "%ProgramFiles%\\Revision Tool"
     exe: "revitool.exe"
     args: "tweaks security vbs disable" # automatically disables Memory Integrity (HVCI) as well
     wait: true
     runas: currentUserElevated
+    option: "disable-vbs"

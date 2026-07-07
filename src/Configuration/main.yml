@@ -3,21 +3,22 @@ title: Custom
 description: Custom Revision configuration
 privilege: Admin
 actions:
-  
-  # OS Info
+  - !writeStatus: {status: "Applying ReviOS identity"}
   - !task: {path: 'Tasks\registry\os-info\edition.yml'}
   - !task: {path: 'Tasks\registry\os-info\oem-info.yml'}
 
+  - !writeStatus: {status: "Preparing base system"}
   - !task: {path: 'Tasks\start.yml'}
+  - !task: {path: 'Tasks\post-install-tools.yml'}
  
-  
+  - !writeStatus: {status: "Removing optional components"}
   - !task: {path: 'Tasks\packages\app-win32.yml'}
   # Uninstalling WinSxS packages before app-win32 could leave leftovers
   - !task: {path: 'Tasks\packages\win-sxs.yml'}
   - !task: {path: 'Tasks\packages\appx.yml'}
 
-  
   # Defender requires explorer to be running to disable certain protections, so that's why Explorer is terminated afterward
+  - !writeStatus: {status: "Restarting Windows shell processes"}
   - !taskKill: {name: "explorer", errorAction: Ignore}
   - !taskKill: {name: "SearchApp", errorAction: Ignore}
   - !taskKill: {name: "SearchHost", errorAction: Ignore}
@@ -27,9 +28,17 @@ actions:
   - !taskKill: {name: "backgroundTaskHost", errorAction: Ignore}
   - !taskKill: {name: "Widgets", errorAction: Ignore}
 
+  - !writeStatus: {status: "Installing selected software"}
   - !task: {path: 'Tasks\software.yml'}
+
+  - !writeStatus: {status: "Applying service configuration"}
   - !task: {path: 'Tasks\services.yml'}
   
+  - !writeStatus: {status: "Applying categorized registry policies"}
   - !task: {path: 'Tasks\registry.yml'}
+
+  - !writeStatus: {status: "Applying upgrade compatibility cleanup"}
   - !task: {path: 'Tasks\revert.yml'}
+
+  - !writeStatus: {status: "Finalizing ReviOS configuration"}
   - !task: {path: 'Tasks\final.yml'}

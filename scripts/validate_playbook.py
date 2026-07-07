@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -11,7 +12,8 @@ from typing import Any
 import yaml
 
 
-ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_ROOT = Path(__file__).resolve().parents[1]
+ROOT = DEFAULT_ROOT
 CONFIG_DIR = ROOT / "src" / "Configuration"
 IMAGES_DIR = ROOT / "src" / "Images"
 LINE_COMMENT_RE = re.compile(r"(?m)^\s*//.*$")
@@ -164,7 +166,25 @@ def collect_registry_duplicate_warnings(parsed_yaml: dict[Path, Any]) -> list[st
     return warnings
 
 
-def main() -> int:
+def configure_root(root: Path) -> None:
+    global ROOT, CONFIG_DIR, IMAGES_DIR
+
+    ROOT = root.resolve()
+    CONFIG_DIR = ROOT / "src" / "Configuration"
+    IMAGES_DIR = ROOT / "src" / "Images"
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Validate ReviOS playbook assets.")
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=DEFAULT_ROOT,
+        help="Playbook root to validate. Defaults to the repository root.",
+    )
+    args = parser.parse_args(argv)
+    configure_root(args.root)
+
     errors: list[str] = []
     parsed_yaml = validate_structured_files(errors)
 
