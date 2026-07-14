@@ -113,56 +113,14 @@ actions:
         'MicrosoftWindows.CrossDevice'
       )
 
-
   # https://github.com/meetrevision/playbook/issues/219
+  # When the network is available, revitool installs the latest VCLibs packages; otherwise, it bundles and installs the recent version of VCLibs packages offline (useful during oobe).
   - !writeStatus: {status: "Restoring VCLibs"}
-
-  # x64
-  - !download:
-    url: 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
-    destination: 'Microsoft.VCLibs.x64.14.00.Desktop.appx'
-    cpuArch: X64
-  - !powerShell:
-    wait: true
+  - !run:
+    path: "%ProgramFiles%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "msstore-apps --id 9NBLGGH3FRZM,9NBLGGH4RV3K -r RP" # 9NBLGGH3FRZM - Desktop; 9NBLGGH4RV3K - UWPDesktop.
+    runas: currentUserElevated
     exeDir: true
-    errorAction: Ignore
-    cpuArch: X64
-    weight: 10
-    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.x64.14.00.Desktop.appx'"
-
-  - !download:
-    url: 'https://aka.ms/Microsoft.VCLibs.x86.14.00.Desktop.appx'
-    destination: 'Microsoft.VCLibs.x86.14.00.Desktop.appx'
-    cpuArch: X64
-  - !powerShell:
     wait: true
-    exeDir: true
-    errorAction: Ignore
-    cpuArch: X64
-    weight: 10
-    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.x86.14.00.Desktop.appx'"
-
-  # ARM64
-  - !download:
-    url: 'https://aka.ms/Microsoft.VCLibs.arm64.14.00.Desktop.appx'
-    destination: 'Microsoft.VCLibs.arm64.14.00.Desktop.appx'
-    cpuArch: Arm64
-  - !powerShell:
-    wait: true
-    exeDir: true
-    errorAction: Ignore
-    cpuArch: Arm64
-    weight: 10
-    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.arm64.14.00.Desktop.appx'"
-
-  - !download:
-    url: 'https://aka.ms/Microsoft.VCLibs.arm.14.00.Desktop.appx'
-    destination: 'Microsoft.VCLibs.arm.14.00.Desktop.appx'
-    cpuArch: Arm64
-  - !powerShell:
-    wait: true
-    exeDir: true
-    errorAction: Ignore
-    cpuArch: Arm64
-    weight: 10
-    command: "Add-AppxPackage -Path '.\\Microsoft.VCLibs.arm.14.00.Desktop.appx'"
+    oobe: true
