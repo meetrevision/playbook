@@ -43,6 +43,7 @@ actions:
     url: 'https://github.com/meetrevision/revision-tool/releases/latest/download/RevisionTool-Setup.exe'
     destination: "RevisionTool-Setup.exe"
     overwrite: true
+    errorAction: Log
   - !run:
     exeDir: true
     exe: "RevisionTool-Setup.exe"

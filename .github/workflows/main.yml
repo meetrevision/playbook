@@ -36,6 +36,24 @@ jobs:
           (Get-Content -Path $finalizeCMDPath) -replace 'set version=.+', "set version=$version" | Set-Content -Path $finalizeCMDPath
         shell: pwsh
 
+      - name: Fetch latest RevisionTool-Setup.exe (bundled fallback)
+        run: |
+          $release = Invoke-RestMethod -Uri 'https://api.github.com/repos/meetrevision/revision-tool/releases/latest'
+          $version = $release.tag_name
+          $asset = $release.assets | Where-Object { $_.name -eq 'RevisionTool-Setup.exe' } | Select-Object -First 1
+          if (-not $asset) { throw 'RevisionTool-Setup.exe asset not found in latest revision-tool release' }
+
+          Invoke-WebRequest -Uri $asset.browser_download_url -OutFile 'src\Executables\RevisionTool-Setup.exe' -UseBasicParsing
+
+          if ($asset.digest -like 'sha256:*') {
+            $expected = $asset.digest.Substring('sha256:'.Length).ToUpper()
+            $actual = (Get-FileHash -Algorithm SHA256 -Path 'src\Executables\RevisionTool-Setup.exe').Hash
+            if ($actual -ne $expected) { throw "SHA256 mismatch for RevisionTool-Setup.exe (expected $expected, got $actual)" }
+          }
+          echo "REVISION_TOOL_SHA256=$((Get-FileHash -Algorithm SHA256 -Path 'src\Executables\RevisionTool-Setup.exe').Hash)" >> $env:GITHUB_ENV
+          echo "REVISION_TOOL_VERSION=$version" >> $env:GITHUB_ENV
+        shell: pwsh
+
       - name: Archive content
         run: |
           7z a -pmalte -mhe=on "Revi-PB-${{ env.VERSION }}.apbx" ./src/*
@@ -63,3 +81,5 @@ jobs:
             📌Link: 
 
             SHA256: `${{ env.HASH }}`
+
+            Bundled Revision Tool version: [${{ env.REVISION_TOOL_VERSION }}](https://github.com/meetrevision/revision-tool/releases/tag/${{ env.REVISION_TOOL_VERSION }}) (SHA256: `${{ env.REVISION_TOOL_SHA256 }}`)
