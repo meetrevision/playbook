@@ -40,7 +40,7 @@ ReviOS Playbook currently supports ARM64 and AMD64 builds of the following Windo
 - Windows 11 24H2 `26100` (+ LTSC)
 - Windows 11 25H2 `26200`
 - Windows 11 26H2 `26300`
-- Windows 11 Canary (`27xxx` series)
+- Windows 11 Canary (selected builds: `27686`, `27718`, `27723`, `27729`, `27744`, `27754`, `27758`, `27788`, `27800`, `27900`)
 
 Any other build **is not** supported by Revision.
 
