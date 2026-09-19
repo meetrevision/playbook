@@ -58,8 +58,8 @@ body:
         - ISO Injection: `type here`
         - Specs: `type here`
       placeholder: |
-        - OS Build Number & Edition: `26200.6584, Home`
-        - ReviOS version: `25.10`
+        - OS Build Number & Edition: `26300.9457, Pro`
+        - ReviOS version: `26.09`
         - ISO Injection: `Yes`
         - Specs: `PC, Intel Core i5-10400, 16GB RAM, NVIDIA GeForce GTX 1650`
   

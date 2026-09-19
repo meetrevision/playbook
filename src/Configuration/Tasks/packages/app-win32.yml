@@ -37,7 +37,12 @@ actions:
     errorAction: Ignore
     weight: 30
     command: >-
-      .\APPX-REMOVER.ps1 -Packages 'Microsoft.Copilot'
+      .\APPX-REMOVER.ps1 -Packages @(
+        'Microsoft.Copilot',
+        'Microsoft.Windows.Ai.Copilot.Provider',
+        'MicrosoftWindows.Client.CoreAI',
+        'Microsoft.AIFabric.CBS'
+      )
 
   # OneDrive
   - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
