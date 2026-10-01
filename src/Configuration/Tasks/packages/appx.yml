@@ -121,6 +121,6 @@ actions:
     exe: "revitool.exe"
     args: "msstore-apps --id 9NBLGGH3FRZM,9NBLGGH4RV3K -r RP" # 9NBLGGH3FRZM - Desktop; 9NBLGGH4RV3K - UWPDesktop.
     runas: currentUserElevated
-    exeDir: true
+    exeDir: false
     wait: true
     oobe: true
