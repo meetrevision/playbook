@@ -1,8 +1,10 @@
 name: Archive and Release
 
 on:
-  # Allow manual triggering
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 env:
   FILENAME: 'Revi-PB-${{ github.event.workflow_run.started_at }}.apbx'
