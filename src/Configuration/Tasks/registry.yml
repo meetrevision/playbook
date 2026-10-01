@@ -6,9 +6,9 @@ actions:
   - !writeStatus: {status: "Tweaking registry"}
 
   # OS Info
-  - !writeStatus: {status: "Configuring OS Info"}
-  - !task: {path: 'Tasks\registry\os-info\edition.yml'}
-  - !task: {path: 'Tasks\registry\os-info\oem-info.yml'}
+#  - !writeStatus: {status: "Configuring OS Info"}
+#  - !task: {path: 'Tasks\registry\os-info\edition.yml'}
+#  - !task: {path: 'Tasks\registry\os-info\oem-info.yml'}
 
   # Explorer
   - !writeStatus: {status: "Configuring Explorer"}
