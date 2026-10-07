@@ -75,3 +75,5 @@ actions:
   # === Prevent WebView2 spawning from SearchHost
   # ------> https://reddit.com/r/WindowsHelp/comments/1lfu325/comment/n2nk50h
   - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Policies\Microsoft\FeatureManagement\Overrides', value: '1694661260', type: REG_DWORD, data: '0'}
+  # SearchWebView2_Master: 43998308 / 3369582732
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Policies\Microsoft\FeatureManagement\Overrides', value: '3369582732', type: REG_DWORD, data: '0'}
