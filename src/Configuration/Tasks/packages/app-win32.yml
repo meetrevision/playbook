@@ -24,11 +24,12 @@ actions:
     errorAction: Ignore
     weight: 30
     command: >-
-      .\APPX-REMOVER.ps1 -Packages @(
+      $packages = @(
         'Microsoft.MicrosoftEdge',
         'Microsoft.MicrosoftEdgeDevToolsClient',
         'Microsoft.Edge.GameAssist'
-      )
+      );
+      & (Join-Path $env:ProgramFiles 'Revision Tool\revitool.exe') appx --all-users --remove ($packages -join ',')
   
   # In case Revision Tool's removal method fails
   - !powerShell:
@@ -37,7 +38,7 @@ actions:
     errorAction: Ignore
     weight: 30
     command: >-
-      .\APPX-REMOVER.ps1 -Packages 'Microsoft.Copilot'
+      & (Join-Path $env:ProgramFiles 'Revision Tool\revitool.exe') appx --all-users --remove 'Microsoft.Copilot'
 
   # OneDrive
   - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
@@ -56,10 +57,11 @@ actions:
     errorAction: Ignore
     weight: 10
     command: >-
-      .\APPX-REMOVER.ps1 -Packages @(
+      $packages = @(
         'OneDrive',
         'microsoft.microsoftskydrive'
-      )
+      );
+      & (Join-Path $env:ProgramFiles 'Revision Tool\revitool.exe') appx --all-users --remove ($packages -join ',')
 
   # Teams
   - !writeStatus: {status: "Removing Teams", option: "remove-teams"}
@@ -74,11 +76,12 @@ actions:
     errorAction: Ignore
     weight: 10
     command: >-
-      .\APPX-REMOVER.ps1 -Packages @(
+      $packages = @(
         'MicrosoftTeams',
         'MSTeams', # New Teams
         'Flipgrid'
-      )
+      );
+      & (Join-Path $env:ProgramFiles 'Revision Tool\revitool.exe') appx --all-users --remove ($packages -join ',')
   
   # Microsoft Teams Meeting Add-in for Microsoft Office
   - !run:

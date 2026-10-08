@@ -41,14 +41,30 @@ actions:
   - !writeStatus: {status: 'Installing Revision Tool'}
   - !download: 
     url: 'https://github.com/meetrevision/revision-tool/releases/latest/download/RevisionTool-Setup.exe'
-    destination: "RevisionTool-Setup.exe"
+    destination: "RevisionTool-Setup-Latest.exe"
     overwrite: true
     errorAction: Log
+  - !powerShell:
+    exeDir: true
+    wait: true
+    errorAction: Halt
+    weight: 50
+    command: >-
+      $installer = if (Test-Path -LiteralPath '.\RevisionTool-Setup-Latest.exe') {
+        '.\RevisionTool-Setup-Latest.exe'
+      } elseif (Test-Path -LiteralPath '.\RevisionTool-Setup.exe') {
+        '.\RevisionTool-Setup.exe'
+      } else {
+        throw 'No Revision Tool installer was found.'
+      };
+      Start-Process -FilePath $installer -ArgumentList '/VERYSILENT /TASKS="desktopicon"' -Wait -WindowStyle Hidden
+
+  - !writeStatus: {status: "Optimizing PowerShell"}
   - !run:
     exeDir: true
-    exe: "RevisionTool-Setup.exe"
-    args: '/VERYSILENT /TASKS="desktopicon"'
-    weight: 150
+    exe: "PowerShell"
+    args: '-NoP -ExecutionPolicy Bypass -File ngen.ps1'
+    weight: 100
 
   - !writeStatus: {status: "Configuring a power plan"}
   - !run:
@@ -57,10 +73,3 @@ actions:
     args: "tweaks performance powerplan enable"
     wait: true
     runas: currentUserElevated
-
-  - !writeStatus: {status: "Optimizing PowerShell"}
-  - !run:
-    exeDir: true
-    exe: "PowerShell"
-    args: '-NoP -ExecutionPolicy Bypass -File ngen.ps1'
-    weight: 100

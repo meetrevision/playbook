@@ -11,7 +11,7 @@ actions:
     errorAction: Ignore
     weight: 48
     command: >-
-      .\APPX-REMOVER.ps1 -Packages @(
+       $packages = @(
         'Microsoft.Windows.SecureAssessmentBrowser',
         'Microsoft.Windows.PeopleExperienceHost',
         'Microsoft.WindowsCamera',
@@ -56,7 +56,9 @@ actions:
         'MixedReality.Portal',
         'Microsoft.MSPaint', # Paint 3D
         'Microsoft.StartExperiencesApp'
-      )
+        );
+        
+        & (Join-Path $env:ProgramFiles 'Revision Tool\revitool.exe') appx --all-users --remove ($packages -join ',')
 
   - !writeStatus: {status: "Removing Photos"}
   - !powerShell:
@@ -66,7 +68,7 @@ actions:
     errorAction: Ignore
     weight: 10
     command: >-
-      .\APPX-REMOVER.ps1 -Packages 'Microsoft.Windows.Photos'
+      & (Join-Path $env:ProgramFiles 'Revision Tool\revitool.exe') appx --all-users --remove 'Microsoft.Windows.Photos'
 
   - !writeStatus: {status: "Removing Dev Home", option: "remove-appx-devhome"}
   - !powerShell:
@@ -76,29 +78,7 @@ actions:
     errorAction: Ignore
     weight: 10
     command: >-
-      .\APPX-REMOVER.ps1 -Packages 'Microsoft.Windows.DevHome'
-    
-  - !writeStatus: {status: "Removing Xbox Apps", option: "remove-appx-xbox"}
-  - !powerShell:
-    option: "remove-appx-xbox"
-    wait: true
-    exeDir: true
-    errorAction: Ignore
-    weight: 30
-    command: >-
-      .\APPX-REMOVER.ps1 -Packages @(
-        'Microsoft.Xbox',
-        'Microsoft.XboxApp', # Xbox Console Companion is deprecated
-        'Microsoft.GamingApp',
-        'Microsoft.Edge.GameAssist'
-      ) -ExcludePackages 'Microsoft.XboxGameCallableUI'
-
-    #139
-  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: 'URL:ms-gamebar', option: "remove-appx-xbox"}
-  - !registryValue: {path: 'HKCR\ms-gamebar', value: 'URL Protocol', type: REG_SZ, data: '', option: "remove-appx-xbox"}
-  - !registryKey: {path: 'HKCR\ms-gamebar\shell\open\command', operation: add, option: "remove-appx-xbox"}
-  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: '%SystemRoot%\System32\systray.exe', option: "remove-appx-xbox"}
-  - !registryValue: {path: 'HKCU\Software\Microsoft\GameBar', value: 'ShowStartupPanel', type: REG_DWORD, data: '0', option: "remove-appx-xbox"}
+      & (Join-Path $env:ProgramFiles 'Revision Tool\revitool.exe') appx --all-users --remove 'Microsoft.Windows.DevHome'
 
   - !writeStatus: {status: "Removing Your Phone", option: "remove-appx-yourphone"}
   - !powerShell:
@@ -108,10 +88,11 @@ actions:
     errorAction: Ignore
     weight: 20
     command: >-
-      .\APPX-REMOVER.ps1 -Packages @(
+      $packages = @(
         'Microsoft.YourPhone',
         'MicrosoftWindows.CrossDevice'
-      )
+      );
+      & (Join-Path $env:ProgramFiles 'Revision Tool\revitool.exe') appx --all-users --remove ($packages -join ',')
 
   # https://github.com/meetrevision/playbook/issues/219
   # When the network is available, revitool installs the latest VCLibs packages; otherwise, it bundles and installs the recent version of VCLibs packages offline (useful during oobe).

@@ -189,10 +189,14 @@ actions:
     wait: true
     runas: currentUserElevated
     option: "remove-appx-yourphone"
+
+  # Reliable method to prevent CrossDeviceResume from running
+  # Discovered by https://github.com/meetrevision/ 
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\ShellUIHosts\CrossDeviceResumeHost', value: 'ProcessPath', type: REG_SZ, data: '%SystemRoot%\system32\ShellHost.exe', option: "remove-appx-yourphone"} 
+
+  # ---> Following registries only prevent enabling Cross Device Resume in Settings:
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration', value: 'IsResumeAllowed', type: REG_DWORD, data: '0', option: "remove-appx-yourphone"}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\PolicyManager\default\Connectivity\DisableCrossDeviceResume', value: 'value', type: REG_DWORD, data: '1', option: "remove-appx-yourphone"}
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Policies\Microsoft\FeatureManagement\Overrides', value: '1387020943', type: REG_DWORD, data: '0', option: "remove-appx-yourphone"} # ID (56517033) found in "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\appxmanifest.xml" 
-  # - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CrossDeviceResume.exe', value: 'Debugger', type: REG_SZ, data: '%windir%\System32\taskkill.exe', option: "remove-appx-yourphone"}
 
   # ================
   # === Accounts ===

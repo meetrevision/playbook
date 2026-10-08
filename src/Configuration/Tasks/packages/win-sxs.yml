@@ -54,3 +54,19 @@ actions:
     runas: currentUserElevated
     weight: 100
     option: "remove-onedrive"
+
+  - !writeStatus: {status: "Removing Xbox", option: "remove-appx-xbox"}
+  - !run:
+    path: "%ProgramFiles%\\Revision Tool"
+    exe: "revitool.exe"
+    args: "winpackage --install xbox-removal"
+    wait: true
+    runas: currentUserElevated
+    weight: 30
+    option: "remove-appx-xbox"
+  #139
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: 'URL:ms-gamebar', option: "remove-appx-xbox"}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: 'URL Protocol', type: REG_SZ, data: '', option: "remove-appx-xbox"}
+  - !registryKey: {path: 'HKCR\ms-gamebar\shell\open\command', operation: add, option: "remove-appx-xbox"}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: '%SystemRoot%\System32\systray.exe', option: "remove-appx-xbox"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\GameBar', value: 'ShowStartupPanel', type: REG_DWORD, data: '0', option: "remove-appx-xbox"}
