@@ -40,6 +40,7 @@ actions:
 
   # === Don't search the web or display web results in Search - Enabled
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search', value: 'ConnectedSearchUseWeb', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings', value: 'IsWebSuggestionsEnabled', type: REG_DWORD, data: '0'}
 
   # === Don't search the web or display web results in Search over metered connections - Enabled
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search', value: 'ConnectedSearchUseWebOverMeteredConnections', type: REG_DWORD, data: '0'}
@@ -71,6 +72,9 @@ actions:
   # === Disable Store results in Search (25H2)
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\WinStore.Tasks.WindowsSearchTask', value: 'ActivationType', type: REG_DWORD, data: '4294967295'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\WinStore.Tasks.WindowsSearchTask', value: 'Server', type: REG_SZ, data: ''}
+  # 26H2
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings', value: 'IsStoreSuggestionsEnabled', type: REG_DWORD, data: '0'}
+  
 
   # === Prevent WebView2 spawning from SearchHost
   # ------> https://reddit.com/r/WindowsHelp/comments/1lfu325/comment/n2nk50h
