@@ -1,8 +1,8 @@
 ---
 title: Configure Updates -> Microsoft Store
-description: Configure Update settings for Microsoft Store
+description: Configure Update and Privacy settings for Microsoft Store
 privilege: TrustedInstaller
-actions:
+actions: 
 
   # === Turn off Automatic Download and Install of updates - Disabled
   # ------> https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.WindowsStore::DisableAutoInstall
@@ -10,3 +10,99 @@ actions:
   
   # === Turn off the offer to update to the latest version of Windows - Enabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\WindowsStore', value: 'DisableOSUpgrade', type: REG_DWORD, data: '1'}
+
+  # === Disable MS Store Personalization & Telemetry ===
+  # ------> https://github.com/meetrevision/playbook/issues/244
+  - !taskKill: {name: "WinStore.App", errorAction: Ignore}
+  - !taskKill: {name: "StoreDesktopExtension", errorAction: Ignore}
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    command: |
+      $storeProcesses = @('WinStore.App', 'StoreDesktopExtension')
+      foreach ($proc in $storeProcesses) {
+          Get-Process -Name $proc -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+      }
+      Start-Sleep -Milliseconds 500
+
+      $t = [AppDomain]::CurrentDomain.GetAssemblies() | ForEach-Object { $_.GetType('Microsoft.Win32.Win32Native') } | Where-Object { $_ }
+      $mSet = $t.GetMethods([System.Reflection.BindingFlags]'Static,NonPublic') | Where-Object { $_.Name -eq 'RegSetValueEx' -and $_.GetParameters()[4].ParameterType -eq [byte[]] }
+      $mCreate = $t.GetMethods([System.Reflection.BindingFlags]'Static,NonPublic') | Where-Object { $_.Name -eq 'RegCreateKeyEx' }
+
+      function Set-StoreWinRtValue {
+          param($hRoot, [string]$subKey, [string]$valName, [int]$typeKind, [byte[]]$bytes)
+          $argsCreate = [object[]]@(
+              $hRoot,
+              $subKey,
+              0,
+              [string]$null,
+              0,
+              0xF003F,
+              $null,
+              [Microsoft.Win32.SafeHandles.SafeRegistryHandle]::new([IntPtr]::Zero, $true),
+              0
+          )
+          if ($mCreate.Invoke($null, $argsCreate) -eq 0) {
+              $hKey = $argsCreate[7]
+              $argsSet = [object[]]@(
+                  $hKey,
+                  $valName,
+                  0,
+                  [Microsoft.Win32.RegistryValueKind]$typeKind,
+                  $bytes,
+                  $bytes.Length
+              )
+              $mSet.Invoke($null, $argsSet) | Out-Null
+              $hKey.Close()
+          }
+      }
+
+      $paths = [System.Collections.Generic.List[string]]::new()
+      $profiles = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\*' | Where-Object { $_.ProfileImagePath -and (Test-Path $_.ProfileImagePath -ErrorAction SilentlyContinue) } | Select-Object -ExpandProperty ProfileImagePath -Unique
+      foreach ($p in $profiles) {
+          $sp = Join-Path $p 'AppData\Local\Packages\Microsoft.WindowsStore_8wekyb3d8bbwe\Settings\settings.dat'
+          if (Test-Path $sp -ErrorAction SilentlyContinue) { $paths.Add($sp) }
+      }
+
+      $userDirs = Get-ChildItem -Path 'C:\Users' -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -notmatch '^(Public|Default|All Users)$' }
+      foreach ($d in $userDirs) {
+          $sp = Join-Path $d.FullName 'AppData\Local\Packages\Microsoft.WindowsStore_8wekyb3d8bbwe\Settings\settings.dat'
+          if ((Test-Path $sp -ErrorAction SilentlyContinue) -and (-not $paths.Contains($sp))) { $paths.Add($sp) }
+      }
+
+      $cur = Join-Path $env:LocalAppData 'Packages\Microsoft.WindowsStore_8wekyb3d8bbwe\Settings\settings.dat'
+      if ((Test-Path $cur -ErrorAction SilentlyContinue) -and (-not $paths.Contains($cur))) { $paths.Add($cur) }
+
+      $hive = 'MSStore_Temp'
+      $hUsers = [Microsoft.Win32.RegistryKey]::OpenBaseKey([Microsoft.Win32.RegistryHive]::Users, [Microsoft.Win32.RegistryView]::Default).Handle
+
+      foreach ($sp in $paths) {
+          & reg.exe unload ('HKU\' + $hive) 2>&1 | Out-Null
+          $load = & reg.exe load ('HKU\' + $hive) $sp 2>&1
+          if ($LASTEXITCODE -eq 0) {
+              $ft = [BitConverter]::GetBytes([DateTime]::UtcNow.ToFileTime())
+              [byte[]]$valBool = @(0) + $ft
+              Set-StoreWinRtValue -hRoot $hUsers -subKey ($hive + '\LocalState\PersistentSettings') -valName 'PersonalizationEnabled' -typeKind 100000011 -bytes $valBool
+              Set-StoreWinRtValue -hRoot $hUsers -subKey ($hive + '\LocalState') -valName 'StorePrelaunchOptedIn' -typeKind 100000011 -bytes $valBool
+
+              [byte[]]$valTel = [System.Text.Encoding]::ASCII.GetBytes('False') + [byte]0
+              Set-StoreWinRtValue -hRoot $hUsers -subKey ($hive + '\LocalState\configuration') -valName 'IsClientTelemetryLevelEnabled' -typeKind 100000012 -bytes $valTel
+
+              [byte[]]$valAds = [System.Text.Encoding]::ASCII.GetBytes('[]') + [byte]0
+              Set-StoreWinRtValue -hRoot $hUsers -subKey ($hive + '\LocalState\configuration') -valName 'BrowseAdsConfigs' -typeKind 100000012 -bytes $valAds
+
+              [byte[]]$valTo = [System.Text.Encoding]::ASCII.GetBytes('0') + [byte]0
+              Set-StoreWinRtValue -hRoot $hUsers -subKey ($hive + '\LocalState\configuration') -valName 'SearchAdsTimeoutLimit' -typeKind 100000012 -bytes $valTo
+
+              for ($i = 0; $i -lt 5; $i++) {
+                  [GC]::Collect()
+                  [GC]::WaitForPendingFinalizers()
+                  & reg.exe unload ('HKU\' + $hive) 2>&1 | Out-Null
+                  if ($LASTEXITCODE -eq 0) { break }
+                  Start-Sleep -Milliseconds 500
+              }
+          }
+      }
+      $hUsers.Close()
+      exit 0
