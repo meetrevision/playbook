@@ -15,7 +15,7 @@ actions:
     runas: currentUserElevated
     weight: 100
 
-  - !writeStatus: {status: 'Disabling Windows Defender', option: 'disable-defender'}
+  - !writeStatus: {status: 'Configuring Windows Defender'}
   - !run:
     path: "%ProgramFiles%\\Revision Tool"
     exe: "revitool.exe"
@@ -23,17 +23,6 @@ actions:
     wait: true
     runas: currentUserElevated
     weight: 100
-    option: 'disable-defender'
-
-  - !writeStatus: {status: 'Enabling Windows Defender', option: 'enable-defender'}
-  - !run:
-    path: "%ProgramFiles%\\Revision Tool"
-    exe: "revitool.exe"
-    args: "tweaks security defender enable"
-    wait: true
-    runas: currentUserElevated
-    weight: 100
-    option: 'enable-defender'
 
   - !writeStatus: {status: "Removing AI components", option: 'remove-winsxs-ai'}
   - !run:
